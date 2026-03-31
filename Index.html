@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top"><meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  <?!= include('Stylesheet'); ?>
+</head>
+<body>
+<header class="app-header">
+  <div class="header-inner">
+    <div class="header-left"><span class="material-icons header-icon" onclick="showTopPage()">domain</span><h1 class="header-title" onclick="showTopPage()">社会基盤ユニットQMS管理システム</h1></div>
+    <div class="header-right"><span class="header-sub">品質管理システム</span><button class="admin-btn" id="adminBtn" style="display:none;" onclick="openAdminPage()"><span class="material-icons">settings</span></button></div>
+  </div>
+  <nav class="breadcrumb" id="breadcrumb"><a href="javascript:void(0)" onclick="showTopPage()">トップ</a></nav>
+</header>
+
+<main class="main-content">
+
+  <!-- ===== トップ ===== -->
+  <div id="page-top" class="page active">
+    <div class="welcome-banner"><div class="welcome-icon"><span class="material-icons">engineering</span></div><div class="welcome-text"><h2>品質管理システム</h2><p>本部・部門を選択して進捗管理表を確認してください</p></div></div>
+    <div class="honbu-columns" id="honbuGrid"></div>
+  </div>
+
+  <!-- ===== 部門一覧 ===== -->
+  <div id="page-department" class="page">
+    <div class="dept-header"><div class="dept-title-area"><h2 id="deptTitle" class="dept-title"></h2><span class="dept-badge" id="deptBadge"></span></div><button class="btn-secondary" onclick="refreshDepartment()"><span class="material-icons">refresh</span> 更新</button></div>
+    <div class="table-wrapper"><div class="table-scroll">
+      <table class="progress-table" id="progressTable">
+        <thead>
+          <tr class="hdr-group">
+            <th rowspan="2" class="sc sc0">No</th>
+            <th rowspan="2" class="sc sc1">コード</th>
+            <th rowspan="2" class="sc sc2 col-kenmei">件名名称</th>
+            <th rowspan="2">工期<br>着手日</th><th rowspan="2">工期<br>竣工日</th>
+            <th rowspan="2" class="col-amt">受注金額<br>(千円)</th><th rowspan="2">受注<br>契約先</th>
+            <th rowspan="2" class="gh g-grp">グループ</th>
+            <th colspan="4" class="gh g-tai">実施体制</th>
+            <th rowspan="2" class="gh g-tok">特記<br>事項</th>
+            <th colspan="2" class="gh g-kei">契約内容確認</th>
+            <th colspan="2" class="gh g-kh2">契約内容<br>変更確認</th>
+            <th colspan="2" class="gh g-hin">品質計画書</th>
+            <th colspan="2" class="gh g-sek">設計業務<br>依頼記録</th>
+            <th colspan="2" class="gh g-ira">依頼成果品<br>検査</th>
+            <th colspan="2" class="gh g-ita">委託関係<br>記録</th>
+            <th colspan="2" class="gh g-itk">委託成果品<br>検査</th>
+            <th colspan="2" class="gh g-gij">議事録</th>
+            <th colspan="2" class="gh g-shi">進捗確認</th>
+            <th colspan="2" class="gh g-ken">主要技術<br>検討会</th>
+            <th colspan="2" class="gh g-kns">設計検査<br>記録</th>
+            <th colspan="2" class="gh g-dat">妥当性<br>確認記録</th>
+            <th colspan="3" class="gh g-rsk">リスク対策<br>及びリスク評価</th>
+            <th rowspan="2" class="gh g-ksh">検収</th>
+            <th rowspan="2" class="gh g-den">報告書<br>電子化</th>
+            <th colspan="2" class="gh g-qc">品質管理<br>担当確認</th>
+          </tr>
+          <tr class="hdr-sub">
+            <th class="g-tai">担当者</th><th class="g-tai">実施<br>責任者</th><th class="g-tai">審査<br>責任者</th><th class="g-tai">承認者</th>
+            <th class="g-kei">作成</th><th class="g-kei">リスク<br>変更</th>
+            <th class="g-kh2">変更<br>回数</th><th class="g-kh2">リスク<br>件数</th>
+            <th class="g-hin">変更<br>回数</th><th class="g-hin">リスク<br>件数</th>
+            <th class="g-sek">有/無</th><th class="g-sek">手続き</th>
+            <th class="g-ira">実施/<br>計画</th><th class="g-ira">実施日<br>実施者</th>
+            <th class="g-ita">有/無</th><th class="g-ita">手続き</th>
+            <th class="g-itk">実施/<br>計画</th><th class="g-itk">実施日<br>実施者</th>
+            <th class="g-gij">最新No</th><th class="g-gij">承認日</th>
+            <th class="g-shi">実施/<br>計画</th><th class="g-shi">実施日<br>実施者</th>
+            <th class="g-ken">実施/<br>計画</th><th class="g-ken">実施日<br>実施者</th>
+            <th class="g-kns">実施/<br>計画</th><th class="g-kns">実施日<br>実施者</th>
+            <th class="g-dat">実施/<br>計画</th><th class="g-dat">実施日<br>実施者</th>
+            <th class="g-rsk">シート<br>作成</th><th class="g-rsk">対応<br>済み</th><th class="g-rsk">有効性<br>評価</th>
+            <th class="g-qc">各部</th><th class="g-qc">ユニット<br>本部</th>
+          </tr>
+        </thead>
+        <tbody id="progressBody"></tbody>
+      </table>
+    </div></div>
+    <div id="noDataMsg" class="no-data" style="display:none;"><span class="material-icons">info</span><p>データがありません。</p></div>
+  </div>
+
+  <!-- ===== プロジェクト詳細 ===== -->
+  <div id="page-detail" class="page">
+    <div class="detail-header"><h2 id="detailTitle" class="detail-title"></h2><div class="detail-meta" id="detailMeta"></div></div>
+    <!-- タブバー -->
+    <div class="detail-tabs">
+      <button class="detail-tab active" onclick="switchDetailTab('flow1')"><span class="material-icons">account_tree</span> 全体フロー</button>
+      <button class="detail-tab" onclick="switchDetailTab('flow2')"><span class="material-icons">call_split</span> 部間依頼</button>
+      <button class="detail-tab" onclick="switchDetailTab('flow3')"><span class="material-icons">handshake</span> 委託業務</button>
+      <button class="detail-tab" onclick="switchDetailTab('forms')"><span class="material-icons">grid_view</span> 帳票一覧</button>
+    </div>
+    <!-- フロータブ -->
+    <div id="tabFlow1" class="detail-tab-content active"><div id="flowContainer1" class="flow-container"></div></div>
+    <div id="tabFlow2" class="detail-tab-content" style="display:none;"><div id="flowContainer2" class="flow-container"></div></div>
+    <div id="tabFlow3" class="detail-tab-content" style="display:none;"><div id="flowContainer3" class="flow-container"></div></div>
+    <!-- 帳票一覧タブ -->
+    <div id="tabForms" class="detail-tab-content" style="display:none;">
+      <div id="formPhaseGrid"></div>
+    </div>
+    </div>
+
+  <!-- ===== 帳票フォームページ（全帳票共通） ===== -->
+  <div id="page-form" class="page">
+    <div class="minutes-doc">
+      <div class="minutes-doc-topbar no-print">
+        <button class="btn-back-top" onclick="closeFormPage()"><span class="material-icons">arrow_back</span> 詳細に戻る</button>
+        <span id="gf_saved_badge" class="saved-badge" style="display:none;">保存済み</span>
+        <span id="gf_pending_badge" class="readonly-badge" style="display:none;">承認手続き中</span>
+        <button class="btn-print" onclick="printCurrentForm()"><span class="material-icons">print</span> PDF</button>
+      </div>
+      <div id="formPageTitleBar" class="contract-doc-title"><span class="material-icons" id="formPageIcon">description</span> <span id="formPageTitle"></span></div>
+      <div id="sectionFormArea" class="print-area"></div>
+      <div id="gf_form_actions" class="minutes-actions">
+        <button class="btn-send" id="btnSendGenericApproval" style="display:none;" onclick="sendGenericApprovalRequest()"><span class="material-icons">send</span> 承認依頼を送信</button>
+      </div>
+      <div id="approveBarGeneric" style="display:none;"></div>
+    </div>
+  </div>
+
+  <!-- ===== 議事録一覧 ===== -->
+  <div id="page-minutes-list" class="page">
+    <div class="dept-header">
+      <div class="dept-title-area"><span class="material-icons" style="color:var(--primary);font-size:28px;">summarize</span><h2 class="dept-title" id="minutesListTitle">議事録一覧</h2></div>
+      <button class="btn-primary" onclick="openMinutesForm(null)"><span class="material-icons">add</span> 議事録の新規作成</button>
+    </div>
+    <div id="minutesListBody" class="minutes-list-body"></div>
+  </div>
+
+  <!-- ===== 議事録作成・編集（縦並びレイアウト）===== -->
+  <div id="page-minutes-form" class="page">
+    <div class="minutes-doc">
+      <div class="minutes-doc-topbar no-print">
+        <button class="btn-back-top" onclick="openMinutesList()"><span class="material-icons">arrow_back</span> 一覧に戻る</button>
+        <span id="mf_readonly_badge" class="readonly-badge" style="display:none;">閲覧専用</span>
+        <button class="btn-print" onclick="printCurrentForm()"><span class="material-icons">print</span> 印刷 / PDF</button>
+      </div>
+      <div class="minutes-doc-title"><span class="material-icons">summarize</span> 議事録</div>
+      <input type="hidden" id="mf_mrow">
+      <table class="minutes-table">
+        <tr><th>議事録No</th><td id="mf_no_disp" class="mf-no-disp">新規</td></tr>
+        <tr><th>件名コード</th><td id="mf_code"></td></tr>
+        <tr><th>件名</th><td id="mf_kenmei"></td></tr>
+        <tr><th>年月日</th><td><input type="date" id="mf_date" class="form-input full mf-editable"></td></tr>
+        <tr><th>開始時間</th><td><select id="mf_startTime" class="form-select full mf-editable"></select></td></tr>
+        <tr><th>終了時間</th><td><select id="mf_endTime" class="form-select full mf-editable"></select></td></tr>
+        <tr><th>場所</th><td><input type="text" id="mf_place" class="form-input full mf-editable"></td></tr>
+        <tr><th>出席者（相手）</th><td><textarea id="mf_attendeesOther" class="form-textarea mf-editable" rows="2"></textarea></td></tr>
+        <tr><th>出席者（当社）</th><td><textarea id="mf_attendeesUs" class="form-textarea mf-editable" rows="2"></textarea></td></tr>
+        <tr><th>資料</th><td><textarea id="mf_materials" class="form-textarea mf-editable" rows="2"></textarea></td></tr>
+      </table>
+      <div class="minutes-content-section">
+        <div class="minutes-content-label">協議内容・確認内容・指示内容・報告内容・処置内容</div>
+        <textarea id="mf_content" class="form-textarea minutes-content mf-editable" rows="10"></textarea>
+      </div>
+      <table class="minutes-table">
+        <tr><th>作成者</th><td><input type="text" id="mf_creator" class="form-input full" readonly></td></tr>
+        <tr><th>実施責任者</th><td><input type="text" id="mf_responsible" class="form-input full" readonly></td></tr>
+      </table>
+      <div id="mf_actions" class="minutes-actions">
+        <button class="btn-save" onclick="saveMinutes()"><span class="material-icons">save</span> 保存</button>
+        <button class="btn-send" onclick="sendApprovalRequest()" id="btnSendApproval" style="display:none;"><span class="material-icons">send</span> 承認依頼を送信</button>
+      </div>
+      <div id="approveBarMinutes" style="display:none;"></div>
+    </div>
+  </div>
+
+  <!-- ===== 契約内容確認 ===== -->
+  <div id="page-contract-form" class="page">
+    <div class="contract-doc">
+      <div class="minutes-doc-topbar no-print">
+        <button class="btn-back-top" onclick="openProjectDetail(currentProject)"><span class="material-icons">arrow_back</span> 詳細に戻る</button>
+        <span id="cf_saved_badge" class="saved-badge" style="display:none;">保存済み</span>
+        <button class="btn-print" onclick="printCurrentForm()"><span class="material-icons">print</span> 印刷 / PDF</button>
+      </div>
+      <div class="contract-doc-title"><span class="material-icons">fact_check</span> 契約内容確認</div>
+
+      <table class="minutes-table">
+        <tr><th>顧客名（受注契約先）</th><td id="cf_customer"></td></tr>
+        <tr><th>件名</th><td id="cf_kenmei"></td></tr>
+        <tr><th>受付日</th><td><input type="text" id="cf_date" class="form-input full" readonly></td></tr>
+        <tr><th>確認者</th><td><input type="text" id="cf_confirmer" class="form-input full" readonly></td></tr>
+      </table>
+
+      <!-- 枠の上にコメント -->
+      <p class="contract-comment">部長から引き継いだ受注関連情報、打ち合わせから得られた要求事項</p>
+
+      <!-- ===== 受注関連情報顧客要求事項 ===== -->
+      <div class="contract-section">
+        <div class="contract-section-title">受注関連情報顧客要求事項</div>
+
+        <div class="contract-subsection">
+          <div class="contract-subsection-title">【営業からの受領情報】</div>
+          <div class="contract-checks">
+            <label class="contract-check-label"><input type="checkbox" id="cf_eigyo_gyomu"> 業務受付処理表</label>
+            <label class="contract-check-label"><input type="checkbox" id="cf_eigyo_sekisan"> 積算書作成依頼（見積依頼書、仕様書、設計書）</label>
+            <label class="contract-check-label"><input type="checkbox" id="cf_eigyo_other" onchange="toggleEigyoOther()"> その他</label>
+            <div id="cf_eigyo_other_wrap" style="display:none;margin-left:28px;margin-top:4px;">
+              <textarea id="cf_eigyo_other_text" class="form-textarea" rows="2" placeholder="その他の内容を入力"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="contract-items">
+          <div class="contract-item">
+            <div class="contract-item-header">
+              <span class="contract-item-label">○ 発注内示書又は確認記録</span>
+              <div class="contract-yn">
+                <label><input type="radio" name="cf_hacchu_yn" value="YES" onchange="toggleAttach('cf_hacchu')"> YES</label>
+                <label><input type="radio" name="cf_hacchu_yn" value="NO" onchange="toggleAttach('cf_hacchu')"> NO</label>
+              </div>
+            </div>
+            <div id="cf_hacchu_attach" class="contract-attach" style="display:none;">
+              <span class="contract-attach-label">添付資料－</span>
+              <input type="text" id="cf_hacchu_text" class="form-input full" placeholder="添付資料名を入力">
+            </div>
+          </div>
+          <div class="contract-item">
+            <div class="contract-item-header">
+              <span class="contract-item-label">○ 積算依頼書又は確認記録</span>
+              <div class="contract-yn">
+                <label><input type="radio" name="cf_sekisan_yn" value="YES" onchange="toggleAttach('cf_sekisan')"> YES</label>
+                <label><input type="radio" name="cf_sekisan_yn" value="NO" onchange="toggleAttach('cf_sekisan')"> NO</label>
+              </div>
+            </div>
+            <div id="cf_sekisan_attach" class="contract-attach" style="display:none;">
+              <span class="contract-attach-label">添付資料－</span>
+              <input type="text" id="cf_sekisan_text" class="form-input full" placeholder="添付資料名を入力">
+            </div>
+          </div>
+          <div class="contract-item">
+            <div class="contract-item-header">
+              <span class="contract-item-label">○ 見積依頼書（仕様書、設計書）又は確認記録</span>
+              <div class="contract-yn">
+                <label><input type="radio" name="cf_mitsumori_yn" value="YES" onchange="toggleAttach('cf_mitsumori')"> YES</label>
+                <label><input type="radio" name="cf_mitsumori_yn" value="NO" onchange="toggleAttach('cf_mitsumori')"> NO</label>
+              </div>
+            </div>
+            <div id="cf_mitsumori_attach" class="contract-attach" style="display:none;">
+              <span class="contract-attach-label">添付資料－</span>
+              <input type="text" id="cf_mitsumori_text" class="form-input full" placeholder="添付資料名を入力">
+            </div>
+          </div>
+          <div class="contract-item">
+            <div class="contract-item-header">
+              <span class="contract-item-label">○ 社会的要求事項（法令、基準等）の確認記録（議事録など）</span>
+              <div class="contract-yn">
+                <label><input type="radio" name="cf_shakai_yn" value="YES" onchange="toggleAttach('cf_shakai')"> YES</label>
+                <label><input type="radio" name="cf_shakai_yn" value="NO" onchange="toggleAttach('cf_shakai')"> NO</label>
+              </div>
+            </div>
+            <div id="cf_shakai_attach" class="contract-attach" style="display:none;">
+              <span class="contract-attach-label">添付資料－</span>
+              <input type="text" id="cf_shakai_text" class="form-input full" placeholder="添付資料名を入力">
+            </div>
+          </div>
+          <div class="contract-item">
+            <div class="contract-item-header">
+              <span class="contract-item-label">○ その他の確認記録（議事録、メール、メモ）</span>
+              <div class="contract-yn">
+                <label><input type="radio" name="cf_sonota_yn" value="YES" onchange="toggleAttach('cf_sonota')"> YES</label>
+                <label><input type="radio" name="cf_sonota_yn" value="NO" onchange="toggleAttach('cf_sonota')"> NO</label>
+              </div>
+            </div>
+            <div id="cf_sonota_attach" class="contract-attach" style="display:none;">
+              <span class="contract-attach-label">添付資料－</span>
+              <input type="text" id="cf_sonota_text" class="form-input full" placeholder="添付資料名を入力">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2つの枠の間にコメント -->
+      <p class="contract-comment">業務受付処理表あるいは積算書の作成依頼を受理してから積算書提出前に実施</p>
+
+      <!-- ===== 顧客不満足発生リスクの確認 ===== -->
+      <div class="contract-section contract-section-risk">
+        <div class="contract-section-title"><span class="material-icons" style="font-size:20px;vertical-align:middle;margin-right:6px;">warning_amber</span>顧客不満足発生リスクの確認</div>
+
+        <div class="contract-items">
+          <div class="contract-item">
+            <div class="contract-item-header">
+              <span class="contract-item-label">○ 顧客要求事項（業務の内容，必要とする技術，工期等）に対して，これを満たす上での必要な技術を保有しているか？</span>
+              <div class="contract-yn">
+                <label><input type="radio" name="cf_risk1_yn" value="YES"> YES</label>
+                <label><input type="radio" name="cf_risk1_yn" value="NO"> NO</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="contract-item">
+            <div class="contract-item-header">
+              <span class="contract-item-label">○ 必要な人材・体制を自部署で確保できるか？</span>
+              <div class="contract-yn">
+                <label><input type="radio" name="cf_risk2_yn" value="YES"> YES</label>
+                <label><input type="radio" name="cf_risk2_yn" value="NO"> NO</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="contract-item">
+            <div class="contract-item-header">
+              <span class="contract-item-label">○ 必要な物的資源（資機材，解析プログラム）を自部署で確保できるか？</span>
+              <div class="contract-yn">
+                <label><input type="radio" name="cf_risk3_yn" value="YES"> YES</label>
+                <label><input type="radio" name="cf_risk3_yn" value="NO"> NO</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="contract-item">
+            <div class="contract-item-header">
+              <span class="contract-item-label">○ 上項がNoの場合、すなわち、自部署で上記の資源を確保できない場合において，本部内外の他部署あるいは委託先の協力により，解決できるか？</span>
+              <div class="contract-yn">
+                <label><input type="radio" name="cf_risk4_yn" value="YES"> YES</label>
+                <label><input type="radio" name="cf_risk4_yn" value="NO"> NO</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="contract-item">
+            <div class="contract-item-header">
+              <span class="contract-item-label">○ 上項がYesの場合、その協力先は？（委託する場合、下請法の適用に注意）（当社が未保有の技術（未保有プログラムを含む）を使用する業務を委託する場合は、業務品質管理要領（QC1-003）「10.1.2　留意事項」を参照。）</span>
+            </div>
+            <div class="contract-item-checks">
+              <label class="contract-check-label"><input type="checkbox" id="cf_risk5_honbu"> 本部内</label>
+              <label class="contract-check-label"><input type="checkbox" id="cf_risk5_gaibu"> 本部外</label>
+              <label class="contract-check-label"><input type="checkbox" id="cf_risk5_itaku"> 委託先</label>
+              <label class="contract-check-label"><input type="checkbox" id="cf_risk5_other"> その他</label>
+            </div>
+          </div>
+
+          <div class="contract-item">
+            <div class="contract-item-header">
+              <span class="contract-item-label">○ 原子力関連要領を適用するか？</span>
+              <div class="contract-yn">
+                <label><input type="radio" name="cf_risk6_yn" value="YES"> YES</label>
+                <label><input type="radio" name="cf_risk6_yn" value="NO"> NO</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="contract-item">
+            <div class="contract-item-header">
+              <span class="contract-item-label">○ 仕様書の内容が当社の不利益となる内容，あるいは内容の解釈によって顧客の不満足に繋がる内容はないか？</span>
+              <div class="contract-yn">
+                <label><input type="radio" name="cf_risk7_yn" value="YES"> YES</label>
+                <label><input type="radio" name="cf_risk7_yn" value="NO"> NO</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== 契約前段階リスク確認表 ===== -->
+      <div class="contract-section contract-section-risktable">
+        <div class="contract-section-title"><span class="material-icons" style="font-size:20px;vertical-align:middle;margin-right:6px;">assessment</span>契約前段階リスクの確認</div>
+        <div class="risktable-intro">
+          <p class="risktable-title-main">契約前段階で想定されるリスクの確認・対応結果</p>
+          <p class="risktable-title-sub">リスク対策を実施する場合、妥当性確認において、その対策の有効性を評価すること</p>
+        </div>
+        <div class="risktable-wrap">
+          <table class="risktable" id="riskTable">
+            <thead>
+              <tr>
+                <th class="rt-col-item">リスク項目</th>
+                <th class="rt-col-detail">リスク項目詳細</th>
+                <th class="rt-col-shingi">対策審議</th>
+                <th class="rt-col-umu">有無程度</th>
+                <th class="rt-col-taisaku">対策</th>
+                <th class="rt-col-gutai">具体策</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="rt-item-name">1.新規顧客</td>
+                <td class="rt-detail">新規顧客である場合、当社が要求事項の提示方法・業務推進方法に習熟しておらず、顧客の要求事項・要注意事項を見落とす。</td>
+                <td><select id="rt_1_shingi" class="rt-select"><option value="">-</option><option value="各部">各部</option><option value="本部">本部</option><option value="全社">全社</option></select></td>
+                <td><select id="rt_1_umu" class="rt-select"><option value="">-</option><option value="×">×</option><option value="△">△</option><option value="○">○</option><option value="◎">◎</option></select></td>
+                <td><select id="rt_1_taisaku" class="rt-select"><option value="">-</option><option value="Ａ">Ａ</option><option value="Ｂ">Ｂ</option><option value="Ｃ">Ｃ</option><option value="Ｄ">Ｄ</option></select></td>
+                <td><input type="text" id="rt_1_gutai" class="rt-input" placeholder="具体策を入力"></td>
+              </tr>
+              <tr>
+                <td class="rt-item-name">2.新規商材</td>
+                <td class="rt-detail">新規商材である場合、ノウハウが十分ではなく案件形成の段階でのリスクを見逃す。</td>
+                <td><select id="rt_2_shingi" class="rt-select"><option value="">-</option><option value="各部">各部</option><option value="本部">本部</option><option value="全社">全社</option></select></td>
+                <td><select id="rt_2_umu" class="rt-select"><option value="">-</option><option value="×">×</option><option value="△">△</option><option value="○">○</option><option value="◎">◎</option></select></td>
+                <td><select id="rt_2_taisaku" class="rt-select"><option value="">-</option><option value="Ａ">Ａ</option><option value="Ｂ">Ｂ</option><option value="Ｃ">Ｃ</option><option value="Ｄ">Ｄ</option></select></td>
+                <td><input type="text" id="rt_2_gutai" class="rt-input" placeholder="具体策を入力"></td>
+              </tr>
+              <tr>
+                <td class="rt-item-name">3.業務内容不明確</td>
+                <td class="rt-detail">顧客の要求事項が不明確で受注に進むべきか、手を引くかの判断に迷う間、当社から手を引けない状況となり不利な条件での受注を強いられる。</td>
+                <td><select id="rt_3_shingi" class="rt-select"><option value="">-</option><option value="各部">各部</option><option value="本部">本部</option><option value="全社">全社</option></select></td>
+                <td><select id="rt_3_umu" class="rt-select"><option value="">-</option><option value="×">×</option><option value="△">△</option><option value="○">○</option><option value="◎">◎</option></select></td>
+                <td><select id="rt_3_taisaku" class="rt-select"><option value="">-</option><option value="Ａ">Ａ</option><option value="Ｂ">Ｂ</option><option value="Ｃ">Ｃ</option><option value="Ｄ">Ｄ</option></select></td>
+                <td><input type="text" id="rt_3_gutai" class="rt-input" placeholder="具体策を入力"></td>
+              </tr>
+              <tr>
+                <td class="rt-item-name">4.与信問題の発生</td>
+                <td class="rt-detail">技術方が独自に案件化を進め、契約の段階で営業方が与信調査をした結果、顧客の与信に問題があることが判明し、顧客との金銭面でのトラブルが発生する。【営業本部からの確認結果】</td>
+                <td><select id="rt_4_shingi" class="rt-select"><option value="">-</option><option value="各部">各部</option><option value="本部">本部</option><option value="全社">全社</option></select></td>
+                <td><select id="rt_4_umu" class="rt-select"><option value="">-</option><option value="×">×</option><option value="△">△</option><option value="○">○</option><option value="◎">◎</option></select></td>
+                <td><select id="rt_4_taisaku" class="rt-select"><option value="">-</option><option value="Ａ">Ａ</option><option value="Ｂ">Ｂ</option><option value="Ｃ">Ｃ</option><option value="Ｄ">Ｄ</option></select></td>
+                <td><input type="text" id="rt_4_gutai" class="rt-input" placeholder="具体策を入力"></td>
+              </tr>
+              <tr>
+                <td class="rt-item-name">5.契約内容の突然の変更</td>
+                <td class="rt-detail">（特命型）担当者と合意形成を行ってきた内容が、相手都合（上司の指示等）により、契約間際に覆ってしまう。（競争型）仕様内容が不明確なまま受注し、追加業務をさせられる。</td>
+                <td><select id="rt_5_shingi" class="rt-select"><option value="">-</option><option value="各部">各部</option><option value="本部">本部</option><option value="全社">全社</option></select></td>
+                <td><select id="rt_5_umu" class="rt-select"><option value="">-</option><option value="×">×</option><option value="△">△</option><option value="○">○</option><option value="◎">◎</option></select></td>
+                <td><select id="rt_5_taisaku" class="rt-select"><option value="">-</option><option value="Ａ">Ａ</option><option value="Ｂ">Ｂ</option><option value="Ｃ">Ｃ</option><option value="Ｄ">Ｄ</option></select></td>
+                <td><input type="text" id="rt_5_gutai" class="rt-input" placeholder="具体策を入力"></td>
+              </tr>
+              <tr>
+                <td class="rt-item-name">6.工期の顧客都合の変更</td>
+                <td class="rt-detail">想定していた工期・納期が、顧客都合により変更となってしまい、変更後の着手段階で十分なリソースを確保できないまま業務実施を求められる。</td>
+                <td><select id="rt_6_shingi" class="rt-select"><option value="">-</option><option value="各部">各部</option><option value="本部">本部</option><option value="全社">全社</option></select></td>
+                <td><select id="rt_6_umu" class="rt-select"><option value="">-</option><option value="×">×</option><option value="△">△</option><option value="○">○</option><option value="◎">◎</option></select></td>
+                <td><select id="rt_6_taisaku" class="rt-select"><option value="">-</option><option value="Ａ">Ａ</option><option value="Ｂ">Ｂ</option><option value="Ｃ">Ｃ</option><option value="Ｄ">Ｄ</option></select></td>
+                <td><input type="text" id="rt_6_gutai" class="rt-input" placeholder="具体策を入力"></td>
+              </tr>
+              <tr>
+                <td class="rt-item-name">7.確認記録の不備</td>
+                <td class="rt-detail">電話連絡で受けた情報等を記録に残さなかったため、顧客との間で要求内容の認識に齟齬が生じ、トラブルに発展する。</td>
+                <td><select id="rt_7_shingi" class="rt-select"><option value="">-</option><option value="各部">各部</option><option value="本部">本部</option><option value="全社">全社</option></select></td>
+                <td><select id="rt_7_umu" class="rt-select"><option value="">-</option><option value="×">×</option><option value="△">△</option><option value="○">○</option><option value="◎">◎</option></select></td>
+                <td><select id="rt_7_taisaku" class="rt-select"><option value="">-</option><option value="Ａ">Ａ</option><option value="Ｂ">Ｂ</option><option value="Ｃ">Ｃ</option><option value="Ｄ">Ｄ</option></select></td>
+                <td><input type="text" id="rt_7_gutai" class="rt-input" placeholder="具体策を入力"></td>
+              </tr>
+              <tr>
+                <td class="rt-item-name">8.金額不足</td>
+                <td class="rt-detail">当初の見積もり額より、判明した最終的な見積もり額が上振れした場合、客先が受け入れを拒む。</td>
+                <td><select id="rt_8_shingi" class="rt-select"><option value="">-</option><option value="各部">各部</option><option value="本部">本部</option><option value="全社">全社</option></select></td>
+                <td><select id="rt_8_umu" class="rt-select"><option value="">-</option><option value="×">×</option><option value="△">△</option><option value="○">○</option><option value="◎">◎</option></select></td>
+                <td><select id="rt_8_taisaku" class="rt-select"><option value="">-</option><option value="Ａ">Ａ</option><option value="Ｂ">Ｂ</option><option value="Ｃ">Ｃ</option><option value="Ｄ">Ｄ</option></select></td>
+                <td><input type="text" id="rt_8_gutai" class="rt-input" placeholder="具体策を入力"></td>
+              </tr>
+              <tr>
+                <td class="rt-item-name">9.損害賠償の上限</td>
+                <td class="rt-detail">契約書などに設計瑕疵などによる損害賠償に関する記載がない（上限がない）ため、重大な設計瑕疵により損害賠償が生じた場合、支払いができなくなる可能性がある。</td>
+                <td><select id="rt_9_shingi" class="rt-select"><option value="">-</option><option value="各部">各部</option><option value="本部">本部</option><option value="全社">全社</option></select></td>
+                <td><select id="rt_9_umu" class="rt-select"><option value="">-</option><option value="×">×</option><option value="△">△</option><option value="○">○</option><option value="◎">◎</option></select></td>
+                <td><select id="rt_9_taisaku" class="rt-select"><option value="">-</option><option value="Ａ">Ａ</option><option value="Ｂ">Ｂ</option><option value="Ｃ">Ｃ</option><option value="Ｄ">Ｄ</option></select></td>
+                <td><input type="text" id="rt_9_gutai" class="rt-input" placeholder="具体策を入力"></td>
+              </tr>
+              <tr>
+                <td class="rt-item-name">10.その他</td>
+                <td class="rt-detail"><input type="text" id="rt_10_detail" class="rt-input" placeholder="その他のリスク内容を入力"></td>
+                <td><select id="rt_10_shingi" class="rt-select"><option value="">-</option><option value="各部">各部</option><option value="本部">本部</option><option value="全社">全社</option></select></td>
+                <td><select id="rt_10_umu" class="rt-select"><option value="">-</option><option value="×">×</option><option value="△">△</option><option value="○">○</option><option value="◎">◎</option></select></td>
+                <td><select id="rt_10_taisaku" class="rt-select"><option value="">-</option><option value="Ａ">Ａ</option><option value="Ｂ">Ｂ</option><option value="Ｃ">Ｃ</option><option value="Ｄ">Ｄ</option></select></td>
+                <td><input type="text" id="rt_10_gutai" class="rt-input" placeholder="具体策を入力"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="risktable-legend">
+          <div class="risktable-legend-row"><span class="risktable-legend-label">対策審議</span>各部；部会議、本部；本部会議、全社；リスク評価会議</div>
+          <div class="risktable-legend-row"><span class="risktable-legend-label">有無程度</span>×；該当しない、△；殆ど該当しない、○；一部該当する、◎；殆ど該当する</div>
+          <div class="risktable-legend-row"><span class="risktable-legend-label">対策</span>Ａ；回避、Ｂ；低減、Ｃ；移転、Ｄ；保有　（記載できない場合、別紙「リスク対策シート」に記載）</div>
+        </div>
+      </div>
+
+      <!-- リスク対策の定義 -->
+      <div class="risk-definition">
+        <p class="risk-definition-title">（リスク対策の定義）</p>
+        <div class="risk-definition-body">
+          <p>Ａ 回避：リスクが高すぎると判断する場合，受注しない。あるいは，当社で保有しておらず，委託先も見当たらないような技術を必要とする要求事項は受注範囲から除外するなど。</p>
+          <p>Ｂ 低減：外部専門家による評価の実施，社内審査体制や社内推進体制の強化など。</p>
+          <p>Ｃ 移転：当社に責任が及ばないように契約により先方に責任を転嫁するなど。</p>
+          <p>Ｄ 保有：経営判断により，政策的に受注する場合。</p>
+        </div>
+      </div>
+
+      <!-- ===== 成果品チェック体制の選定 ===== -->
+      <p class="contract-comment">業務受付処理表あるいは積算書の作成依頼を受理してから積算書提出前に実施</p>
+
+      <div class="contract-section contract-section-taisei">
+        <div class="contract-section-title"><span class="material-icons" style="font-size:20px;vertical-align:middle;margin-right:6px;">verified_user</span>成果品チェック体制の選定</div>
+
+        <div class="contract-items">
+          <div class="contract-item">
+            <div class="contract-item-header">
+              <span class="contract-item-label">① 受注額または受注予想額が5,000万円以上か</span>
+              <div class="contract-yn">
+                <label><input type="radio" name="cf_tq1_yn" value="YES" onchange="updateTaiseiState()"> YES</label>
+                <label><input type="radio" name="cf_tq1_yn" value="NO" onchange="updateTaiseiState()"> NO</label>
+              </div>
+            </div>
+          </div>
+          <div class="contract-item">
+            <div class="contract-item-header">
+              <span class="contract-item-label">② 重要度または難易度の高い業務（業務品質管理要領（QC1-003）「7.4 成果品のチェック体制」を参照）に該当するか</span>
+              <div class="contract-yn">
+                <label><input type="radio" name="cf_tq2_yn" value="YES" onchange="updateTaiseiState()"> YES</label>
+                <label><input type="radio" name="cf_tq2_yn" value="NO" onchange="updateTaiseiState()"> NO</label>
+              </div>
+            </div>
+          </div>
+          <div class="contract-item">
+            <div class="contract-item-header">
+              <span class="contract-item-label">③ 定型設計（ルーチン化させた設計）業務，特定（作業が主体で設計を含まない）業務であるか</span>
+              <div class="contract-yn">
+                <label><input type="radio" name="cf_tq3_yn" value="YES" onchange="updateTaiseiState()"> YES</label>
+                <label><input type="radio" name="cf_tq3_yn" value="NO" onchange="updateTaiseiState()"> NO</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="taisei-select-area">
+          <div class="taisei-option">
+            <div class="taisei-option-header">
+              <label class="taisei-radio-label"><input type="radio" name="cf_taisei" value="A" onchange="toggleTaiseiDetail()">
+                <span>・①、②の両方がNoである</span>
+              </label>
+              <div class="taisei-option-right">
+                <select id="cf_taisei_a" class="taisei-dropdown" disabled>
+                  <option value="">選択</option><option value="A-1体制">A-1体制</option><option value="A-2体制">A-2体制</option><option value="A-3体制">A-3体制</option>
+                </select>
+                <span class="taisei-approver">承認者：主管部長</span>
+              </div>
+            </div>
+            <p class="taisei-note">【注意】A体制の場合は、A-1体制～A-3体制から選択すること ※）</p>
+            <p class="taisei-note-sub">※）チェック体制の選定基準は、業務品質管理要領（QC1-003）「7.4成果品のチェック体制」の「表7.2」を参照</p>
+          </div>
+
+          <div class="taisei-option">
+            <div class="taisei-option-header">
+              <label class="taisei-radio-label"><input type="radio" name="cf_taisei" value="B" onchange="toggleTaiseiDetail()">
+                <span>・①、②の一方がYesである</span>
+              </label>
+              <div class="taisei-option-right">
+                <select id="cf_taisei_b" class="taisei-dropdown" disabled>
+                  <option value="">選択</option><option value="B-1体制">B-1体制</option><option value="B-2体制">B-2体制</option><option value="B-3体制">B-3体制</option>
+                </select>
+                <span class="taisei-approver">承認者：本部長</span>
+              </div>
+            </div>
+            <p class="taisei-note">【注意】B体制の場合は、B-1体制～B-3体制から選択すること ※）</p>
+            <p class="taisei-note-sub">※）チェック体制の選定基準は、業務品質管理要領（QC1-003）「7.4成果品のチェック体制」の「表7.2」を参照</p>
+          </div>
+
+          <div class="taisei-option">
+            <div class="taisei-option-header">
+              <label class="taisei-radio-label"><input type="radio" name="cf_taisei" value="C" onchange="toggleTaiseiDetail()">
+                <span>・③に該当する</span>
+              </label>
+              <div class="taisei-option-right">
+                <span class="taisei-label-c">C体制</span>
+                <span class="taisei-approver">承認者：主管部長が指定したＧＭ以上あるいは設計者資格が主任技師以上</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="taisei-option">
+            <div class="taisei-option-header">
+              <label class="taisei-radio-label"><input type="radio" name="cf_taisei" value="SP" onchange="toggleTaiseiDetail()">
+                <span>・A、B、C体制以外の特別な体制を採用する</span>
+              </label>
+            </div>
+            <p class="taisei-note">【注意】A，B，C体制以外の特別な体制を採用する場合は、□→■を選択し、その理由を記載すること</p>
+            <div id="cf_taisei_sp_area" class="taisei-sp-inputs" style="display:none;">
+              <div class="form-group"><label>理由</label><textarea id="cf_taisei_sp_reason" class="form-textarea" rows="2" placeholder="特別な体制を採用する理由"></textarea></div>
+              <div class="form-group"><label>承認者</label><input type="text" id="cf_taisei_sp_approver" class="form-input" placeholder="承認者名を入力"></div>
+              <div class="form-group"><label>審査者</label><input type="text" id="cf_taisei_sp_reviewer" class="form-input" placeholder="審査者名を入力"></div>
+            </div>
+            <p class="taisei-note-bold">B体制および特別な体制については本部長の承認を得ること</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 積算書承認の注意 -->
+      <div class="taisei-caution">
+        <p class="taisei-caution-title">注意：</p>
+        <div class="taisei-caution-body">
+          <p>積算書の承認は、以下のとおり。</p>
+          <p>　　見積額１億円以上；社長</p>
+          <p>　　見積額１億円未満～0.3 億円以上；本部長</p>
+          <p>　　見積額 0.3 億円未満；主管部長</p>
+          <p>見積額１億円以上の大型案件または本部長が必要と認めた場合は，「受注計画＊承認取扱要領 (BB1-008)」にしたがい，「承認書取扱要領（BS1-002）」の定める電子承認ワークフローシステムを用いて「受注計画書 (BB1-008-01) 」を作成し，「職務権限規程（AP1-004）」にしたがって承認を得る。</p>
+        </div>
+      </div>
+
+      <div class="minutes-actions" id="cf_actions">
+        <button class="btn-save" onclick="saveContract()"><span class="material-icons">save</span> 保存</button>
+        <button class="btn-send" onclick="sendContractApprovalRequest()" id="btnSendContractApproval" style="display:none;"><span class="material-icons">send</span> 承認依頼を送信</button>
+      </div>
+      <div id="approveBarContract" style="display:none;"></div>
+    </div>
+  </div>
+
+  <!-- ===== 管理者画面 ===== -->
+  <div id="page-admin" class="page">
+    <div class="detail-header"><h2 class="detail-title"><span class="material-icons">admin_panel_settings</span> フロー管理</h2></div>
+    <div class="admin-actions">
+      <button class="btn-primary" onclick="createNewFlow()"><span class="material-icons">add</span> 新規フロー作成</button>
+    </div>
+    <div id="flowListArea"></div>
+  </div>
+
+  <!-- ===== フローエディタ ===== -->
+  <div id="page-flow-editor" class="page">
+    <div class="fe-toolbar">
+      <button class="btn-back-top" onclick="openAdminPage()"><span class="material-icons">arrow_back</span> 戻る</button>
+      <input type="text" id="fe_flowName" class="form-input" style="flex:1;max-width:240px;" placeholder="フロー名">
+      <div class="fe-tool-group">
+        <button class="fe-tool active" data-tool="select" onclick="setFeTool('select')" title="選択・移動"><span class="material-icons">open_with</span></button>
+        <button class="fe-tool" data-tool="line" onclick="setFeTool('line')" title="直線"><span class="material-icons">trending_flat</span></button>
+        <button class="fe-tool" data-tool="elbow" onclick="setFeTool('elbow')" title="折り曲げ線"><span class="material-icons">subdirectory_arrow_right</span></button>
+        <button class="fe-tool" data-tool="textbox" onclick="setFeTool('textbox')" title="テキストボックス"><span class="material-icons">text_fields</span></button>
+      </div>
+      <button class="btn-save" onclick="saveCurrentFlow()"><span class="material-icons">save</span> 保存</button>
+    </div>
+    <div class="fe-main">
+      <div class="fe-palette" id="fePalette">
+        <div class="fe-palette-title">帳票パレット</div>
+        <div class="fe-palette-hint">クリックでキャンバスに追加</div>
+        <div id="fePaletteItems"></div>
+      </div>
+      <div class="fe-canvas-wrap" id="feCanvasWrap">
+        <svg id="feCanvasSvg" class="fe-canvas-svg" xmlns="http://www.w3.org/2000/svg"></svg>
+        <div class="fe-canvas" id="feCanvas"></div>
+      </div>
+    </div>
+    <div class="fe-format-panel" id="feFormatPanel" style="display:none;">
+      <label>文字色<input type="color" id="feFmtColor" value="#333333" onchange="updateTbFmt()"></label>
+      <label>背景<input type="color" id="feFmtBg" value="#ffffff" onchange="updateTbFmt()"></label>
+      <label>線種<select id="feFmtBorder" onchange="updateTbFmt()"><option value="solid">実線</option><option value="dashed">破線</option><option value="dotted">点線</option><option value="none">なし</option></select></label>
+      <label>線色<input type="color" id="feFmtBorderColor" value="#999999" onchange="updateTbFmt()"></label>
+    </div>
+  </div>
+
+
+  <!-- ===== 契約承認（エラー表示用）===== -->
+  <div id="page-contract-approve" class="page">
+    <div class="minutes-doc"><div class="minutes-doc-title"><span class="material-icons">gavel</span> 契約内容確認 承認</div>
+      <div id="contractApproveError"></div></div>
+  </div>
+
+  <!-- ===== 議事録承認（エラー表示用）===== -->
+  <div id="page-approve" class="page">
+    <div class="minutes-doc"><div class="minutes-doc-title"><span class="material-icons">gavel</span> 議事録 承認確認</div>
+      <div id="approveError"></div></div>
+  </div>
+
+
+</main>
+
+<div id="loadingOverlay" class="loading-overlay" style="display:none;"><div class="loading-spinner"><div class="spinner"></div><p id="loadingText">読み込み中...</p></div></div>
+<div id="toast" class="toast" style="display:none;"></div>
+
+<script>
+  var APPROVE_MODE = <?= approveMode ? 'true' : 'false' ?>;
+  var APPROVE_TOKEN = '<?= approveToken ?>';
+  var APPROVE_MROW = '<?= approveMrow ?>';
+  var CONTRACT_APPROVE_MODE = <?= contractApproveMode ? 'true' : 'false' ?>;
+  var CONTRACT_APPROVE_TOKEN = '<?= contractApproveToken ?>';
+  var GENERIC_APPROVE_MODE = <?= genericApproveMode ? 'true' : 'false' ?>;
+  var GENERIC_APPROVE_TOKEN = '<?= genericApproveToken ?>';
+  var COMMENT_MODE = <?= commentMode ? 'true' : 'false' ?>;
+  var COMMENT_DEPT = '<?= commentDept ?>';
+  var COMMENT_ROW = '<?= commentRow ?>';
+</script>
+<?!= include('JavaScript'); ?>
+</body>
+</html>
