@@ -259,6 +259,17 @@ function getGroupTaisei(ssId) {
   } catch(e) { return { group:'',tanto:'',jisshi:'',shinsa:'',approver:'',tokki:'',date:'' }; }
 }
 
+function getFormBaseInfo(ssId, dept, honbu) {
+  var taisei = getGroupTaisei(ssId);
+  var approvers = getApproversByDept(dept, honbu);
+  return {
+    jisshi: taisei.jisshi, shinsa: taisei.shinsa,
+    approver: taisei.approver, tanto: taisei.tanto, group: taisei.group,
+    bucho: approvers.bucho ? approvers.bucho.name : '',
+    honbucho: approvers.honbucho ? approvers.honbucho.name : ''
+  };
+}
+
 function syncGroupToProgress(dept, rowIndex, data) {
   try {
     var sh = SpreadsheetApp.openById(CONFIG.PROGRESS_SS_ID).getSheetByName(dept);
