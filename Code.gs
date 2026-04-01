@@ -345,6 +345,54 @@ function saveGenericFormData(ssId, sheetName, data) {
   } catch(e) { return { success:false, message: e.message }; }
 }
 
+// 帳票保存時に進捗管理表を更新
+function updateFormProgress(dept, rowIndex, formId) {
+  try {
+    // formIdから進捗フィールドへのマッピング
+    var PROGRESS_MAP = {
+      'keiyaku': {k:'keiyaku_sakusei', val:'作成済'},
+      'keiyaku_henkou': {k:'keiyaku_henkou', val:'+1'},
+      'risk_eval': {k:'keiyaku_risk', val:'評価済'},
+      'risk_plan': {k:'risk_sheet', val:'作成済'},
+      'juchu_plan': {k:'keiyaku_risk2', val:'作成済'},
+      'hinshitsu': {k:'hinshitsu_henkou', val:'+1'},
+      'hinshitsu_tokutei': {k:'hinshitsu_risk', val:'作成済'},
+      'sekkei_irai': {k:'sekkei_umu', val:'有'},
+      'itaku_keikaku': {k:'itaku_umu', val:'有'},
+      'kani_itaku': {k:'itaku_tetsuzuki', val:'作成済'},
+      'itaku_kensa': {k:'itaku_kaisu', val:'+1'},
+      'sekkei_kensa': {k:'kensa_kaisu', val:'+1'},
+      'datousei': {k:'datousei_kaisu', val:'+1'},
+      'shinchoku': {k:'shinchoku_kaisu', val:'+1'},
+      'kentou': {k:'kentou_kaisu', val:'+1'}
+    };
+    var map = PROGRESS_MAP[formId];
+    if (!map) return { success:true };
+    var sh = SpreadsheetApp.openById(CONFIG.PROGRESS_SS_ID).getSheetByName(dept);
+    if (!sh) return { success:false, message:'シートが見つかりません。' };
+    var colIdx = DETAIL_FIELDS.indexOf(map.k);
+    if (colIdx < 0) return { success:true };
+    var col = CONFIG.COL_DETAIL_START + colIdx;
+    if (map.val === '+1') {
+      var cur = sh.getRange(rowIndex, col).getValue();
+      var num = parseInt(cur) || 0;
+      sh.getRange(rowIndex, col).setValue(num + 1);
+    } else {
+      sh.getRange(rowIndex, col).setValue(map.val);
+    }
+    // 実施日列も更新（kaisu系フィールドの隣にjisshi列がある場合）
+    var jisshiKey = map.k.replace('_kaisu','_jisshi').replace('_henkou','_jisshi');
+    if (jisshiKey !== map.k) {
+      var jIdx = DETAIL_FIELDS.indexOf(jisshiKey);
+      if (jIdx >= 0) {
+        var now = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyy/MM/dd');
+        sh.getRange(rowIndex, CONFIG.COL_DETAIL_START + jIdx).setValue(now);
+      }
+    }
+    return { success:true };
+  } catch(e) { return { success:false, message:e.message }; }
+}
+
 // 帳票No自動採番（同じシート名の承認記録から最大Noを取得して+1）
 function getNextFormNo(ssId, sheetName) {
   try {
@@ -1861,5 +1909,299 @@ function removeAllTriggers(){ ScriptApp.getProjectTriggers().forEach(function(t)
 function onOpen(){
   SpreadsheetApp.getUi().createMenu('QMS管理')
     .addItem('受注データ取込','importOrderData')
-    .addSeparator().addItem('トリガー設定','setupTriggers').addItem('トリガー全削除','removeAllTriggers').addToUi();
+    .addSeparator().addItem('トリガー設定','setupTriggers').addItem('トリガー全削除','removeAllTriggers')
+    .addSeparator().addItem('デフォルトフロー初期化','initializeDefaultFlows').addToUi();
+}
+
+// ===== デフォルトフロー3つの初期化 =====
+function initializeDefaultFlows() {
+  var flows = [
+    buildFlow1_ZentaiGyomuHinshitsu(),
+    buildFlow2_BukanIrai(),
+    buildFlow3_ItakuGyomu()
+  ];
+  flows.forEach(function(f) {
+    saveFlowData(f.id, f.name, JSON.stringify(f.json));
+  });
+  return { success: true, message: '3つのデフォルトフローを初期化しました。' };
+}
+
+// ===== フロー1: 業務品質管理 全体業務品質文書管理台帳図 =====
+function buildFlow1_ZentaiGyomuHinshitsu() {
+  // 列基準: col1=120, col2=420, col3=720, col4=1020, col5=1320
+  // 行間隔: 約70-90px
+  var nodes = [
+    // === 契約前フェーズ ===
+    {id:'n1_01',formId:'',label:'新規受注情報',x:120,y:60,w:200,h:40,color:'#c0392b',shape:'terminator',bg:'#FFCCFF'},
+    {id:'n1_02',formId:'keiyaku',label:'契約内容確認書',x:120,y:140,w:200,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n1_03',formId:'risk_eval',label:'リスク評価シート',x:420,y:140,w:200,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n1_04',formId:'risk_plan',label:'リスク対策シート',x:420,y:220,w:200,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n1_05',formId:'',label:'積算書',x:120,y:220,w:200,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n1_06',formId:'',label:'営業本部へ提出',x:120,y:300,w:200,h:40,color:'#555',shape:'rect',bg:'#FFFFFF'},
+
+    // === 契約フェーズ ===
+    {id:'n1_07',formId:'',label:'契約締結',x:120,y:420,w:200,h:40,color:'#c0392b',shape:'terminator',bg:'#FFCCFF'},
+    {id:'n1_08',formId:'',label:'契約確定書類受領・確認',x:420,y:420,w:220,h:40,color:'#1a5276',shape:'rect',bg:'#CCECFF'},
+
+    // === 業務実施前フェーズ ===
+    {id:'n1_09',formId:'juchu_plan',label:'受注計画書',x:120,y:530,w:200,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n1_10',formId:'hinshitsu',label:'品質計画書',x:420,y:530,w:200,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n1_11',formId:'hinshitsu_tokutei',label:'特定業務品質計画書',x:720,y:530,w:220,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n1_12',formId:'doc_ledger',label:'業務品質文書管理台帳',x:120,y:610,w:220,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n1_13',formId:'koutei',label:'工程表',x:420,y:610,w:200,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n1_14',formId:'group_taisei',label:'グループ・実施体制',x:720,y:610,w:220,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n1_15',formId:'anzen',label:'安全事前評価議事録',x:120,y:690,w:220,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n1_16',formId:'sekkei_irai',label:'設計業務依頼票',x:420,y:690,w:200,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n1_17',formId:'gijiroku',label:'議事録①（実施前）',x:720,y:690,w:200,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+
+    // === 業務実施中フェーズ ===
+    {id:'n1_18',formId:'',label:'業務実施',x:120,y:830,w:500,h:50,color:'#2c3e50',shape:'rect',bg:'#E8F5E9'},
+    {id:'n1_19',formId:'shinchoku',label:'進捗確認',x:720,y:800,w:200,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n1_20',formId:'kentou',label:'主要技術検討会',x:720,y:860,w:200,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n1_21',formId:'kokyaku',label:'顧客所有物確認書',x:120,y:920,w:220,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n1_22',formId:'keisoku_shiyo',label:'計測機器使用記録',x:420,y:920,w:200,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n1_23',formId:'keisoku_kosei',label:'計測機器校正記録',x:420,y:990,w:200,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n1_24',formId:'gijiroku',label:'議事録②（実施中）',x:720,y:920,w:200,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n1_25',formId:'keiyaku_henkou',label:'契約内容変更確認書',x:120,y:990,w:220,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n1_26',formId:'doc_ledger',label:'業務品質文書管理台帳②',x:720,y:990,w:240,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n1_27',formId:'sekkei_kensa',label:'設計検査記録',x:120,y:1070,w:200,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n1_28',formId:'kouteinai_kensa',label:'工程内検査記録',x:420,y:1070,w:200,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n1_29',formId:'datousei',label:'妥当性確認記録',x:120,y:1150,w:200,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n1_30',formId:'punch',label:'パンチリスト①',x:420,y:1150,w:200,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n1_31',formId:'punch',label:'パンチリスト②',x:720,y:1150,w:200,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+
+    // === 納品フェーズ ===
+    {id:'n1_32',formId:'itaku_kensa',label:'委託成果品検査記録',x:120,y:1290,w:220,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n1_33',formId:'kenshu',label:'検収',x:420,y:1290,w:200,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n1_34',formId:'denshika',label:'報告書の電子化',x:720,y:1290,w:200,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n1_35',formId:'gijiroku',label:'議事録③（納品時）',x:720,y:1370,w:200,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n1_36',formId:'',label:'成果品の引き渡し',x:120,y:1370,w:200,h:40,color:'#c0392b',shape:'terminator',bg:'#FFCCFF'},
+    {id:'n1_37',formId:'doc_ledger',label:'業務品質文書管理台帳③',x:420,y:1370,w:240,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+
+    // === サイドブランチ（是正・改善） ===
+    {id:'n1_38',formId:'zesei',label:'是正処置管理票',x:1020,y:920,w:220,h:40,color:'#6c3483',shape:'rect',bg:'#FFFF99'},
+    {id:'n1_39',formId:'henkou_irai',label:'変更依頼・指示書',x:1020,y:990,w:220,h:40,color:'#6c3483',shape:'rect',bg:'#FFFF99'},
+    {id:'n1_40',formId:'kaizen',label:'改善提案処置管理票',x:1020,y:1070,w:220,h:40,color:'#6c3483',shape:'rect',bg:'#FFFF99'},
+    {id:'n1_41',formId:'qc_check',label:'品質管理担当確認',x:1020,y:1150,w:220,h:40,color:'#6c3483',shape:'rect',bg:'#FFFF99'}
+  ];
+
+  // ノードインデックスマップ
+  var nMap = {};
+  nodes.forEach(function(n, i) { nMap[n.id] = i; });
+
+  var lines = [
+    // 契約前フロー
+    {from:nMap['n1_01'],to:nMap['n1_02'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n1_02'],to:nMap['n1_03'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n1_03'],to:nMap['n1_04'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n1_02'],to:nMap['n1_05'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n1_05'],to:nMap['n1_06'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n1_06'],to:nMap['n1_07'],type:'straight',dash:'solid',color:'#555'},
+    // 契約→実施前
+    {from:nMap['n1_07'],to:nMap['n1_08'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n1_07'],to:nMap['n1_09'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n1_09'],to:nMap['n1_10'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n1_10'],to:nMap['n1_11'],type:'elbowH',dash:'dashed',color:'#999',label:'必要時'},
+    {from:nMap['n1_09'],to:nMap['n1_12'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n1_10'],to:nMap['n1_13'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n1_10'],to:nMap['n1_14'],type:'elbowH',dash:'solid',color:'#555'},
+    {from:nMap['n1_12'],to:nMap['n1_15'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n1_13'],to:nMap['n1_16'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n1_14'],to:nMap['n1_17'],type:'straight',dash:'solid',color:'#555'},
+    // 実施前→実施中
+    {from:nMap['n1_15'],to:nMap['n1_18'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n1_16'],to:nMap['n1_18'],type:'elbowV',dash:'solid',color:'#555'},
+    {from:nMap['n1_18'],to:nMap['n1_19'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n1_18'],to:nMap['n1_21'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n1_21'],to:nMap['n1_22'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n1_22'],to:nMap['n1_23'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n1_19'],to:nMap['n1_24'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n1_21'],to:nMap['n1_25'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n1_24'],to:nMap['n1_26'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n1_25'],to:nMap['n1_27'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n1_22'],to:nMap['n1_28'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n1_27'],to:nMap['n1_29'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n1_28'],to:nMap['n1_30'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n1_29'],to:nMap['n1_30'],type:'straight',dash:'dashed',color:'#999'},
+    {from:nMap['n1_20'],to:nMap['n1_31'],type:'straight',dash:'solid',color:'#555'},
+    // 実施中→納品
+    {from:nMap['n1_29'],to:nMap['n1_32'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n1_30'],to:nMap['n1_33'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n1_33'],to:nMap['n1_34'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n1_32'],to:nMap['n1_36'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n1_34'],to:nMap['n1_35'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n1_33'],to:nMap['n1_37'],type:'straight',dash:'solid',color:'#555'},
+    // サイドブランチ（是正・改善系）
+    {from:nMap['n1_24'],to:nMap['n1_38'],type:'elbowH',dash:'dashed',color:'#6c3483',label:'問題発生時'},
+    {from:nMap['n1_38'],to:nMap['n1_39'],type:'straight',dash:'solid',color:'#6c3483'},
+    {from:nMap['n1_39'],to:nMap['n1_40'],type:'straight',dash:'solid',color:'#6c3483'},
+    {from:nMap['n1_40'],to:nMap['n1_41'],type:'straight',dash:'solid',color:'#6c3483'}
+  ];
+
+  var textboxes = [
+    {x:20,y:20,w:300,h:30,text:'業務品質管理 全体業務品質文書管理台帳図',color:'#1a5276',bg:'#ffffff',borderStyle:'none',borderColor:'#999'},
+    {x:350,y:60,w:240,h:24,text:'※リスクに応じて作成',color:'#888',bg:'transparent',borderStyle:'none',borderColor:'transparent'},
+    {x:350,y:300,w:240,h:24,text:'※見積提出・契約手続き',color:'#888',bg:'transparent',borderStyle:'none',borderColor:'transparent'},
+    {x:650,y:420,w:260,h:24,text:'※受領した契約書類の確認',color:'#888',bg:'transparent',borderStyle:'none',borderColor:'transparent'},
+    {x:120,y:770,w:500,h:30,text:'───── 業務実施フェーズ ─────',color:'#2c3e50',bg:'transparent',borderStyle:'none',borderColor:'transparent'},
+    {x:120,y:1230,w:500,h:30,text:'───── 納品フェーズ ─────',color:'#2c3e50',bg:'transparent',borderStyle:'none',borderColor:'transparent'},
+    {x:1020,y:860,w:220,h:30,text:'【是正・改善】',color:'#6c3483',bg:'#F3E5F5',borderStyle:'solid',borderColor:'#CE93D8'},
+    // 凡例
+    {x:1020,y:60,w:260,h:180,text:'【凡例】\n■ 黄色: 作成する帳票\n■ 水色: 受領する書類\n■ 桃色: 顧客やりとり・起終点\n■ 白色: 一般的な処理\n■ 緑色: 業務実施区間\n── 実線: 通常フロー\n--- 破線: 条件付きフロー',color:'#333',bg:'#FAFAFA',borderStyle:'solid',borderColor:'#CCCCCC'}
+  ];
+
+  var swimlanes = [
+    {label:'契約前',x:0,w:360,color:'rgba(26,82,118,0.04)'},
+    {label:'契約',x:360,w:360,color:'rgba(125,60,152,0.04)'},
+    {label:'業務実施前',x:0,w:1300,color:'rgba(26,122,92,0.03)'},
+    {label:'業務実施中',x:0,w:1300,color:'rgba(211,84,0,0.03)'},
+    {label:'納品',x:0,w:1300,color:'rgba(36,113,163,0.04)'}
+  ];
+
+  return {
+    id: 'flow_default_1',
+    name: '業務品質管理 全体業務品質文書管理台帳図',
+    json: {name:'業務品質管理 全体業務品質文書管理台帳図',nodes:nodes,lines:lines,textboxes:textboxes,swimlanes:swimlanes}
+  };
+}
+
+// ===== フロー2: 本部間／部間依頼フロー図 =====
+function buildFlow2_BukanIrai() {
+  var nodes = [
+    {id:'n2_01',formId:'',label:'依頼元（部）',x:120,y:60,w:200,h:40,color:'#c0392b',shape:'terminator',bg:'#FFCCFF'},
+    {id:'n2_02',formId:'sekkei_irai',label:'設計業務依頼票',x:120,y:150,w:200,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n2_03',formId:'',label:'依頼先（部）',x:420,y:60,w:200,h:40,color:'#c0392b',shape:'terminator',bg:'#FFCCFF'},
+    {id:'n2_04',formId:'',label:'本部のQMSに従い\n業務を実施するか？',x:420,y:150,w:220,h:50,color:'#1a5276',shape:'diamond',bg:'#FFFFFF'},
+    {id:'n2_05',formId:'hinshitsu',label:'品質計画書',x:420,y:270,w:200,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n2_06',formId:'',label:'業務実施計画書\n安全計画書',x:420,y:350,w:200,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n2_07',formId:'',label:'業務実施',x:420,y:440,w:300,h:50,color:'#2c3e50',shape:'rect',bg:'#E8F5E9'},
+    {id:'n2_08',formId:'sekkei_kensa',label:'設計検査記録',x:120,y:530,w:200,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n2_09',formId:'kouteinai_kensa',label:'工程内検査記録',x:420,y:530,w:200,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n2_10',formId:'datousei',label:'妥当性確認記録',x:720,y:530,w:200,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n2_11',formId:'gijiroku',label:'議事録',x:720,y:350,w:200,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n2_12',formId:'',label:'成果品提出',x:420,y:630,w:200,h:40,color:'#c0392b',shape:'terminator',bg:'#FFCCFF'},
+    {id:'n2_13',formId:'doc_ledger',label:'業務品質文書管理台帳',x:120,y:350,w:220,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n2_14',formId:'punch',label:'パンチリスト',x:720,y:440,w:200,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'}
+  ];
+
+  var nMap = {};
+  nodes.forEach(function(n, i) { nMap[n.id] = i; });
+
+  var lines = [
+    {from:nMap['n2_01'],to:nMap['n2_02'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n2_02'],to:nMap['n2_03'],type:'straight',dash:'solid',color:'#555',label:'依頼'},
+    {from:nMap['n2_03'],to:nMap['n2_04'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n2_04'],to:nMap['n2_05'],type:'straight',dash:'solid',color:'#555',label:'はい'},
+    {from:nMap['n2_05'],to:nMap['n2_06'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n2_06'],to:nMap['n2_07'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n2_07'],to:nMap['n2_08'],type:'elbowV',dash:'solid',color:'#555'},
+    {from:nMap['n2_07'],to:nMap['n2_09'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n2_07'],to:nMap['n2_10'],type:'elbowV',dash:'solid',color:'#555'},
+    {from:nMap['n2_09'],to:nMap['n2_12'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n2_05'],to:nMap['n2_13'],type:'elbowH',dash:'solid',color:'#555'},
+    {from:nMap['n2_06'],to:nMap['n2_11'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n2_07'],to:nMap['n2_14'],type:'straight',dash:'solid',color:'#555'}
+  ];
+
+  var textboxes = [
+    {x:20,y:20,w:250,h:24,text:'本部間／部間依頼フロー図',color:'#1a5276',bg:'#ffffff',borderStyle:'none',borderColor:'#999'},
+    {x:650,y:150,w:200,h:24,text:'※「いいえ」の場合は\n通常業務として処理',color:'#888',bg:'transparent',borderStyle:'none',borderColor:'transparent'},
+    {x:120,y:630,w:280,h:24,text:'※依頼元（部）へ成果品を提出',color:'#888',bg:'transparent',borderStyle:'none',borderColor:'transparent'},
+    // 凡例
+    {x:720,y:60,w:220,h:100,text:'【凡例】\n■ 黄色: 作成する帳票\n■ 桃色: 起点・終点\n■ 緑色: 業務実施区間',color:'#333',bg:'#FAFAFA',borderStyle:'solid',borderColor:'#CCCCCC'}
+  ];
+
+  return {
+    id: 'flow_default_2',
+    name: '本部間／部間依頼フロー図',
+    json: {name:'本部間／部間依頼フロー図',nodes:nodes,lines:lines,textboxes:textboxes,swimlanes:[]}
+  };
+}
+
+// ===== フロー3: 委託業務フロー図 =====
+function buildFlow3_ItakuGyomu() {
+  // 3列構成: col1=120, col2=420, col3=720
+  var nodes = [
+    // 委託準備
+    {id:'n3_01',formId:'itaku_tekigo',label:'委託先適合性確認票',x:120,y:60,w:220,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n3_02',formId:'itaku_keikaku',label:'委託計画書/変更書',x:420,y:60,w:220,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n3_03',formId:'kani_itaku',label:'簡易委託受注・実行書',x:720,y:60,w:220,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+
+    // 仕様書作成
+    {id:'n3_04',formId:'itaku_shiyosho',label:'委託業務仕様書の作成',x:120,y:170,w:220,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n3_05',formId:'shiyosho_check',label:'仕様書チェック表',x:420,y:170,w:220,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n3_06',formId:'itaku_info',label:'委託先の情報管理',x:720,y:170,w:220,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n3_07',formId:'ai_shiyosho',label:'生成AI仕様書記載',x:120,y:260,w:220,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n3_08',formId:'genpatsu_itaku',label:'原子力業務追加要求事項',x:420,y:260,w:240,h:40,color:'#922b21',shape:'rect',bg:'#FFFF99'},
+    {id:'n3_09',formId:'itaku_kansa_shiyosho',label:'委託先監査仕様書記載',x:720,y:260,w:220,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+
+    // 委託実施
+    {id:'n3_10',formId:'hinshitsu',label:'品質計画書',x:120,y:370,w:200,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n3_11',formId:'shikyuhin',label:'支給品・貸与品確認書',x:420,y:370,w:220,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n3_12',formId:'shakuyosho',label:'借用書・貸出簿',x:720,y:370,w:200,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n3_13',formId:'gijiroku',label:'議事録①（委託開始時）',x:120,y:460,w:220,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n3_14',formId:'',label:'委託業務実施',x:420,y:460,w:300,h:50,color:'#2c3e50',shape:'rect',bg:'#E8F5E9'},
+    {id:'n3_15',formId:'gijiroku',label:'議事録②（進捗確認）',x:720,y:460,w:220,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n3_16',formId:'henkou_irai',label:'変更依頼・指示書',x:120,y:560,w:220,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n3_17',formId:'itaku_kansa',label:'委託先品質監査チェック',x:420,y:560,w:240,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n3_18',formId:'punch',label:'パンチリスト①',x:720,y:560,w:200,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+
+    // 委託検収
+    {id:'n3_19',formId:'itaku_kensa',label:'委託成果品検査記録',x:120,y:670,w:220,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n3_20',formId:'gijiroku',label:'議事録③（検収時）',x:420,y:670,w:220,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n3_21',formId:'punch',label:'パンチリスト②',x:720,y:670,w:200,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n3_22',formId:'haiki_shomei',label:'提示資料廃棄証明届出書',x:120,y:760,w:240,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n3_23',formId:'doc_ledger',label:'業務品質文書管理台帳',x:420,y:760,w:220,h:40,color:'#1a5276',shape:'rect',bg:'#FFFF99'},
+    {id:'n3_24',formId:'',label:'委託完了',x:420,y:850,w:200,h:40,color:'#c0392b',shape:'terminator',bg:'#FFCCFF'}
+  ];
+
+  var nMap = {};
+  nodes.forEach(function(n, i) { nMap[n.id] = i; });
+
+  var lines = [
+    // 委託準備→仕様書
+    {from:nMap['n3_01'],to:nMap['n3_04'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n3_02'],to:nMap['n3_05'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n3_01'],to:nMap['n3_02'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n3_02'],to:nMap['n3_03'],type:'straight',dash:'dashed',color:'#999',label:'簡易の場合'},
+    // 仕様書内
+    {from:nMap['n3_04'],to:nMap['n3_05'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n3_05'],to:nMap['n3_06'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n3_04'],to:nMap['n3_07'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n3_05'],to:nMap['n3_08'],type:'straight',dash:'dashed',color:'#922b21',label:'原子力業務'},
+    {from:nMap['n3_06'],to:nMap['n3_09'],type:'straight',dash:'solid',color:'#555'},
+    // 仕様書→委託実施
+    {from:nMap['n3_07'],to:nMap['n3_10'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n3_08'],to:nMap['n3_11'],type:'elbowV',dash:'solid',color:'#555'},
+    {from:nMap['n3_11'],to:nMap['n3_12'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n3_10'],to:nMap['n3_13'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n3_10'],to:nMap['n3_14'],type:'elbowH',dash:'solid',color:'#555'},
+    {from:nMap['n3_14'],to:nMap['n3_15'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n3_13'],to:nMap['n3_16'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n3_14'],to:nMap['n3_17'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n3_14'],to:nMap['n3_18'],type:'elbowV',dash:'solid',color:'#555'},
+    // 委託検収
+    {from:nMap['n3_16'],to:nMap['n3_19'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n3_17'],to:nMap['n3_20'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n3_18'],to:nMap['n3_21'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n3_19'],to:nMap['n3_22'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n3_20'],to:nMap['n3_23'],type:'straight',dash:'solid',color:'#555'},
+    {from:nMap['n3_23'],to:nMap['n3_24'],type:'straight',dash:'solid',color:'#555'}
+  ];
+
+  var textboxes = [
+    {x:20,y:20,w:200,h:24,text:'委託業務フロー図',color:'#1a5276',bg:'#ffffff',borderStyle:'none',borderColor:'#999'},
+    {x:120,y:130,w:300,h:24,text:'───── 仕様書作成 ─────',color:'#2c3e50',bg:'transparent',borderStyle:'none',borderColor:'transparent'},
+    {x:120,y:330,w:300,h:24,text:'───── 委託実施 ─────',color:'#2c3e50',bg:'transparent',borderStyle:'none',borderColor:'transparent'},
+    {x:120,y:630,w:300,h:24,text:'───── 委託検収 ─────',color:'#2c3e50',bg:'transparent',borderStyle:'none',borderColor:'transparent'},
+    {x:950,y:260,w:180,h:24,text:'※原子力業務のみ',color:'#922b21',bg:'transparent',borderStyle:'none',borderColor:'transparent'},
+    // 凡例
+    {x:720,y:760,w:220,h:100,text:'【凡例】\n■ 黄色: 作成する帳票\n■ 桃色: 起点・終点\n■ 緑色: 業務実施区間\n--- 破線: 条件付きフロー',color:'#333',bg:'#FAFAFA',borderStyle:'solid',borderColor:'#CCCCCC'}
+  ];
+
+  return {
+    id: 'flow_default_3',
+    name: '委託業務フロー図',
+    json: {name:'委託業務フロー図',nodes:nodes,lines:lines,textboxes:textboxes,swimlanes:[]}
+  };
 }

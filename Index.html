@@ -609,8 +609,15 @@
       <div class="fe-tool-group">
         <button class="fe-tool active" data-tool="select" onclick="setFeTool('select')" title="選択・移動"><span class="material-icons">open_with</span></button>
         <button class="fe-tool" data-tool="line" onclick="setFeTool('line')" title="直線"><span class="material-icons">trending_flat</span></button>
-        <button class="fe-tool" data-tool="elbow" onclick="setFeTool('elbow')" title="折り曲げ線"><span class="material-icons">subdirectory_arrow_right</span></button>
+        <button class="fe-tool" data-tool="elbow" onclick="setFeTool('elbow')" title="折り曲げ線（自動）"><span class="material-icons">subdirectory_arrow_right</span></button>
+        <button class="fe-tool" data-tool="elbowV" onclick="setFeTool('elbowV')" title="折り曲げ線（縦優先）"><span class="material-icons">south_east</span></button>
+        <button class="fe-tool" data-tool="elbowH" onclick="setFeTool('elbowH')" title="折り曲げ線（横優先）"><span class="material-icons">east</span></button>
         <button class="fe-tool" data-tool="textbox" onclick="setFeTool('textbox')" title="テキストボックス"><span class="material-icons">text_fields</span></button>
+        <button class="fe-tool" data-tool="swimlane" onclick="setFeTool('swimlane')" title="スイムレーン追加"><span class="material-icons">view_column</span></button>
+      </div>
+      <div class="fe-tool-group">
+        <label style="font-size:11px;display:flex;align-items:center;gap:4px;padding:0 6px;">線種<select id="feLineDash" style="font-size:11px;padding:2px 4px;border:1px solid #ccc;border-radius:3px;">
+          <option value="solid">実線</option><option value="dashed">破線</option><option value="dotted">点線</option></select></label>
       </div>
       <button class="btn-save" onclick="saveCurrentFlow()"><span class="material-icons">save</span> 保存</button>
     </div>
@@ -618,6 +625,21 @@
       <div class="fe-palette" id="fePalette">
         <div class="fe-palette-title">帳票パレット</div>
         <div class="fe-palette-hint">クリックでキャンバスに追加</div>
+        <div style="margin-bottom:8px;">
+          <label style="font-size:11px;font-weight:600;">形状</label>
+          <select id="fePaletteShape" style="width:100%;font-size:11px;padding:4px;border:1px solid #ccc;border-radius:4px;margin-top:2px;">
+            <option value="rect">矩形</option><option value="terminator">端子（丸角）</option><option value="diamond">ひし形（判断）</option><option value="document">文書</option><option value="bracket">括弧</option>
+          </select>
+          <label style="font-size:11px;font-weight:600;margin-top:6px;display:block;">背景色</label>
+          <div style="display:flex;gap:4px;margin-top:2px;">
+            <button class="fe-color-btn" data-bg="#FFFF99" style="width:24px;height:24px;border:1px solid #ccc;border-radius:3px;background:#FFFF99;cursor:pointer;" title="作成資料（黄）" onclick="document.getElementById('fePaletteBg').value='#FFFF99'"></button>
+            <button class="fe-color-btn" data-bg="#CCECFF" style="width:24px;height:24px;border:1px solid #ccc;border-radius:3px;background:#CCECFF;cursor:pointer;" title="受領資料（水色）" onclick="document.getElementById('fePaletteBg').value='#CCECFF'"></button>
+            <button class="fe-color-btn" data-bg="#FFCCFF" style="width:24px;height:24px;border:1px solid #ccc;border-radius:3px;background:#FFCCFF;cursor:pointer;" title="顧客やりとり（桃）" onclick="document.getElementById('fePaletteBg').value='#FFCCFF'"></button>
+            <button class="fe-color-btn" data-bg="#FFFFFF" style="width:24px;height:24px;border:1px solid #ccc;border-radius:3px;background:#FFFFFF;cursor:pointer;" title="白" onclick="document.getElementById('fePaletteBg').value='#FFFFFF'"></button>
+            <input type="color" id="fePaletteBg" value="#FFFF99" style="width:24px;height:24px;border:1px solid #ccc;border-radius:3px;padding:0;cursor:pointer;">
+          </div>
+          <button class="btn-secondary" style="width:100%;margin-top:8px;font-size:11px;padding:6px;" onclick="addCustomNode()"><span class="material-icons" style="font-size:14px;">add_box</span> カスタムノード追加</button>
+        </div>
         <div id="fePaletteItems"></div>
       </div>
       <div class="fe-canvas-wrap" id="feCanvasWrap">
@@ -626,10 +648,13 @@
       </div>
     </div>
     <div class="fe-format-panel" id="feFormatPanel" style="display:none;">
-      <label>文字色<input type="color" id="feFmtColor" value="#333333" onchange="updateTbFmt()"></label>
-      <label>背景<input type="color" id="feFmtBg" value="#ffffff" onchange="updateTbFmt()"></label>
-      <label>線種<select id="feFmtBorder" onchange="updateTbFmt()"><option value="solid">実線</option><option value="dashed">破線</option><option value="dotted">点線</option><option value="none">なし</option></select></label>
-      <label>線色<input type="color" id="feFmtBorderColor" value="#999999" onchange="updateTbFmt()"></label>
+      <label>文字色<input type="color" id="feFmtColor" value="#333333" onchange="updateFmt()"></label>
+      <label>背景<input type="color" id="feFmtBg" value="#ffffff" onchange="updateFmt()"></label>
+      <label>形状<select id="feFmtShape" onchange="updateFmt()"><option value="rect">矩形</option><option value="terminator">端子</option><option value="diamond">ひし形</option><option value="document">文書</option><option value="bracket">括弧</option></select></label>
+      <label>線種<select id="feFmtBorder" onchange="updateFmt()"><option value="solid">実線</option><option value="dashed">破線</option><option value="dotted">点線</option><option value="none">なし</option></select></label>
+      <label>線色<input type="color" id="feFmtBorderColor" value="#999999" onchange="updateFmt()"></label>
+      <label>幅<input type="number" id="feFmtW" min="40" max="400" step="10" style="width:60px;" onchange="updateFmt()"></label>
+      <label>高さ<input type="number" id="feFmtH" min="20" max="300" step="10" style="width:60px;" onchange="updateFmt()"></label>
     </div>
   </div>
 

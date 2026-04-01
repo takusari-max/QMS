@@ -427,12 +427,12 @@ function openFormById(formId){
   else if(form.action==='nuc_mochidashi_form') openNucMochidashiForm();
   else if(form.action==='nuc_kyoiku_form') openNucKyoikuForm();
   else if(form.action==='nuc_kanri_form') openNucKanriForm();
-  else if(form.action==='itaku_shiyosho_form'||form.action==='itaku_info_form'||form.action==='ai_shiyosho_form'||form.action==='genpatsu_itaku_form'||form.action==='itaku_kansa_shiyosho_form') openReferenceForm(formId);
-  else if(form.action==='stub'){
-    var schema=FORM_SCHEMAS[formId];
-    if(schema) openGenericForm(formId);
-    else showToast(form.title+' は現在準備中です','info');
-  }
+  else if(form.action==='itaku_shiyosho_form') openItakuShiyoshoForm();
+  else if(form.action==='itaku_info_form') openItakuInfoForm();
+  else if(form.action==='ai_shiyosho_form') openAiShiyoshoForm();
+  else if(form.action==='genpatsu_itaku_form') openGenpatsuItakuForm();
+  else if(form.action==='itaku_kansa_shiyosho_form') openItakuKansaShiyoshoForm();
+  else showToast(form.title+' は現在準備中です','info');
 }
 
 // ===== 検査記録フォーム（3種共通テンプレート）=====
@@ -1828,22 +1828,171 @@ function loadNucKanriForm(){if(!currentProject||!currentProject.projectSSId)retu
   google.script.run.withSuccessHandler(function(d){if(!d)return;['nendo','dept'].forEach(function(k){var el=document.getElementById('nkr_'+k);if(el&&d[k])el.value=d[k];});
     for(var i=0;i<5;i++){['res','date','who','status'].forEach(function(f){var el=document.getElementById('nkr_'+f+'_'+i);if(el&&d[f+'_'+i])el.value=d[f+'_'+i];});}}).getGenericFormData(currentProject.projectSSId,'原子力情報管理');}
 
-// ===== 参照系帳票共通フォーム =====
-var REFERENCE_DEFS={
-  'itaku_shiyosho':{title:'委託業務仕様書の作成',sheet:'委託業務仕様書',desc:'BO1-002 委託契約要領（第19版）別紙3-1、3-2に基づき、委託業務仕様書を作成してください。'},
-  'itaku_info':{title:'委託先の情報管理',sheet:'委託先情報管理',desc:'セキュリティ上信頼できる業者であることを確認し、情報管理に関する記録を残してください。'},
-  'ai_shiyosho':{title:'生成AIに関する仕様書への記載',sheet:'生成AI仕様書',desc:'生成AIの使用に関する事項を仕様書に記載してください。'},
-  'genpatsu_itaku':{title:'原子力業務における委託先への追加要求事項',sheet:'原子力追加要求',desc:'BI1-105 一般原子力業務に係る情報セキュリティ管理要領に基づく追加要求事項を記載してください。'},
-  'itaku_kansa_shiyosho':{title:'委託先監査に関する仕様書の記載',sheet:'委託先監査仕様書',desc:'QC1-012「委託先に対する品質監査実施の手引書」を踏まえ、委託先監査について仕様書に追記してください。'}
-};
-function openReferenceForm(formId){var def=REFERENCE_DEFS[formId];if(!def)return;
+// ===== 参照系帳票 個別フォーム =====
+
+// --- 委託業務仕様書の作成 ---
+function openItakuShiyoshoForm(){
   var area=document.getElementById('sectionFormArea');
-  var reg=FORM_REGISTRY.find(function(f){return f.id===formId;});
-  var h=formHeader(reg?reg.phase:'outsource',reg?reg.icon:'article',def.title);
-  h+='<div class="gf-section"><div class="gf-section-title">説明</div><p style="font-size:14px;line-height:1.7;color:var(--text);margin-bottom:12px;">'+escH(def.desc)+'</p></div>';
-  h+='<div class="gf-section"><div class="gf-section-title">記載内容</div>';h+=fG('','内容',fTa('ref_content',12));h+=fG('','備考',fTa('ref_biko',3));h+='</div>';
-  h+=formSaveBtn("savePhase3Form('"+def.sheet+"','ref',['content','biko'],[])");h+='</div></div>';
-  area.innerHTML=h;showFormPage();loadPhase3Form(def.sheet,'ref',['content','biko'],[]);}
+  var h=formHeader('outsource','article','委託業務仕様書の作成');
+  h+='<div class="gf-section"><div class="gf-section-title">説明</div><p style="font-size:14px;line-height:1.7;color:var(--text);margin-bottom:12px;">BO1-002 委託契約要領（第19版）別紙3-1、3-2に基づき、委託業務仕様書を作成してください。</p></div>';
+  h+='<div class="gf-section"><div class="gf-section-title">仕様書記載チェックリスト</div>';
+  var checks=[
+    '業務名称・業務内容の明確な記載','成果品の種類・数量・納期の記載','適用基準・法令の記載',
+    '品質管理要求事項の記載','検査方法・合格判定基準の記載','委託先の資格・実績要件の記載',
+    '秘密保持・情報管理要求の記載','再委託に関する取り決めの記載','変更管理手順の記載',
+    '支給品・貸与品の取り扱い記載'
+  ];
+  checks.forEach(function(c,i){h+='<div class="form-group"><label style="display:flex;align-items:center;gap:8px;"><input type="checkbox" id="is_chk_'+i+'"> '+escH(c)+'</label></div>';});
+  h+='</div>';
+  h+='<div class="gf-section"><div class="gf-section-title">仕様書内容</div>';
+  h+=fG('','業務概要',fTa('is_gaiyou',5));
+  h+=fG('','成果品一覧',fTa('is_seikabutsu',4));
+  h+=fG('','備考',fTa('is_biko',3));
+  h+='</div>';
+  h+=formSaveBtn("saveItakuShiyoshoForm()");h+='</div></div>';
+  area.innerHTML=h;showFormPage();loadItakuShiyoshoForm();
+}
+function saveItakuShiyoshoForm(){
+  if(!currentProject||!currentProject.projectSSId)return;
+  var data={};
+  for(var i=0;i<10;i++){var el=document.getElementById('is_chk_'+i);data['chk_'+i]=el&&el.checked?'1':'0';}
+  ['gaiyou','seikabutsu','biko'].forEach(function(k){data[k]=gv('is_'+k);});
+  showLoading('保存中...');google.script.run.withSuccessHandler(function(r){hideLoading();showToast(r.message,r.success?'success':'error');if(r.success)afterFormSaved();}).withFailureHandler(function(e){hideLoading();showToast(e.message,'error');}).saveGenericFormData(currentProject.projectSSId,'委託業務仕様書',data);
+}
+function loadItakuShiyoshoForm(){
+  if(!currentProject||!currentProject.projectSSId)return;
+  google.script.run.withSuccessHandler(function(d){if(!d)return;
+    for(var i=0;i<10;i++){var el=document.getElementById('is_chk_'+i);if(el)el.checked=(d['chk_'+i]==='1');}
+    ['gaiyou','seikabutsu','biko'].forEach(function(k){var el=document.getElementById('is_'+k);if(el&&d[k])el.value=d[k];});
+  }).getGenericFormData(currentProject.projectSSId,'委託業務仕様書');
+}
+
+// --- 委託先の情報管理 ---
+function openItakuInfoForm(){
+  var area=document.getElementById('sectionFormArea');
+  var h=formHeader('outsource','security','委託先の情報管理');
+  h+='<div class="gf-section"><div class="gf-section-title">説明</div><p style="font-size:14px;line-height:1.7;color:var(--text);margin-bottom:12px;">セキュリティ上信頼できる業者であることを確認し、情報管理に関する記録を残してください。</p></div>';
+  h+='<div class="gf-section"><div class="gf-section-title">情報管理確認テーブル</div>';
+  h+='<div style="overflow-x:auto;"><table class="form-table" style="width:100%;border-collapse:collapse;">';
+  h+='<thead><tr><th style="padding:8px;border:1px solid #ddd;background:#f5f5f5;">管理項目</th><th style="padding:8px;border:1px solid #ddd;background:#f5f5f5;width:120px;">確認結果</th><th style="padding:8px;border:1px solid #ddd;background:#f5f5f5;width:120px;">確認日</th><th style="padding:8px;border:1px solid #ddd;background:#f5f5f5;width:120px;">確認者</th></tr></thead><tbody>';
+  var items=['秘密保持契約の締結','情報セキュリティポリシーの確認','データ受渡方法の確認','アクセス権限管理の確認','情報廃棄方法の確認','再委託先の情報管理確認','インシデント対応体制の確認','定期的な情報管理状況の確認'];
+  items.forEach(function(item,i){
+    h+='<tr><td style="padding:6px 8px;border:1px solid #ddd;">'+escH(item)+'</td>';
+    h+='<td style="padding:4px;border:1px solid #ddd;"><select id="ii_r_'+i+'_0" class="form-input" style="margin:0;"><option value="">--</option><option value="適合">適合</option><option value="不適合">不適合</option><option value="該当なし">該当なし</option></select></td>';
+    h+='<td style="padding:4px;border:1px solid #ddd;"><input type="date" id="ii_r_'+i+'_1" class="form-input" style="margin:0;"></td>';
+    h+='<td style="padding:4px;border:1px solid #ddd;"><input type="text" id="ii_r_'+i+'_2" class="form-input" style="margin:0;"></td></tr>';
+  });
+  h+='</tbody></table></div></div>';
+  h+='<div class="gf-section"><div class="gf-section-title">備考</div>';h+=fG('','',fTa('ii_biko',3));h+='</div>';
+  h+=formSaveBtn("saveTableForm('委託先情報管理','ii',8,3)");h+='</div></div>';
+  area.innerHTML=h;showFormPage();loadTableForm('委託先情報管理','ii',8,3,['biko']);
+}
+
+// --- 生成AI仕様書記載 ---
+function openAiShiyoshoForm(){
+  var area=document.getElementById('sectionFormArea');
+  var h=formHeader('outsource','smart_toy','生成AIに関する仕様書への記載');
+  h+='<div class="gf-section"><div class="gf-section-title">説明</div><p style="font-size:14px;line-height:1.7;color:var(--text);margin-bottom:12px;">生成AIの使用に関する事項を仕様書に記載してください。</p></div>';
+  h+='<div class="gf-section"><div class="gf-section-title">AI利用条件チェックリスト</div>';
+  var checks=[
+    '生成AIの使用可否を仕様書に明記しているか','使用可能なAIツール・サービスを特定しているか',
+    'AI生成物の品質確認方法を規定しているか','機密情報のAI入力制限を規定しているか',
+    'AI生成物の著作権・知的財産の取り扱いを規定しているか'
+  ];
+  checks.forEach(function(c,i){h+='<div class="form-group"><label style="display:flex;align-items:center;gap:8px;"><input type="checkbox" id="ai_chk_'+i+'"> '+escH(c)+'</label></div>';});
+  h+='</div>';
+  h+='<div class="gf-section"><div class="gf-section-title">条件詳細</div>';
+  h+=fG('','使用許可するAIツール',fTa('ai_tools',3));
+  h+=fG('','使用制限事項',fTa('ai_restrict',3));
+  h+=fG('','品質確認手順',fTa('ai_quality',3));
+  h+=fG('','備考',fTa('ai_biko',3));
+  h+='</div>';
+  h+=formSaveBtn("saveAiShiyoshoForm()");h+='</div></div>';
+  area.innerHTML=h;showFormPage();loadAiShiyoshoForm();
+}
+function saveAiShiyoshoForm(){
+  if(!currentProject||!currentProject.projectSSId)return;
+  var data={};
+  for(var i=0;i<5;i++){var el=document.getElementById('ai_chk_'+i);data['chk_'+i]=el&&el.checked?'1':'0';}
+  ['tools','restrict','quality','biko'].forEach(function(k){data[k]=gv('ai_'+k);});
+  showLoading('保存中...');google.script.run.withSuccessHandler(function(r){hideLoading();showToast(r.message,r.success?'success':'error');if(r.success)afterFormSaved();}).withFailureHandler(function(e){hideLoading();showToast(e.message,'error');}).saveGenericFormData(currentProject.projectSSId,'生成AI仕様書',data);
+}
+function loadAiShiyoshoForm(){
+  if(!currentProject||!currentProject.projectSSId)return;
+  google.script.run.withSuccessHandler(function(d){if(!d)return;
+    for(var i=0;i<5;i++){var el=document.getElementById('ai_chk_'+i);if(el)el.checked=(d['chk_'+i]==='1');}
+    ['tools','restrict','quality','biko'].forEach(function(k){var el=document.getElementById('ai_'+k);if(el&&d[k])el.value=d[k];});
+  }).getGenericFormData(currentProject.projectSSId,'生成AI仕様書');
+}
+
+// --- 原子力業務追加要求事項 ---
+function openGenpatsuItakuForm(){
+  var area=document.getElementById('sectionFormArea');
+  var h=formHeader('outsource','warning','原子力業務における委託先への追加要求事項');
+  h+='<div class="gf-section"><div class="gf-section-title">説明</div><p style="font-size:14px;line-height:1.7;color:var(--text);margin-bottom:12px;">BI1-105 一般原子力業務に係る情報セキュリティ管理要領に基づく追加要求事項を記載してください。</p></div>';
+  h+='<div class="gf-section"><div class="gf-section-title">追加要求チェックリスト</div>';
+  var checks=[
+    '原子力情報セキュリティに関する誓約書の取得','情報管理責任者の指定','原子力情報の取扱区分の明示',
+    '情報セキュリティ教育の実施要求','入退室管理・物理的セキュリティの要求','電子データの暗号化要求',
+    '情報セキュリティインシデント発生時の報告義務','業務終了時の情報返却・廃棄要求'
+  ];
+  checks.forEach(function(c,i){h+='<div class="form-group"><label style="display:flex;align-items:center;gap:8px;"><input type="checkbox" id="gi_chk_'+i+'"> '+escH(c)+'</label></div>';});
+  h+='</div>';
+  h+='<div class="gf-section"><div class="gf-section-title">確認結果</div>';
+  h+='<div style="overflow-x:auto;"><table class="form-table" style="width:100%;border-collapse:collapse;">';
+  h+='<thead><tr><th style="padding:8px;border:1px solid #ddd;background:#f5f5f5;">要求事項</th><th style="padding:8px;border:1px solid #ddd;background:#f5f5f5;width:120px;">対応状況</th><th style="padding:8px;border:1px solid #ddd;background:#f5f5f5;">対応内容</th></tr></thead><tbody>';
+  checks.forEach(function(c,i){
+    h+='<tr><td style="padding:6px 8px;border:1px solid #ddd;font-size:13px;">'+escH(c)+'</td>';
+    h+='<td style="padding:4px;border:1px solid #ddd;"><select id="gi_r_'+i+'_0" class="form-input" style="margin:0;"><option value="">--</option><option value="対応済">対応済</option><option value="対応中">対応中</option><option value="未対応">未対応</option><option value="該当なし">該当なし</option></select></td>';
+    h+='<td style="padding:4px;border:1px solid #ddd;"><input type="text" id="gi_r_'+i+'_1" class="form-input" style="margin:0;"></td></tr>';
+  });
+  h+='</tbody></table></div></div>';
+  h+='<div class="gf-section"><div class="gf-section-title">備考</div>';h+=fG('','',fTa('gi_biko',3));h+='</div>';
+  h+=formSaveBtn("saveTableForm('原子力追加要求','gi',8,2)");h+='</div></div>';
+  area.innerHTML=h;showFormPage();loadGenpatsuItakuFormData();
+}
+function loadGenpatsuItakuFormData(){
+  if(!currentProject||!currentProject.projectSSId)return;
+  google.script.run.withSuccessHandler(function(d){if(!d)return;
+    for(var i=0;i<8;i++){var el=document.getElementById('gi_chk_'+i);if(el)el.checked=(d['chk_'+i]==='1');}
+    loadTableForm('原子力追加要求','gi',8,2,['biko']);
+  }).getGenericFormData(currentProject.projectSSId,'原子力追加要求');
+}
+
+// --- 委託先監査仕様書記載 ---
+function openItakuKansaShiyoshoForm(){
+  var area=document.getElementById('sectionFormArea');
+  var h=formHeader('outsource','gavel','委託先監査に関する仕様書の記載');
+  h+='<div class="gf-section"><div class="gf-section-title">説明</div><p style="font-size:14px;line-height:1.7;color:var(--text);margin-bottom:12px;">QC1-012「委託先に対する品質監査実施の手引書」を踏まえ、委託先監査について仕様書に追記してください。</p></div>';
+  h+='<div class="gf-section"><div class="gf-section-title">監査仕様記載チェックリスト</div>';
+  var checks=[
+    '委託先への品質監査実施の旨を記載しているか','監査の時期・頻度を明示しているか',
+    '監査項目・判定基準を記載しているか','不適合発生時の是正処置手順を記載しているか',
+    '監査記録の保管要求を記載しているか','フォローアップ監査の条件を記載しているか'
+  ];
+  checks.forEach(function(c,i){h+='<div class="form-group"><label style="display:flex;align-items:center;gap:8px;"><input type="checkbox" id="ks_chk_'+i+'"> '+escH(c)+'</label></div>';});
+  h+='</div>';
+  h+='<div class="gf-section"><div class="gf-section-title">記載内容</div>';
+  h+=fG('','監査計画概要',fTa('ks_plan',4));
+  h+=fG('','備考',fTa('ks_biko',3));
+  h+='</div>';
+  h+=formSaveBtn("saveItakuKansaShiyoshoForm()");h+='</div></div>';
+  area.innerHTML=h;showFormPage();loadItakuKansaShiyoshoForm();
+}
+function saveItakuKansaShiyoshoForm(){
+  if(!currentProject||!currentProject.projectSSId)return;
+  var data={};
+  for(var i=0;i<6;i++){var el=document.getElementById('ks_chk_'+i);data['chk_'+i]=el&&el.checked?'1':'0';}
+  ['plan','biko'].forEach(function(k){data[k]=gv('ks_'+k);});
+  showLoading('保存中...');google.script.run.withSuccessHandler(function(r){hideLoading();showToast(r.message,r.success?'success':'error');if(r.success)afterFormSaved();}).withFailureHandler(function(e){hideLoading();showToast(e.message,'error');}).saveGenericFormData(currentProject.projectSSId,'委託先監査仕様書',data);
+}
+function loadItakuKansaShiyoshoForm(){
+  if(!currentProject||!currentProject.projectSSId)return;
+  google.script.run.withSuccessHandler(function(d){if(!d)return;
+    for(var i=0;i<6;i++){var el=document.getElementById('ks_chk_'+i);if(el)el.checked=(d['chk_'+i]==='1');}
+    ['plan','biko'].forEach(function(k){var el=document.getElementById('ks_'+k);if(el&&d[k])el.value=d[k];});
+  }).getGenericFormData(currentProject.projectSSId,'委託先監査仕様書');
+}
 
 // ===== テーブル系共通save/load =====
 function saveTableForm(sheet,prefix,rows,cols){if(!currentProject||!currentProject.projectSSId)return;var data={};
@@ -1866,27 +2015,36 @@ function createNewFlow(){var n=prompt('新規フロー名:','標準QMSフロー'
 function openFlowEditor(fid){showLoading('読み込み中...');google.script.run.withSuccessHandler(function(d){hideLoading();if(!d){showToast('見つかりません','error');return;}currentFlowId=d.id;try{currentFlowData=JSON.parse(d.json);}catch(e){currentFlowData={name:d.name,nodes:[],lines:[],textboxes:[]};}currentFlowData.name=d.name;if(!currentFlowData.textboxes)currentFlowData.textboxes=[];if(currentFlowData.comments){currentFlowData.textboxes=currentFlowData.textboxes.concat(currentFlowData.comments.map(function(c){return{x:c.x,y:c.y,w:c.w||200,h:60,text:c.text||'',color:'#333',bg:'#fff9c4',borderStyle:'solid',borderColor:'#f0e68c'};}));delete currentFlowData.comments;}openFlowEditorUI();}).withFailureHandler(function(e){hideLoading();showToast(e.message,'error');}).getFlowData(fid);}
 function confirmDeleteFlow(id,name){if(!confirm('「'+name+'」を削除？'))return;showLoading('削除中...');google.script.run.withSuccessHandler(function(r){hideLoading();showToast(r.message,r.success?'success':'error');if(r.success)loadFlowList();}).withFailureHandler(function(e){hideLoading();showToast(e.message,'error');}).deleteFlow(id);}
 function openFlowEditorUI(){showPage('page-flow-editor');updateBreadcrumb([{label:'フロー管理',onclick:'openAdminPage()'},{label:currentFlowData.name||'編集'}]);document.getElementById('fe_flowName').value=currentFlowData.name||'';feTool='select';feSelected=null;feLineStart=null;setFeTool('select');renderFePalette();feRender();bindFeCanvasEvents();}
-function setFeTool(t){feTool=t;feLineStart=null;document.querySelectorAll('.fe-tool').forEach(function(b){b.classList.toggle('active',b.dataset.tool===t);});document.getElementById('feCanvas').style.cursor=t==='select'?'default':(t==='textbox'?'text':'crosshair');showFmtPanel(false);}
+function setFeTool(t){feTool=t;feLineStart=null;document.querySelectorAll('.fe-tool').forEach(function(b){b.classList.toggle('active',b.dataset.tool===t);});document.getElementById('feCanvas').style.cursor=t==='select'?'default':(t==='textbox'||t==='swimlane'?'text':'crosshair');showFmtPanel(false);}
+function addCustomNode(){var label=prompt('ノードラベル:');if(!label)return;var fd=currentFlowData,ns=fd.nodes||[];var maxY=40;ns.forEach(function(n){maxY=Math.max(maxY,n.y+50);});var x=60+(ns.length%3)*220;if(x>660){x=60;maxY+=10;}var shape=document.getElementById('fePaletteShape').value||'rect';var bg=document.getElementById('fePaletteBg').value||'#FFFF99';ns.push({id:'n'+Date.now(),formId:'',label:label,x:x,y:maxY,w:180,h:40,color:'#555',shape:shape,bg:bg});fd.nodes=ns;feRender();}
 
 // パレット
-function renderFePalette(){var el=document.getElementById('fePaletteItems'),h='';FORM_REGISTRY.forEach(function(f){h+='<div class="fe-palette-item" data-fid="'+f.id+'" data-ft="'+escH(f.title)+'"><span class="material-icons" style="font-size:16px;">'+f.icon+'</span><span>'+escH(f.title)+'</span></div>';});el.innerHTML=h;el.querySelectorAll('.fe-palette-item').forEach(function(it){it.addEventListener('click',function(){var fd=currentFlowData,ns=fd.nodes||[];var maxY=40;ns.forEach(function(n){maxY=Math.max(maxY,n.y+50);});var x=60+(ns.length%3)*220;if(x>660){x=60;maxY+=10;}ns.push({id:'n'+Date.now(),formId:this.dataset.fid,label:this.dataset.ft,x:x,y:maxY,w:180,h:40,color:'#1a5276'});fd.nodes=ns;feRender();});});}
+function renderFePalette(){var el=document.getElementById('fePaletteItems'),h='';FORM_REGISTRY.forEach(function(f){h+='<div class="fe-palette-item" data-fid="'+f.id+'" data-ft="'+escH(f.title)+'"><span class="material-icons" style="font-size:16px;">'+f.icon+'</span><span>'+escH(f.title)+'</span></div>';});el.innerHTML=h;el.querySelectorAll('.fe-palette-item').forEach(function(it){it.addEventListener('click',function(){var fd=currentFlowData,ns=fd.nodes||[];var maxY=40;ns.forEach(function(n){maxY=Math.max(maxY,n.y+50);});var x=60+(ns.length%3)*220;if(x>660){x=60;maxY+=10;}var shape=document.getElementById('fePaletteShape').value||'rect';var bg=document.getElementById('fePaletteBg').value||'#FFFF99';ns.push({id:'n'+Date.now(),formId:this.dataset.fid,label:this.dataset.ft,x:x,y:maxY,w:180,h:40,color:'#1a5276',shape:shape,bg:bg});fd.nodes=ns;feRender();});});}
 
 // メイン描画
 function feRender(){var fd=currentFlowData,canvas=document.getElementById('feCanvas'),svg=document.getElementById('feCanvasSvg');var h='';
-(fd.nodes||[]).forEach(function(n,i){var sel=(feSelected&&feSelected.type==='node'&&feSelected.idx===i);h+='<div class="fe-node'+(sel?' fe-sel':'')+'" data-idx="'+i+'" style="left:'+n.x+'px;top:'+n.y+'px;width:'+(n.w||180)+'px;height:'+(n.h||40)+'px;border-color:'+(n.color||'#1a5276')+';"><div class="fe-node-bar" style="background:'+(n.color||'#1a5276')+';"></div><span class="fe-node-text">'+escH(n.label)+'</span><button class="fe-del" data-dt="node" data-di="'+i+'"><span class="material-icons">close</span></button></div>';});
+// スイムレーン描画
+(fd.swimlanes||[]).forEach(function(sl,i){h+='<div class="fe-swimlane" data-sli="'+i+'" style="left:'+sl.x+'px;top:0;width:'+sl.w+'px;height:100%;background:'+(sl.color||'rgba(0,0,0,.015)')+';"><div class="fe-swimlane-label">'+escH(sl.label||'')+'</div></div>';});
+// ノード描画（shape対応）
+(fd.nodes||[]).forEach(function(n,i){var sel=(feSelected&&feSelected.type==='node'&&feSelected.idx===i);var shape=n.shape||'rect';var bg=n.bg||'#fff';var cls='fe-node shape-'+shape+(sel?' fe-sel':'');h+='<div class="'+cls+'" data-idx="'+i+'" style="left:'+n.x+'px;top:'+n.y+'px;width:'+(n.w||180)+'px;height:'+(n.h||40)+'px;border-color:'+(n.color||'#1a5276')+';background:'+bg+';">';if(shape!=='diamond'&&shape!=='bracket')h+='<div class="fe-node-bar" style="background:'+(n.color||'#1a5276')+';"></div>';h+='<span class="fe-node-text" style="'+(n.fontSize?'font-size:'+n.fontSize+'px;':'')+(n.textAlign?'text-align:'+n.textAlign+';':'')+'">'+escH(n.label)+'</span><button class="fe-del" data-dt="node" data-di="'+i+'"><span class="material-icons">close</span></button></div>';});
+// テキストボックス描画
 (fd.textboxes||[]).forEach(function(tb,i){var sel=(feSelected&&feSelected.type==='textbox'&&feSelected.idx===i);var bs=tb.borderStyle||'solid',bc=tb.borderColor||'#999';h+='<div class="fe-tb'+(sel?' fe-sel':'')+'" data-tidx="'+i+'" style="left:'+tb.x+'px;top:'+tb.y+'px;width:'+(tb.w||200)+'px;min-height:'+(tb.h||40)+'px;color:'+(tb.color||'#333')+';background:'+(tb.bg||'#fff')+';border:2px '+bs+' '+(bs==='none'?'transparent':bc)+';"><textarea class="fe-tb-text" data-tidx="'+i+'" style="color:'+(tb.color||'#333')+';">'+escH(tb.text||'')+'</textarea><button class="fe-del fe-del-tb" data-dt="textbox" data-di="'+i+'"><span class="material-icons">close</span></button></div>';});
-if(!(fd.nodes||[]).length&&!(fd.textboxes||[]).length)h+='<div class="fe-canvas-hint"><span class="material-icons">drag_indicator</span><p>パレットから帳票をクリックして追加</p></div>';
+if(!(fd.nodes||[]).length&&!(fd.textboxes||[]).length&&!(fd.swimlanes||[]).length)h+='<div class="fe-canvas-hint"><span class="material-icons">drag_indicator</span><p>パレットから帳票をクリックして追加</p></div>';
 canvas.innerHTML=h;feRenderLines(svg,fd);bindFeNodeEvents();}
 
 // 線描画（直線+折り曲げ+矢印回転）
-function feRenderLines(svg,fd){var W=Math.max(svg.parentElement.scrollWidth,1200),H=Math.max(svg.parentElement.scrollHeight,900);svg.setAttribute('viewBox','0 0 '+W+' '+H);svg.setAttribute('width',W);svg.setAttribute('height',H);var ps='';
-(fd.lines||[]).forEach(function(ln,i){var from=fd.nodes[ln.from],to=fd.nodes[ln.to];if(!from||!to)return;var sel=(feSelected&&feSelected.type==='line'&&feSelected.idx===i);var sc=sel?'#e74c3c':'#555',sw=sel?3:2;
+function feRenderLines(svg,fd){var W=Math.max(svg.parentElement.scrollWidth,3200),H=Math.max(svg.parentElement.scrollHeight,4500);svg.setAttribute('viewBox','0 0 '+W+' '+H);svg.setAttribute('width',W);svg.setAttribute('height',H);var ps='';
+(fd.lines||[]).forEach(function(ln,i){var from=fd.nodes[ln.from],to=fd.nodes[ln.to];if(!from||!to)return;var sel=(feSelected&&feSelected.type==='line'&&feSelected.idx===i);var sc=sel?'#e74c3c':(ln.color||'#555'),sw=sel?3:2;
+var dashAttr='';if(ln.dash==='dashed')dashAttr=' stroke-dasharray="8,4"';else if(ln.dash==='dotted')dashAttr=' stroke-dasharray="3,3"';
 var cp=calcConnPts(from,to),x1=cp.x1,y1=cp.y1,x2=cp.x2,y2=cp.y2;
 var lastDx,lastDy;
-if(ln.type==='elbow'){var mx=(x1+x2)/2,my=(y1+y2)/2;if(Math.abs(x2-x1)>Math.abs(y2-y1)){ps+='<polyline points="'+x1+','+y1+' '+x1+','+my+' '+x2+','+my+' '+x2+','+y2+'" fill="none" stroke="'+sc+'" stroke-width="'+sw+'" data-lidx="'+i+'" class="fe-lp"/>';lastDx=0;lastDy=y2-my;}else{ps+='<polyline points="'+x1+','+y1+' '+mx+','+y1+' '+mx+','+y2+' '+x2+','+y2+'" fill="none" stroke="'+sc+'" stroke-width="'+sw+'" data-lidx="'+i+'" class="fe-lp"/>';lastDx=x2-mx;lastDy=0;}}
-else{ps+='<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="'+sc+'" stroke-width="'+sw+'" data-lidx="'+i+'" class="fe-lp"/>';lastDx=x2-x1;lastDy=y2-y1;}
+if(ln.type==='elbowV'){ps+='<polyline points="'+x1+','+y1+' '+x1+','+y2+' '+x2+','+y2+'" fill="none" stroke="'+sc+'" stroke-width="'+sw+'"'+dashAttr+' data-lidx="'+i+'" class="fe-lp"/>';lastDx=x2-x1;lastDy=0;}
+else if(ln.type==='elbowH'){ps+='<polyline points="'+x1+','+y1+' '+x2+','+y1+' '+x2+','+y2+'" fill="none" stroke="'+sc+'" stroke-width="'+sw+'"'+dashAttr+' data-lidx="'+i+'" class="fe-lp"/>';lastDx=0;lastDy=y2-y1;}
+else if(ln.type==='elbow'){var mx=(x1+x2)/2,my=(y1+y2)/2;if(Math.abs(x2-x1)>Math.abs(y2-y1)){ps+='<polyline points="'+x1+','+y1+' '+x1+','+my+' '+x2+','+my+' '+x2+','+y2+'" fill="none" stroke="'+sc+'" stroke-width="'+sw+'"'+dashAttr+' data-lidx="'+i+'" class="fe-lp"/>';lastDx=0;lastDy=y2-my;}else{ps+='<polyline points="'+x1+','+y1+' '+mx+','+y1+' '+mx+','+y2+' '+x2+','+y2+'" fill="none" stroke="'+sc+'" stroke-width="'+sw+'"'+dashAttr+' data-lidx="'+i+'" class="fe-lp"/>';lastDx=x2-mx;lastDy=0;}}
+else{ps+='<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="'+sc+'" stroke-width="'+sw+'"'+dashAttr+' data-lidx="'+i+'" class="fe-lp"/>';lastDx=x2-x1;lastDy=y2-y1;}
 var ang=Math.atan2(lastDy,lastDx)*180/Math.PI;
-ps+='<polygon points="-8,-5 0,0 -8,5" fill="'+sc+'" transform="translate('+x2+','+y2+') rotate('+ang+')"/>';});
+ps+='<polygon points="-8,-5 0,0 -8,5" fill="'+sc+'" transform="translate('+x2+','+y2+') rotate('+ang+')"/>';
+if(ln.label){var lmx=(x1+x2)/2,lmy=(y1+y2)/2;ps+='<text x="'+lmx+'" y="'+(lmy-6)+'" text-anchor="middle" fill="'+sc+'" font-size="11" font-weight="600">'+escH(ln.label)+'</text>';}});
 svg.innerHTML=ps;svg.querySelectorAll('.fe-lp').forEach(function(p){p.style.cursor='pointer';p.addEventListener('click',function(e){e.stopPropagation();feSelected={type:'line',idx:parseInt(this.dataset.lidx)};feRender();});});}
 
 function calcConnPts(a,b){var aw=a.w||180,ah=a.h||40,bw=b.w||180,bh=b.h||40;var ax=a.x+aw/2,ay=a.y+ah/2,bx=b.x+bw/2,by=b.y+bh/2;var dx=bx-ax,dy=by-ay;var x1,y1,x2,y2;
@@ -1898,13 +2056,14 @@ return{x1:x1,y1:y1,x2:x2,y2:y2};}
 function bindFeCanvasEvents(){var wrap=document.getElementById('feCanvasWrap');wrap.onclick=function(e){var c=document.getElementById('feCanvas');if(e.target!==c&&e.target!==wrap&&!e.target.classList.contains('fe-canvas-svg'))return;
 var rect=c.getBoundingClientRect();var x=Math.round((e.clientX-rect.left+wrap.scrollLeft)/10)*10;var y=Math.round((e.clientY-rect.top+wrap.scrollTop)/10)*10;
 if(feTool==='textbox'){var text=prompt('テキスト:');if(!text)return;if(!currentFlowData.textboxes)currentFlowData.textboxes=[];currentFlowData.textboxes.push({x:x,y:y,w:200,h:60,text:text,color:'#333333',bg:'#ffffff',borderStyle:'solid',borderColor:'#999999'});feRender();}
+else if(feTool==='swimlane'){var label=prompt('フェーズ名:');if(!label)return;if(!currentFlowData.swimlanes)currentFlowData.swimlanes=[];currentFlowData.swimlanes.push({label:label,x:x,w:400,color:'rgba(0,0,0,.02)'});feRender();}
 else{feSelected=null;feLineStart=null;showFmtPanel(false);feRender();}};}
 
 function bindFeNodeEvents(){var canvas=document.getElementById('feCanvas');
 canvas.querySelectorAll('.fe-node').forEach(function(el){el.addEventListener('mousedown',function(e){if(e.target.closest('.fe-del'))return;e.preventDefault();e.stopPropagation();var idx=parseInt(this.dataset.idx);
-if(feTool==='line'||feTool==='elbow'){if(feLineStart===null){feLineStart=idx;feSelected={type:'node',idx:idx};feRender();}else if(feLineStart!==idx){if(!currentFlowData.lines)currentFlowData.lines=[];currentFlowData.lines.push({from:feLineStart,to:idx,type:feTool==='elbow'?'elbow':'straight'});feLineStart=null;feSelected=null;feRender();}return;}
+if(feTool==='line'||feTool==='elbow'||feTool==='elbowV'||feTool==='elbowH'){if(feLineStart===null){feLineStart=idx;feSelected={type:'node',idx:idx};feRender();}else if(feLineStart!==idx){if(!currentFlowData.lines)currentFlowData.lines=[];var lt=feTool;if(lt!=='elbowV'&&lt!=='elbowH'&&lt!=='elbow')lt='straight';var dash=document.getElementById('feLineDash');var dv=dash?dash.value:'solid';currentFlowData.lines.push({from:feLineStart,to:idx,type:lt,dash:dv,color:'#555'});feLineStart=null;feSelected=null;feRender();}return;}
 feSelected={type:'node',idx:idx};showFmtPanel(false);var r=this.getBoundingClientRect();feDrag={active:true,idx:idx,type:'node',ox:e.clientX-r.left,oy:e.clientY-r.top};feRender();});
-el.addEventListener('dblclick',function(e){e.stopPropagation();var idx=parseInt(this.dataset.idx);var n=currentFlowData.nodes[idx];var c=prompt('色(例:#1a5276):',n.color||'#1a5276');if(c){n.color=c;feRender();}});});
+el.addEventListener('dblclick',function(e){e.stopPropagation();var idx=parseInt(this.dataset.idx);feSelected={type:'node',idx:idx};showFmtPanel(true,idx);feRender();});});
 
 canvas.querySelectorAll('.fe-tb').forEach(function(el){el.addEventListener('mousedown',function(e){if(e.target.closest('.fe-del')||e.target.tagName==='TEXTAREA')return;e.preventDefault();e.stopPropagation();var idx=parseInt(this.dataset.tidx);feSelected={type:'textbox',idx:idx};var r=this.getBoundingClientRect();feDrag={active:true,idx:idx,type:'textbox',ox:e.clientX-r.left,oy:e.clientY-r.top};showFmtPanel(true,idx);feRender();});});
 canvas.querySelectorAll('.fe-tb-text').forEach(function(ta){ta.addEventListener('input',function(){currentFlowData.textboxes[parseInt(this.dataset.tidx)].text=this.value;});ta.addEventListener('focus',function(){var idx=parseInt(this.dataset.tidx);feSelected={type:'textbox',idx:idx};showFmtPanel(true,idx);});});
@@ -1915,11 +2074,17 @@ document.addEventListener('mousemove',function(e){if(!feDrag.active)return;var c
 document.addEventListener('mouseup',function(){if(feDrag.active)feDrag={active:false,idx:-1,type:'',ox:0,oy:0};});
 document.addEventListener('keydown',function(e){if(!feSelected||(e.key!=='Delete'&&e.key!=='Backspace'))return;if(document.activeElement&&(document.activeElement.tagName==='INPUT'||document.activeElement.tagName==='TEXTAREA'))return;if(feSelected.type==='node'){currentFlowData.nodes.splice(feSelected.idx,1);fixLineIdx(feSelected.idx);}else if(feSelected.type==='textbox'){currentFlowData.textboxes.splice(feSelected.idx,1);}else if(feSelected.type==='line'){currentFlowData.lines.splice(feSelected.idx,1);}feSelected=null;showFmtPanel(false);feRender();});
 
-function fixLineIdx(ri){currentFlowData.lines=(currentFlowData.lines||[]).filter(function(ln){return ln.from!==ri&&ln.to!==ri;}).map(function(ln){return{from:ln.from>ri?ln.from-1:ln.from,to:ln.to>ri?ln.to-1:ln.to,type:ln.type};});}
+function fixLineIdx(ri){currentFlowData.lines=(currentFlowData.lines||[]).filter(function(ln){return ln.from!==ri&&ln.to!==ri;}).map(function(ln){return{from:ln.from>ri?ln.from-1:ln.from,to:ln.to>ri?ln.to-1:ln.to,type:ln.type,dash:ln.dash,color:ln.color,label:ln.label};});}
 
 // 書式パネル
-function showFmtPanel(show,idx){var p=document.getElementById('feFormatPanel');if(!p)return;if(!show||!feSelected||feSelected.type!=='textbox'){p.style.display='none';return;}p.style.display='flex';var tb=currentFlowData.textboxes[idx];if(!tb)return;document.getElementById('feFmtColor').value=tb.color||'#333333';document.getElementById('feFmtBg').value=tb.bg||'#ffffff';document.getElementById('feFmtBorder').value=tb.borderStyle||'solid';document.getElementById('feFmtBorderColor').value=tb.borderColor||'#999999';}
-function updateTbFmt(){if(!feSelected||feSelected.type!=='textbox')return;var tb=currentFlowData.textboxes[feSelected.idx];if(!tb)return;tb.color=document.getElementById('feFmtColor').value;tb.bg=document.getElementById('feFmtBg').value;tb.borderStyle=document.getElementById('feFmtBorder').value;tb.borderColor=document.getElementById('feFmtBorderColor').value;feRender();showFmtPanel(true,feSelected.idx);}
+function showFmtPanel(show,idx){var p=document.getElementById('feFormatPanel');if(!p)return;if(!show||!feSelected||(feSelected.type!=='textbox'&&feSelected.type!=='node')){p.style.display='none';return;}p.style.display='flex';
+var shapeEl=document.getElementById('feFmtShape');var wEl=document.getElementById('feFmtW');var hEl=document.getElementById('feFmtH');
+if(feSelected.type==='textbox'){var tb=currentFlowData.textboxes[idx];if(!tb)return;document.getElementById('feFmtColor').value=tb.color||'#333333';document.getElementById('feFmtBg').value=tb.bg||'#ffffff';document.getElementById('feFmtBorder').value=tb.borderStyle||'solid';document.getElementById('feFmtBorderColor').value=tb.borderColor||'#999999';if(shapeEl)shapeEl.parentElement.style.display='none';if(wEl){wEl.value=tb.w||200;}if(hEl){hEl.value=tb.h||60;}}
+else if(feSelected.type==='node'){var n=currentFlowData.nodes[idx];if(!n)return;document.getElementById('feFmtColor').value=n.color||'#1a5276';document.getElementById('feFmtBg').value=n.bg||'#fff';document.getElementById('feFmtBorder').value='solid';document.getElementById('feFmtBorderColor').value=n.color||'#1a5276';if(shapeEl){shapeEl.parentElement.style.display='';shapeEl.value=n.shape||'rect';}if(wEl){wEl.value=n.w||180;}if(hEl){hEl.value=n.h||40;}}}
+function updateFmt(){if(!feSelected)return;
+if(feSelected.type==='textbox'){var tb=currentFlowData.textboxes[feSelected.idx];if(!tb)return;tb.color=document.getElementById('feFmtColor').value;tb.bg=document.getElementById('feFmtBg').value;tb.borderStyle=document.getElementById('feFmtBorder').value;tb.borderColor=document.getElementById('feFmtBorderColor').value;var w=parseInt(document.getElementById('feFmtW').value);var h=parseInt(document.getElementById('feFmtH').value);if(w>0)tb.w=w;if(h>0)tb.h=h;}
+else if(feSelected.type==='node'){var n=currentFlowData.nodes[feSelected.idx];if(!n)return;n.color=document.getElementById('feFmtColor').value;n.bg=document.getElementById('feFmtBg').value;var shapeEl=document.getElementById('feFmtShape');if(shapeEl)n.shape=shapeEl.value;var w=parseInt(document.getElementById('feFmtW').value);var h=parseInt(document.getElementById('feFmtH').value);if(w>0)n.w=w;if(h>0)n.h=h;}
+feRender();showFmtPanel(true,feSelected.idx);}
 
 // 保存
 function saveCurrentFlow(){if(!currentFlowId||!currentFlowData)return;currentFlowData.name=document.getElementById('fe_flowName').value||'名称未設定';showLoading('保存中...');google.script.run.withSuccessHandler(function(r){hideLoading();showToast(r.message,r.success?'success':'error');}).withFailureHandler(function(e){hideLoading();showToast(e.message,'error');}).saveFlowData(currentFlowId,currentFlowData.name,JSON.stringify(currentFlowData));}
@@ -1929,29 +2094,37 @@ function renderFlowDiagramFromSaved(flowData, containerId){
   var fd;try{fd=typeof flowData==='string'?JSON.parse(flowData):flowData;}catch(e){return;}if(!fd)return;
   var cid=containerId||'flowContainer1';
   var container=document.getElementById(cid);if(!container)return;
-  var nodes=fd.nodes||[],lines=fd.lines||[],tbs=fd.textboxes||[];
-  if(!nodes.length&&!tbs.length){container.innerHTML='<p style="color:var(--text-light);padding:20px;">フロー未設定</p>';return;}
+  var nodes=fd.nodes||[],lines=fd.lines||[],tbs=fd.textboxes||[],sls=fd.swimlanes||[];
+  if(!nodes.length&&!tbs.length&&!sls.length){container.innerHTML='<p style="color:var(--text-light);padding:20px;">フロー未設定</p>';return;}
   var maxX=100,maxY=100;
-  nodes.forEach(function(n){maxX=Math.max(maxX,n.x+(n.w||180)+20);maxY=Math.max(maxY,n.y+(n.h||40)+40);});
-  tbs.forEach(function(c){maxX=Math.max(maxX,c.x+(c.w||200)+20);maxY=Math.max(maxY,c.y+(c.h||60)+20);});
+  nodes.forEach(function(n){maxX=Math.max(maxX,n.x+(n.w||180)+40);maxY=Math.max(maxY,n.y+(n.h||40)+60);});
+  tbs.forEach(function(c){maxX=Math.max(maxX,c.x+(c.w||200)+40);maxY=Math.max(maxY,c.y+(c.h||60)+40);});
+  sls.forEach(function(sl){maxX=Math.max(maxX,sl.x+sl.w+20);});
   var html='<div class="fe-view-wrap" style="position:relative;width:'+maxX+'px;height:'+maxY+'px;">';
+  // スイムレーン
+  sls.forEach(function(sl){html+='<div class="fe-view-swimlane" style="left:'+sl.x+'px;top:0;width:'+sl.w+'px;height:'+maxY+'px;background:'+(sl.color||'rgba(0,0,0,.015)')+';"><div class="fe-view-swimlane-label">'+escH(sl.label||'')+'</div></div>';});
   // SVG
   html+='<svg style="position:absolute;top:0;left:0;width:'+maxX+'px;height:'+maxY+'px;pointer-events:none;" viewBox="0 0 '+maxX+' '+maxY+'">';
-  lines.forEach(function(ln){var from=nodes[ln.from],to=nodes[ln.to];if(!from||!to)return;var cp=calcConnPts(from,to),x1=cp.x1,y1=cp.y1,x2=cp.x2,y2=cp.y2;var lastDx,lastDy;
-    if(ln.type==='elbow'){var mx=(x1+x2)/2,my=(y1+y2)/2;if(Math.abs(x2-x1)>Math.abs(y2-y1)){html+='<polyline points="'+x1+','+y1+' '+x1+','+my+' '+x2+','+my+' '+x2+','+y2+'" fill="none" stroke="#555" stroke-width="2"/>';lastDx=0;lastDy=y2-my;}else{html+='<polyline points="'+x1+','+y1+' '+mx+','+y1+' '+mx+','+y2+' '+x2+','+y2+'" fill="none" stroke="#555" stroke-width="2"/>';lastDx=x2-mx;lastDy=0;}}
-    else{html+='<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="#555" stroke-width="2"/>';lastDx=x2-x1;lastDy=y2-y1;}
-    var ang=Math.atan2(lastDy,lastDx)*180/Math.PI;html+='<polygon points="-8,-5 0,0 -8,5" fill="#555" transform="translate('+x2+','+y2+') rotate('+ang+')"/>';
+  lines.forEach(function(ln){var from=nodes[ln.from],to=nodes[ln.to];if(!from||!to)return;var sc=ln.color||'#555';var cp=calcConnPts(from,to),x1=cp.x1,y1=cp.y1,x2=cp.x2,y2=cp.y2;var lastDx,lastDy;
+    var dashAttr='';if(ln.dash==='dashed')dashAttr=' stroke-dasharray="8,4"';else if(ln.dash==='dotted')dashAttr=' stroke-dasharray="3,3"';
+    if(ln.type==='elbowV'){html+='<polyline points="'+x1+','+y1+' '+x1+','+y2+' '+x2+','+y2+'" fill="none" stroke="'+sc+'" stroke-width="2"'+dashAttr+'/>';lastDx=x2-x1;lastDy=0;}
+    else if(ln.type==='elbowH'){html+='<polyline points="'+x1+','+y1+' '+x2+','+y1+' '+x2+','+y2+'" fill="none" stroke="'+sc+'" stroke-width="2"'+dashAttr+'/>';lastDx=0;lastDy=y2-y1;}
+    else if(ln.type==='elbow'){var mx=(x1+x2)/2,my=(y1+y2)/2;if(Math.abs(x2-x1)>Math.abs(y2-y1)){html+='<polyline points="'+x1+','+y1+' '+x1+','+my+' '+x2+','+my+' '+x2+','+y2+'" fill="none" stroke="'+sc+'" stroke-width="2"'+dashAttr+'/>';lastDx=0;lastDy=y2-my;}else{html+='<polyline points="'+x1+','+y1+' '+mx+','+y1+' '+mx+','+y2+' '+x2+','+y2+'" fill="none" stroke="'+sc+'" stroke-width="2"'+dashAttr+'/>';lastDx=x2-mx;lastDy=0;}}
+    else{html+='<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="'+sc+'" stroke-width="2"'+dashAttr+'/>';lastDx=x2-x1;lastDy=y2-y1;}
+    var ang=Math.atan2(lastDy,lastDx)*180/Math.PI;html+='<polygon points="-8,-5 0,0 -8,5" fill="'+sc+'" transform="translate('+x2+','+y2+') rotate('+ang+')"/>';
+    if(ln.label){var lmx=(x1+x2)/2,lmy=(y1+y2)/2;html+='<text x="'+lmx+'" y="'+(lmy-6)+'" text-anchor="middle" fill="'+sc+'" font-size="11" font-weight="600">'+escH(ln.label)+'</text>';}
   });
   html+='</svg>';
-  // テキストボックス（ノードの下に描画→z-index低）
+  // テキストボックス
   tbs.forEach(function(tb){var bs=tb.borderStyle||'solid',bc=tb.borderColor||'#999';
     html+='<div class="fe-view-tb" style="position:absolute;left:'+tb.x+'px;top:'+tb.y+'px;width:'+(tb.w||200)+'px;min-height:'+(tb.h||24)+'px;color:'+(tb.color||'#333')+';background:'+(tb.bg||'#fff')+';border:2px '+bs+' '+(bs==='none'?'transparent':bc)+';border-radius:3px;padding:4px 8px;font-size:11px;line-height:1.5;white-space:pre-wrap;">'+escH(tb.text||'')+'</div>';
   });
-  // ノード（z-index高、クリッカブル）
-  nodes.forEach(function(n){var reg=FORM_REGISTRY.find(function(f){return f.id===n.formId;});var icon=reg?reg.icon:'description';
-    html+='<button class="fe-view-node" style="position:absolute;left:'+n.x+'px;top:'+n.y+'px;width:'+(n.w||180)+'px;height:'+(n.h||36)+'px;border-left:4px solid '+(n.color||'#1a5276')+';" onclick="openFormById(\''+escH(n.formId)+'\')">';
-    html+='<span class="material-icons" style="color:'+(n.color||'#1a5276')+';font-size:16px;">'+icon+'</span>';
-    html+='<span>'+escH(n.label)+'</span></button>';
+  // ノード（shape対応、クリッカブル）
+  nodes.forEach(function(n){var reg=FORM_REGISTRY.find(function(f){return f.id===n.formId;});var icon=reg?reg.icon:'description';var shape=n.shape||'rect';var bg=n.bg||'#fff';var shapeCls=shape!=='rect'?' shape-'+shape:'';
+    var onclick=n.formId?'onclick="openFormById(\''+escH(n.formId)+'\')"':'';
+    html+='<button class="fe-view-node'+shapeCls+'" style="position:absolute;left:'+n.x+'px;top:'+n.y+'px;width:'+(n.w||180)+'px;height:'+(n.h||36)+'px;border-left:'+(shape==='diamond'||shape==='bracket'?'none':'4px solid '+(n.color||'#1a5276'))+';background:'+bg+';" '+onclick+'>';
+    if(shape!=='diamond')html+='<span class="material-icons" style="color:'+(n.color||'#1a5276')+';font-size:16px;">'+icon+'</span>';
+    html+='<span style="'+(n.fontSize?'font-size:'+n.fontSize+'px;':'')+'">'+escH(n.label)+'</span></button>';
   });
   html+='</div>';
   container.innerHTML=html;
@@ -1964,7 +2137,7 @@ function renderFlowDiagram(){
       renderDefaultFlow_inner();return;
     }
     // フロー名で対応するコンテナにレンダリング
-    var containerMap={'業務品質管理':'flowContainer1','別紙1':'flowContainer2','別紙2':'flowContainer3'};
+    var containerMap={'業務品質管理':'flowContainer1','本部間':'flowContainer2','部間依頼':'flowContainer2','委託業務':'flowContainer3'};
     list.forEach(function(f){
       google.script.run.withSuccessHandler(function(d){
         if(!d||!d.json) return;
@@ -2516,166 +2689,9 @@ var FORM_SCHEMAS = {
   }
 };
 
-// ===== 汎用フォームエンジン =====
-function openGenericForm(formId){
-  var schema=FORM_SCHEMAS[formId];
-  var reg=FORM_REGISTRY.find(function(f){return f.id===formId;});
-  if(!schema||!reg) return;
-  var p=currentProject;
-  var area=document.getElementById('sectionFormArea');
-
-  var html='<div class="inline-section"><div class="inline-section-header" style="background:'+(getPhaseColor(reg.phase)||'var(--primary)')+';">';
-  html+='<span class="material-icons">'+reg.icon+'</span><h3>'+schema.title+'</h3>';
-  html+='<button class="btn-close-section" onclick="closeFormPage()"><span class="material-icons">close</span></button></div>';
-  html+='<div class="inline-section-body" id="gf_body">';
-
-  schema.sections.forEach(function(sec,si){
-    html+='<div class="gf-section"><div class="gf-section-title">'+escH(sec.title)+'</div>';
-    if(sec.type==='fields'){
-      sec.fields.forEach(function(f){
-        var val=resolveAutoValue(f,p);
-        html+='<div class="form-group"><label>'+escH(f.label)+'</label>';
-        if(f.type==='textarea') html+='<textarea id="gf_'+f.key+'" class="form-textarea" rows="'+(f.rows||3)+'">'+escH(val)+'</textarea>';
-        else if(f.type==='date') html+='<input type="date" id="gf_'+f.key+'" class="form-input" value="'+escH(val)+'">';
-        else if(f.type==='radio'){
-          html+='<div class="gf-radio-group">';
-          (f.options||[]).forEach(function(o){html+='<label class="gf-radio"><input type="radio" name="gf_'+f.key+'" value="'+escH(o)+'"> '+escH(o)+'</label>';});
-          html+='</div>';
-        } else if(f.type==='select'){
-          html+='<select id="gf_'+f.key+'" class="form-select"><option value="">選択</option>';
-          (f.options||[]).forEach(function(o){html+='<option value="'+escH(o)+'">'+escH(o)+'</option>';});
-          html+='</select>';
-        } else html+='<input type="text" id="gf_'+f.key+'" class="form-input" value="'+escH(val)+'">';
-        html+='</div>';
-      });
-    } else if(sec.type==='checklist'){
-      html+='<div class="gf-checklist">';
-      sec.items.forEach(function(item){
-        html+='<div class="gf-check-item"><span class="gf-check-label">'+escH(item.label)+'</span><div class="contract-yn">';
-        (item.options||[]).forEach(function(o){html+='<label><input type="radio" name="gf_'+item.key+'" value="'+escH(o)+'"> '+escH(o)+'</label>';});
-        html+='</div></div>';
-      });
-      html+='</div>';
-    } else if(sec.type==='table'){
-      html+='<div class="gf-table-wrap"><table class="gf-table"><thead><tr>';
-      sec.columns.forEach(function(col){html+='<th>'+escH(col)+'</th>';});
-      html+='</tr></thead><tbody>';
-      for(var r=0;r<(sec.maxRows||5);r++){
-        html+='<tr>';
-        sec.columns.forEach(function(col,ci){html+='<td><input type="text" class="gf-table-input" id="gf_'+sec.keyPrefix+'_'+r+'_'+ci+'"></td>';});
-        html+='</tr>';
-      }
-      html+='</tbody></table></div>';
-    }
-    html+='</div>';
-  });
-
-  html+='<div class="gf-actions"><button class="btn-save" onclick="saveGenericForm(\''+formId+'\')"><span class="material-icons">save</span> 保存</button></div>';
-  html+='</div></div>';
-  area.innerHTML=html;
-  showFormPage();
-
-  // 既存データ読み込み
-  loadGenericFormData(formId);
-}
-
 function getPhaseColor(phaseId){
   var ph=QMS_PHASES.find(function(p){return p.id===phaseId;});
   return ph?ph.color:'#1a5276';
-}
-
-function resolveAutoValue(field,project){
-  if(!field.auto) return '';
-  if(field.auto==='code') return project.code||'';
-  if(field.auto==='kenmei') return project.kenmeiName||'';
-  if(field.auto==='customer') return project.contractor||'';
-  if(field.auto==='amount') return project.juchuAmount?String(project.juchuAmount):'';
-  if(field.auto==='today'){var d=new Date();return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);}
-  if(field.auto==='confirmer') return ''; // サーバーから取得
-  return '';
-}
-
-function collectGenericFormData(formId){
-  var schema=FORM_SCHEMAS[formId];
-  if(!schema) return {};
-  var data={};
-  schema.sections.forEach(function(sec){
-    if(sec.type==='fields'){
-      sec.fields.forEach(function(f){
-        if(f.type==='radio'){
-          var sel=document.querySelector('input[name="gf_'+f.key+'"]:checked');
-          data[f.key]=sel?sel.value:'';
-        } else {
-          var el=document.getElementById('gf_'+f.key);
-          data[f.key]=el?el.value:'';
-        }
-      });
-    } else if(sec.type==='checklist'){
-      sec.items.forEach(function(item){
-        var sel=document.querySelector('input[name="gf_'+item.key+'"]:checked');
-        data[item.key]=sel?sel.value:'';
-      });
-    } else if(sec.type==='table'){
-      var rows=[];
-      for(var r=0;r<(sec.maxRows||5);r++){
-        var row=[];var hasVal=false;
-        sec.columns.forEach(function(col,ci){
-          var el=document.getElementById('gf_'+sec.keyPrefix+'_'+r+'_'+ci);
-          var v=el?el.value:'';
-          row.push(v);
-          if(v)hasVal=true;
-        });
-        if(hasVal)rows.push(row.join('|'));
-      }
-      data['_table_'+sec.keyPrefix]=rows.join('\n');
-    }
-  });
-  return data;
-}
-
-function saveGenericForm(formId){
-  if(!currentProject||!currentProject.projectSSId) return;
-  var schema=FORM_SCHEMAS[formId];
-  var data=collectGenericFormData(formId);
-  showLoading('保存中...');
-  google.script.run.withSuccessHandler(function(r){
-    hideLoading();showToast(r.message,r.success?'success':'error');
-  }).withFailureHandler(function(e){hideLoading();showToast(e.message,'error');
-  }).saveGenericFormData(currentProject.projectSSId, schema.sheetName, data);
-}
-
-function loadGenericFormData(formId){
-  if(!currentProject||!currentProject.projectSSId) return;
-  var schema=FORM_SCHEMAS[formId];
-  google.script.run.withSuccessHandler(function(data){
-    if(!data) return;
-    schema.sections.forEach(function(sec){
-      if(sec.type==='fields'){
-        sec.fields.forEach(function(f){
-          var val=data[f.key];if(!val) return;
-          if(f.type==='radio'){
-            document.querySelectorAll('input[name="gf_'+f.key+'"]').forEach(function(r){if(r.value===val) r.checked=true;});
-          } else {
-            var el=document.getElementById('gf_'+f.key);if(el) el.value=val;
-          }
-        });
-      } else if(sec.type==='checklist'){
-        sec.items.forEach(function(item){
-          var val=data[item.key];if(!val) return;
-          document.querySelectorAll('input[name="gf_'+item.key+'"]').forEach(function(r){if(r.value===val) r.checked=true;});
-        });
-      } else if(sec.type==='table'){
-        var tableData=data['_table_'+sec.keyPrefix];
-        if(!tableData) return;
-        tableData.split('\n').forEach(function(rowStr,r){
-          rowStr.split('|').forEach(function(v,ci){
-            var el=document.getElementById('gf_'+sec.keyPrefix+'_'+r+'_'+ci);
-            if(el) el.value=v;
-          });
-        });
-      }
-    });
-  }).getGenericFormData(currentProject.projectSSId, schema.sheetName);
 }
 
 // ===== グループ・実施体制フォーム =====
@@ -2838,7 +2854,7 @@ function closeFormPage(){
   openProjectDetail(currentProject);
 }
 
-// ===== 保存後: 承認依頼ボタン表示 =====
+// ===== 保存後: 承認依頼ボタン表示 + 進捗管理表更新 =====
 function afterFormSaved(){
   if(!currentProject||!currentProject.projectSSId||!currentFormId) return;
   document.getElementById('gf_saved_badge').style.display='inline-flex';
@@ -2847,6 +2863,10 @@ function afterFormSaved(){
     if(r&&r.status==='pending') return;
     document.getElementById('btnSendGenericApproval').style.display='inline-flex';
   }).checkGenericApprovalStatus(currentProject.projectSSId, currentFormId);
+  // 進捗管理表を更新
+  if(currentDepartment&&currentProject.rowIndex&&currentFormId){
+    google.script.run.updateFormProgress(currentDepartment,currentProject.rowIndex,currentFormId);
+  }
 }
 
 // ===== 承認者自動入力（部署ベース）=====

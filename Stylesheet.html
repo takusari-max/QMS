@@ -254,7 +254,7 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 .detail-tab-content{display:none;} .detail-tab-content.active{display:block;}
 
 /* Flow diagram */
-.flow-container{overflow:auto;padding:12px 0;max-height:80vh;}
+.flow-container{overflow:auto;padding:12px 0;max-height:none;}
 .flow-container svg{min-width:700px;}
 .fe-view-wrap{min-width:900px;}
 
@@ -352,7 +352,7 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 /* Canvas */
 .fe-canvas-wrap{flex:1;position:relative;overflow:auto;background:#f4f5f7;border:1px solid var(--border);border-radius:var(--radius);}
 .fe-canvas-svg{position:absolute;top:0;left:0;pointer-events:all;z-index:1;}
-.fe-canvas{position:relative;min-width:1200px;min-height:900px;z-index:2;background:
+.fe-canvas{position:relative;min-width:3200px;min-height:4500px;z-index:2;background:
   repeating-linear-gradient(0deg,transparent,transparent 19px,#e2e4e8 19px,#e2e4e8 20px),
   repeating-linear-gradient(90deg,transparent,transparent 19px,#e2e4e8 19px,#e2e4e8 20px);}
 .fe-canvas-hint{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;color:var(--text-light);font-size:14px;pointer-events:none;}
@@ -367,6 +367,15 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 .fe-node-del{background:none;border:none;color:#ccc;cursor:pointer;padding:4px 6px;line-height:1;flex-shrink:0;}
 .fe-node-del:hover{color:#e74c3c;}
 .fe-node-del .material-icons{font-size:16px;}
+.fe-node.shape-terminator{border-radius:20px;}
+.fe-node.shape-diamond{border-radius:4px;transform:rotate(0deg);clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);overflow:visible;}
+.fe-node.shape-diamond .fe-node-bar{display:none;}
+.fe-node.shape-diamond .fe-node-text{text-align:center;padding:4px 2px;font-size:10px;white-space:normal;word-break:break-all;}
+.fe-node.shape-document{border-radius:4px 4px 0 0;border-bottom:none;clip-path:polygon(0 0,100% 0,100% 85%,50% 100%,0 85%);}
+.fe-node.shape-bracket{background:transparent;border:none;border-left:3px solid #555;border-top:3px solid #555;border-bottom:3px solid #555;border-radius:8px 0 0 8px;box-shadow:none;}
+.fe-node.shape-bracket .fe-node-bar{display:none;}
+.fe-swimlane{position:absolute;border-right:2px dashed #b0bec5;z-index:0;background:rgba(0,0,0,.015);pointer-events:none;}
+.fe-swimlane-label{position:absolute;top:4px;left:50%;transform:translateX(-50%);font-size:12px;font-weight:700;color:#546e7a;white-space:nowrap;letter-spacing:1px;}
 
 /* Textbox on canvas */
 .fe-tb{position:absolute;border-radius:4px;padding:4px;box-shadow:0 1px 4px rgba(0,0,0,.1);cursor:grab;user-select:none;z-index:4;min-height:40px;}
@@ -389,7 +398,13 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 /* View mode (project detail) */
 .fe-view-node{display:flex;align-items:center;gap:6px;padding:6px 10px;background:#fff;border:1px solid var(--border);border-radius:5px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;transition:var(--tr);z-index:3;box-shadow:0 1px 3px rgba(0,0,0,.08);}
 .fe-view-node:hover{box-shadow:var(--shadow);transform:translateY(-1px);}
+.fe-view-node.shape-terminator{border-radius:20px;}
+.fe-view-node.shape-diamond{clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);text-align:center;justify-content:center;padding:4px;white-space:normal;font-size:10px;}
+.fe-view-node.shape-document{clip-path:polygon(0 0,100% 0,100% 85%,50% 100%,0 85%);}
+.fe-view-node.shape-bracket{background:transparent;border:none;border-left:3px solid #555;border-top:3px solid #555;border-bottom:3px solid #555;border-radius:8px 0 0 8px;box-shadow:none;}
 .fe-view-tb{z-index:1;pointer-events:none;box-sizing:border-box;}
+.fe-view-swimlane{position:absolute;border-right:2px dashed #b0bec5;z-index:0;background:rgba(0,0,0,.015);pointer-events:none;}
+.fe-view-swimlane-label{position:absolute;top:6px;left:50%;transform:translateX(-50%);font-size:13px;font-weight:700;color:#546e7a;letter-spacing:1px;}
 
 /* Form page (full-page form display) */
 .form-page-topbar{display:flex;align-items:center;gap:16px;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--border);}
