@@ -1,0 +1,3537 @@
+Total sheets: 47
+
+Processing sheets 4 to 15
+
+
+================================================================================
+SHEET 4: フロー (（別紙1）本部間 部間依頼フロー図)
+================================================================================
+Dimensions: C7:L57
+
+NON-EMPTY CELLS:
+--------------------------------------------------------------------------------
+(no non-empty cells)
+
+MERGED CELLS:
+--------------------------------------------------------------------------------
+(no merged cells)
+
+================================================================================
+SHEET 5: フロー (（別紙2）委託業務フロー図)
+================================================================================
+Dimensions: C7:L38
+
+NON-EMPTY CELLS:
+--------------------------------------------------------------------------------
+(24, 5): '請求前'
+(26, 3): '※委託G作成資料'
+
+MERGED CELLS:
+--------------------------------------------------------------------------------
+(no merged cells)
+
+================================================================================
+SHEET 6: 業務品質文書管理台帳
+================================================================================
+Dimensions: A1:AE145
+
+NON-EMPTY CELLS:
+--------------------------------------------------------------------------------
+(1, 10): '参考帳票（2026/1/9）' [BG:Values must be of type <class 'str'>]
+(1, 17): '参考帳票（2026/1/9）' [BG:Values must be of type <class 'str'>]
+(2, 2): '業務品質文書管理台帳' [BG:Values must be of type <class 'str'>]
+(3, 2): '件名コード' [BG:Values must be of type <class 'str'>]
+(3, 4): '=基本データ!D3' [BG:Values must be of type <class 'str'>]
+(3, 10): '凡例\u3000●：該当' [BG:Values must be of type <class 'str'>]
+(3, 24): '目次へ戻る' [BOLD]
+(3, 25): '=HYPERLINK("#目次!A1","●")'
+(4, 2): '件名' [BG:Values must be of type <class 'str'>]
+(4, 4): '=基本データ!D4' [BG:Values must be of type <class 'str'>]
+(4, 10): '\u3000\u3000\u3000〇：場合により該当' [BG:Values must be of type <class 'str'>]
+(4, 24): 'フローへ戻る' [BOLD]
+(4, 25): '=HYPERLINK("#フロー!A2","●")'
+(5, 10): '\u3000\u3000\u3000※：品質管理と兼用' [BG:Values must be of type <class 'str'>]
+(7, 2): '収納番号' [BG:Values must be of type <class 'str'>]
+(7, 3): '必要記録' [BG:Values must be of type <class 'str'>]
+(7, 4): '確認事項' [BG:Values must be of type <class 'str'>]
+(7, 6): '記録となる資料\n（太字は参考帳票あり）' [BG:Values must be of type <class 'str'>]
+(7, 10): '作成する書類' [BG:Values must be of type <class 'str'>]
+(7, 13): '受領 (ﾌｧｲﾘﾝｸﾞ)' [BG:Values must be of type <class 'str'>]
+(7, 14): 'ﾁｪｯｸ欄' [BG:Values must be of type <class 'str'>]
+(7, 16): '確認事項' [BG:Values must be of type <class 'str'>]
+(7, 18): 'ﾁｪｯｸ欄' [BG:Values must be of type <class 'str'>]
+(8, 10): '品質\n管理' [BG:Values must be of type <class 'str'>]
+(8, 11): '業務\n実施' [BG:Values must be of type <class 'str'>]
+(8, 12): '社内\n手続' [BG:Values must be of type <class 'str'>]
+(8, 24): '改訂履歴'
+(9, 24): '改訂日'
+(9, 25): '改訂内容'
+(10, 2): 1 [BG:Values must be of type <class 'str'>]
+(10, 3): '契約内容確認記録' [BG:Values must be of type <class 'str'>]
+(10, 4): '・' [BG:Values must be of type <class 'str'>]
+(10, 5): '顧客要求事項（実施項目，実施数量，その他）\n' [BG:Values must be of type <class 'str'>]
+(10, 6): '◆契約内容確認書' [BOLD, BG:Values must be of type <class 'str'>]
+(10, 10): '●' [BG:Values must be of type <class 'str'>]
+(10, 11): '※' [BG:Values must be of type <class 'str'>]
+(10, 16): '・' [BG:Values must be of type <class 'str'>]
+(10, 17): '件名設定時または契約前の情報（金額未定依頼を含む）で，受注予想額が1億円以上見込まれる場合は，受注計画書（積算書添付）作成し，社長まで承認を得ているか？' [BG:Values must be of type <class 'str'>]
+(10, 24): datetime.datetime(2023, 2, 7, 0, 0)
+(10, 25): '2022年度土木本部ジオフロント本部内部監査指摘事項を追記'
+(11, 7): '○業務受付処理表' [BG:Values must be of type <class 'str'>]
+(11, 13): '●' [BG:Values must be of type <class 'str'>]
+(11, 24): datetime.datetime(2023, 3, 16, 0, 0)
+(11, 25): '確認事項欄で内容が重複するものを整理'
+(12, 7): '○積算書作成依頼' [BG:Values must be of type <class 'str'>]
+(12, 13): '●' [BG:Values must be of type <class 'str'>]
+(12, 16): '・' [BG:Values must be of type <class 'str'>]
+(12, 17): '受注総額が1億円以上で、かつ複数の部署で受注する場合、主管部が代表して総額で受注計画書の社長承認を得ているか？【2024年度】' [BOLD, BG:Values must be of type <class 'str'>]
+(12, 24): datetime.datetime(2023, 3, 24, 0, 0)
+(12, 25): '確認事項欄の順序を見直し'
+(12, 30): '③'
+(12, 31): '受注総額が1億円以上で、かつ複数の部署で受注する場合、主管部が代表して総額で受注計画書の社長承認を得ているか？【2024年度】' [BOLD, BG:Values must be of type <class 'str'>]
+(13, 4): '・' [BG:Values must be of type <class 'str'>]
+(13, 5): '実施能力' [BG:Values must be of type <class 'str'>]
+(13, 8): '・' [BG:Values must be of type <class 'str'>]
+(13, 9): '見積依頼書' [BG:Values must be of type <class 'str'>]
+(13, 13): '●' [BG:Values must be of type <class 'str'>]
+(13, 16): '・' [BG:Values must be of type <class 'str'>]
+(13, 17): ' 見積額が3000万円以上の場合、本部長の承認を得ているか？' [BG:Values must be of type <class 'str'>]
+(13, 24): datetime.datetime(2023, 4, 27, 0, 0)
+(13, 25): '2022年度内部監査指摘事項に対する対応'
+(14, 4): '・' [BG:Values must be of type <class 'str'>]
+(14, 5): '受注業務のリスク管理（契約前段階）' [BG:Values must be of type <class 'str'>]
+(14, 8): '・' [BG:Values must be of type <class 'str'>]
+(14, 9): '仕様書' [BG:Values must be of type <class 'str'>]
+(14, 13): '●' [BG:Values must be of type <class 'str'>]
+(14, 16): '・' [BG:Values must be of type <class 'str'>]
+(14, 17): '「受注計画書」の作成・承認に関する詳細は，TEPSCO掲示板「規程・要領集」の受注計画・実行承認取扱要領（BT1-010）を参照とする。' [BG:Values must be of type <class 'str'>]
+(14, 24): datetime.datetime(2023, 6, 22, 0, 0)
+(14, 25): '誤字の修正（規定→規程、実行書→実行承認）'
+(14, 31): '「受注計画書」の作成・承認に関する詳細は，TEPSCO掲示板「規程・要領集」の受注計画・実行承認取扱要領（BT1-010）を参照とする。' [BG:Values must be of type <class 'str'>]
+(15, 8): '・' [BG:Values must be of type <class 'str'>]
+(15, 9): '設計書' [BG:Values must be of type <class 'str'>]
+(15, 13): '●' [BG:Values must be of type <class 'str'>]
+(15, 16): '・' [BG:Values must be of type <class 'str'>]
+(15, 17): 'お客さまの仕様書に記載がなくとも社会的要求事項である必要不可欠な関連法令・規制などは契約内容確認時に、お客さまに確認し、契約内容確認書に記載しているか？' [BG:Values must be of type <class 'str'>]
+(15, 24): datetime.datetime(2024, 1, 18, 0, 0)
+(15, 25): '2023年度再エネ本部内部監査指摘事項の追記'
+(15, 30): '②'
+(15, 31): 'お客さまの仕様書に記載がなくとも社会的要求事項である必要不可欠な関連法令・規制などは契約内容確認時に、お客さまに確認し、契約内容確認書に記載しているか？' [BG:Values must be of type <class 'str'>]
+(16, 7): '〇リスク対策シート' [BG:Values must be of type <class 'str'>]
+(16, 12): '〇' [BG:Values must be of type <class 'str'>]
+(16, 24): datetime.datetime(2025, 4, 21, 0, 0)
+(16, 25): '2024年度土木本部ジオフロント本部内部監査指摘事項の追記'
+(17, 7): '〇積算書' [BG:Values must be of type <class 'str'>]
+(17, 12): '●' [BG:Values must be of type <class 'str'>]
+(17, 16): '・' [BG:Values must be of type <class 'str'>]
+(17, 17): '当該業務に関するお客さまの諸規定の内容を確認し、当該業務に適用する必要がある場合には、その名称を品質計画書に記載しているか？' [BG:Values must be of type <class 'str'>]
+(17, 24): datetime.datetime(2026, 1, 9, 0, 0) [BOLD]
+(17, 25): '全体をレビュー' [BOLD]
+(17, 30): '①'
+(17, 31): '当該業務に関するお客さまの諸規定の内容を確認し、当該業務に適用する必要がある場合には、その名称を品質計画書に記載しているか？' [BG:Values must be of type <class 'str'>]
+(18, 7): '〇提示額応答記録' [BG:Values must be of type <class 'str'>]
+(18, 13): '●' [BG:Values must be of type <class 'str'>]
+(18, 16): '・' [BG:Values must be of type <class 'str'>]
+(18, 17): '契約内容の確認者は業務の経験・実績、技術力のある技術者を選任しているか？' [BG:Values must be of type <class 'str'>]
+(18, 30): '①'
+(18, 31): '契約内容の確認者は業務の経験・実績、技術力のある技術者を選任しているか？' [BG:Values must be of type <class 'str'>]
+(19, 7): '〇受注情報（契約書，請書等）' [BG:Values must be of type <class 'str'>]
+(19, 13): '●' [BG:Values must be of type <class 'str'>]
+(19, 16): '・' [BG:Values must be of type <class 'str'>]
+(19, 17): '契約内容確認では、事前にお客さまとのやり取りがある場合は、その記録を契約内容確認と紐づけをしているか？【2024年度】' [BOLD, BG:Values must be of type <class 'str'>]
+(19, 30): '②'
+(19, 31): '契約内容確認では、事前にお客さまとのやり取りがある場合は、その記録を契約内容確認と紐づけをしているか？【2024年度】' [BOLD, BG:Values must be of type <class 'str'>]
+(20, 7): '〇議事録類' [BG:Values must be of type <class 'str'>]
+(20, 11): '●' [BG:Values must be of type <class 'str'>]
+(20, 16): '・' [BG:Values must be of type <class 'str'>]
+(20, 17): '契約内容確認記録、品質計画書、検査記録等とその内容を補完する別資料とを確実に紐づけしているか？' [BG:Values must be of type <class 'str'>]
+(20, 30): '②'
+(20, 31): '契約内容確認記録、品質計画書、検査記録等とその内容を補完する別資料とを確実に紐づけしているか？' [BG:Values must be of type <class 'str'>]
+(21, 4): '（他本部より依頼される場合）' [BG:Values must be of type <class 'str'>]
+(21, 7): '〇設計業務依頼票' [BG:Values must be of type <class 'str'>]
+(21, 13): '●' [BG:Values must be of type <class 'str'>]
+(21, 16): '・' [BG:Values must be of type <class 'str'>]
+(21, 17): '各種帳票の日付は記載されているか、それぞれの整合性はとれているか？。' [BG:Values must be of type <class 'str'>]
+(21, 30): '⑤'
+(21, 31): '各種帳票の日付は記載されているか、それぞれの整合性はとれているか？。' [BG:Values must be of type <class 'str'>]
+(22, 4): '（東電Gの簡易委託の場合）' [BG:Values must be of type <class 'str'>]
+(22, 7): '〇簡易委託受注・委託発注実行書' [BG:Values must be of type <class 'str'>]
+(22, 12): '●' [BG:Values must be of type <class 'str'>]
+(24, 3): '契約内容変更記録' [BG:Values must be of type <class 'str'>]
+(24, 6): '◆' [BOLD, BG:Values must be of type <class 'str'>]
+(24, 7): '契約内容変更確認書' [BOLD, BG:Values must be of type <class 'str'>]
+(24, 10): '●' [BG:Values must be of type <class 'str'>]
+(24, 11): '※' [BG:Values must be of type <class 'str'>]
+(24, 16): '・' [BG:Values must be of type <class 'str'>]
+(24, 17): '契約変更に係る事項は議事録を作成しているか？。' [BG:Values must be of type <class 'str'>]
+(25, 7): '○' [BG:Values must be of type <class 'str'>]
+(25, 8): '顧客よりの変更指示書類' [BG:Values must be of type <class 'str'>]
+(25, 13): '●' [BG:Values must be of type <class 'str'>]
+(25, 16): '・' [BG:Values must be of type <class 'str'>]
+(25, 17): '契約内容の変更では、「契約内容確認書」ではなく、「契約内容変更確認書」にて対応しているか？' [BG:Values must be of type <class 'str'>]
+(26, 8): '・' [BG:Values must be of type <class 'str'>]
+(26, 9): '変更指示書' [BG:Values must be of type <class 'str'>]
+(26, 13): '●' [BG:Values must be of type <class 'str'>]
+(26, 16): '・' [BG:Values must be of type <class 'str'>]
+(26, 17): '設計内容に変更が生じた場合、実施責任者は変更により発生するリスクの有無・内容・影響について主管部長と協議し、それを記録し、管理しているか？' [BG:Values must be of type <class 'str'>]
+(27, 8): '・' [BG:Values must be of type <class 'str'>]
+(27, 9): '変更仕様書' [BG:Values must be of type <class 'str'>]
+(27, 13): '●' [BG:Values must be of type <class 'str'>]
+(28, 8): '・' [BG:Values must be of type <class 'str'>]
+(28, 9): '変更設計書' [BG:Values must be of type <class 'str'>]
+(28, 13): '●' [BG:Values must be of type <class 'str'>]
+(28, 16): '・' [BG:Values must be of type <class 'str'>]
+(28, 17): '「契約内容変更確認書」において、契約内容変更の経緯が分かるようエビデンスを記録に残しているか？【2024年度】' [BOLD, BG:Values must be of type <class 'str'>]
+(29, 7): '〇' [BG:Values must be of type <class 'str'>]
+(29, 8): '変更依頼・指示書' [BG:Values must be of type <class 'str'>]
+(29, 12): '●' [BG:Values must be of type <class 'str'>]
+(30, 7): '〇' [BG:Values must be of type <class 'str'>]
+(30, 8): '議事録類' [BG:Values must be of type <class 'str'>]
+(30, 11): '●' [BG:Values must be of type <class 'str'>]
+(32, 2): 2 [BG:Values must be of type <class 'str'>]
+(32, 3): '品質計画記録' [BG:Values must be of type <class 'str'>]
+(32, 4): '・' [BG:Values must be of type <class 'str'>]
+(32, 5): '実施項目' [BG:Values must be of type <class 'str'>]
+(32, 6): '◆' [BOLD, BG:Values must be of type <class 'str'>]
+(32, 7): '品質計画書' [BOLD, BG:Values must be of type <class 'str'>]
+(32, 10): '●' [BG:Values must be of type <class 'str'>]
+(32, 16): '・' [BG:Values must be of type <class 'str'>]
+(32, 17): '品質計画書のチェック欄（「有・無」，□）と各項目に記入漏れはないか？。' [BG:Values must be of type <class 'str'>]
+(33, 4): '・' [BG:Values must be of type <class 'str'>]
+(33, 5): '実施体制' [BG:Values must be of type <class 'str'>]
+(33, 7): '〇' [BG:Values must be of type <class 'str'>]
+(33, 8): '実施計画書' [BG:Values must be of type <class 'str'>]
+(33, 11): '●' [BG:Values must be of type <class 'str'>]
+(33, 16): '・' [BG:Values must be of type <class 'str'>]
+(33, 17): '計画書等に地図・書籍等を転載する場合，出所・出典が記載されているか？。' [BG:Values must be of type <class 'str'>]
+(34, 4): '・' [BG:Values must be of type <class 'str'>]
+(34, 5): '必要不可欠な法令，基準類' [BG:Values must be of type <class 'str'>]
+(34, 7): '〇' [BG:Values must be of type <class 'str'>]
+(34, 8): '安全計画書' [BG:Values must be of type <class 'str'>]
+(34, 11): '●' [BG:Values must be of type <class 'str'>]
+(34, 16): '・' [BG:Values must be of type <class 'str'>]
+(34, 17): '品質計画書と委託計画書に整合はとれているか？。' [BG:Values must be of type <class 'str'>]
+(35, 4): '・' [BG:Values must be of type <class 'str'>]
+(35, 5): '使用プログラム  ' [BG:Values must be of type <class 'str'>]
+(35, 8): '・' [BG:Values must be of type <class 'str'>]
+(35, 9): '新規入場者教育記録（安全計画書表紙に対象者の署名）' [BG:Values must be of type <class 'str'>]
+(35, 10): '●' [BG:Values must be of type <class 'str'>]
+(35, 16): '・' [BG:Values must be of type <class 'str'>]
+(35, 17): '現場作業の作業員名簿など個人情報（自宅の住所，電話番号等）を持たざるを得ない場合，管理台帳に記載して個人情報管理責任者（個人情報管理担当者）に報告しているか？（個人情報保護要領）' [BG:Values must be of type <class 'str'>]
+(37, 4): '・' [BG:Values must be of type <class 'str'>]
+(37, 5): '業務工程' [BG:Values must be of type <class 'str'>]
+(37, 8): '・' [BG:Values must be of type <class 'str'>]
+(37, 9): '安全教育記録（安全計画書表紙に対象者の署名）' [BG:Values must be of type <class 'str'>]
+(37, 10): '●' [BG:Values must be of type <class 'str'>]
+(37, 16): '・' [BG:Values must be of type <class 'str'>]
+(37, 17): '個人情報を記録した重要な書類等については，実施責任者が施錠保管しているか？' [BG:Values must be of type <class 'str'>]
+(38, 4): '・' [BG:Values must be of type <class 'str'>]
+(38, 5): '受注業務のリスク管理（受注・業務着手段階，業務実施・引渡し段階）' [BG:Values must be of type <class 'str'>]
+(38, 16): '・' [BG:Values must be of type <class 'str'>]
+(38, 17): '契約内容確認記録、品質計画書、検査記録等とその内容を補完する別資料とを確実に紐づけしているか？' [BG:Values must be of type <class 'str'>]
+(39, 7): '〇' [BG:Values must be of type <class 'str'>]
+(39, 8): 'リスク対策シート' [BG:Values must be of type <class 'str'>]
+(39, 12): '〇' [BG:Values must be of type <class 'str'>]
+(39, 16): '・' [BG:Values must be of type <class 'str'>]
+(39, 17): '使用するプログラムはバージョンにいたるまで、それを特定できるように明示しているか？' [BG:Values must be of type <class 'str'>]
+(40, 7): '〇' [BG:Values must be of type <class 'str'>]
+(40, 8): '品質保証計画' [BG:Values must be of type <class 'str'>]
+(40, 11): '●' [BG:Values must be of type <class 'str'>]
+(40, 16): '・' [BG:Values must be of type <class 'str'>]
+(40, 17): '委託先がプログラムを使用する場合でも、「プログラムの使用：有」とし、プログラム名を記載しているか？また、プログラムの検証記録を受領しているか？' [BG:Values must be of type <class 'str'>]
+(41, 6): '◆安全事前評価議事録' [BG:Values must be of type <class 'str'>]
+(41, 10): '●' [BG:Values must be of type <class 'str'>]
+(42, 7): '〇' [BG:Values must be of type <class 'str'>]
+(42, 8): '作業員名簿' [BG:Values must be of type <class 'str'>]
+(42, 11): '●' [BG:Values must be of type <class 'str'>]
+(42, 16): '・' [BG:Values must be of type <class 'str'>]
+(42, 17): '設計検査，妥当性確認などの計画されたイベントについては，それぞれ重要なポイントであることから，最後まで，適宜，手書き等にて加筆し，記録されているか？【2024年度】' [BOLD, BG:Values must be of type <class 'str'>]
+(44, 16): '・' [BG:Values must be of type <class 'str'>]
+(44, 17): '設計検査や妥当性確認の実績（実施日）の漏れや誤記が散見された。品質記録は品質管理を実施した重要な記録であるため、正しい月日が記載されているか？【2024年度】' [BOLD, BG:Values must be of type <class 'str'>]
+(46, 16): '・' [BG:Values must be of type <class 'str'>]
+(46, 17): '初版の品質計画書の内容から変更が生じた場合は，変更理由を記載のうえ改訂し，最新版を用いて管理しているか？' [BG:Values must be of type <class 'str'>]
+(47, 16): '・' [BG:Values must be of type <class 'str'>]
+(47, 17): '委託先の追加変更等によって，お客さまへの提出物（安全計画書，実施計画書等）に変更が生じた場合は，お客さまに再提出の必要性を確認する等して，必要な対応をしているか？' [BG:Values must be of type <class 'str'>]
+(49, 16): '・' [BG:Values must be of type <class 'str'>]
+(49, 17): 'お客さまから口頭で中間成果の提出要求の指示を受けた場合、議事録作成あるいは品質計画書への指示内容の記載など、エビデンスを記録しているか？' [BG:Values must be of type <class 'str'>]
+(51, 2): 3 [BG:Values must be of type <class 'str'>]
+(51, 3): '顧客所有物管理記録' [BG:Values must be of type <class 'str'>]
+(51, 4): '・' [BG:Values must be of type <class 'str'>]
+(51, 5): '資料名，受入日，数量，支給・貸与別' [BG:Values must be of type <class 'str'>]
+(51, 6): '◆顧客所有物確認書' [BOLD, BG:Values must be of type <class 'str'>]
+(51, 10): '●' [BG:Values must be of type <class 'str'>]
+(51, 16): '・' [BG:Values must be of type <class 'str'>]
+(51, 17): 'お客さまからの支給品がある場合は，件名，名称，受入日，数量，使用期間中の保管方法，使用期間後の処分方法，処分日を記録しているか？' [BG:Values must be of type <class 'str'>]
+(52, 4): '・' [BG:Values must be of type <class 'str'>]
+(52, 5): '資料の損傷状況' [BG:Values must be of type <class 'str'>]
+(52, 7): '〇' [BG:Values must be of type <class 'str'>]
+(52, 8): '借用書' [BG:Values must be of type <class 'str'>]
+(52, 11): '●' [BG:Values must be of type <class 'str'>]
+(52, 16): '・' [BG:Values must be of type <class 'str'>]
+(52, 17): 'お客さまからの貸与品がある場合は，件名，名称，受入日，数量，使用期間中の保管方法，返却方法，返却日等を記録しているか？' [BG:Values must be of type <class 'str'>]
+(53, 4): '・' [BG:Values must be of type <class 'str'>]
+(53, 5): '適用外資料の措置' [BG:Values must be of type <class 'str'>]
+(53, 7): '〇' [BG:Values must be of type <class 'str'>]
+(53, 8): '顧客所有物リスト' [BG:Values must be of type <class 'str'>]
+(53, 10): '●' [BG:Values must be of type <class 'str'>]
+(53, 16): '・' [BG:Values must be of type <class 'str'>]
+(53, 17): '顧客支給品・貸与品は、返却あるいは廃棄以外の場合、処置方法をお客さまと協議し、決定された処置方法およびそれに基づいて実施した結果を顧客所有物確認書に記載しているか？' [BG:Values must be of type <class 'str'>]
+(54, 4): '・' [BG:Values must be of type <class 'str'>]
+(54, 5): '返却日，廃棄' [BG:Values must be of type <class 'str'>]
+(54, 6): '◆顧客所有物返却記録' [BG:Values must be of type <class 'str'>]
+(54, 10): '●' [BG:Values must be of type <class 'str'>]
+(55, 7): '〇' [BG:Values must be of type <class 'str'>]
+(55, 8): '送付状' [BG:Values must be of type <class 'str'>]
+(55, 10): '●' [BG:Values must be of type <class 'str'>]
+(55, 16): '・' [BG:Values must be of type <class 'str'>]
+(55, 17): '帳票は社会基盤ユニットHP/品質文書一覧/業務品質管理要領/顧客所有物確認書（参考帳票）を参考とする。' [BG:Values must be of type <class 'str'>]
+(56, 7): '〇' [BG:Values must be of type <class 'str'>]
+(56, 8): '議事録等' [BG:Values must be of type <class 'str'>]
+(56, 11): '●' [BG:Values must be of type <class 'str'>]
+(56, 16): '・' [BG:Values must be of type <class 'str'>]
+(56, 17): 'お客さまのデータを業務終了後も保管する場合、その根拠資料とその資料の発信日を正確に記載しているか？【2024年度】' [BOLD, BG:Values must be of type <class 'str'>]
+(59, 2): 4 [BG:Values must be of type <class 'str'>]
+(59, 3): '計測機器管理記録\n（委託先を含む）' [BG:Values must be of type <class 'str'>]
+(59, 4): '・' [BG:Values must be of type <class 'str'>]
+(59, 5): '計測機器の使用前における校正に用いた基準，校正記録\n' [BG:Values must be of type <class 'str'>]
+(59, 6): '◆' [BOLD, BG:Values must be of type <class 'str'>]
+(59, 7): '計測機器使用記録' [BOLD, BG:Values must be of type <class 'str'>]
+(59, 10): '●' [BG:Values must be of type <class 'str'>]
+(59, 16): '・' [BG:Values must be of type <class 'str'>]
+(59, 17): '計測機器の校正有効期限を把握，管理しているか？' [BG:Values must be of type <class 'str'>]
+(60, 6): '◆管理記録' [BG:Values must be of type <class 'str'>]
+(60, 10): '●' [BG:Values must be of type <class 'str'>]
+(60, 16): '・' [BG:Values must be of type <class 'str'>]
+(60, 17): '校正有効期限が切れていて，暫く使用しない機器については，「使用不可」のラベルを貼る等，使用不可の識別を明確にしているか？' [BG:Values must be of type <class 'str'>]
+(61, 4): '・' [BG:Values must be of type <class 'str'>]
+(61, 5): '使用計測機器の校正有効期間' [BG:Values must be of type <class 'str'>]
+(61, 8): '・' [BOLD, BG:Values must be of type <class 'str'>]
+(61, 9): '計測機器校正記録' [BOLD, BG:Values must be of type <class 'str'>]
+(61, 10): '●' [BG:Values must be of type <class 'str'>]
+(62, 8): '・' [BG:Values must be of type <class 'str'>]
+(62, 9): '点検、管理状況を確認できる記録' [BG:Values must be of type <class 'str'>]
+(62, 10): '●' [BG:Values must be of type <class 'str'>]
+(63, 8): '・' [BG:Values must be of type <class 'str'>]
+(63, 9): '計量証明事業登録証' [BG:Values must be of type <class 'str'>]
+(63, 10): '●' [BG:Values must be of type <class 'str'>]
+(64, 8): '・' [BG:Values must be of type <class 'str'>]
+(64, 9): 'その他' [BG:Values must be of type <class 'str'>]
+(64, 10): '●' [BG:Values must be of type <class 'str'>]
+(66, 2): 5 [BG:Values must be of type <class 'str'>]
+(66, 3): '設計業務依頼記録' [BG:Values must be of type <class 'str'>]
+(66, 4): '・' [BG:Values must be of type <class 'str'>]
+(66, 5): '依頼工期' [BG:Values must be of type <class 'str'>]
+(66, 6): '◆' [BOLD, BG:Values must be of type <class 'str'>]
+(66, 7): '設計業務依頼票（他本部へ依頼する場合）' [BOLD, BG:Values must be of type <class 'str'>]
+(66, 12): '●' [BG:Values must be of type <class 'str'>]
+(66, 16): '・' [BG:Values must be of type <class 'str'>]
+(66, 17): '依頼内容が業務全体にわたる場合、「依頼内容がわかるように役割分担を記載する」、または、これが難しい場合（例えば主管部と依頼先の担当者が一緒になって業務を行う場合）には、「共働で業務を実施する」を明示しているか？' [BG:Values must be of type <class 'str'>]
+(67, 4): '・' [BG:Values must be of type <class 'str'>]
+(67, 5): '依頼項目と内容' [BG:Values must be of type <class 'str'>]
+(67, 12): '(○)' [BG:Values must be of type <class 'str'>]
+(68, 4): '・' [BG:Values must be of type <class 'str'>]
+(68, 5): '適用する品質マネジメントシステム（依頼元又は依頼先の別）' [BG:Values must be of type <class 'str'>]
+(68, 6): '◆変更依頼・指示書' [BOLD, BG:Values must be of type <class 'str'>]
+(68, 11): '●' [BG:Values must be of type <class 'str'>]
+(69, 6): '◆議事録類' [BG:Values must be of type <class 'str'>]
+(69, 13): '●' [BG:Values must be of type <class 'str'>]
+(70, 4): '・' [BG:Values must be of type <class 'str'>]
+(70, 5): '審査，検証活動記録の提出要求（依頼先の品質マネジメントシステムを適用する場合）' [BG:Values must be of type <class 'str'>]
+(70, 6): '◆依頼先での検証記録' [BG:Values must be of type <class 'str'>]
+(72, 4): '・' [BG:Values must be of type <class 'str'>]
+(72, 5): '主管部の業務実施責任者名' [BG:Values must be of type <class 'str'>]
+(73, 4): '・' [BG:Values must be of type <class 'str'>]
+(73, 5): '依頼先の連絡窓口（依頼先の品質マネジメントシステムを適用する場合）' [BG:Values must be of type <class 'str'>]
+(76, 2): 6 [BG:Values must be of type <class 'str'>]
+(76, 3): '委託管理記録' [BG:Values must be of type <class 'str'>]
+(76, 4): '・' [BG:Values must be of type <class 'str'>]
+(76, 5): '委託内容' [BG:Values must be of type <class 'str'>]
+(76, 6): '◆委託計画書' [BG:Values must be of type <class 'str'>]
+(76, 12): '●' [BG:Values must be of type <class 'str'>]
+(76, 16): '・' [BG:Values must be of type <class 'str'>]
+(76, 17): '委託計画書の作成，承認が行われているか？。（受注額が未定あるいは委託金額が未定の場合であっても，想定金額を記載しているか？。）' [BG:Values must be of type <class 'str'>]
+(77, 4): '・' [BG:Values must be of type <class 'str'>]
+(77, 5): '委託成果品内容' [BG:Values must be of type <class 'str'>]
+(77, 6): '◆委託契約請求書' [BG:Values must be of type <class 'str'>]
+(77, 12): '●' [BG:Values must be of type <class 'str'>]
+(77, 16): '・' [BG:Values must be of type <class 'str'>]
+(77, 17): '委託契約請求書の審査・承認が行われているか？' [BG:Values must be of type <class 'str'>]
+(78, 4): '・' [BG:Values must be of type <class 'str'>]
+(78, 5): '委託先審査状況' [BG:Values must be of type <class 'str'>]
+(78, 8): '・委託仕様書' [BG:Values must be of type <class 'str'>]
+(78, 12): '●' [BG:Values must be of type <class 'str'>]
+(78, 16): '・' [BG:Values must be of type <class 'str'>]
+(78, 17): '再委託をする場合、お客さまへの再委託先の承認確認と文書記録化しているか？。【2021年度、2024年度】' [BOLD]
+(79, 4): '・' [BG:Values must be of type <class 'str'>]
+(79, 5): '仕様書で指示した成果物，数量，委託成果' [BG:Values must be of type <class 'str'>]
+(79, 8): '・委託設計書' [BG:Values must be of type <class 'str'>]
+(79, 12): '●' [BG:Values must be of type <class 'str'>]
+(79, 16): '・' [BG:Values must be of type <class 'str'>]
+(79, 17): '委託仕様書等に「使用機器の校正記録等の提出」を求める記載があるか？。予め委託先から，機器の使用前に校正記録を受領し，内容を確認し，保管・管理しているか？。（委託先の実施計画書等に同記録等の提出について記載があるか？。）但し，公的規格や学会・協会基準に従った試験・調査を除く。'
+(80, 6): '委託契約通知書' [BG:Values must be of type <class 'str'>]
+(80, 13): '●' [BG:Values must be of type <class 'str'>]
+(81, 4): '・' [BG:Values must be of type <class 'str'>]
+(81, 5): '使用計測機器の校正記録等の受領・保管' [BG:Values must be of type <class 'str'>]
+(81, 6): '実施計画書・安全計画書' [BG:Values must be of type <class 'str'>]
+(81, 13): '●' [BG:Values must be of type <class 'str'>]
+(82, 7): '実施体制表' [BG:Values must be of type <class 'str'>]
+(82, 13): '●' [BG:Values must be of type <class 'str'>]
+(82, 16): '・' [BG:Values must be of type <class 'str'>]
+(82, 17): '公的規格や学会・協会基準に従った試験・調査においては，試験器・測定器の校正記録の提出を求める必要はないが，「適切に管理された状態にある試験器・測定器を用いて実施すること」を仕様書に明記しているか？。（委託先の実施計画書等にこの点の記載があるか？。）'
+(83, 7): '有資格者届' [BG:Values must be of type <class 'str'>]
+(83, 13): '●' [BG:Values must be of type <class 'str'>]
+(84, 7): '実施工程表' [BG:Values must be of type <class 'str'>]
+(84, 13): '●' [BG:Values must be of type <class 'str'>]
+(84, 16): '・' [BG:Values must be of type <class 'str'>]
+(84, 17): '委託仕様書の内容が委託先の実施計画書に全て反映されているか？'
+(85, 7): '議事録等' [BG:Values must be of type <class 'str'>]
+(85, 13): '●' [BG:Values must be of type <class 'str'>]
+(85, 16): '・' [BG:Values must be of type <class 'str'>]
+(85, 17): '委託先より受領した業務計画書はその適切性について審査・承認を実施したか？'
+(86, 6): '指示文書・記録' [BG:Values must be of type <class 'str'>]
+(86, 10): '●' [BG:Values must be of type <class 'str'>]
+(86, 16): '・' [BG:Values must be of type <class 'str'>]
+(86, 17): '未保有技術を受注し，外注する場合（委託先が当社保有でないプログラムを使用する場合を含む）は，委託仕様書等に下記資料を求める記載があるか？。（委託先の実施計画書等に同資料等の提出について記載があるか？。）\n①品質計画書または実施計画書（業務目的、実施項目と数量、実施手順・方法、工程、実施体制等を記載）、②品質保証計画（成果品の審査体制、審査の方法と合格基準、審査時期等の計画）、③業務実施責任者、審査者又は検査者、承認者の同種・同類業務の経験を示した経歴書、④打合せ議事録、⑤インプットデータ（入力条件書等）の審査・検査記録とその合格根拠（チェックの記録等）、⑥アウトプットデータ（計算書、成果品等）の審査・検査・承認の記録と合格根拠（チェックの記録等）'
+(87, 6): '受領文書・記録' [BG:Values must be of type <class 'str'>]
+(87, 13): '●' [BG:Values must be of type <class 'str'>]
+(88, 6): '◆ 変更依頼・指示書' [BG:Values must be of type <class 'str'>]
+(88, 12): '●' [BG:Values must be of type <class 'str'>]
+(89, 7): '〇' [BG:Values must be of type <class 'str'>]
+(89, 8): '委託契約変更請求書、議事録等' [BG:Values must be of type <class 'str'>]
+(89, 12): '●' [BG:Values must be of type <class 'str'>]
+(90, 6): '◆委託成果品検査記録' [BOLD, BG:Values must be of type <class 'str'>]
+(90, 10): '●' [BG:Values must be of type <class 'str'>]
+(90, 11): '※' [BG:Values must be of type <class 'str'>]
+(91, 6): '◆完了届・請求書' [BG:Values must be of type <class 'str'>]
+(91, 10): '●' [BG:Values must be of type <class 'str'>]
+(91, 13): '●' [BG:Values must be of type <class 'str'>]
+(92, 7): '〇議事録類' [BG:Values must be of type <class 'str'>]
+(92, 11): '●' [BG:Values must be of type <class 'str'>]
+(92, 13): '●' [BG:Values must be of type <class 'str'>]
+(92, 16): '・' [BG:Values must be of type <class 'str'>]
+(92, 17): '委託先への支給品や貸与品ある場合、これを適切に管理するために、「委託先への支給品・貸与品確認書」を品質記録として、作成・保管すること【2017，2024年度】' [BOLD]
+(93, 6): '◆' [BOLD, BG:Values must be of type <class 'str'>]
+(93, 7): '委託先への支給品・貸与品確認書' [BOLD, BG:Values must be of type <class 'str'>]
+(93, 10): '●' [BG:Values must be of type <class 'str'>]
+(94, 7): '〇送付書,借用書,議事録等' [BG:Values must be of type <class 'str'>]
+(94, 11): '●' [BG:Values must be of type <class 'str'>]
+(94, 16): '・' [BG:Values must be of type <class 'str'>]
+(94, 17): '委託計画変更の際には，委託先に変更指示を出しているか？'
+(95, 6): '◆ 計測機器記録' [BG:Values must be of type <class 'str'>]
+(95, 10): '●' [BG:Values must be of type <class 'str'>]
+(95, 13): '●' [BG:Values must be of type <class 'str'>]
+(95, 16): '・' [BG:Values must be of type <class 'str'>]
+(95, 17): '当初契約から数量変更等があった場合には，変更後の確定数量で設計変更を行っているか？また、変更後の確定数量に対して成果品検査を行っているか？'
+(97, 16): '・' [BG:Values must be of type <class 'str'>]
+(97, 17): '委託成果品の検査にあたっては、必要となる検査項目を確認してから検査を行い、その内容を記録して管理しているか？'
+(98, 16): '・' [BG:Values must be of type <class 'str'>]
+(98, 17): '委託成果品検査を2回に分けて実施する場合、委託成果品（案）の違いの明示や、実際に行った検査内容を記録して管理しているか？'
+(99, 16): '・' [BG:Values must be of type <class 'str'>]
+(99, 17): '検査の参加者として実施責任者および審査者の名前を記載し、必要があれば担当者や関係者の名前を追記して記録を作成し、管理しているか？'
+(100, 16): '・' [BG:Values must be of type <class 'str'>]
+(100, 17): '直接委託の請書において、収入印紙は請書を発行する受注者側が負担し貼付けなければならないが、当社としても正しい書類であるかを確認しているか？【2024年度】' [BOLD]
+(102, 16): '・' [BG:Values must be of type <class 'str'>]
+(102, 17): '直接委託請求書のERP 処理において、源泉所得税を間違えて処理してしまった。ミスのないよう厳正的確処理を行っているか？【2024年度】' [BOLD]
+(108, 2): 7 [BG:Values must be of type <class 'str'>]
+(108, 3): '設計検査記録' [BG:Values must be of type <class 'str'>]
+(108, 4): '・' [BG:Values must be of type <class 'str'>]
+(108, 5): '設計検査の計画' [BG:Values must be of type <class 'str'>]
+(108, 6): '◆設計検査記録' [BOLD, BG:Values must be of type <class 'str'>]
+(108, 10): '●' [BG:Values must be of type <class 'str'>]
+(108, 11): '※' [BG:Values must be of type <class 'str'>]
+(108, 16): '・' [BG:Values must be of type <class 'str'>]
+(108, 17): 'お客さまに最終報告案として提出する場合，設計検査・妥当性確認の記録を残しているか？【2024年度】' [BOLD, BG:Values must be of type <class 'str'>]
+(109, 4): '・' [BG:Values must be of type <class 'str'>]
+(109, 5): '結果が，要求事項を満足していること，合否の根拠' [BG:Values must be of type <class 'str'>]
+(109, 8): '・' [BG:Values must be of type <class 'str'>]
+(109, 9): '中間報告書' [BG:Values must be of type <class 'str'>]
+(109, 11): '●' [BG:Values must be of type <class 'str'>]
+(109, 16): '・' [BG:Values must be of type <class 'str'>]
+(109, 17): '設計検査・妥当性確認記録は、それぞれの記録の有効性やトレサビリティを明確にする上で、正しく記録しているか？【2024年度】' [BOLD, BG:Values must be of type <class 'str'>]
+(110, 8): '・' [BG:Values must be of type <class 'str'>]
+(110, 9): '最終報告書' [BG:Values must be of type <class 'str'>]
+(110, 11): '●' [BG:Values must be of type <class 'str'>]
+(110, 16): '・' [BG:Values must be of type <class 'str'>]
+(110, 17): 'お客さまへの提出物に地図・書籍等を転載する場合，出所・出典が記載されているか？' [BG:Values must be of type <class 'str'>]
+(111, 8): '・' [BG:Values must be of type <class 'str'>]
+(111, 9): '仕様書' [BG:Values must be of type <class 'str'>]
+(111, 13): '●' [BG:Values must be of type <class 'str'>]
+(111, 16): '・' [BG:Values must be of type <class 'str'>]
+(111, 17): '検査項目の選択ミス、出席者の記載漏れ、エビデンス資料の記載漏れ等の記載ミスがないか？' [BG:Values must be of type <class 'str'>]
+(112, 8): '・' [BG:Values must be of type <class 'str'>]
+(112, 9): '品質計画書' [BG:Values must be of type <class 'str'>]
+(112, 13): '●' [BG:Values must be of type <class 'str'>]
+(112, 16): '・' [BG:Values must be of type <class 'str'>]
+(112, 17): '事例との比較により合否判定を行う場合には、事例名を記載しているか？' [BG:Values must be of type <class 'str'>]
+(113, 8): '・' [BG:Values must be of type <class 'str'>]
+(113, 9): '実施計画書' [BG:Values must be of type <class 'str'>]
+(113, 13): '●' [BG:Values must be of type <class 'str'>]
+(113, 16): '・' [BG:Values must be of type <class 'str'>]
+(113, 17): '検査項目に示す計画の内容を設計検査記録と紐づけしてトレーサービリティを確保できるように管理しているか？' [BG:Values must be of type <class 'str'>]
+(114, 8): '・' [BG:Values must be of type <class 'str'>]
+(114, 9): '設計業務依頼記録' [BG:Values must be of type <class 'str'>]
+(114, 13): '●' [BG:Values must be of type <class 'str'>]
+(114, 16): '・' [BG:Values must be of type <class 'str'>]
+(114, 17): '検査項目に実施する検査項目がない場合、実施内容を設計検査記録に追記するなどして設計検査の実態にあった内容にその都度見直して合否判定を行っているか？' [BG:Values must be of type <class 'str'>]
+(115, 8): '・' [BG:Values must be of type <class 'str'>]
+(115, 9): '委託関連記録\u3000' [BG:Values must be of type <class 'str'>]
+(115, 13): '●' [BG:Values must be of type <class 'str'>]
+(116, 8): '・' [BG:Values must be of type <class 'str'>]
+(116, 9): '議事録\u3000\u3000' [BG:Values must be of type <class 'str'>]
+(116, 13): '●' [BG:Values must be of type <class 'str'>]
+(116, 16): '・' [BG:Values must be of type <class 'str'>]
+(116, 17): '「情報セキュリティ対策表」などお客さまに提出する資料は、上位職に説明したうえで、承認印を受領し、承認のエビデンスを残しているか？' [BG:Values must be of type <class 'str'>]
+(117, 8): '・' [BG:Values must be of type <class 'str'>]
+(117, 9): 'その他提出資料' [BG:Values must be of type <class 'str'>]
+(117, 11): '○' [BG:Values must be of type <class 'str'>]
+(117, 13): '●' [BG:Values must be of type <class 'str'>]
+(117, 16): '・' [BG:Values must be of type <class 'str'>]
+(117, 17): '業務の実施に際し、各種書類に記載されている審査者・承認者は記載間違いなく、正しく記録されているか？' [BG:Values must be of type <class 'str'>]
+(118, 16): '・' [BG:Values must be of type <class 'str'>]
+(118, 17): '契約内容確認記録、品質計画書、検査記録等とその内容を補完する別資料とを確実に紐づけしているか？' [BG:Values must be of type <class 'str'>]
+(120, 2): 8 [BG:Values must be of type <class 'str'>]
+(120, 3): '妥当性確認記録' [BG:Values must be of type <class 'str'>]
+(120, 4): '・' [BG:Values must be of type <class 'str'>]
+(120, 5): '仕様書の要求事項' [BG:Values must be of type <class 'str'>]
+(120, 6): '◆妥当性確認記録' [BOLD, BG:Values must be of type <class 'str'>]
+(120, 10): '●' [BG:Values must be of type <class 'str'>]
+(120, 11): '※' [BG:Values must be of type <class 'str'>]
+(120, 16): '・' [BG:Values must be of type <class 'str'>]
+(120, 17): 'お客さまに最終報告案として提出する場合，設計検査・妥当性確認の記録を残しているか？【2024年度】' [BOLD, BG:Values must be of type <class 'str'>]
+(121, 4): '・' [BG:Values must be of type <class 'str'>]
+(121, 5): '実施計画書内容' [BG:Values must be of type <class 'str'>]
+(121, 7): '〇' [BG:Values must be of type <class 'str'>]
+(121, 8): '顧客が成果品を受領した記録' [BG:Values must be of type <class 'str'>]
+(121, 10): '●' [BG:Values must be of type <class 'str'>]
+(121, 13): '●' [BG:Values must be of type <class 'str'>]
+(121, 16): '・' [BG:Values must be of type <class 'str'>]
+(121, 17): '設計検査・妥当性確認記録は、それぞれの記録の有効性やトレサビリティを明確にする上で、正しく記録しているか？【2024年度】' [BOLD, BG:Values must be of type <class 'str'>]
+(122, 4): '・' [BG:Values must be of type <class 'str'>]
+(122, 5): '業務期間中における顧客要望' [BG:Values must be of type <class 'str'>]
+(122, 7): '〇' [BG:Values must be of type <class 'str'>]
+(122, 8): '成果品（控）' [BG:Values must be of type <class 'str'>]
+(122, 11): '●' [BG:Values must be of type <class 'str'>]
+(122, 16): '・' [BG:Values must be of type <class 'str'>]
+(122, 17): '成果品（案）の初版についても，顧客要求事項及び設計管理票（議事録）に記載されたお客さまの意向等が成果品（案）に反映ずみであることを確認しているか？' [BG:Values must be of type <class 'str'>]
+(123, 8): '・' [BG:Values must be of type <class 'str'>]
+(123, 9): '仕様書' [BG:Values must be of type <class 'str'>]
+(123, 13): '●' [BG:Values must be of type <class 'str'>]
+(124, 8): '・' [BG:Values must be of type <class 'str'>]
+(124, 9): '品質計画書' [BG:Values must be of type <class 'str'>]
+(124, 13): '●' [BG:Values must be of type <class 'str'>]
+(124, 16): '・' [BG:Values must be of type <class 'str'>]
+(124, 17): '（日本原燃（図書センター決定図書化業務）については，業務報告書の承認用図書（初版）について妥当性を確認しているか？。）' [BG:Values must be of type <class 'str'>]
+(125, 8): '・' [BG:Values must be of type <class 'str'>]
+(125, 9): '実施計画書' [BG:Values must be of type <class 'str'>]
+(125, 13): '●' [BG:Values must be of type <class 'str'>]
+(125, 16): '・' [BG:Values must be of type <class 'str'>]
+(125, 17): '中間報告書またはお客さまの後工程に関わる重要な資料等についても，妥当性を確認しているか？。' [BG:Values must be of type <class 'str'>]
+(126, 8): '・' [BG:Values must be of type <class 'str'>]
+(126, 9): '設計業務依頼記録' [BG:Values must be of type <class 'str'>]
+(126, 13): '●' [BG:Values must be of type <class 'str'>]
+(126, 16): '・' [BG:Values must be of type <class 'str'>]
+(126, 17): '帳票は本部HP/土木本部品質文書一覧/土木本部 業務品質管理要領/妥当性確認記録（参考帳票）を参考とする。' [BG:Values must be of type <class 'str'>]
+(127, 8): '・' [BG:Values must be of type <class 'str'>]
+(127, 9): '委託関連記録\u3000' [BG:Values must be of type <class 'str'>]
+(127, 13): '●' [BG:Values must be of type <class 'str'>]
+(127, 16): '・' [BG:Values must be of type <class 'str'>]
+(127, 17): '妥当性確認の日付と公印管理簿の本部長印取得の日付とは整合しているか' [BG:Values must be of type <class 'str'>]
+(128, 8): '・' [BG:Values must be of type <class 'str'>]
+(128, 9): '設計検査記録' [BG:Values must be of type <class 'str'>]
+(128, 13): '●' [BG:Values must be of type <class 'str'>]
+(128, 16): '・' [BG:Values must be of type <class 'str'>]
+(128, 17): '業務終了後リスク対策の効有効性評価を実施し結果を記録しているか？' [BG:Values must be of type <class 'str'>]
+(129, 8): '・' [BG:Values must be of type <class 'str'>]
+(129, 9): '議事録\u3000\u3000' [BG:Values must be of type <class 'str'>]
+(129, 13): '●' [BG:Values must be of type <class 'str'>]
+(129, 16): '・' [BG:Values must be of type <class 'str'>]
+(129, 17): '業務の実施に際し、各種書類に記載されている審査者・承認者は記載間違いなく、正しく記録されているか？' [BG:Values must be of type <class 'str'>]
+(130, 8): '・' [BG:Values must be of type <class 'str'>]
+(130, 9): 'その他提出資料' [BG:Values must be of type <class 'str'>]
+(130, 13): '●' [BG:Values must be of type <class 'str'>]
+(132, 2): 9 [BG:Values must be of type <class 'str'>]
+(132, 3): '成果品の引き渡し後の活動' [BG:Values must be of type <class 'str'>]
+(132, 4): '・' [BG:Values must be of type <class 'str'>]
+(132, 5): '顧客から要求事項がある場合には，それを満たす必要があり，その内容を確認するとともに，その活動を行う' [BG:Values must be of type <class 'str'>]
+(132, 6): '◆' [BG:Values must be of type <class 'str'>]
+(132, 7): '議事録' [BOLD, BG:Values must be of type <class 'str'>]
+(132, 10): '●' [BG:Values must be of type <class 'str'>]
+(132, 11): '※' [BG:Values must be of type <class 'str'>]
+(132, 16): '・' [BG:Values must be of type <class 'str'>]
+(132, 17): '受領した「受領書兼検収合格書」の書面で「客先要求の依頼」があった場合、その情報は部長に報告し、対応方策について協議し、部長の承認を得て、記録しているか？' [BG:Values must be of type <class 'str'>]
+(136, 2): 10 [BG:Values must be of type <class 'str'>]
+(136, 3): '議事録等' [BG:Values must be of type <class 'str'>]
+(136, 4): '・' [BG:Values must be of type <class 'str'>]
+(136, 5): '当社作成，先方作成，メモ（ノートコピー等），メールの印刷物等' [BG:Values must be of type <class 'str'>]
+(136, 6): '◆' [BG:Values must be of type <class 'str'>]
+(136, 7): '議事録' [BOLD, BG:Values must be of type <class 'str'>]
+(136, 10): '●' [BG:Values must be of type <class 'str'>]
+(136, 11): '※' [BG:Values must be of type <class 'str'>]
+(136, 16): '・' [BG:Values must be of type <class 'str'>]
+(136, 17): '契約内容確認記録、品質計画書、検査記録等とその内容を補完する別資料とを確実に紐づけしているか？' [BG:Values must be of type <class 'str'>]
+(139, 2): 11 [BG:Values must be of type <class 'str'>]
+(139, 3): 'その他' [BG:Values must be of type <class 'str'>]
+(139, 4): '・' [BG:Values must be of type <class 'str'>]
+(139, 5): '品質記録の保存' [BG:Values must be of type <class 'str'>]
+(139, 10): '●' [BG:Values must be of type <class 'str'>]
+(139, 16): '・' [BG:Values must be of type <class 'str'>]
+(139, 17): '品質記録の保存期間は、お客さまとの契約内容を踏まえ、品質記録の保存期間を確認し、それに基づいて当該品質記録を保存しているか？【2024年度】' [BOLD, BG:Values must be of type <class 'str'>]
+(140, 4): '・' [BG:Values must be of type <class 'str'>]
+(140, 5): '新規採用者教育' [BG:Values must be of type <class 'str'>]
+(140, 11): '●' [BG:Values must be of type <class 'str'>]
+(140, 16): '・' [BG:Values must be of type <class 'str'>]
+(140, 17): '新規採用者がいた場合、教育・訓練実施要領にしたがい、教育実施記録を作成し、管理しているか？' [BG:Values must be of type <class 'str'>]
+(141, 4): '・' [BG:Values must be of type <class 'str'>]
+(141, 5): '規程・要領などを社外に提出する場合' [BG:Values must be of type <class 'str'>]
+(141, 10): '●' [BG:Values must be of type <class 'str'>]
+(141, 12): '●' [BG:Values must be of type <class 'str'>]
+(141, 16): '・' [BG:Values must be of type <class 'str'>]
+(141, 17): '品質マニュアルなど規程・要領を社外に提出する場合には、マニュアルの所管部署長の承認を得て提出することになっている。正しい手順で承認を得て提出しているか？' [BG:Values must be of type <class 'str'>]
+(142, 4): '・' [BG:Values must be of type <class 'str'>]
+(142, 5): '論文の外部発表' [BG:Values must be of type <class 'str'>]
+(142, 12): '●' [BG:Values must be of type <class 'str'>]
+(143, 16): '・' [BG:Values must be of type <class 'str'>]
+(143, 17): '外部発表した論文は、論文発表後速やかに論文作成者が論文検索システムへ論文登録を行っているか？【2024年度】' [BOLD, BG:Values must be of type <class 'str'>]
+
+MERGED CELLS:
+--------------------------------------------------------------------------------
+  P35:P36
+  P44:P45
+  E79:E80
+  R44:R45
+  B51:B58
+  C66:C75
+  D22:E22
+  B76:B107
+  R15:R16
+  Q10:Q11
+  C7:C9
+  B132:B135
+  B10:B31
+  R79:R81
+  H89:I89
+  B7:B9
+  D3:I3
+  R42:R43
+  Q40:Q41
+  N7:N9
+  B120:B131
+  C132:C135
+  P122:P123
+  C139:C144
+  R122:R123
+  E73:E75
+  H37:H38
+  C51:C58
+  I35:I36
+  R120:R121
+  B136:B138
+  J8:J9
+  P26:P27
+  R82:R83
+  K37:K38
+  R10:R11
+  C120:C131
+  Q53:Q54
+  E14:E15
+  B3:C3
+  B108:B119
+  F120:I120
+  B32:B50
+  Q92:Q93
+  J7:L7
+  Q122:Q123
+  M37:M38
+  J35:J36
+  B4:C5
+  L35:L36
+  F108:I108
+  Q114:Q115
+  R100:R101
+  P53:P54
+  P47:P48
+  F7:I9
+  R47:R48
+  B59:B65
+  P15:P16
+  Q79:Q81
+  J1:O1
+  P92:P93
+  E81:E82
+  Q66:Q67
+  E10:E12
+  M7:M9
+  E68:E69
+  C32:C50
+  C76:C107
+  P10:P11
+  Q141:Q142
+  Q42:Q43
+  C24:C31
+  P40:P41
+  E132:E135
+  R40:R41
+  E59:E60
+  H121:I121
+  R114:R115
+  Q35:Q36
+  C136:C138
+  E109:E111
+  Q44:Q45
+  E136:E138
+  I37:I38
+  Q15:Q16
+  R26:R27
+  R35:R36
+  P141:P142
+  E70:E71
+  R141:R142
+  E122:E124
+  K8:K9
+  R7:R9
+  R92:R93
+  C10:C23
+  D4:I5
+  B2:N2
+  R53:R54
+  Q95:Q96
+  G136:I136
+  B139:B144
+  Q86:Q91
+  E38:E42
+  D109:D110
+  P100:P101
+  Q26:Q27
+  B66:B75
+  J37:J38
+  L37:L38
+  Q1:S1
+  K35:K36
+  D21:E21
+  M35:M36
+  Q132:Q133
+  Q82:Q83
+  L8:L9
+  P95:P96
+  C108:C119
+  R95:R96
+  G66:I67
+  R86:R91
+  P82:P83
+  P79:P81
+  P66:P67
+  E61:E62
+  R66:R67
+  D7:E9
+  R112:R113
+  P7:Q9
+  P114:P115
+  Q100:Q101
+  P132:P133
+  R132:R133
+  Q47:Q48
+  G132:I132
+  P42:P43
+  C59:C65
+
+================================================================================
+SHEET 7: 契約内容確認書
+================================================================================
+Dimensions: A1:BB107
+
+NON-EMPTY CELLS:
+--------------------------------------------------------------------------------
+(1, 32): '参考帳票（2026/1/9）' [BG:Values must be of type <class 'str'>]
+(2, 2): '契約内容確認書（1/2）' [BG:FFD9D9D9]
+(2, 45): '目次へ戻る' [BOLD]
+(2, 46): '=HYPERLINK("#目次!A1","●")'
+(3, 2): '部長から引き継いだ受注関連情報，打合せから得られた要求事項' [BG:Values must be of type <class 'str'>]
+(3, 45): 'フローへ戻る' [BOLD]
+(3, 46): '=HYPERLINK("#フロー!A2","●")'
+(4, 2): '顧客名' [BG:Values must be of type <class 'str'>]
+(4, 5): '=+基本データ!D5' [BG:Values must be of type <class 'str'>]
+(4, 31): '受付日' [BG:Values must be of type <class 'str'>]
+(4, 45): '改訂履歴'
+(5, 2): '件名' [BG:Values must be of type <class 'str'>]
+(5, 5): '=基本データ!D4' [BG:Values must be of type <class 'str'>]
+(5, 45): '改訂日'
+(5, 46): '改訂内容'
+(6, 2): '確認者' [BG:Values must be of type <class 'str'>]
+(6, 45): datetime.datetime(2022, 12, 22, 0, 0)
+(6, 46): '2022年度土木・ジオ本部内部監査指摘事項４か所反映（赤字部分）'
+(7, 2): '受注関連情報\n顧客要求事項\n' [BG:Values must be of type <class 'str'>]
+(7, 5): '【営業本部からの受領資料】'
+(7, 45): datetime.datetime(2023, 3, 3, 0, 0)
+(7, 46): '未保有技術を外注する場合の対応に関する注意喚起のコメントを追記'
+(8, 5): '□'
+(8, 6): '業務受付処理票、'
+(8, 12): '□'
+(8, 13): '積算書作成依頼（'
+(8, 20): '□'
+(8, 21): '見積依頼書、'
+(8, 26): '□'
+(8, 27): '仕様書、'
+(8, 30): '□'
+(8, 31): '設計書）'
+(8, 45): datetime.datetime(2023, 4, 27, 0, 0)
+(8, 46): '書式修正'
+(9, 5): '□'
+(9, 6): 'その他（\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000）'
+(9, 45): datetime.datetime(2023, 6, 22, 0, 0)
+(9, 46): '誤字の修正（規定→規程、実行書→実行承認）、押印枠の作成者→確認者'
+(10, 45): datetime.datetime(2023, 10, 19, 0, 0)
+(10, 46): 'チェック体制の区分を明記できるよう書式を変更（2023年度台湾内部監査指摘事項）'
+(11, 5): '○発注内示書又は確認記録；'
+(11, 23): '□'
+(11, 24): 'Yes→（添付資料－'
+(11, 38): '）'
+(11, 39): '□'
+(11, 40): 'No'
+(11, 45): datetime.datetime(2026, 1, 9, 0, 0) [BOLD]
+(11, 46): 'リスク評価の審議レベルの追加' [BOLD]
+(12, 5): '○積算依頼書又は確認記録；'
+(12, 23): '□'
+(12, 24): 'Yes→（添付資料－'
+(12, 38): '）'
+(12, 39): '□'
+(12, 40): 'No'
+(12, 45): datetime.datetime(2026, 1, 9, 0, 0) [BOLD]
+(12, 46): '表現の修正、チェックボックスのプルダウン選択化' [BOLD]
+(13, 5): '○見積依頼書（仕様書，設計書）又は確認記録；'
+(13, 23): '□'
+(13, 24): 'Yes→（添付資料－'
+(13, 38): '）'
+(13, 39): '□'
+(13, 40): 'No'
+(13, 45): datetime.datetime(2026, 1, 9, 0, 0) [BOLD]
+(13, 46): '全体をレビュー' [BOLD]
+(14, 5): '○社会的要求事項（法令、基準等）の確認記録（議事録など）；'
+(15, 23): '□'
+(15, 24): 'Yes→（添付資料－'
+(15, 38): '）'
+(15, 39): '□'
+(15, 40): 'No'
+(16, 5): '○その他の確認記録（議事録,メール,メモ）；'
+(16, 23): '□'
+(16, 24): 'Yes→（添付資料－'
+(16, 38): '）'
+(16, 39): '□'
+(16, 40): 'No'
+(19, 2): '業務受付処理票あるいは積算書の作成依頼を受理してから積算書提出前に実施' [BG:Values must be of type <class 'str'>]
+(20, 2): '顧客不満足発生リスクの確認' [BG:Values must be of type <class 'str'>]
+(20, 5): '・'
+(20, 6): '顧客要求事項（業務の内容，必要とする技術，工期等）に対して，これを満たす上での必要な技術を保有しているか？\u3000'
+(21, 36): '□'
+(21, 37): 'Yes'
+(21, 39): '□'
+(21, 40): 'No'
+(23, 5): '・'
+(23, 6): '必要な人材・体制を自部署で確保できるか？'
+(23, 36): '□'
+(23, 37): 'Yes'
+(23, 39): '□'
+(23, 40): 'No'
+(25, 5): '・'
+(25, 6): '必要な物的資源（資機材，解析プログラム）を自部署で確保できるか？'
+(25, 36): '□'
+(25, 37): 'Yes'
+(25, 39): '□'
+(25, 40): 'No'
+(27, 5): '・'
+(27, 6): '上項がNoの場合、すなわち、自部署で上記の資源を確保できない場合において，'
+(28, 6): '本部内外の他部署あるいは委託先の協力により，解決できるか？'
+(28, 36): '□'
+(28, 37): 'Yes'
+(28, 39): '□'
+(28, 40): 'No'
+(30, 5): '・'
+(30, 6): '上項がYesの場合、その協力先は？'
+(30, 26): '□'
+(30, 27): '本部内'
+(30, 30): '□'
+(30, 31): '本部外'
+(30, 34): '□'
+(30, 35): '委託先'
+(30, 38): '□'
+(30, 39): 'その他'
+(31, 6): '（委託する場合、下請法の適用に注意）'
+(32, 6): '（当社が未保有の技術（未保有プログラムを含む）を使用する業務を委託する場合は、業務品質管理要領（QC1-003）「10.1.2\u3000留意事項」を参照。）'
+(35, 5): '・'
+(35, 6): '原子力関連要領を適用するか？'
+(35, 36): '□'
+(35, 37): 'Yes'
+(35, 39): '□'
+(35, 40): 'No'
+(37, 5): '・'
+(37, 6): '仕様書の内容が当社の不利益となる内容，あるいは内容の解釈によって顧客の不満足に繋がる内容はないか？'
+(38, 36): '□'
+(38, 37): 'Yes'
+(38, 39): '□'
+(38, 40): 'No'
+(51, 32): '=+AF1' [BG:Values must be of type <class 'str'>]
+(52, 2): '契約内容確認書（2/2）' [BG:FFD9D9D9]
+(53, 2): '業務受付処理票あるいは積算書の作成依頼を受理してから積算書提出前に実施' [BG:Values must be of type <class 'str'>]
+(54, 2): '顧客不満足発生リスクの確認' [BG:Values must be of type <class 'str'>]
+(55, 5): '契約前段階で想定されるリスクの確認・対応結果' [BOLD, BG:Values must be of type <class 'str'>]
+(56, 6): 'リスク対策を実施する場合、妥当性確認において、その対策の有効性を評価すること' [BG:Values must be of type <class 'str'>]
+(57, 5): 'リスク項目' [BG:Values must be of type <class 'str'>]
+(57, 10): 'リスク項目詳細' [BG:Values must be of type <class 'str'>]
+(57, 31): '対策\n審議' [BG:Values must be of type <class 'str'>]
+(57, 33): '有無\n程度' [BG:Values must be of type <class 'str'>]
+(57, 35): '対策' [BG:Values must be of type <class 'str'>]
+(57, 37): '具体策' [BG:Values must be of type <class 'str'>]
+(59, 5): '1.新規顧客' [BG:Values must be of type <class 'str'>]
+(59, 10): '新規顧客である場合、当社が要求事項の提示方法・業務推進方法に習熟しておらず、顧客の要求事項・要注意事項を見落とす。' [BG:Values must be of type <class 'str'>]
+(61, 5): '2.新規商材' [BG:Values must be of type <class 'str'>]
+(61, 10): '新規商材である場合、ノウハウが十分ではなく案件形成の段階でのリスクを見逃す。' [BG:Values must be of type <class 'str'>]
+(63, 5): '3.業務内容不明確' [BG:Values must be of type <class 'str'>]
+(63, 10): '顧客の要求事項が不明確で受注に進むべきか、手を引くかの判断に迷う間、当社から手を引けない状況となり不利な条件での受注を強いられる。' [BG:Values must be of type <class 'str'>]
+(65, 5): '4.与信問題の発生' [BG:Values must be of type <class 'str'>]
+(65, 10): '技術方が独自に案件化を進め、契約の段階で営業方が与信調査をした結果、顧客の与信に問題があることが判明し、顧客との金銭面でのトラブルが発生する。【営業本部からの確認結果】' [BG:Values must be of type <class 'str'>]
+(67, 5): '5.契約内容の突然の変更' [BG:Values must be of type <class 'str'>]
+(67, 10): '（特命型）担当者と合意形成を行ってきた内容が、相手都合（上司の指示等）により、契約間際に覆ってしまう。（競争型）仕様内容が不明確なまま受注し、追加業務をさせられる。' [BG:Values must be of type <class 'str'>]
+(69, 5): '6.工期の顧客都合の変更' [BG:Values must be of type <class 'str'>]
+(69, 10): '想定していた工期・納期が、顧客都合により変更となってしまい、変更後の着手段階で十分なリソースを確保できないまま業務実施を求められる。' [BG:Values must be of type <class 'str'>]
+(71, 5): '7.確認記録の不備' [BG:Values must be of type <class 'str'>]
+(71, 10): '電話連絡で受けた情報等を記録に残さなかったため、顧客との間で要求内容の認識に齟齬が生じ、トラブルに発展する。' [BG:Values must be of type <class 'str'>]
+(73, 5): '8.金額不足' [BG:Values must be of type <class 'str'>]
+(73, 10): '当初の見積もり額より、判明した最終的な見積もり額が上振れした場合、客先が受け入れを拒む。' [BG:Values must be of type <class 'str'>]
+(75, 5): '9.損害賠償の上限' [BG:Values must be of type <class 'str'>]
+(75, 10): '契約書などに設計瑕疵などによる損害賠償に関する記載がない（上限がない）ため、重大な設計瑕疵により損害賠償が生じた場合、支払いができなくなる可能性がある。' [BG:Values must be of type <class 'str'>]
+(77, 5): '10.その他' [BG:Values must be of type <class 'str'>]
+(83, 5): '\u3000対策審議\u3000各部；部会議、本部；本部会議、全社；リスク評価会議\n\u3000有無程度\u3000×；該当しない、△；殆ど該当しない、○；一部該当する、◎；殆ど該当する\n\u3000対策\u3000\u3000\u3000Ａ；回避、Ｂ；低減、Ｃ；移転、Ｄ；保有\u3000\u3000（記載できない場合、別紙「リスク対策シート」に記載）' [BG:Values must be of type <class 'str'>]
+(86, 2): '業務受付処理票あるいは積算書の作成依頼を受理してから積算書提出前に実施'
+(87, 2): 'チェック体制の確認' [BG:Values must be of type <class 'str'>]
+(87, 6): '①'
+(87, 7): '受注額または受注予想額が5,000万円以上か'
+(87, 36): '□'
+(87, 37): 'Yes'
+(87, 39): '□'
+(87, 40): 'No'
+(88, 6): '②'
+(88, 7): '重要度または難易度の高い業務（業務品質管理要領（QC1-003）「7.4 成果品のチェック体制」を参照）に該当するか'
+(89, 36): '□'
+(89, 37): 'Yes'
+(89, 39): '□'
+(89, 40): 'No'
+(90, 6): '③'
+(90, 7): '定型設計（ルーチン化させた設計）業務，特定（作業が主体で設計を含まない）業務であるか'
+(91, 36): '□'
+(91, 37): 'Yes'
+(91, 39): '□'
+(91, 40): 'No'
+(92, 5): '・①，②の両方がNoである'
+(92, 17): '→'
+(92, 18): '□ A-? 体制'
+(92, 24): '承認者：主管部長'
+(92, 44): '←【注意】A体制の場合は、A-1体制～A-3体制から選択すること ※）' [BOLD]
+(93, 5): '・①，②の一方がYesである'
+(93, 17): '→'
+(93, 18): '□ B-? 体制'
+(93, 24): '承認者：本部長'
+(93, 44): '←【注意】B体制の場合は、B-1体制～B-3体制から選択すること ※）' [BOLD]
+(94, 5): '・③に該当する'
+(94, 17): '→'
+(94, 18): '□ C 体制'
+(94, 24): '承認者：主管部長が指定したGM以上あるいは'
+(94, 44): '\u3000\u3000※）チェック体制の選定基準は、業務品質管理要領（QC1-003）「7.4成果品のチェック体制」の「表7.2」を参照' [BOLD]
+(95, 27): ' 設計者資格が主任技師以上'
+(96, 5): '・'
+(96, 6): '□'
+(96, 7): ' A，B，C体制以外の特別な体制を採用する'
+(96, 30): '本部長'
+(96, 34): '部長'
+(96, 38): '確認者'
+(96, 44): '←【注意】A，B，C体制以外の特別な体制を採用する場合は、□→■を選択し、その理由を記載すること' [BOLD]
+(97, 6): '理由'
+(97, 19): '承認者：'
+(98, 5): '\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000'
+(98, 19): '審査者：'
+(99, 5): '※ B体制および特別な体制については本部長の承認を得ること' [BOLD]
+(101, 5): '注意：' [BOLD, BG:Values must be of type <class 'str'>]
+(101, 6): '積算書の承認は、以下のとおり。\u3000\u3000見積額１億円以上；社長\n\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000見積額１億円未満～0.3 億円以上；本部長\n\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000見積額 0.3 億円未満；主管部長\n見積額１億円以上の大型案件または本部長が必要と認めた場合は，「受注計画＊承認取扱要領 (BB1-008)」にしたがい，「承認書取扱要領（BS1-002）」の定める電子承認ワークフローシステムを用いて「受注計画書 (BB1-008-01) 」を作成し，「職務権限規程（AP1-004）」にしたがって承認を得る。' [BOLD, BG:Values must be of type <class 'str'>]
+
+MERGED CELLS:
+--------------------------------------------------------------------------------
+  AH98:AK100
+  AK69:AO70
+  E77:I78
+  F32:AN33
+  AK59:AO60
+  AL98:AO100
+  AG71:AH72
+  E61:I62
+  AI71:AJ72
+  AJ37:AO37
+  AE4:AH4
+  AK61:AO62
+  AG73:AH74
+  AI73:AJ74
+  AJ88:AO88
+  B6:D6
+  AE63:AF64
+  F28:AI28
+  AG63:AH64
+  AI57:AJ58
+  J69:AD70
+  B7:D18
+  J59:AD60
+  B4:D4
+  E55:AO55
+  E79:I80
+  AE81:AF82
+  J79:AD80
+  AH96:AK96
+  AE77:AF78
+  AG77:AH78
+  J63:AD64
+  AE67:AF68
+  AG61:AH62
+  AI75:AJ76
+  E6:AO6
+  AD97:AG97
+  AE69:AF70
+  AG75:AH76
+  E75:I76
+  E7:AO7
+  AK77:AO78
+  AK67:AO68
+  AE79:AF80
+  AG79:AH80
+  AD98:AG100
+  B5:D5
+  E16:V16
+  AR104:AW106
+  AG81:AH82
+  E18:V18
+  AE71:AF72
+  AJ90:AO90
+  AG65:AH66
+  AI65:AJ66
+  AK71:AO72
+  E73:I74
+  G88:AH89
+  AI4:AO4
+  AE73:AF74
+  AF1:AP1
+  E63:I64
+  AK73:AO74
+  AE57:AF58
+  R92:V92
+  G90:AH91
+  AG57:AH58
+  H97:Q98
+  AK63:AO64
+  E65:I66
+  E13:V13
+  F37:AI38
+  R94:V94
+  J71:AD72
+  AD96:AG96
+  AI61:AJ62
+  J73:AD74
+  B87:D100
+  J57:AD58
+  B54:D85
+  AK75:AO76
+  V97:AB97
+  J77:AD78
+  E67:I68
+  F20:AI21
+  V98:AB98
+  B2:AO2
+  E69:I70
+  F101:AO106
+  F25:AI25
+  R93:V93
+  E59:I60
+  AI63:AJ64
+  J75:AD76
+  AK79:AO80
+  J67:AD68
+  AK81:AO82
+  J61:AD62
+  AE65:AF66
+  B20:D49
+  AI81:AJ82
+  AK65:AO66
+  AI77:AJ78
+  J81:AD82
+  E4:AD4
+  F23:AI23
+  AJ92:AO92
+  E57:I58
+  AG67:AH68
+  AI67:AJ68
+  E71:I72
+  AJ20:AO20
+  E81:I82
+  AK57:AO58
+  AE75:AF76
+  AG69:AH70
+  AH97:AK97
+  AI69:AJ70
+  AF51:AP51
+  E5:AO5
+  AE59:AF60
+  E14:AO14
+  AG59:AH60
+  J65:AD66
+  AI59:AJ60
+  E83:AO85
+  AL97:AO97
+  B52:AO52
+  AE61:AF62
+  AL96:AO96
+  AI79:AJ80
+
+================================================================================
+SHEET 8: 記載例契約内容確認書
+================================================================================
+Dimensions: A1:BN103
+
+NON-EMPTY CELLS:
+--------------------------------------------------------------------------------
+(1, 32): '参考帳票（2026/1/9）'
+(2, 2): '契約内容確認書（1/2）' [BG:Values must be of type <class 'str'>]
+(2, 45): '目次へ戻る' [BOLD]
+(2, 46): '=HYPERLINK("#目次!A2","●")'
+(3, 2): '部長から引き継いだ受注関連情報，打合せから得られた要求事項'
+(3, 45): 'フローへ戻る' [BOLD]
+(3, 46): '=HYPERLINK("#フロー!A2","●")'
+(4, 2): '顧客名'
+(4, 5): '=+基本データ!D5'
+(4, 31): '受付日'
+(4, 45): '改訂履歴'
+(5, 2): '件名'
+(5, 5): '=+基本データ!D4'
+(5, 45): '改訂日'
+(5, 46): '改訂内容'
+(6, 2): '確認者'
+(6, 45): datetime.datetime(2022, 12, 22, 0, 0)
+(6, 46): '2022年度土木・ジオ本部内部監査指摘事項４か所反映（赤字部分）'
+(7, 2): '受注関連情報\n顧客要求事項\n'
+(7, 5): '【営業本部からの受領資料】' [BG:Values must be of type <class 'str'>]
+(7, 45): datetime.datetime(2023, 3, 3, 0, 0)
+(7, 46): '未保有技術を外注する場合の対応に関する注意喚起のコメントを追記'
+(8, 5): '■業務受付処理票、■積算書作成依頼（■見積依頼書、■仕様書、■設計書）' [BG:Values must be of type <class 'str'>]
+(8, 45): datetime.datetime(2023, 4, 27, 0, 0)
+(8, 46): '書式修正'
+(9, 5): '□その他（\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000）' [BG:Values must be of type <class 'str'>]
+(9, 45): datetime.datetime(2023, 6, 22, 0, 0)
+(9, 46): '誤字の修正（規定→規程、実行書→実行承認）、押印枠の作成者→確認者'
+(10, 45): datetime.datetime(2023, 10, 19, 0, 0) [BOLD]
+(10, 46): 'チェック体制の区分を明記できるよう書式を変更（2023年度台湾内部監査指摘事項）' [BOLD]
+(11, 5): '○発注内示書又は確認記録；' [BG:Values must be of type <class 'str'>]
+(11, 23): '□' [BG:Values must be of type <class 'str'>]
+(11, 24): 'Yes→（添付資料－' [BG:Values must be of type <class 'str'>]
+(11, 38): '）' [BG:Values must be of type <class 'str'>]
+(11, 39): '□' [BG:Values must be of type <class 'str'>]
+(11, 40): 'No' [BG:Values must be of type <class 'str'>]
+(11, 45): datetime.datetime(2025, 5, 21, 0, 0) [BOLD]
+(11, 46): 'リスク評価の審議レベルの追加' [BOLD]
+(12, 5): '○積算依頼書又は確認記録；' [BG:Values must be of type <class 'str'>]
+(12, 23): '□' [BG:Values must be of type <class 'str'>]
+(12, 24): 'Yes→（添付資料－' [BG:Values must be of type <class 'str'>]
+(12, 38): '）' [BG:Values must be of type <class 'str'>]
+(12, 39): '□' [BG:Values must be of type <class 'str'>]
+(12, 40): 'No' [BG:Values must be of type <class 'str'>]
+(12, 45): datetime.datetime(2026, 1, 9, 0, 0) [BOLD]
+(12, 46): '表現の修正、チェックボックスのプルダウン選択化' [BOLD]
+(13, 5): '○見積依頼書（仕様書，設計書）又は確認記録；' [BG:Values must be of type <class 'str'>]
+(13, 23): '■' [BG:Values must be of type <class 'str'>]
+(13, 24): 'Yes→（添付資料－1\u3000見積依頼書一式' [BG:Values must be of type <class 'str'>]
+(13, 38): '）' [BG:Values must be of type <class 'str'>]
+(13, 39): '□' [BG:Values must be of type <class 'str'>]
+(13, 40): 'No' [BG:Values must be of type <class 'str'>]
+(14, 5): '○社会的要求事項（法令、基準等）の確認記録（議事録など）；' [BG:Values must be of type <class 'str'>]
+(15, 23): '□' [BG:Values must be of type <class 'str'>]
+(15, 24): 'Yes→（添付資料－' [BG:Values must be of type <class 'str'>]
+(15, 38): '）' [BG:Values must be of type <class 'str'>]
+(15, 39): '□' [BG:Values must be of type <class 'str'>]
+(15, 40): 'No' [BG:Values must be of type <class 'str'>]
+(16, 5): '○その他の確認記録（議事録,メール,メモ）；' [BG:Values must be of type <class 'str'>]
+(16, 23): '□' [BG:Values must be of type <class 'str'>]
+(16, 24): 'Yes→（添付資料－' [BG:Values must be of type <class 'str'>]
+(16, 38): '）' [BG:Values must be of type <class 'str'>]
+(16, 39): '□' [BG:Values must be of type <class 'str'>]
+(16, 40): 'No' [BG:Values must be of type <class 'str'>]
+(19, 2): '業務受付処理票あるいは積算書の作成依頼を受理してから積算書提出前に実施'
+(20, 2): '顧客不満足発生リスクの確認'
+(20, 5): '・'
+(20, 6): '顧客要求事項（業務の内容，必要とする技術，工期等）に対して，これを満たす上での必要な技術を保有しているか？\u3000'
+(21, 36): '■Yes\u3000□No'
+(22, 5): '・'
+(22, 6): '必要な人材・体制を自部署で確保できるか？'
+(22, 36): '■Yes\u3000□No'
+(23, 5): '・'
+(23, 6): '必要な物的資源（資機材，解析プログラム）を自部署で確保できるか？'
+(23, 36): '■Yes\u3000□No'
+(24, 5): '・'
+(24, 6): '上項がNoの場合、すなわち、自部署で上記の資源を確保できない場合において，'
+(25, 6): '本部内外の他部署あるいは委託先の協力により，解決できる'
+(25, 36): '□Yes\u3000□No'
+(26, 5): '・'
+(26, 6): 'Yesのとき、その協力先は？'
+(26, 25): '□本部内\u3000□本部外\u3000□委託先\u3000□その他'
+(27, 6): '（委託する場合、下請法の適用に注意）'
+(28, 6): '（当社が未保有の技術（未保有プログラムを含む）を使用する業務を委託する場合は、業務品質管理要領（QC1-003）「10.委託（2）委託仕様書作成の留意事項」を参照。）'
+(30, 5): '・'
+(30, 6): '原子力関連要領を適用するか'
+(30, 36): '□Yes\u3000■No'
+(31, 5): '・'
+(31, 6): '仕様書の内容が当社の不利益となる内容，あるいは内容の解釈によって顧客の不満足に繋がる内容はない'
+(32, 36): '■Yes\u3000□No'
+(48, 32): '=+AF1'
+(49, 2): '契約内容確認書（2/2）' [BG:Values must be of type <class 'str'>]
+(50, 2): '業務受付処理票あるいは積算書の作成依頼を受理してから積算書提出前に実施'
+(51, 2): '顧客不満足発生リスクの確認'
+(52, 5): '契約前段階で想定されるリスクの確認・対応結果' [BOLD]
+(53, 6): 'リスク対策を実施する場合、妥当性確認において、その対策の有効性を評価すること'
+(54, 5): 'リスク項目'
+(54, 10): 'リスク項目詳細' [BG:Values must be of type <class 'str'>]
+(54, 31): '対策\n審議' [BG:Values must be of type <class 'str'>]
+(54, 33): '有無\n程度' [BG:Values must be of type <class 'str'>]
+(54, 35): '対策' [BG:Values must be of type <class 'str'>]
+(54, 37): '具体策'
+(56, 5): '1.新規顧客'
+(56, 10): '新規顧客である場合、当社が要求事項の提示方法・業務推進方法に習熟しておらず、顧客の要求事項・要注意事項を見落とす。' [BG:Values must be of type <class 'str'>]
+(56, 33): '×'
+(58, 5): '2.新規商材'
+(58, 10): '新規商材である場合、ノウハウが十分ではなく案件形成の段階でのリスクを見逃す。' [BG:Values must be of type <class 'str'>]
+(58, 33): '×'
+(60, 5): '3.業務内容不明確'
+(60, 10): '顧客の要求事項が不明確で受注に進むべきか、手を引くかの判断に迷う間、当社から手を引けない状況となり不利な条件での受注を強いられる。' [BG:Values must be of type <class 'str'>]
+(60, 33): '×'
+(62, 5): '4.与信問題の発生'
+(62, 10): '技術方が独自に案件化を進め、契約の段階で営業方が与信調査をした結果、顧客の与信に問題があることが判明し、顧客との金銭面でのトラブルが発生する。【営業本部からの確認結果】' [BG:Values must be of type <class 'str'>]
+(62, 33): '×'
+(64, 5): '5.契約内容の突然の変更'
+(64, 10): '（特命型）担当者と合意形成を行ってきた内容が、相手都合（上司の指示等）により、契約間際に覆ってしまう。（競争型）仕様内容が不明確なまま受注し、追加業務をさせられる。' [BG:Values must be of type <class 'str'>]
+(64, 33): '×'
+(66, 5): '6.工期の顧客都合の変更'
+(66, 10): '想定していた工期・納期が、顧客都合により変更となってしまい、変更後の着手段階で十分なリソースを確保できないまま業務実施を求められる。' [BG:Values must be of type <class 'str'>]
+(66, 33): '×'
+(68, 5): '7.確認記録の不備'
+(68, 10): '電話連絡で受けた情報等を記録に残さなかったため、顧客との間で要求内容の認識に齟齬が生じ、トラブルに発展する。' [BG:Values must be of type <class 'str'>]
+(68, 33): '×'
+(70, 5): '8.金額不足'
+(70, 10): '当初の見積もり額より、判明した最終的な見積もり額が上振れした場合、客先が受け入れを拒む。' [BG:Values must be of type <class 'str'>]
+(70, 33): '×'
+(72, 5): '9.損害賠償の上限'
+(72, 10): '契約書などに設計瑕疵などによる損害賠償に関する記載がない（上限がない）ため、重大な設計瑕疵により損害賠償が生じた場合、支払いができなくなる可能性がある。' [BG:Values must be of type <class 'str'>]
+(72, 33): '×'
+(74, 5): '10.その他'
+(74, 33): '×'
+(80, 5): '\u3000対策審議\u3000各部；部会議、本部；本部会議、全社；リスク評価会議\n\u3000有無程度\u3000×；該当しない、△；殆ど該当しない、○；一部該当する、◎；殆ど該当する\n\u3000対策\u3000\u3000\u3000Ａ；回避、Ｂ；低減、Ｃ；移転、Ｄ；保有\u3000\u3000（記載できない場合、別紙「リスク対策シート」に記載）' [BG:Values must be of type <class 'str'>]
+(83, 2): '業務受付処理票あるいは積算書の作成依頼を受理してから積算書提出前に実施'
+(84, 2): 'チェック体制の確認'
+(84, 6): '①'
+(84, 7): '受注額または受注予想額が5,000万円以上か'
+(84, 36): '□'
+(84, 37): 'Yes'
+(84, 39): '■'
+(84, 40): 'No'
+(85, 6): '②'
+(85, 7): '重要度または難易度の高い業務（業務品質管理要領（QC1-003）「7.4 成果品のチェック体制」を参照）に該当するか'
+(86, 36): '□'
+(86, 37): 'Yes'
+(86, 39): '■'
+(86, 40): 'No'
+(87, 6): '③'
+(87, 7): '定型設計（ルーチン化させた設計）業務，特定（作業が主体で設計を含まない）業務であるか'
+(88, 36): '□'
+(88, 37): 'Yes'
+(88, 39): '■'
+(88, 40): 'No'
+(89, 5): '・①，②の両方がNoである'
+(89, 17): '→'
+(89, 18): '■ A-3 体制'
+(89, 24): '承認者：主管部長'
+(89, 44): '←【注意】A体制の場合は、A-1体制～A-3体制から選択すること ※）' [BOLD]
+(90, 5): '・①，②の一方がYesである'
+(90, 17): '→'
+(90, 18): '□ B-? 体制'
+(90, 24): '承認者：本部長'
+(90, 44): '←【注意】B体制の場合は、B-1体制～B-3体制から選択すること ※）' [BOLD]
+(91, 5): '・③に該当する'
+(91, 17): '→'
+(91, 18): '□ C 体制'
+(91, 24): '承認者：主管部長が指定したGM以上あるいは'
+(91, 44): '\u3000\u3000※）チェック体制の選定基準は、業務品質管理要領（QC1-003）「7.4成果品のチェック体制」の「表7.2」を参照' [BOLD]
+(92, 27): ' 設計者資格が主任技師以上'
+(93, 5): '・□ A,B,C体制以外の特別な体制を採用する'
+(93, 6): '□'
+(93, 7): ' A，B，C体制以外の特別な体制を採用する'
+(93, 30): '本部長'
+(93, 34): '部長'
+(93, 38): '確認者'
+(93, 44): '←【注意】A，B，C体制以外の特別な体制を採用する場合は、□→■を選択し、その理由を記載すること' [BOLD]
+(94, 6): '理由'
+(94, 18): '承認者：'
+(94, 30): '2023.10.18'
+(94, 34): '2023.10.18'
+(94, 38): '2023.10.18'
+(95, 5): '\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000'
+(95, 18): '審査者：'
+(95, 30): '本部長'
+(95, 34): '部長'
+(95, 38): '確認者'
+(96, 5): '* B 体制および特別な体制については本部長の承認を得ること' [BOLD]
+(98, 5): '注意：' [BOLD]
+(98, 6): '積算書の承認は、以下のとおり。\u3000\u3000見積額１億円以上；社長\n\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000見積額１億円未満～0.3 億円以上；本部長\n\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000見積額 0.3 億円未満；主管部長\n見積額１億円以上の大型案件または本部長が必要と認めた場合は，「受注計画＊承認取扱要領 (BB1-008)」にしたがい，「承認書取扱要領（BS1-002）」の定める電子承認ワークフローシステムを用いて「受注計画書 (BB1-008-01) 」を作成し，「職務権限規程（AP1-004）」にしたがって承認を得る。' [BOLD, BG:Values must be of type <class 'str'>]
+
+MERGED CELLS:
+--------------------------------------------------------------------------------
+  AE64:AF65
+  AE78:AF79
+  AG78:AH79
+  AI72:AJ73
+  E80:AO82
+  AJ87:AO87
+  AG62:AH63
+  AI62:AJ63
+  J58:AD59
+  E70:I71
+  AD93:AG93
+  AE4:AH4
+  AJ89:AO89
+  AG64:AH65
+  AK70:AO71
+  E72:I73
+  J72:AD73
+  AI64:AJ65
+  AE54:AF55
+  H94:Q95
+  AG54:AH55
+  B6:D6
+  E62:I63
+  E56:I57
+  J78:AD79
+  B7:D18
+  AJ25:AO25
+  B4:D4
+  E52:AO52
+  J70:AD71
+  AK74:AO75
+  J54:AD55
+  AE58:AF59
+  AK58:AO59
+  AK76:AO77
+  E74:I75
+  J56:AD57
+  E6:AO6
+  AG76:AH77
+  AE60:AF61
+  AK60:AO61
+  E76:I77
+  J76:AD77
+  AJ30:AO30
+  V95:AB95
+  AI56:AJ57
+  AE68:AF69
+  X13:AK13
+  E7:AO7
+  R90:V90
+  B84:D97
+  F22:AI22
+  G87:AH88
+  F28:AN29
+  V94:AB94
+  B5:D5
+  E16:V16
+  J74:AD75
+  J60:AD61
+  AJ32:AO32
+  R91:V91
+  B51:D82
+  AK78:AO79
+  E18:V18
+  B20:D46
+  AK62:AO63
+  J68:AD69
+  E64:I65
+  E78:I79
+  AI74:AJ75
+  AI4:AO4
+  AK64:AO65
+  AF1:AP1
+  AI76:AJ77
+  AK54:AO55
+  F31:AI32
+  AH94:AK94
+  AG66:AH67
+  AI66:AJ67
+  E13:V13
+  J62:AD63
+  AL94:AO94
+  B49:AO49
+  J64:AD65
+  E66:I67
+  R89:V89
+  AH95:AK97
+  AE70:AF71
+  AK66:AO67
+  E68:I69
+  AI78:AJ79
+  E58:I59
+  AJ31:AO31
+  AL95:AO97
+  AE72:AF73
+  AG72:AH73
+  AK68:AO69
+  F20:AI21
+  AJ21:AO21
+  AE62:AF63
+  AE56:AF57
+  E60:I61
+  AH93:AK93
+  AG56:AH57
+  AG70:AH71
+  B2:AO2
+  AJ23:AO23
+  F25:AI25
+  J66:AD67
+  AI54:AJ55
+  AL93:AO93
+  AF48:AP48
+  AK72:AO73
+  E54:I55
+  AE74:AF75
+  AK56:AO57
+  AG74:AH75
+  AG68:AH69
+  AI68:AJ69
+  AG58:AH59
+  E4:AD4
+  F23:AI23
+  AI58:AJ59
+  AE76:AF77
+  F98:AO103
+  AJ20:AO20
+  AD94:AG94
+  AE66:AF67
+  AJ85:AO85
+  AG60:AH61
+  Y26:AO26
+  AI60:AJ61
+  E5:AO5
+  AJ22:AO22
+  E14:AO14
+  G85:AH86
+  AD95:AG97
+  AI70:AJ71
+
+================================================================================
+SHEET 9: 契約内容変更確認書
+================================================================================
+Dimensions: A1:AY46
+
+NON-EMPTY CELLS:
+--------------------------------------------------------------------------------
+(1, 10): '参考帳票（2026/1/9）' [BG:Values must be of type <class 'str'>]
+(2, 2): '契約内容に変更が発生した場合（変更の都度確認のこと）' [BG:Values must be of type <class 'str'>]
+(2, 17): '目次へ戻る' [BOLD]
+(2, 18): '=HYPERLINK("#目次!A1","●")'
+(3, 2): '契約内容変更確認書（No.\u3000\u3000）' [BOLD, BG:FFD9D9D9]
+(3, 17): 'フローへ戻る' [BOLD]
+(3, 18): '=HYPERLINK("#フロー!A2","●")'
+(4, 2): '件名コード' [BG:FFD9D9D9]
+(4, 5): '=基本データ!D3' [BG:Values must be of type <class 'str'>]
+(4, 17): '改訂履歴'
+(5, 2): '件\u3000\u3000\u3000名' [BG:FFD9D9D9]
+(5, 5): '=基本データ!D4' [BG:Values must be of type <class 'str'>]
+(5, 17): '改訂日'
+(5, 18): '改訂内容'
+(6, 2): '確認日/場所' [BG:FFD9D9D9]
+(6, 17): datetime.datetime(2022, 12, 27, 0, 0)
+(6, 18): '設計変更時にもリスクの有無確認欄を追加'
+(7, 2): 'お客様' [BG:FFD9D9D9]
+(7, 5): '=基本データ!D5' [BG:Values must be of type <class 'str'>]
+(7, 17): datetime.datetime(2023, 6, 22, 0, 0)
+(7, 18): '誤字の修正（規定→規程、実行書→実行承認）、押印枠の作成者→確認者'
+(8, 2): '確認者' [BG:FFD9D9D9]
+(8, 17): datetime.datetime(2025, 5, 21, 0, 0) [BOLD]
+(8, 18): 'リスク評価の審議レベルの追加' [BOLD]
+(9, 3): '１．変更内容' [BG:Values must be of type <class 'str'>]
+(9, 17): datetime.datetime(2026, 1, 9, 0, 0) [BOLD]
+(9, 18): '表現の修正、チェックボックスのプルダウン選択化' [BOLD]
+(15, 3): '□'
+(15, 4): ' 資料で確認（資料名）：' [BG:Values must be of type <class 'str'>]
+(16, 3): '注意：' [BG:Values must be of type <class 'str'>]
+(16, 4): '積算書の承認は、以下のとおり。' [BG:Values must be of type <class 'str'>]
+(17, 4): '見積額１億円以上；社長\u3000\u3000\u3000※）' [BG:Values must be of type <class 'str'>]
+(18, 4): '見積額１億円未満～0.3 億円以上；本部長' [BG:Values must be of type <class 'str'>]
+(19, 4): '見積額 0.3 億円未満；主管部長' [BG:Values must be of type <class 'str'>]
+(20, 4): '見積額１億円以上の大型案件または本部長が必要と認めた場合は，「受注計画＊承認取扱要領 (BB1-008)」にしたがい，「承認書取扱要領（BS1-002）」の定める電子承認ワークフローシステムを用いて「受注計画書 (BB1-008-01) 」を作成し，「職務権限規程（AP1-004）」にしたがって承認を得る。' [BG:Values must be of type <class 'str'>]
+(23, 4): '※）ここでいう「見積額」とは，「変更前の受注契約額に対する増分」のこと。' [BG:Values must be of type <class 'str'>]
+(25, 3): '２．想定されるリスクの確認・対応結果' [BG:Values must be of type <class 'str'>]
+(26, 3): '□'
+(26, 4): ' 想定されるリスクの有無'
+(26, 8): '□有'
+(26, 9): '□無'
+(27, 3): '\u3000\u3000\u3000リスク対策を実施する場合、妥当性確認において、その対策の有効性を評価すること'
+(29, 3): 'リスク項目'
+(29, 5): 'リスク項目詳細'
+(29, 8): '対策\n審議'
+(29, 9): '有無\n程度'
+(29, 10): '対策'
+(29, 11): '具体策' [BG:Values must be of type <class 'str'>]
+(40, 3): '対策審議\u3000各部；部会議、本部；本部会議、全社；リスク評価会議' [BG:Values must be of type <class 'str'>]
+(40, 10): '本部長' [BG:Values must be of type <class 'str'>]
+(40, 11): '部長' [BG:Values must be of type <class 'str'>]
+(40, 12): '実施責任者' [BG:Values must be of type <class 'str'>]
+(41, 3): '有無程度\u3000×；該当しない、△；殆ど該当しない、○；一部該当する、' [BG:Values must be of type <class 'str'>]
+(42, 4): '◎；殆ど該当する' [BG:Values must be of type <class 'str'>]
+(43, 3): '対策\u3000\u3000\u3000Ａ；回避、Ｂ；低減、Ｃ；移転、Ｄ；保有\n\u3000\u3000\u3000\u3000\u3000' [BG:Values must be of type <class 'str'>]
+(44, 3): '\u3000\u3000\u3000\u3000\u3000\u3000（書ききれない場合、別紙「リスク対策シート」に記載）' [BG:Values must be of type <class 'str'>]
+(46, 14): '\u3000'
+
+MERGED CELLS:
+--------------------------------------------------------------------------------
+  K42:K44
+  H29:H30
+  K31:L32
+  B8:D8
+  C31:D32
+  J37:J38
+  J1:N1
+  H31:H32
+  E37:G38
+  D20:M22
+  J42:J44
+  I37:I38
+  I33:I34
+  E33:G34
+  B6:D6
+  E29:G30
+  J35:J36
+  B5:D5
+  K37:L38
+  C37:D38
+  B45:M45
+  E35:G36
+  B4:D4
+  K29:L30
+  I29:I30
+  H37:H38
+  J31:J32
+  B7:D7
+  I35:I36
+  C33:D34
+  E31:G32
+  K33:L34
+  C44:I44
+  C29:D30
+  I31:I32
+  B3:M3
+  H33:H34
+  E5:M5
+  J33:J34
+  C35:D36
+  L42:L44
+  K35:L36
+  J29:J30
+  E4:M4
+  H35:H36
+
+================================================================================
+SHEET 10: リスク対策シート
+================================================================================
+Dimensions: B1:AL45
+
+NON-EMPTY CELLS:
+--------------------------------------------------------------------------------
+(1, 26): '参考帳票（2026/1/9）'
+(2, 2): 'リスク対策シート'
+(2, 13): '帳票番号'
+(2, 37): '目次へ戻る' [BOLD]
+(2, 38): '=HYPERLINK("#目次!A1","●")'
+(3, 13): '規定文書名'
+(3, 20): '受注業務のリスク管理方法の指針'
+(3, 37): 'フローへ戻る' [BOLD]
+(3, 38): '=HYPERLINK("#フロー!A2","●")'
+(4, 13): '本部内主管箇所'
+(4, 30): '本部'
+(5, 26): '部'
+(5, 32): 'G'
+(5, 37): '改訂履歴'
+(6, 2): '□契約前・□契約後'
+(6, 20): '発行年月日：'
+(6, 37): '改訂日'
+(6, 38): '改訂内容'
+(7, 2): '件名：'
+(7, 8): '=基本データ!D4'
+(7, 37): datetime.datetime(2026, 1, 9, 0, 0) [BOLD]
+(7, 38): '体裁見直し' [BOLD]
+(8, 2): '顧客名：'
+(8, 8): '=基本データ!D5'
+(9, 2): '受注期間：'
+(9, 8): '=基本データ!D6'
+(9, 14): '～'
+(9, 15): '=基本データ!D7'
+(9, 21): '受注額：'
+(9, 24): '=+基本データ!D11/1000000'
+(9, 30): '百万円'
+(10, 2): '実施責任者：'
+(10, 8): '東設\u3000三郎'
+(11, 3): '■背景と経緯'
+(17, 3): '■リスクの詳細内容'
+(23, 3): '■対策（当該リスク対策を■に変更する）\u3000□回避\u3000□低減\u3000□移転\u3000□保有'
+(28, 3): '■対策の有効性評価（業務完了後に記載）'
+(33, 3): '承認欄'
+(33, 17): '本部長'
+(33, 21): '部長'
+(33, 25): 'GM'
+(33, 29): '実施責任者'
+(35, 3): '「対策」の承認'
+(39, 3): '承認欄'
+(39, 17): '本部長'
+(39, 21): '部長'
+(39, 25): 'GM'
+(39, 29): '実施責任者'
+(41, 3): '「対策の有効性」の評価'
+(45, 34): '\u3000'
+
+MERGED CELLS:
+--------------------------------------------------------------------------------
+  U33:X33
+  T3:AG3
+  M3:S3
+  AC35:AF37
+  AC40:AF40
+  H8:AG8
+  U39:X39
+  B8:G8
+  C11:AF16
+  Y33:AB33
+  H10:AG10
+  C17:AF22
+  Y41:AB43
+  B10:G10
+  AD4:AG4
+  Y6:AG6
+  AD9:AG9
+  B9:G9
+  U35:X37
+  U40:X40
+  AA5:AE5
+  U34:X34
+  Q41:T43
+  C39:P40
+  C41:P43
+  C35:P37
+  AC41:AF43
+  B6:S6
+  Q33:T33
+  Z1:AH1
+  Q39:T39
+  T4:AC4
+  Y39:AB39
+  X9:AC9
+  T2:AG2
+  M2:S2
+  AF5:AG5
+  H7:AG7
+  U9:W9
+  AC33:AF33
+  B7:G7
+  C23:AF27
+  AC39:AF39
+  T5:Y5
+  C33:P34
+  U41:X43
+  T6:X6
+  O9:T9
+  M4:S5
+  Q35:T37
+  Q40:T40
+  Y35:AB37
+  B2:L5
+  H9:M9
+  Y34:AB34
+  Q34:T34
+  Y40:AB40
+  C28:AF32
+  AC34:AF34
+
+================================================================================
+SHEET 11: リスク評価シート
+================================================================================
+Dimensions: A1:AA70
+
+NON-EMPTY CELLS:
+--------------------------------------------------------------------------------
+(1, 21): '参考帳票（2026/1/9）'
+(2, 2): '受注案件リスク評価シート' [BOLD]
+(2, 15): '回答欄凡例'
+(3, 3): '案件番号：' [BOLD, BG:Values must be of type <class 'str'>]
+(3, 4): '=+基本データ!D3' [BG:Values must be of type <class 'str'>]
+(3, 15): '◎'
+(3, 16): '：大いに当てはまる'
+(3, 26): '目次へ戻る' [BOLD]
+(3, 27): '=HYPERLINK("#目次!A1","●")'
+(4, 3): '案 件 名：' [BOLD, BG:Values must be of type <class 'str'>]
+(4, 4): '=+基本データ!D4' [BG:Values must be of type <class 'str'>]
+(4, 15): '○'
+(4, 16): '：一部当てはまる'
+(4, 26): 'フローへ戻る' [BOLD]
+(4, 27): '=HYPERLINK("#フロー!A2","●")'
+(5, 15): '△'
+(5, 16): '：ほとんど当てはまらない'
+(6, 3): 'お客さま名：' [BOLD, BG:Values must be of type <class 'str'>]
+(6, 4): '=+基本データ!D5' [BG:Values must be of type <class 'str'>]
+(6, 15): '×'
+(6, 16): '：該当なし'
+(6, 26): '改訂履歴'
+(7, 3): '受注金額：' [BOLD, BG:Values must be of type <class 'str'>]
+(7, 4): '=+基本データ!D11' [BG:Values must be of type <class 'str'>]
+(7, 26): '改訂日'
+(7, 27): '改訂内容'
+(8, 4): '赤枠内に必要情報を記入' [BOLD]
+(8, 26): datetime.datetime(2026, 1, 9, 0, 0) [BOLD]
+(8, 27): '新規制定' [BOLD]
+(9, 2): '【リスク評価ＳＴＥＰ１】' [BOLD]
+(9, 18): 'ウエイト記入'
+(10, 3): 'リスク項目' [BOLD, BG:Values must be of type <class 'str'>]
+(10, 6): 'リスク項目詳細' [BOLD, BG:Values must be of type <class 'str'>]
+(10, 15): '回答' [BOLD, BG:Values must be of type <class 'str'>]
+(10, 16): '備考' [BOLD, BG:Values must be of type <class 'str'>]
+(10, 18): '項目\nウエイト'
+(10, 19): '回答内容'
+(10, 20): '回答箇所'
+(11, 1): '\n'
+(11, 2): '1.契約前段階で想定されるリスク' [BOLD, BG:Values must be of type <class 'str'>]
+(11, 3): '①新規お客さま' [BOLD]
+(11, 6): '新規お客さまである場合、当社が要求事項の提示方法・業務推進方法に習熟しておらず、お客さまの要求事項・要注意事項を見落とす。' [BOLD]
+(11, 15): '◎' [BG:Values must be of type <class 'str'>]
+(11, 18): 1 [BG:Values must be of type <class 'str'>]
+(11, 19): '=IF(O11="",0,IF(O11="◎",3,IF(O11="〇",2,IF(O11="△",1,IF(O11="×",0)))))*R11' [BG:Values must be of type <class 'str'>]
+(11, 20): '=IF(O11="",0,IF(O11="◎",1,IF(O11="○",1,IF(O11="△",1,IF(O11="×",1)))))*R11' [BG:Values must be of type <class 'str'>]
+(12, 1): '\n'
+(12, 3): '②新規商材' [BOLD, BG:Values must be of type <class 'str'>]
+(12, 6): '新規商材である場合、ノウハウが十分ではなく案件形成の段階でのリスクを見逃す。' [BOLD, BG:Values must be of type <class 'str'>]
+(12, 15): '〇' [BG:Values must be of type <class 'str'>]
+(12, 18): 1 [BG:Values must be of type <class 'str'>]
+(12, 19): '=IF(O12="",0,IF(O12="◎",3,IF(O12="〇",2,IF(O12="△",1,IF(O12="×",0)))))*R12' [BG:Values must be of type <class 'str'>]
+(12, 20): '=IF(O12="",0,IF(O12="◎",1,IF(O12="○",1,IF(O12="△",1,IF(O12="×",1)))))*R12' [BG:Values must be of type <class 'str'>]
+(13, 1): '\n'
+(13, 3): '③業務内容不明確' [BOLD]
+(13, 6): 'お客さまの要求事項が不明確で受注に進むべきか、手を引くかの判断に迷う間、当社から手を引けない状況となり不利な条件での受注を強いられる。' [BOLD]
+(13, 15): '△' [BG:Values must be of type <class 'str'>]
+(13, 18): 1 [BG:Values must be of type <class 'str'>]
+(13, 19): '=IF(O13="",0,IF(O13="◎",3,IF(O13="〇",2,IF(O13="△",1,IF(O13="×",0)))))*R13' [BG:Values must be of type <class 'str'>]
+(13, 20): '=IF(O13="",0,IF(O13="◎",1,IF(O13="○",1,IF(O13="△",1,IF(O13="×",1)))))*R13' [BG:Values must be of type <class 'str'>]
+(14, 1): '\n'
+(14, 3): '④与信問題の発生' [BOLD, BG:Values must be of type <class 'str'>]
+(14, 6): '技術方が独自に案件化を進め、契約の段階で営業方が与信調査をした結果、お客さまの与信に問題があることが判明し、お客さまとの金銭面でのトラブルが発生する。' [BOLD, BG:Values must be of type <class 'str'>]
+(14, 15): '×' [BG:Values must be of type <class 'str'>]
+(14, 18): 1 [BG:Values must be of type <class 'str'>]
+(14, 19): '=IF(O14="",0,IF(O14="◎",3,IF(O14="〇",2,IF(O14="△",1,IF(O14="×",0)))))*R14' [BG:Values must be of type <class 'str'>]
+(14, 20): '=IF(O14="",0,IF(O14="◎",1,IF(O14="○",1,IF(O14="△",1,IF(O14="×",1)))))*R14' [BG:Values must be of type <class 'str'>]
+(15, 1): '\n'
+(15, 3): '⑤契約内容の突然の変更' [BOLD]
+(15, 6): '（特命型）担当者と合意形成を行って来た内容が、相手都合（上司の指示等）により、契約間際に覆ってしまう。（競争型）仕様内容が不明確なまま受注し、追加業務をさせられる。' [BOLD]
+(15, 15): '△' [BG:Values must be of type <class 'str'>]
+(15, 18): 1 [BG:Values must be of type <class 'str'>]
+(15, 19): '=IF(O15="",0,IF(O15="◎",3,IF(O15="〇",2,IF(O15="△",1,IF(O15="×",0)))))*R15' [BG:Values must be of type <class 'str'>]
+(15, 20): '=IF(O15="",0,IF(O15="◎",1,IF(O15="○",1,IF(O15="△",1,IF(O15="×",1)))))*R15' [BG:Values must be of type <class 'str'>]
+(16, 1): '\n'
+(16, 3): '⑥工期のお客さま都合の変更' [BOLD, BG:Values must be of type <class 'str'>]
+(16, 6): '想定していた工期・納期が、お客さま都合により変更となってしまい、変更後の着手段階で十分なリソースを確保できないまま業務実施を求められる。' [BOLD, BG:Values must be of type <class 'str'>]
+(16, 15): '×' [BG:Values must be of type <class 'str'>]
+(16, 18): 1 [BG:Values must be of type <class 'str'>]
+(16, 19): '=IF(O16="",0,IF(O16="◎",3,IF(O16="〇",2,IF(O16="△",1,IF(O16="×",0)))))*R16' [BG:Values must be of type <class 'str'>]
+(16, 20): '=IF(O16="",0,IF(O16="◎",1,IF(O16="○",1,IF(O16="△",1,IF(O16="×",1)))))*R16' [BG:Values must be of type <class 'str'>]
+(17, 1): '\n'
+(17, 3): '⑦確認記録の不備' [BOLD]
+(17, 6): '電話連絡で受けた情報等を記録に残さなかったため、お客さまとの間で要求内容の認識に齟齬が生じ、トラブルに発展する。' [BOLD]
+(17, 15): '×' [BG:Values must be of type <class 'str'>]
+(17, 18): 1 [BG:Values must be of type <class 'str'>]
+(17, 19): '=IF(O17="",0,IF(O17="◎",3,IF(O17="〇",2,IF(O17="△",1,IF(O17="×",0)))))*R17' [BG:Values must be of type <class 'str'>]
+(17, 20): '=IF(O17="",0,IF(O17="◎",1,IF(O17="○",1,IF(O17="△",1,IF(O17="×",1)))))*R17' [BG:Values must be of type <class 'str'>]
+(18, 1): '\n'
+(18, 3): '⑧金額不足' [BOLD, BG:Values must be of type <class 'str'>]
+(18, 6): '当初の見積もり額より、判明した最終的な見積もり額が上振れした場合、客先が受け入れを拒む。' [BOLD, BG:Values must be of type <class 'str'>]
+(18, 15): '×' [BG:Values must be of type <class 'str'>]
+(18, 18): 1 [BG:Values must be of type <class 'str'>]
+(18, 19): '=IF(O18="",0,IF(O18="◎",3,IF(O18="〇",2,IF(O18="△",1,IF(O18="×",0)))))*R18' [BG:Values must be of type <class 'str'>]
+(18, 20): '=IF(O18="",0,IF(O18="◎",1,IF(O18="○",1,IF(O18="△",1,IF(O18="×",1)))))*R18' [BG:Values must be of type <class 'str'>]
+(19, 1): '\n'
+(19, 3): '⑨損害賠償の上限' [BOLD]
+(19, 6): '契約書などに設計瑕疵などによる損害賠償に関する記載がない（上限がない）ため、重大な設計瑕疵により損害賠償が生じた場合、支払いができなくなる可能性がある。' [BOLD]
+(19, 15): '◎' [BG:Values must be of type <class 'str'>]
+(19, 18): 1 [BG:Values must be of type <class 'str'>]
+(19, 19): '=IF(O19="",0,IF(O19="◎",3,IF(O19="〇",2,IF(O19="△",1,IF(O19="×",0)))))*R19' [BG:Values must be of type <class 'str'>]
+(19, 20): '=IF(O19="",0,IF(O19="◎",1,IF(O19="○",1,IF(O19="△",1,IF(O19="×",1)))))*R19' [BG:Values must be of type <class 'str'>]
+(20, 1): '\n'
+(20, 3): '⑩その他' [BOLD, BG:Values must be of type <class 'str'>]
+(20, 15): '◎' [BG:Values must be of type <class 'str'>]
+(20, 18): 1 [BG:Values must be of type <class 'str'>]
+(20, 19): '=IF(O20="",0,IF(O20="◎",3,IF(O20="〇",2,IF(O20="△",1,IF(O20="×",0)))))*R20' [BG:Values must be of type <class 'str'>]
+(20, 20): '=IF(O20="",0,IF(O20="◎",1,IF(O20="○",1,IF(O20="△",1,IF(O20="×",1)))))*R20' [BG:Values must be of type <class 'str'>]
+(21, 18): '=IF(S21=0,"",S21/T21)' [BG:Values must be of type <class 'str'>]
+(21, 19): '=SUM(S11:S20)' [BG:Values must be of type <class 'str'>]
+(21, 20): '=SUM(T11:T20)*3' [BG:Values must be of type <class 'str'>]
+(22, 4): '評価数'
+(22, 5): '全体'
+(22, 6): '評価率'
+(22, 7): '【ＳＴＥＰ１のリスク評価結果】' [BOLD]
+(23, 2): 'リスク１'
+(23, 4): '=S21' [BG:Values must be of type <class 'str'>]
+(23, 5): '=T21' [BG:Values must be of type <class 'str'>]
+(23, 6): '=IF(D23=0,"",D23/E23)' [BG:Values must be of type <class 'str'>]
+(23, 7): '=IF(F23="","",IF(F23>=D25,"評価率によるリスクは大です",IF(F23>=D26,"評価率によるリスクは中です",IF(F23>=D27,"評価率によるリスクは小です",IF(F23>0,"評価率によるリスクは極めて小です")))))' [BOLD]
+(24, 6): '【評価】' [BOLD]
+(25, 2): '高'
+(25, 3): 'リスク大'
+(25, 4): 0.8
+(25, 6): '実施責任者氏名'
+(25, 14): '部長氏名'
+(26, 2): '中'
+(26, 3): 'リスク中'
+(26, 4): 0.5
+(26, 6): '記入日'
+(26, 8): datetime.datetime(2025, 10, 31, 0, 0)
+(26, 14): '記入日'
+(26, 16): datetime.datetime(2025, 10, 31, 0, 0)
+(27, 2): '低'
+(27, 3): 'リスク小'
+(27, 4): 0.2
+(27, 6): '自由記載欄\u3000'
+(27, 14): '管理の重要度\n高/中/低を記載'
+(27, 16): '低'
+(28, 3): 'リスク極小'
+(30, 2): '【リスク評価ＳＴＥＰ２】' [BOLD]
+(31, 3): 'リスク項目' [BOLD, BG:Values must be of type <class 'str'>]
+(31, 6): 'リスク項目詳細' [BOLD, BG:Values must be of type <class 'str'>]
+(31, 15): '回答' [BOLD, BG:Values must be of type <class 'str'>]
+(31, 16): '備考' [BOLD, BG:Values must be of type <class 'str'>]
+(31, 18): '項目\nウエイト'
+(31, 19): '回答内容'
+(31, 20): '回答箇所'
+(32, 1): '\n'
+(32, 2): '2.受注・業務着手段階で想定されるリスク' [BOLD, BG:Values must be of type <class 'str'>]
+(32, 3): '①確認記録の不備' [BOLD]
+(32, 6): '案件形成時に認識していた要求事項と契約時の要求事項に差異が発生し、当社がエビデンスを提示することが出来ず、お客さまの要求に従わざるを得ない。' [BOLD]
+(32, 15): '△' [BG:Values must be of type <class 'str'>]
+(32, 18): 1 [BOLD, BG:Values must be of type <class 'str'>]
+(32, 19): '=IF(O32="",0,IF(O32="◎",3,IF(O32="〇",2,IF(O32="△",1,IF(O32="×",0)))))*R32' [BG:Values must be of type <class 'str'>]
+(32, 20): '=IF(O32="",0,IF(O32="◎",1,IF(O32="○",1,IF(O32="△",1,IF(O32="×",1)))))*R32' [BG:Values must be of type <class 'str'>]
+(33, 1): '\n'
+(33, 3): '②お客さま要求事項の未確定による作業の手戻り' [BOLD, BG:Values must be of type <class 'str'>]
+(33, 6): '受注時でもなお、要求事項が不明確である中で業務を着手せざるを得ず、作業の手戻りが発生したり、工期を順守できなくなる。' [BOLD, BG:Values must be of type <class 'str'>]
+(33, 15): '△' [BG:Values must be of type <class 'str'>]
+(33, 18): 1 [BOLD, BG:Values must be of type <class 'str'>]
+(33, 19): '=IF(O33="",0,IF(O33="◎",3,IF(O33="〇",2,IF(O33="△",1,IF(O33="×",0)))))*R33' [BG:Values must be of type <class 'str'>]
+(33, 20): '=IF(O33="",0,IF(O33="◎",1,IF(O33="○",1,IF(O33="△",1,IF(O33="×",1)))))*R33' [BG:Values must be of type <class 'str'>]
+(34, 1): '\n'
+(34, 3): '③業務内容不明確' [BOLD]
+(34, 6): '品質計画（書）策定段階でのリスク抽出が出来なかった場合、見逃したリスクが後の業務実施段階で支障をきたす。' [BOLD]
+(34, 15): '×' [BG:Values must be of type <class 'str'>]
+(34, 18): 1 [BOLD, BG:Values must be of type <class 'str'>]
+(34, 19): '=IF(O34="",0,IF(O34="◎",3,IF(O34="〇",2,IF(O34="△",1,IF(O34="×",0)))))*R34' [BG:Values must be of type <class 'str'>]
+(34, 20): '=IF(O34="",0,IF(O34="◎",1,IF(O34="○",1,IF(O34="△",1,IF(O34="×",1)))))*R34' [BG:Values must be of type <class 'str'>]
+(35, 1): '\n'
+(35, 3): '④委託先の成果品不良、工程遅延' [BOLD, BG:Values must be of type <class 'str'>]
+(35, 6): '委託先の選定を誤り（初めての会社、規模の小さい会社、地元企業等）、委託先への条件提示の遅れに対し委託先でその遅れを吸収できずに工期が遅れ、当社も発注者に対し工期不履行となる。技術面でも同様のリスク。' [BOLD, BG:Values must be of type <class 'str'>]
+(35, 15): '×' [BG:Values must be of type <class 'str'>]
+(35, 18): 1 [BOLD, BG:Values must be of type <class 'str'>]
+(35, 19): '=IF(O35="",0,IF(O35="◎",3,IF(O35="〇",2,IF(O35="△",1,IF(O35="×",0)))))*R35' [BG:Values must be of type <class 'str'>]
+(35, 20): '=IF(O35="",0,IF(O35="◎",1,IF(O35="○",1,IF(O35="△",1,IF(O35="×",1)))))*R35' [BG:Values must be of type <class 'str'>]
+(36, 1): '\n'
+(36, 3): '⑤' [BOLD]
+(36, 18): 1 [BOLD, BG:Values must be of type <class 'str'>]
+(36, 19): '=IF(O36="",0,IF(O36="◎",3,IF(O36="〇",2,IF(O36="△",1,IF(O36="×",0)))))*R36' [BG:Values must be of type <class 'str'>]
+(36, 20): '=IF(O36="",0,IF(O36="◎",1,IF(O36="○",1,IF(O36="△",1,IF(O36="×",1)))))*R36' [BG:Values must be of type <class 'str'>]
+(37, 1): '\n'
+(37, 3): '⑥' [BOLD, BG:Values must be of type <class 'str'>]
+(37, 18): 1 [BOLD, BG:Values must be of type <class 'str'>]
+(37, 19): '=IF(O37="",0,IF(O37="◎",3,IF(O37="〇",2,IF(O37="△",1,IF(O37="×",0)))))*R37' [BG:Values must be of type <class 'str'>]
+(37, 20): '=IF(O37="",0,IF(O37="◎",1,IF(O37="○",1,IF(O37="△",1,IF(O37="×",1)))))*R37' [BG:Values must be of type <class 'str'>]
+(38, 1): '\n'
+(38, 3): '⑦' [BOLD]
+(38, 18): 1 [BOLD, BG:Values must be of type <class 'str'>]
+(38, 19): '=IF(O38="",0,IF(O38="◎",3,IF(O38="〇",2,IF(O38="△",1,IF(O38="×",0)))))*R38' [BG:Values must be of type <class 'str'>]
+(38, 20): '=IF(O38="",0,IF(O38="◎",1,IF(O38="○",1,IF(O38="△",1,IF(O38="×",1)))))*R38' [BG:Values must be of type <class 'str'>]
+(39, 1): '\n'
+(39, 3): '⑧' [BOLD, BG:Values must be of type <class 'str'>]
+(39, 18): 1 [BOLD, BG:Values must be of type <class 'str'>]
+(39, 19): '=IF(O39="",0,IF(O39="◎",3,IF(O39="〇",2,IF(O39="△",1,IF(O39="×",0)))))*R39' [BG:Values must be of type <class 'str'>]
+(39, 20): '=IF(O39="",0,IF(O39="◎",1,IF(O39="○",1,IF(O39="△",1,IF(O39="×",1)))))*R39' [BG:Values must be of type <class 'str'>]
+(40, 1): '\n'
+(40, 3): '⑨' [BOLD]
+(40, 18): 1 [BOLD, BG:Values must be of type <class 'str'>]
+(40, 19): '=IF(O40="",0,IF(O40="◎",3,IF(O40="〇",2,IF(O40="△",1,IF(O40="×",0)))))*R40' [BG:Values must be of type <class 'str'>]
+(40, 20): '=IF(O40="",0,IF(O40="◎",1,IF(O40="○",1,IF(O40="△",1,IF(O40="×",1)))))*R40' [BG:Values must be of type <class 'str'>]
+(41, 1): '\n'
+(41, 3): '⑩' [BOLD, BG:Values must be of type <class 'str'>]
+(41, 18): 1 [BOLD, BG:Values must be of type <class 'str'>]
+(41, 19): '=IF(O41="",0,IF(O41="◎",3,IF(O41="〇",2,IF(O41="△",1,IF(O41="×",0)))))*R41' [BG:Values must be of type <class 'str'>]
+(41, 20): '=IF(O41="",0,IF(O41="◎",1,IF(O41="○",1,IF(O41="△",1,IF(O41="×",1)))))*R41' [BG:Values must be of type <class 'str'>]
+(42, 4): '評価数'
+(42, 5): '全体'
+(42, 6): '評価率'
+(42, 18): '=IF(S42=0,"",S42/T42)' [BG:Values must be of type <class 'str'>]
+(42, 19): '=SUM(S32:S41)' [BG:Values must be of type <class 'str'>]
+(42, 20): '=SUM(T32:T41)*3' [BG:Values must be of type <class 'str'>]
+(43, 2): 'リスク２\u3000'
+(43, 4): '=S42' [BG:Values must be of type <class 'str'>]
+(43, 5): '=T42' [BG:Values must be of type <class 'str'>]
+(43, 6): '=IF(D43=0,"",R42)' [BG:Values must be of type <class 'str'>]
+(45, 3): 'リスク項目' [BOLD, BG:Values must be of type <class 'str'>]
+(45, 6): 'リスク項目詳細' [BOLD, BG:Values must be of type <class 'str'>]
+(45, 15): '回答' [BOLD, BG:Values must be of type <class 'str'>]
+(45, 16): '備考' [BOLD, BG:Values must be of type <class 'str'>]
+(45, 18): '項目\nウエイト'
+(45, 19): '回答内容'
+(45, 20): '回答箇所'
+(46, 1): '\n'
+(46, 2): '3.業務実施・引渡し段階で想定されるリスク' [BOLD, BG:Values must be of type <class 'str'>]
+(46, 3): '①設計変更時の検証不足' [BOLD]
+(46, 6): 'お客さまの要求事項に変更があった場合、新規設計時と同じレビュー・検証を実施せず、お客さま要求事項を満たさない成果品を提出してしまう。また、実施したとしても、設計上のミスを見逃してしまい、竣工後お客さまに損害を与えてしまう。' [BOLD]
+(46, 15): '◎' [BG:Values must be of type <class 'str'>]
+(46, 18): 1 [BOLD, BG:Values must be of type <class 'str'>]
+(46, 19): '=IF(O46="",0,IF(O46="◎",3,IF(O46="〇",2,IF(O46="△",1,IF(O46="×",0)))))*R46' [BG:Values must be of type <class 'str'>]
+(46, 20): '=IF(O46="",0,IF(O46="◎",1,IF(O46="○",1,IF(O46="△",1,IF(O46="×",1)))))*R46' [BG:Values must be of type <class 'str'>]
+(47, 1): '\n'
+(47, 3): '②業務進捗後、成果品がお客さまのイメージと合わず、追加業務が発生' [BOLD, BG:Values must be of type <class 'str'>]
+(47, 6): '中間打合せで、着手した業務内容や変更内容がお客さまの要求に合わず、想定外に工数・時間を要し、要求納期を守れない、コストが大幅に超過する等トラブルが発生する。' [BOLD, BG:Values must be of type <class 'str'>]
+(47, 15): '〇' [BG:Values must be of type <class 'str'>]
+(47, 18): 1 [BOLD, BG:Values must be of type <class 'str'>]
+(47, 19): '=IF(O47="",0,IF(O47="◎",3,IF(O47="〇",2,IF(O47="△",1,IF(O47="×",0)))))*R47' [BG:Values must be of type <class 'str'>]
+(47, 20): '=IF(O47="",0,IF(O47="◎",1,IF(O47="○",1,IF(O47="△",1,IF(O47="×",1)))))*R47' [BG:Values must be of type <class 'str'>]
+(48, 1): '\n'
+(48, 3): '③最終成果品がお客さまのイメージと合わず、追加業務が発生' [BOLD]
+(48, 6): '最終成果品がお客さまの要求に合わず、想定外に工数・時間を要し、要求納期を守れない、コストが大幅に超過する等トラブルが発生する。' [BOLD]
+(48, 15): '△' [BG:Values must be of type <class 'str'>]
+(48, 18): 1 [BOLD, BG:Values must be of type <class 'str'>]
+(48, 19): '=IF(O48="",0,IF(O48="◎",3,IF(O48="〇",2,IF(O48="△",1,IF(O48="×",0)))))*R48' [BG:Values must be of type <class 'str'>]
+(48, 20): '=IF(O48="",0,IF(O48="◎",1,IF(O48="○",1,IF(O48="△",1,IF(O48="×",1)))))*R48' [BG:Values must be of type <class 'str'>]
+(49, 1): '\n'
+(49, 3): '④中間検査の未実施' [BOLD, BG:Values must be of type <class 'str'>]
+(49, 6): '中間検査を実施しなかったために出戻りが発生し、納期・工数に大きなインパクトを与える。' [BOLD, BG:Values must be of type <class 'str'>]
+(49, 15): '×' [BG:Values must be of type <class 'str'>]
+(49, 18): 1 [BOLD, BG:Values must be of type <class 'str'>]
+(49, 19): '=IF(O49="",0,IF(O49="◎",3,IF(O49="〇",2,IF(O49="△",1,IF(O49="×",0)))))*R49' [BG:Values must be of type <class 'str'>]
+(49, 20): '=IF(O49="",0,IF(O49="◎",1,IF(O49="○",1,IF(O49="△",1,IF(O49="×",1)))))*R49' [BG:Values must be of type <class 'str'>]
+(50, 1): '\n'
+(50, 3): '⑤検証・妥当性確認の不足' [BOLD]
+(50, 6): '必要な手順で十分な検証・妥当性確認を行わなかったために、お客さまへ瑕疵のある成果品を納入してしまい、お客さまとの間でトラブルになる。' [BOLD]
+(50, 15): '×' [BG:Values must be of type <class 'str'>]
+(50, 18): 1 [BOLD, BG:Values must be of type <class 'str'>]
+(50, 19): '=IF(O50="",0,IF(O50="◎",3,IF(O50="〇",2,IF(O50="△",1,IF(O50="×",0)))))*R50' [BG:Values must be of type <class 'str'>]
+(50, 20): '=IF(O50="",0,IF(O50="◎",1,IF(O50="○",1,IF(O50="△",1,IF(O50="×",1)))))*R50' [BG:Values must be of type <class 'str'>]
+(51, 1): '\n'
+(51, 3): '⑥法令や技術基準の不順守' [BOLD, BG:Values must be of type <class 'str'>]
+(51, 6): '法令や技術基準の順守に必要な手続き（営業方→法務方のリーガルチェック）を見落とし、対応するために設計変更が生じて、工事金額が増加し、お客さまとの間でトラブルになる。' [BOLD, BG:Values must be of type <class 'str'>]
+(51, 15): '×' [BG:Values must be of type <class 'str'>]
+(51, 18): 1 [BOLD, BG:Values must be of type <class 'str'>]
+(51, 19): '=IF(O51="",0,IF(O51="◎",3,IF(O51="〇",2,IF(O51="△",1,IF(O51="×",0)))))*R51' [BG:Values must be of type <class 'str'>]
+(51, 20): '=IF(O51="",0,IF(O51="◎",1,IF(O51="○",1,IF(O51="△",1,IF(O51="×",1)))))*R51' [BG:Values must be of type <class 'str'>]
+(52, 1): '\n'
+(52, 3): '⑦' [BOLD, BG:Values must be of type <class 'str'>]
+(52, 19): '=IF(O52="",0,IF(O52="◎",3,IF(O52="〇",2,IF(O52="△",1,IF(O52="×",0)))))*R52' [BG:Values must be of type <class 'str'>]
+(53, 1): '\n'
+(53, 3): '⑧' [BOLD, BG:Values must be of type <class 'str'>]
+(53, 19): '=IF(O53="",0,IF(O53="◎",3,IF(O53="〇",2,IF(O53="△",1,IF(O53="×",0)))))*R53' [BG:Values must be of type <class 'str'>]
+(54, 1): '\n'
+(54, 3): '⑨' [BOLD, BG:Values must be of type <class 'str'>]
+(54, 19): '=IF(O54="",0,IF(O54="◎",3,IF(O54="〇",2,IF(O54="△",1,IF(O54="×",0)))))*R54' [BG:Values must be of type <class 'str'>]
+(54, 20): '=IF(O54="",0,IF(O54="◎",1,IF(O54="○",1,IF(O54="△",1,IF(O54="×",1)))))*R54' [BG:Values must be of type <class 'str'>]
+(55, 1): '\n'
+(55, 3): '⑩' [BOLD, BG:Values must be of type <class 'str'>]
+(55, 19): '=IF(O55="",0,IF(O55="◎",3,IF(O55="〇",2,IF(O55="△",1,IF(O55="×",0)))))*R55' [BG:Values must be of type <class 'str'>]
+(55, 20): '=IF(O55="",0,IF(O55="◎",1,IF(O55="○",1,IF(O55="△",1,IF(O55="×",1)))))*R55' [BG:Values must be of type <class 'str'>]
+(56, 4): '評価数'
+(56, 5): '全体'
+(56, 6): '評価率'
+(56, 18): '=IF(S56=0,"",S56/T56)' [BG:Values must be of type <class 'str'>]
+(56, 19): '=SUM(S46:S55)' [BG:Values must be of type <class 'str'>]
+(56, 20): '=SUM(T46:T55)*3' [BG:Values must be of type <class 'str'>]
+(57, 2): 'リスク３'
+(57, 4): '=S56' [BG:Values must be of type <class 'str'>]
+(57, 5): '=T56' [BG:Values must be of type <class 'str'>]
+(57, 6): '=IF(D57=0,"",R56)' [BG:Values must be of type <class 'str'>]
+(58, 4): '評価数'
+(58, 5): '全体'
+(58, 6): '評価率'
+(58, 7): '【ＳＴＥＰ２のリスク評価結果】' [BOLD]
+(59, 1): '\n'
+(59, 2): '合計\nリスク2+リスク3'
+(59, 4): '=D43+D57' [BG:Values must be of type <class 'str'>]
+(59, 5): '=E43+E57' [BG:Values must be of type <class 'str'>]
+(59, 6): '=IF(D59=0,"",D59/E59)' [BG:Values must be of type <class 'str'>]
+(59, 7): '=IF(F59="","",IF(F59>=D61,"評価率によるリスクは大です",IF(F59>=D62,"評価率によるリスクは中です",IF(F59>=D63,"評価率によるリスクは小です",IF(F59>0,"評価率によるリスクは極めて小です")))))' [BOLD]
+(60, 6): '【評価】' [BOLD]
+(61, 2): '高'
+(61, 3): 'リスク大'
+(61, 4): 0.8
+(61, 6): '実施責任者氏名'
+(61, 14): '部長氏名'
+(62, 2): '中'
+(62, 3): 'リスク中'
+(62, 4): 0.5
+(62, 6): '記入日'
+(62, 8): datetime.datetime(2025, 12, 1, 0, 0)
+(62, 14): '記入日'
+(62, 16): datetime.datetime(2025, 12, 1, 0, 0)
+(63, 2): '低'
+(63, 3): 'リスク小'
+(63, 4): 0.2
+(63, 6): '自由記載欄\u3000'
+(63, 14): '管理の重要度\n高/中/低を記載'
+(63, 16): '低'
+(64, 3): 'リスク極小'
+
+MERGED CELLS:
+--------------------------------------------------------------------------------
+  F15:N15
+  C31:E31
+  F25:G25
+  C40:E40
+  O2:U2
+  B32:B41
+  H27:L28
+  C51:E51
+  H25:L25
+  F13:N13
+  N61:O61
+  F37:N37
+  C49:E49
+  C18:E18
+  C34:E34
+  F54:N54
+  F10:N10
+  F19:N19
+  F34:N34
+  C20:E20
+  N26:O26
+  F20:N20
+  C4:C5
+  F33:N33
+  F45:N45
+  N25:O25
+  F17:N17
+  C12:E12
+  C46:E46
+  F47:N47
+  F31:N31
+  F46:N46
+  C39:E39
+  C48:E48
+  D4:J5
+  F39:N39
+  C32:E32
+  C38:E38
+  F48:N48
+  F62:G62
+  C13:E13
+  H63:L64
+  C15:E15
+  F61:G61
+  C33:E33
+  C35:E35
+  P63:P64
+  C10:E10
+  C16:E16
+  C50:E50
+  C55:E55
+  D3:J3
+  F36:N36
+  F18:N18
+  F50:N50
+  F27:G28
+  B43:C43
+  P27:P28
+  C36:E36
+  C11:E11
+  B46:B55
+  B57:C57
+  N27:O28
+  H61:L61
+  C37:E37
+  F49:N49
+  F14:N14
+  F11:N11
+  C14:E14
+  G23:I23
+  D7:J7
+  F40:N40
+  F55:N55
+  F12:N12
+  C54:E54
+  H26:L26
+  C41:E41
+  F51:N51
+  B59:C59
+  F32:N32
+  F41:N41
+  F35:N35
+  F38:N38
+  N62:O62
+  B23:C23
+  C17:E17
+  F26:G26
+  C19:E19
+  B11:B20
+  N63:O64
+  F63:G64
+  D6:J6
+  G59:I59
+  F16:N16
+  C45:E45
+  H62:L62
+  C47:E47
+
+================================================================================
+SHEET 12: 受注計画書
+================================================================================
+Dimensions: B1:AQ62
+
+NON-EMPTY CELLS:
+--------------------------------------------------------------------------------
+(1, 21): 'BB1-008-(2)-01'
+(1, 25): '2025年度\u3000受注計画書の⼈件費単価と間接原価' [BOLD]
+(1, 30): '←ユニットHPへのリンクです'
+(2, 2): '承認日'
+(2, 6): '作成日'
+(2, 10): '通知日'
+(2, 20): '通知日'
+(3, 3): '(\u3000\u3000／\u3000\u3000／\u3000\u3000)'
+(3, 8): '(\u3000\u3000／\u3000\u3000／\u3000\u3000)'
+(3, 11): '(\u3000\u3000／\u3000\u3000／\u3000\u3000)'
+(3, 21): '(\u3000\u3000／\u3000\u3000／\u3000\u3000)'
+(3, 25): '◇承認書例４：受注計画書(チェックリスト付き) ver.6\u3000（総括作成）' [BOLD]
+(3, 31): '←ユニットHPへのリンクです'
+(4, 2): '社長'
+(4, 3): '本部長'
+(4, 4): '部長'
+(4, 6): 'ＧＭ'
+(4, 11): '常任監査役'
+(4, 21): '見積書/入札書\n作成箇所'
+(4, 25): '要領抜粋' [BOLD]
+(4, 41): '目次へ戻る' [BOLD]
+(4, 42): '=HYPERLINK("#目次!A2","●")'
+(5, 41): 'フローへ戻る' [BOLD]
+(5, 42): '=HYPERLINK("#フロー!A2","●")'
+(6, 16): '本部'
+(6, 20): '部'
+(6, 41): '改訂履歴'
+(7, 41): '改訂日'
+(7, 42): '改訂内容'
+(8, 9): '  受 \u3000注\u3000 計 \u3000画 \u3000書'
+(8, 41): datetime.datetime(2026, 1, 9, 0, 0) [BOLD]
+(8, 42): '新規追加' [BOLD]
+(9, 2): '１．\u3000受\u3000注\u3000計\u3000画\u3000概\u3000要'
+(9, 22): '（千円）'
+(10, 2): '件名コード'
+(10, 4): '=基本データ!D3'
+(10, 13): '主管部'
+(10, 17): '本部'
+(10, 20): '部'
+(11, 2): '件名名称'
+(11, 4): '=基本データ!D4'
+(11, 13): '依頼部'
+(11, 17): '本部'
+(11, 20): '部'
+(12, 13): '依頼部'
+(12, 17): '本部'
+(12, 20): '部'
+(13, 2): '受注先'
+(13, 4): '=基本データ!D5'
+(13, 20): '受注総額'
+(13, 21): '=SUM(U10:U12)'
+(15, 2): '２． 実 行 計 画 （ 設計監理原価 ）'
+(16, 2): '項\u3000\u3000\u3000\u3000目'
+(16, 6): '原\u3000実\u3000施\u3000計\u3000画'
+(16, 13): '変\u3000更\u3000計\u3000画'
+(16, 20): '増\u3000減'
+(16, 41): '使用時は最新版を確認すること（受注計画承認取扱要領（BB1-008））' [BOLD]
+(17, 6): '内\u3000\u3000容'
+(17, 10): '金\u3000\u3000額（千円）'
+(17, 13): '内\u3000容'
+(17, 17): '金\u3000額（千円）'
+(18, 2): '受  注  額  (A)'
+(18, 21): '=R18-K18'
+(18, 22): 0
+(19, 2): '契約工期 (全体)'
+(19, 6): '=基本データ!D6'
+(19, 10): '～'
+(19, 11): '=基本データ!D7'
+(19, 17): '～'
+(19, 21): 0 [BG:Values must be of type <class 'str'>]
+(19, 22): 0 [BG:Values must be of type <class 'str'>]
+(20, 2): '人  件  費'
+(20, 7): '×'
+(20, 9): '人日'
+(20, 11): '=F20*H20'
+(20, 14): '×'
+(20, 16): '人日'
+(20, 18): '=M20*O20'
+(20, 21): '=R20-K20'
+(20, 22): 0
+(21, 2): '委\u3000託\u3000費\n（技術出向・労働派遣等）'
+(21, 21): '=R21-K21'
+(21, 22): 0
+(22, 21): '=R22-K22'
+(22, 22): 0
+(23, 6): '計'
+(23, 11): '=SUM(K21:L22)'
+(23, 13): '計'
+(23, 18): '=SUM(R21:S22)'
+(23, 21): '=R23-K23'
+(23, 22): 0
+(24, 2): '設計委託費 (B)'
+(24, 21): '=R24-K24'
+(24, 22): 0
+(25, 21): '=R25-K25'
+(26, 21): '=R26-K26'
+(26, 22): 0
+(27, 21): '=R27-K27'
+(27, 22): 0
+(28, 21): '=R28-K28'
+(28, 22): 0
+(29, 21): '=R29-K29'
+(29, 22): 0
+(30, 21): '=R30-K30'
+(30, 22): 0
+(31, 21): '=R31-K31'
+(31, 22): 0
+(32, 6): '計'
+(32, 11): '=SUM(K24:L31)'
+(32, 13): '計'
+(32, 18): '=SUM(R24:S31)'
+(32, 21): '=R32-K32'
+(32, 22): 0
+(33, 2): '直接経費'
+(33, 21): '=R33-K33'
+(33, 22): 0
+(34, 21): '=R34-K34'
+(34, 22): 0
+(35, 21): '=R35-K35'
+(35, 22): 0
+(36, 21): '=R36-K36'
+(36, 22): 0
+(37, 6): '計'
+(37, 11): '=SUM(K33:L36)'
+(37, 13): '計'
+(37, 18): '=SUM(R33:S36)'
+(37, 21): '=R37-K37'
+(37, 22): 0
+(38, 2): '間接原価((人件費+委託費)\n間接原価算出予定比率)'
+(38, 21): '=R38-K38'
+(38, 22): 0
+(39, 2): '合  計  (C)'
+(39, 11): '=SUM(K20,K23,K32,K37,K38)'
+(39, 18): '=SUM(R20,R23,R32,R37,R38)'
+(39, 21): '=R39-K39'
+(39, 22): 0
+(40, 2): '設計委託率 (B)/(A)'
+(40, 11): '=IF(ISERROR(K32/K18*100),"",K32/K18*100)'
+(40, 12): '％'
+(40, 18): '=IF(ISERROR(R32/R18*100),"",R32/R18*100)'
+(40, 19): '％'
+(41, 2): '粗  利  益 (A)-(C)'
+(41, 11): '=K18-K39'
+(41, 18): '=R18-R39'
+(42, 2): '粗利益率 {(A-C)}/(A)'
+(42, 11): '=IF(ISERROR(K41/K18*100),"",K41/K18*100)'
+(42, 12): '％'
+(42, 18): '=IF(ISERROR(R41/R18*100),"",R41/R18*100)'
+(42, 19): '％'
+(43, 2): '３．特記事項'
+(53, 3): '部分完成内訳欄\u3000（部分完成の場合のみ記載）'
+(54, 3): '売上額（千円）'
+(54, 6): '工\u3000\u3000\u3000\u3000期'
+(54, 13): '粗利益率'
+(54, 17): '（備考）'
+(55, 2): '①'
+(55, 10): '～'
+(55, 16): '％'
+(56, 2): '②'
+(56, 10): '～'
+(56, 16): '％'
+(57, 2): '③'
+(57, 10): '～'
+(57, 16): '％'
+(58, 2): '計'
+(58, 4): '=SUM(D55:D57)'
+(58, 10): '～'
+(58, 16): '％'
+
+MERGED CELLS:
+--------------------------------------------------------------------------------
+  F27:I27
+  D13:L13
+  T16:V17
+  M29:P29
+  Q6:S6
+  B33:E37
+  F29:I29
+  B24:E32
+  F25:I25
+  F54:L54
+  K58:L58
+  B13:C13
+  R12:S12
+  M35:P35
+  B39:E39
+  D4:E4
+  M54:P54
+  Q55:V58
+  D10:L10
+  M25:P25
+  B38:E38
+  M18:P18
+  M33:P33
+  B40:E40
+  B44:V51
+  F56:I56
+  F58:I58
+  R10:S10
+  R19:S19
+  K55:L55
+  M6:O6
+  M19:P19
+  B41:E41
+  F57:I57
+  N10:P10
+  F19:I19
+  F34:I34
+  K56:L56
+  B18:E18
+  F30:I30
+  F33:I33
+  F42:I42
+  M21:P21
+  K19:L19
+  N12:P12
+  N55:O55
+  M27:P27
+  F28:I28
+  M36:P36
+  F39:I39
+  N56:O56
+  M34:P34
+  N58:O58
+  M39:P39
+  B42:E42
+  F36:I36
+  N11:P11
+  F18:I18
+  M31:P31
+  M40:P40
+  D5:E5
+  K57:L57
+  B19:E19
+  F22:I22
+  C54:E54
+  F31:I31
+  M26:P26
+  M41:P41
+  R11:S11
+  M24:P24
+  M38:P38
+  B20:E20
+  F40:I40
+  D11:L12
+  F55:I55
+  B10:C10
+  F24:I24
+  B21:E23
+  N57:O57
+  F21:I21
+  F26:I26
+  F41:I41
+  M22:P22
+  F35:I35
+  B11:C12
+  M30:P30
+  B16:E17
+  F38:I38
+  M28:P28
+  M42:P42
+
+================================================================================
+SHEET 13: 品質計画書
+================================================================================
+Dimensions: B1:BG66
+
+NON-EMPTY CELLS:
+--------------------------------------------------------------------------------
+(1, 52): '参考帳票（2026/1/9）'
+(2, 2): '品 質 計 画 書（No. \u3000\u3000）' [BOLD, BG:FFD9D9D9]
+(2, 58): '目次へ戻る' [BOLD]
+(2, 59): '=HYPERLINK("#目次!A2","●")'
+(3, 58): 'フローへ戻る' [BOLD]
+(3, 59): '=HYPERLINK("#フロー!A2","●")'
+(4, 2): '業務概要' [BOLD, BG:FFD9D9D9]
+(4, 38): '業務工程' [BOLD, BG:FFD9D9D9]
+(5, 2): '件名コード' [BG:FFD9D9D9]
+(5, 8): '=基本データ!D3'
+(5, 38): '項\u3000\u3000目' [BG:FFD9D9D9]
+(5, 39): '担当者' [BG:FFD9D9D9]
+(5, 40): '年\u3000\u3000度' [BG:FFD9D9D9]
+(5, 58): '改訂履歴'
+(6, 2): '受注件名' [BG:FFD9D9D9]
+(6, 8): '=基本データ!D4'
+(6, 40): '前年度' [BG:FFD9D9D9]
+(6, 41): 4 [BG:FFD9D9D9]
+(6, 42): 5 [BG:FFD9D9D9]
+(6, 43): 6 [BG:FFD9D9D9]
+(6, 45): 7 [BG:FFD9D9D9]
+(6, 46): 8 [BG:FFD9D9D9]
+(6, 47): 9 [BG:FFD9D9D9]
+(6, 48): 10 [BG:FFD9D9D9]
+(6, 49): 11 [BG:FFD9D9D9]
+(6, 50): 12 [BG:FFD9D9D9]
+(6, 51): 1 [BG:FFD9D9D9]
+(6, 52): 2 [BG:FFD9D9D9]
+(6, 53): 3 [BG:FFD9D9D9]
+(6, 54): '次年度' [BG:FFD9D9D9]
+(6, 58): '改訂日'
+(6, 59): '改訂内容'
+(7, 2): '受注先' [BG:FFD9D9D9]
+(7, 8): '=基本データ!D5'
+(7, 58): datetime.datetime(2023, 1, 31, 0, 0)
+(7, 59): '変更理由欄にコメント追記'
+(8, 2): '受託期間' [BG:FFD9D9D9]
+(8, 8): '=基本データ!D6'
+(8, 21): '～'
+(8, 25): '=基本データ!D7'
+(8, 58): datetime.datetime(2023, 3, 2, 0, 0)
+(8, 59): '技術プログラムの使用の有無欄にコメント追記'
+(9, 2): '業務構成' [BOLD, BG:FFD9D9D9]
+(9, 58): datetime.datetime(2023, 4, 27, 0, 0)
+(9, 59): '2022年度内部監査指摘事項に対する対応'
+(10, 2): 'チェック\n体制' [BG:FFD9D9D9]
+(10, 8): '□ A-? 体制'
+(10, 14): '□ B-? 体制'
+(10, 20): '□ C 体制'
+(10, 36): '；体制を選択する'
+(10, 58): datetime.datetime(2023, 10, 19, 0, 0)
+(10, 59): 'チェック体制の区分を明記できるよう書式を変更（2023年度台湾内部監査指摘事項）'
+(11, 8): '□ 上記以外の特別な体制（理由を記載し、本部長の承認が必要）'
+(11, 58): datetime.datetime(2024, 1, 18, 0, 0)
+(11, 59): 'リスク管理欄の文書を見直し（帳票をレビュー）'
+(12, 9): '（理由：\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000本部長印）'
+(12, 58): datetime.datetime(2025, 7, 1, 0, 0) [BOLD]
+(12, 59): 'リスク評価の審議レベルの追加' [BOLD]
+(13, 58): datetime.datetime(2025, 7, 1, 0, 0) [BOLD]
+(13, 59): '表現の修正、チェックボックスのプルダウン選択化' [BOLD]
+(14, 8): '承 認 者' [BG:FFD9D9D9]
+(14, 17): '=基本データ!D8'
+(14, 58): datetime.datetime(2026, 1, 9, 0, 0) [BOLD]
+(14, 59): '全体をレビュー' [BOLD]
+(15, 8): '審 査 者' [BG:FFD9D9D9]
+(15, 17): '=基本データ!D9'
+(16, 8): '実 施 責 任 者' [BG:FFD9D9D9]
+(16, 17): '=基本データ!D10'
+(17, 8): '担当者' [BG:FFD9D9D9]
+(19, 2): '部間／本部間依頼' [BG:FFD9D9D9]
+(19, 8): 'No.' [BG:FFD9D9D9]
+(19, 17): '①'
+(19, 24): '②'
+(19, 31): '③'
+(19, 38): '進捗管理' [BG:FFD9D9D9]
+(20, 8): '所属' [BG:FFD9D9D9]
+(20, 38): '主要技術検討会' [BG:FFD9D9D9]
+(21, 8): '担当者' [BG:FFD9D9D9]
+(21, 38): '委託成果品検査' [BG:FFD9D9D9]
+(22, 2): '委託先' [BG:FFD9D9D9]
+(22, 8): 'No.' [BG:FFD9D9D9]
+(22, 17): '①'
+(22, 24): '②'
+(22, 31): '③'
+(22, 38): '設計検査' [BG:FFD9D9D9]
+(23, 8): '会社名' [BG:FFD9D9D9]
+(23, 38): '妥当性確認' [BG:FFD9D9D9]
+(24, 8): '所属' [BG:FFD9D9D9]
+(24, 38): '受注業務のリスク管理' [BOLD, BG:FFD9D9D9]
+(25, 8): '担当者' [BG:FFD9D9D9]
+(25, 38): '契約前段階で想定されるリスクの確認・対応結果（すでに契約内容確認書で挙げているリスク項目がある場合、それを再掲）' [BOLD]
+(26, 8): '※委託先からの実施計画書：' [BG:FFD9D9D9]
+(26, 17): '□有'
+(26, 21): '□無'
+(26, 24): '□有'
+(26, 28): '□無'
+(26, 31): '□有'
+(26, 35): '□無'
+(26, 38): 'リスク項目' [BOLD]
+(26, 41): 'リスク項目詳細' [BOLD]
+(26, 50): '対策審議' [BOLD]
+(26, 51): '有無程度' [BOLD]
+(26, 52): '対策' [BOLD]
+(26, 53): '具体策' [BOLD]
+(28, 8): '有の場合：委託仕様書の内容が全て実施計画書に反映されている：' [BG:FFD9D9D9]
+(28, 17): '□'
+(28, 24): '□'
+(28, 31): '□'
+(31, 2): '業務実施\n計画' [BG:FFD9D9D9]
+(31, 8): '【実施項目・数量・内容】\n'
+(31, 38): '受注・業務着手時段階で想定されるリスクの確認・対応結果' [BOLD]
+(32, 8): '○実施内容、手順等を記載。記載しきれない場合は参照先を明記。'
+(32, 38): 'リスク項目' [BOLD]
+(32, 41): 'リスク項目詳細' [BOLD]
+(32, 50): '対策審議' [BOLD]
+(32, 51): '有無程度' [BOLD]
+(32, 52): '対策' [BOLD]
+(32, 53): '具体策' [BOLD]
+(33, 38): '1.確認記録の不備'
+(33, 41): '案件形成時に認識していた要求事項と契約時の要求事項に差異が発生し、当社がエビデンスを提示することが出来ず、顧客の要求に従わざるを得ない。'
+(35, 38): '2.顧客要求事項の未確定による作業の手戻り'
+(35, 41): '受注時でもなお、要求事項が不明確である中で業務を着手せざるを得ず、作業の手戻りが発生したり、工期を順守できなくなる。'
+(37, 38): '3.作業内容不明確'
+(37, 41): '品質計画（書）策定段階でのリスク抽出が出来なかった場合、見逃したリスクが後の業務実施段階で支障をきたす。'
+(39, 38): '4.委託先の成果品不良、工程遅延'
+(39, 41): '委託先の選定を誤り（初めての会社、規模の小さい会社、地元企業等）、委託先への条件提示の遅れに対し委託先でその遅れを吸収できずに工期が遅れ、当社も発注者に対し工期不履行となる。技術面でも同様のリスク。'
+(41, 38): '5.その他'
+(43, 38): '業務実施・引渡し段階で想定されるリスクの確認・対応結果' [BOLD]
+(44, 38): 'リスク項目' [BOLD]
+(44, 41): 'リスク項目詳細' [BOLD]
+(44, 50): '対策審議' [BOLD]
+(44, 51): '有無程度' [BOLD]
+(44, 52): '対策' [BOLD]
+(44, 53): '具体策' [BOLD]
+(45, 38): '1.設計変更時の検証不足'
+(45, 41): '顧客の要求事項に変更があった場合、新規設計時と同じレビュー・検証を実施せず、顧客要求事項を満たさない成果品を提出してしまう。また、実施したとしても、設計上のミスを見逃してしまい、竣工後顧客に損害を与えてしまう。'
+(47, 38): '2. 業務進捗後、成果品が顧客のイメージと合わず、追加業務が発生'
+(47, 41): '中間打合せで、着手した業務内容や変更内容が顧客の要求に合わず、想定外に工数・時間を要し、要求納期を守れない、コストが大幅に超過する等トラブルが発生する。'
+(49, 8): '・技術プログラムリスト登録プログラムの使用（委託先を含む＊)：'
+(49, 33): '□有 □無'
+(49, 38): '3. 最終成果品が顧客のイメージと合わず、追加業務が発生'
+(49, 41): '最終成果品が顧客の要求に合わず、想定外に工数・時間を要し、要求納期を守れない、コストが大幅に超過する等トラブルが発生する。'
+(50, 8): '\u3000\u3000有の場合（名称：\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000                 Ver.\u3000\u3000 ）\n'
+(51, 38): '4.中間検査の未実施'
+(51, 41): '中間検査を実施しなかったために出戻りが発生し、納期・工数に大きなインパクトを与える。'
+(52, 8): '＊；当社が未保有のプログラムを使用する業務を委託する場合は、業務品質管理要領\n\u3000\u3000（QC1-003）「10.委託（2）委託仕様書作成の留意事項」を参照。'
+(53, 38): '5.検証活動の不足'
+(53, 41): '必要な手順で十分な検証・妥当性確認を行わなかったために、顧客へ瑕疵のある成果品を納入してしまい、顧客との間でトラブルになる。'
+(54, 8): '・必要不可欠な関連法令・規制：'
+(54, 22): '□有'
+(54, 25): '□無'
+(55, 9): '有の場合（名称：\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000）'
+(55, 38): '6.法令や技術基準の不遵守'
+(55, 41): '法令や技術基準の順守に必要な手続き（営業方→法務方のリーガルチェック）を見落とし、対応するために設計変更が生じて、工事金額が増加し、顧客との間でトラブルになる'
+(56, 8): '・顧客が定めた規程・基準等\u3000：'
+(56, 22): '□有'
+(56, 25): '□無'
+(57, 9): '有の場合（名称：\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000）'
+(57, 38): '7.その他'
+(58, 8): '・計画書等に地図・書籍等の転載：'
+(58, 23): '□有'
+(58, 26): '□無'
+(59, 9): '有の場合：出所・出典が記載されている：'
+(59, 27): '□'
+(59, 38): '（記入凡例）対策審議\u3000各部；部会議、本部；本部会議、全社；リスク評価会議\u3000\u3000\u3000\u3000有無程度\u3000×；該当しない、△；殆ど該当しない、○；一部該当する、◎；殆ど該当する\u3000\u3000\u3000\u3000対策\u3000Ａ；回避、Ｂ；低減、Ｃ；移転、Ｄ；保有\u3000（書ききれない場合、別紙「リスク対策シート」に記載）'
+(60, 8): '・個人情報（自宅の住所，電話番号，運転免許証写し等）を持たざるを\n'
+(60, 38): '承認・審査' [BOLD, BG:FFD9D9D9]
+(61, 9): '得ない：'
+(61, 13): '□有'
+(61, 16): '□無'
+(61, 38): '変更理由/備考（品質計画書を変更する場合、変更理由を必ず記載すること）'
+(61, 51): '承認者'
+(61, 52): '審査者'
+(61, 53): '実施責任者'
+(61, 54): '作成者'
+(62, 9): '有の場合：'
+(62, 14): '実施担当者は個人情報管理台帳に記載して個人情報管理責任者(個人情報管理担当者)に報告すると共に，個人情報を記録した重要な書類等については，実施責任者が施錠保管している：□'
+
+MERGED CELLS:
+--------------------------------------------------------------------------------
+  AE19:AK19
+  AX49:AX50
+  N62:AJ65
+  AZ49:AZ50
+  X26:Z27
+  AL31:BB31
+  BA37:BB38
+  B22:G30
+  B8:G8
+  AL51:AN52
+  Q17:W17
+  AY41:AY42
+  BA45:BB46
+  AO51:AW52
+  AQ7:AR7
+  AZ35:AZ36
+  AQ16:AR16
+  H11:AK11
+  N10:S10
+  Q15:AK15
+  AE20:AK20
+  W58:Y58
+  AO57:AW58
+  AQ18:AR18
+  BA27:BB27
+  AY49:AY50
+  Q26:S27
+  AX53:AX54
+  AE22:AK22
+  AQ8:AR8
+  AL29:AN29
+  H15:P15
+  AL21:AM21
+  B5:G5
+  X17:AD17
+  AL45:AN46
+  AO39:AW40
+  H23:P23
+  AY35:AY36
+  AL44:AN44
+  AE21:AK21
+  AX55:AX56
+  AQ10:AR10
+  AL24:BB24
+  H5:AK5
+  Q23:W23
+  AL23:AM23
+  BA63:BA66
+  X19:AD19
+  AO33:AW34
+  BA57:BB58
+  AX39:AX40
+  AZ39:AZ40
+  AE23:AK23
+  AI26:AK27
+  H49:AF49
+  AO35:AW36
+  AO28:AW28
+  AN5:BB5
+  H25:P25
+  AY45:AY46
+  AL32:AN32
+  AL60:BB60
+  AQ20:AR20
+  BA33:BB34
+  Q14:AK14
+  AY47:AY48
+  Z58:AB58
+  AL59:BB59
+  AZ33:AZ34
+  AQ22:AR22
+  BA39:BB40
+  V54:X54
+  AQ12:AR12
+  H26:P27
+  AQ21:AR21
+  AL49:AN50
+  AL61:AX66
+  H8:T8
+  X21:AD21
+  H19:P19
+  AO26:AW26
+  AZ1:BC1
+  AE25:AK25
+  X23:AD23
+  BA47:BB48
+  AL5:AL6
+  H28:P30
+  AL41:AN42
+  H14:P14
+  H50:AK51
+  AY51:AY52
+  I59:Z59
+  AO27:AW27
+  Y56:AA56
+  Q20:W20
+  AL30:AN30
+  BA51:BB52
+  Q16:AK16
+  BA26:BB26
+  H52:AK53
+  H10:M10
+  AL20:AM20
+  X18:AD18
+  B31:G66
+  AL22:AM22
+  U26:W27
+  AL55:AN56
+  AZ37:AZ38
+  AE28:AK30
+  U8:X8
+  AL39:AN40
+  AO55:AW56
+  H6:AK6
+  AQ11:AR11
+  AY33:AY34
+  BA49:BB50
+  AE24:AK24
+  AO30:AW30
+  AY63:AY66
+  H16:P16
+  AY53:AY54
+  B19:G21
+  X22:AD22
+  AO29:AW29
+  AX57:AX58
+  AG49:AK49
+  AZ51:AZ52
+  H22:P22
+  BA41:BB42
+  H7:AK7
+  M61:O61
+  AO44:AW44
+  AY55:AY56
+  BA35:BB36
+  BA28:BB28
+  Q25:W25
+  AZ63:AZ66
+  AX41:AX42
+  BB63:BB66
+  AZ41:AZ42
+  AO47:AW48
+  Q24:W24
+  AY39:AY40
+  Q18:W18
+  BA30:BB30
+  AB26:AD27
+  AO37:AW38
+  AQ14:AR14
+  AL57:AN58
+  AE18:AK18
+  AA59:AB59
+  AQ23:AR23
+  AX33:AX34
+  AQ13:AR13
+  B7:G7
+  H20:P20
+  X28:AD30
+  B4:AK4
+  Q19:W19
+  AL27:AN27
+  AQ6:AR6
+  AX35:AX36
+  AQ15:AR15
+  AL19:AM19
+  AL4:BB4
+  BA32:BB32
+  AY37:AY38
+  X24:AD24
+  AL33:AN34
+  AZ53:AZ54
+  T10:Y10
+  Q22:W22
+  H21:P21
+  H33:AK48
+  AY57:AY58
+  AO41:AW42
+  B2:BB3
+  AO49:AW50
+  AL35:AN36
+  AL28:AN28
+  P61:R61
+  AZ55:AZ56
+  X25:AD25
+  AX45:AX46
+  AZ45:AZ46
+  AM5:AM6
+  AE26:AG27
+  Y8:AK8
+  AX47:AX48
+  Q21:W21
+  AZ47:AZ48
+  H32:AK32
+  AL25:BB25
+  BA53:BB54
+  Q28:W30
+  B6:G6
+  AX37:AX38
+  AQ17:AR17
+  H24:P24
+  B9:AK9
+  B10:G18
+  BA55:BB56
+  AO53:AW54
+  AL53:AN54
+  V56:X56
+  AL47:AN48
+  AQ19:AR19
+  H17:P18
+  AL43:BB43
+  AL37:AN38
+  AQ9:AR9
+  AZ57:AZ58
+  BA29:BB29
+  AO32:AW32
+  AO45:AW46
+  AE17:AK17
+  AX51:AX52
+  AL26:AN26
+  BA44:BB44
+  Y54:AA54
+  X20:AD20
+
+================================================================================
+SHEET 14: 【記載例】品質計画書
+================================================================================
+Dimensions: A1:AQ67
+
+NON-EMPTY CELLS:
+--------------------------------------------------------------------------------
+(1, 36): '参考帳票（2026/1/9）'
+(2, 2): '品 質 計 画 書（No. \u3000\u3000）' [BOLD, BG:FFD9D9D9]
+(2, 42): '目次へ戻る' [BOLD]
+(2, 43): '=HYPERLINK("#目次!A2","●")'
+(3, 42): 'フローへ戻る' [BOLD]
+(3, 43): '=HYPERLINK("#フロー!A2","●")'
+(4, 2): '業務概要' [BOLD, BG:FFD9D9D9]
+(4, 22): '業務工程' [BOLD, BG:FFD9D9D9]
+(5, 2): '件名コード' [BG:FFD9D9D9]
+(5, 8): 'AC11111'
+(5, 22): '項\u3000\u3000目' [BG:FFD9D9D9]
+(5, 24): '年\u3000\u3000度' [BG:FFD9D9D9]
+(5, 42): '改訂履歴'
+(6, 2): '受注件名' [BG:FFD9D9D9]
+(6, 8): '〇〇発電所の冷却用水路実施設計'
+(6, 24): '前年度' [BG:FFD9D9D9]
+(6, 25): 4 [BG:FFD9D9D9]
+(6, 26): 5 [BG:FFD9D9D9]
+(6, 27): 6 [BG:FFD9D9D9]
+(6, 29): 7 [BG:FFD9D9D9]
+(6, 30): 8 [BG:FFD9D9D9]
+(6, 31): 9 [BG:FFD9D9D9]
+(6, 32): 10 [BG:FFD9D9D9]
+(6, 33): 11 [BG:FFD9D9D9]
+(6, 34): 12 [BG:FFD9D9D9]
+(6, 35): 1 [BG:FFD9D9D9]
+(6, 36): 2 [BG:FFD9D9D9]
+(6, 37): 3 [BG:FFD9D9D9]
+(6, 38): '次年度' [BG:FFD9D9D9]
+(6, 42): '改訂日'
+(6, 43): '改訂内容'
+(7, 2): '受注先' [BG:FFD9D9D9]
+(7, 8): '東京電力HD'
+(7, 22): '①設計１（実施責任者）'
+(7, 42): datetime.datetime(2023, 1, 31, 0, 0)
+(7, 43): '変更理由欄にコメント追記'
+(8, 2): '受託期間' [BG:FFD9D9D9]
+(8, 8): datetime.datetime(2021, 4, 16, 0, 0)
+(8, 18): '～'
+(8, 20): datetime.datetime(2022, 3, 25, 0, 0)
+(8, 22): '解析手法の妥当性検討'
+(8, 42): datetime.datetime(2023, 3, 2, 0, 0)
+(8, 43): '技術プログラムの使用の有無欄にコメント追記'
+(9, 2): '業務構成' [BOLD, BG:FFD9D9D9]
+(9, 22): '測定装置仕様の検討'
+(9, 42): datetime.datetime(2023, 4, 27, 0, 0)
+(9, 43): '2022年度内部監査指摘事項に対する対応'
+(10, 2): 'チェック\n体制' [BG:FFD9D9D9]
+(10, 8): ' ■体制Ａ-（３） \u3000\u3000 □体制Ｂ-（\u3000）\u3000\u3000；体制は番号まで記載\n□原則以外（理由：              \u3000\u3000\u3000\u3000\u3000\u3000         本部長印）'
+(10, 22): '②設計２（担当者A）'
+(10, 42): datetime.datetime(2023, 10, 19, 0, 0)
+(10, 43): 'チェック体制の区分を明記できるよう書式を変更（2023年度台湾内部監査指摘事項）'
+(11, 22): 'ゆるみ領域の影響検討'
+(11, 42): datetime.datetime(2025, 7, 1, 0, 0) [BOLD]
+(11, 43): 'リスク管理欄の文書を見直し（帳票をレビュー）' [BOLD]
+(12, 8): '承 認 者' [BG:FFD9D9D9]
+(12, 17): '東設\u3000太郎'
+(12, 22): '引き戻し解析手法の検討'
+(12, 42): datetime.datetime(2025, 7, 1, 0, 0) [BOLD]
+(12, 43): 'リスク評価の審議レベルの追加' [BOLD]
+(13, 8): '審 査 者' [BG:FFD9D9D9]
+(13, 17): '東設\u3000次郎'
+(13, 22): '③技術オプション（担当者B）'
+(13, 42): datetime.datetime(2026, 1, 9, 0, 0) [BOLD]
+(13, 43): '全体をレビュー' [BOLD]
+(14, 8): '実 施 責 任 者' [BG:FFD9D9D9]
+(14, 17): '東設\u3000三郎'
+(14, 22): '（性能評価）\u3000感度解析\u3000'
+(15, 8): '担当者' [BG:FFD9D9D9]
+(15, 17): '担当者A'
+(15, 19): '担当者B'
+(15, 21): '担当者C'
+(15, 22): '\u3000\u3000\u3000\u3000\u3000\u3000\u3000指標の検討'
+(16, 17): '担当者D'
+(16, 19): '担当者E'
+(16, 22): 'ドラフト作成'
+(17, 2): '部間／本部間依頼' [BG:FFD9D9D9]
+(17, 8): 'No.' [BG:FFD9D9D9]
+(17, 17): '①'
+(17, 19): '②'
+(17, 21): '③'
+(17, 22): '報告書作成'
+(18, 8): '所属' [BG:FFD9D9D9]
+(18, 22): '委員会'
+(18, 29): '7/20▼'
+(18, 33): '▽'
+(18, 36): '▽'
+(19, 8): '担当者' [BG:FFD9D9D9]
+(19, 22): '進捗管理' [BG:Values must be of type <class 'str'>]
+(19, 27): '6/25▼'
+(19, 31): '▼9/15'
+(20, 2): '委託先' [BG:FFD9D9D9]
+(20, 8): 'No.' [BG:FFD9D9D9]
+(20, 17): '①'
+(20, 19): '②'
+(20, 21): '③'
+(20, 22): '主要技術検討会' [BG:Values must be of type <class 'str'>]
+(21, 8): '会社名' [BG:FFD9D9D9]
+(21, 22): '委託成果品検査' [BG:FFD9D9D9]
+(21, 24): '→委託がある場合も同様に検査予定を記載し、実施したら実施日を記載する'
+(22, 8): '所属' [BG:FFD9D9D9]
+(22, 22): '設計検査' [BG:FFD9D9D9]
+(22, 29): '▼7/6,7/13委員会対応'
+(22, 33): '▽委員会対応'
+(22, 35): '▽ドラフト'
+(22, 36): '▽委員会対応'
+(22, 37): '▽中間'
+(23, 8): '担当者' [BG:FFD9D9D9]
+(23, 22): '妥当性確認' [BG:FFD9D9D9]
+(23, 37): '▽中間'
+(24, 8): '※委託先からの実施計画書：' [BG:Values must be of type <class 'str'>]
+(24, 17): '有，無'
+(24, 19): '有，無'
+(24, 21): '有，無'
+(24, 22): '受注業務のリスク管理' [BOLD, BG:Values must be of type <class 'str'>]
+(25, 22): '契約前段階で想定されるリスクの確認・対応結果（すでに契約内容確認書で挙げているリスク項目がある場合、それを再掲）' [BOLD]
+(26, 8): '有の場合：委託仕様書の内容が全て計画書に反映されている：' [BG:Values must be of type <class 'str'>]
+(26, 17): '□'
+(26, 19): '□'
+(26, 21): '□'
+(26, 22): 'リスク項目' [BOLD]
+(26, 25): 'リスク項目詳細' [BOLD]
+(26, 34): '対策審議' [BOLD]
+(26, 35): '有無程度' [BOLD]
+(26, 36): '対策' [BOLD]
+(26, 37): '具体策' [BOLD]
+(31, 2): '業務実施\n計画' [BG:FFD9D9D9]
+(31, 8): '【実施項目・数量・内容】\n'
+(31, 22): '受注・業務着手時段階で想定されるリスクの確認・対応結果' [BOLD]
+(32, 8): '〇実施内容、手順等を記載。記載しきれない場合は参照先を明記。'
+(32, 22): 'リスク項目' [BOLD]
+(32, 25): 'リスク項目詳細' [BOLD]
+(32, 34): '対策審議' [BOLD]
+(32, 35): '有無程度' [BOLD]
+(32, 36): '対策' [BOLD]
+(32, 37): '具体策' [BOLD]
+(33, 9): '・'
+(33, 10): '実施項目、実施方法、実施手順は〇〇発電所の冷却用水路実施設計実施計画書を参照。'
+(33, 22): '1.確認記録の不備'
+(33, 25): '案件形成時に認識していた要求事項と契約時の要求事項に差異が発生し、当社がエビデンスを提示することが出来ず、顧客の要求に従わざるを得ない。'
+(33, 35): '×'
+(33, 36): '－'
+(35, 22): '2.顧客要求事項の未確定による作業の手戻り'
+(35, 25): '受注時でもなお、要求事項が不明確である中で業務を着手せざるを得ず、作業の手戻りが発生したり、工期を順守できなくなる。'
+(35, 35): '〇'
+(35, 36): 'D'
+(35, 37): 'お客様に要求事項の未確定による工程への影響を説明しこれを記録に残す'
+(37, 22): '3.作業内容不明確'
+(37, 25): '品質計画（書）策定段階でのリスク抽出が出来なかった場合、見逃したリスクが後の業務実施段階で支障をきたす。'
+(37, 35): '×'
+(37, 36): '－'
+(39, 22): '4.委託先の成果品不良、工程遅延'
+(39, 25): '委託先の選定を誤り（初めての会社、規模の小さい会社、地元企業等）、委託先への条件提示の遅れに対し委託先でその遅れを吸収できずに工期が遅れ、当社も発注者に対し工期不履行となる。技術面でも同様のリスク。'
+(39, 35): '×'
+(39, 36): '－'
+(41, 22): '5.その他'
+(41, 35): '－'
+(41, 36): '－'
+(43, 22): '業務実施・引渡し段階で想定されるリスクの確認・対応結果' [BOLD]
+(44, 22): 'リスク項目' [BOLD]
+(44, 25): 'リスク項目詳細' [BOLD]
+(44, 34): '対策審議' [BOLD]
+(44, 35): '有無程度' [BOLD]
+(44, 36): '対策' [BOLD]
+(44, 37): '具体策' [BOLD]
+(45, 22): '1.設計変更時の検証不足'
+(45, 25): '顧客の要求事項に変更があった場合、新規設計時と同じレビュー・検証を実施せず、顧客要求事項を満たさない成果品を提出してしまう。また、実施したとしても、設計上のミスを見逃してしまい、竣工後顧客に損害を与えてしまう。'
+(45, 35): '×'
+(45, 36): '－'
+(47, 22): '2. 業務進捗後、成果品が顧客のイメージと合わず、追加業務が発生'
+(47, 25): '中間打合せで、着手した業務内容や変更内容が顧客の要求に合わず、想定外に工数・時間を要し、要求納期を守れない、コストが大幅に超過する等トラブルが発生する。'
+(47, 35): '×'
+(47, 36): '－'
+(49, 8): '・技術プログラムリスト登録プログラムの使用（委託先を含む＊）： 有・無'
+(49, 22): '3. 最終成果品が顧客のイメージと合わず、追加業務が発生'
+(49, 25): '最終成果品が顧客の要求に合わず、想定外に工数・時間を要し、要求納期を守れない、コストが大幅に超過する等トラブルが発生する。'
+(49, 35): '×'
+(49, 36): '－'
+(50, 8): '\u3000\u3000有の場合（名称：Soil Pius Static/Flow Ver.2019、\n\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000三次元粒状体挙動解析 PFC3D   Ver.4.0 ）'
+(51, 22): '4.中間検査の未実施'
+(51, 25): '中間検査を実施しなかったために出戻りが発生し、納期・工数に大きなインパクトを与える。'
+(51, 35): '×'
+(51, 36): '－'
+(52, 8): '＊；当社が未保有のプログラムを使用する業務を委託する場合は、業務品質管理要領（QC1-003）「10.委託（2）委託仕様書作成の留意事項」を参照。'
+(53, 22): '5.検証活動の不足'
+(53, 25): '必要な手順で十分な検証・妥当性確認を行わなかったために、顧客へ瑕疵のある成果品を納入してしまい、顧客との間でトラブルになる。'
+(53, 35): '×'
+(53, 36): '－'
+(54, 8): '・必要不可欠な関連法令・規制：\u3000有・無\n\u3000有の場合（名称：\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000）'
+(55, 22): '6.法令や技術基準の不遵守'
+(55, 25): '法令や技術基準の順守に必要な手続き（営業方→法務方のリーガルチェック）を見落とし、対応するために設計変更が生じて、工事金額が増加し、顧客との間でトラブルになる'
+(55, 35): '×'
+(55, 36): '－'
+(56, 8): '・顧客が定めた規程・基準等\u3000：\u3000有・無\n\u3000有の場合（名称：\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000）'
+(57, 22): '7.その他'
+(57, 35): '－'
+(57, 36): '－'
+(58, 8): '・計画書等に地図・書籍等の転載：\u3000有・無\n\u3000有の場合：出所・出典が記載されている：□'
+(59, 22): '（記入凡例）対策審議\u3000各部：部会議、本部：本部会議、全社：リスク評価会議有無程度\u3000×；該当無し、◎；殆ど該当、○；一部該当\u3000\u3000\u3000\u3000対策\u3000Ａ；回避、Ｂ；低減、Ｃ；移転、Ｄ；保有\u3000（書ききれない場合、別紙「リスク対策シート」に記載）'
+(60, 8): '・個人情報（自宅の住所,電話番号,運転面免許証写し等）を持\n\u3000たざるを得ない：\u3000有・無\n\u3000有の場合：実施担当者は個人情報管理台帳に記載して個人情\n\u3000\u3000\u3000\u3000\u3000\u3000報管理責任者(個人情報管理担当者)に報告すると\n\u3000\u3000\u3000\u3000\u3000\u3000共に，個人情報を記録した重要な書類等について\n\u3000\u3000\u3000\u3000\u3000\u3000は実施責任者が施錠保管している：□'
+(60, 22): '承認・審査' [BOLD, BG:Values must be of type <class 'str'>]
+(61, 22): '変更理由/備考（品質計画書を変更する場合、変更理由を必ず記載すること）\nNo.1作成；2021.4.22\u3000初版発行\nNo.2改訂；2021.9.15\u3000審査者に部長を追加、設計の重要ポイントに設計検査を追加'
+(61, 35): '承認'
+(61, 36): '審査'
+(61, 37): '実施責任者'
+(61, 38): '作成者'
+(63, 35): '部長'
+(63, 36): '部長'
+(63, 37): 'GM'
+(63, 38): 'メンバー'
+
+MERGED CELLS:
+--------------------------------------------------------------------------------
+  Y37:AG38
+  V17:W17
+  Q21:R21
+  S21:T21
+  V61:AH66
+  B8:G8
+  AH33:AH34
+  AA13:AB13
+  Y57:AG58
+  S24:T25
+  AJ1:AM1
+  V55:X56
+  AI49:AI50
+  AH53:AH54
+  V20:W20
+  AH35:AH36
+  AA15:AB15
+  V4:AL4
+  Q14:U14
+  AI51:AI52
+  AK37:AL38
+  H13:P13
+  AH55:AH56
+  H49:U49
+  AI63:AI66
+  AK63:AK66
+  AI41:AI42
+  V24:AL24
+  AI35:AI36
+  AK57:AL58
+  AH39:AH40
+  U26:U30
+  AA7:AB7
+  V15:W15
+  B5:G5
+  AJ55:AJ56
+  AA16:AB16
+  S19:T19
+  H23:P23
+  AH45:AH46
+  AJ45:AJ46
+  AA18:AB18
+  Q17:R17
+  H60:U66
+  AH47:AH48
+  AJ47:AJ48
+  V45:X46
+  S20:T20
+  AA11:AB11
+  AK33:AL34
+  V25:AL25
+  AH37:AH38
+  H5:U5
+  AA22:AB22
+  R8:S8
+  V47:X48
+  S22:T22
+  AI53:AI54
+  V8:W8
+  AI55:AI56
+  Y26:AG26
+  H17:P17
+  AI45:AI46
+  Y41:AG42
+  V27:X27
+  V10:W10
+  AA6:AB6
+  Q23:R23
+  H19:P19
+  V19:W19
+  S23:T23
+  Y27:AG27
+  V9:W9
+  V59:AL59
+  U24:U25
+  H12:P12
+  V31:AL31
+  AK26:AL26
+  Q15:R15
+  S15:T15
+  V35:X36
+  V11:W11
+  V49:X50
+  H14:P14
+  V5:W6
+  Q24:R25
+  H10:U11
+  V60:AL60
+  Y35:AG36
+  V39:X40
+  AI33:AI34
+  B31:G66
+  H50:U51
+  V29:X29
+  Y30:AG30
+  AA8:AB8
+  V21:W21
+  AA17:AB17
+  Q13:U13
+  AK51:AL52
+  H52:U53
+  V43:AL43
+  V44:X44
+  Y29:AG29
+  H24:P25
+  Y45:AG46
+  AA10:AB10
+  V53:X54
+  AJ51:AJ52
+  V23:W23
+  AK41:AL42
+  S26:T30
+  B17:G19
+  AK35:AL36
+  AK28:AL28
+  AA19:AB19
+  V13:W13
+  V37:X38
+  Y47:AG48
+  AA9:AB9
+  AJ57:AJ58
+  AK30:AL30
+  H8:Q8
+  X5:AL5
+  Q20:R20
+  V32:X32
+  H6:U6
+  H22:P22
+  V26:X26
+  AH49:AH50
+  AJ49:AJ50
+  AI47:AI48
+  AK47:AL48
+  AJ33:AJ34
+  H32:U32
+  H7:U7
+  AI37:AI38
+  T8:U8
+  H54:U55
+  B7:G7
+  Y51:AG52
+  H20:P20
+  AL63:AL66
+  AJ35:AJ36
+  AI39:AI40
+  H56:U57
+  AI57:AI58
+  Y49:AG50
+  V57:X58
+  H26:P30
+  H58:U59
+  V22:W22
+  AK27:AL27
+  AA23:AB23
+  V41:X42
+  B20:G30
+  Q16:R16
+  V28:X28
+  S16:T16
+  Y44:AG44
+  H21:P21
+  Q12:U12
+  V12:W12
+  B4:U4
+  V18:W18
+  H15:P16
+  Q18:R18
+  V14:W14
+  V30:X30
+  S18:T18
+  Y33:AG34
+  AK49:AL50
+  V33:X34
+  AJ39:AJ40
+  AJ53:AJ54
+  S17:T17
+  AK39:AL40
+  Y53:AG54
+  B2:AL3
+  Y28:AG28
+  B10:G16
+  AJ37:AJ38
+  Q19:R19
+  B6:G6
+  Y55:AG56
+  AA20:AB20
+  H18:P18
+  Y32:AG32
+  Y39:AG40
+  AH51:AH52
+  Q22:R22
+  Q26:R30
+  AK44:AL44
+  AK53:AL54
+  V7:W7
+  AH57:AH58
+  AJ63:AJ66
+  V16:W16
+  AA12:AB12
+  B9:U9
+  J33:U48
+  AH41:AH42
+  AK55:AL56
+  AJ41:AJ42
+  V51:X52
+  AA14:AB14
+  AK32:AL32
+  AK45:AL46
+
+================================================================================
+SHEET 15: 特定業務品質計画書
+================================================================================
+Dimensions: B1:V105
+
+NON-EMPTY CELLS:
+--------------------------------------------------------------------------------
+(1, 13): '参考帳票（2026/1/9）'
+(2, 2): '特定業務品質計画書（No. \u3000\u3000）' [BG:FFC0C0C0]
+(2, 21): '目次へ戻る' [BOLD]
+(2, 22): '=HYPERLINK("#目次!A2","●")'
+(3, 2): '業務概要' [BG:FFC0C0C0]
+(3, 21): 'フローへ戻る' [BOLD]
+(3, 22): '=HYPERLINK("#フロー!A2","●")'
+(4, 2): '件名コード' [BG:FFC0C0C0]
+(4, 3): '=基本データ!D3'
+(4, 6): '受託期間' [BG:FFC0C0C0]
+(4, 8): '=基本データ!D6'
+(4, 12): '～'
+(4, 13): '=基本データ!D7'
+(5, 2): '受注件名' [BG:FFC0C0C0]
+(5, 3): '=基本データ!D4'
+(5, 21): '改訂履歴'
+(6, 2): '受注先' [BG:FFC0C0C0]
+(6, 3): '=基本データ!D5'
+(6, 21): '改訂日'
+(6, 22): '改訂内容'
+(7, 2): '業務構成' [BG:FFC0C0C0]
+(7, 21): datetime.datetime(2023, 1, 31, 0, 0)
+(7, 22): '変更理由欄にコメント追記'
+(8, 2): 'チェック体制' [BG:FFC0C0C0]
+(8, 3): '承認者 氏 名' [BG:FFC0C0C0]
+(8, 6): '審査者 氏 名' [BG:FFC0C0C0]
+(8, 9): '実施責任者 氏 名' [BG:FFC0C0C0]
+(8, 12): '担当者 氏 名' [BG:FFC0C0C0]
+(8, 21): datetime.datetime(2023, 4, 27, 0, 0)
+(8, 22): '2022年度内部監査指摘事項に対する対応'
+(9, 3): '=基本データ!D8'
+(9, 6): '=基本データ!D9'
+(9, 9): '=基本データ!D10'
+(9, 21): datetime.datetime(2025, 7, 1, 0, 0) [BOLD]
+(9, 22): 'リスク評価の審議レベルの追加' [BOLD]
+(10, 21): datetime.datetime(2025, 7, 1, 0, 0) [BOLD]
+(10, 22): '表現の修正、チェックボックスのプルダウン選択化' [BOLD]
+(11, 21): datetime.datetime(2026, 1, 9, 0, 0) [BOLD]
+(11, 22): '全体をレビュー' [BOLD]
+(12, 2): '部間／本部間\n依頼' [BG:FFC0C0C0]
+(12, 3): '所属' [BG:FFC0C0C0]
+(12, 12): '担当者 氏 名' [BG:FFC0C0C0]
+(15, 2): '委託先' [BG:FFC0C0C0]
+(15, 3): '会社名' [BG:FFC0C0C0]
+(15, 7): '所属' [BG:FFC0C0C0]
+(15, 12): '担当者 氏 名' [BG:FFC0C0C0]
+(17, 3): '※委託先からの実施計画書：'
+(17, 6): '□有 □無'
+(17, 8): '有の場合：委託仕様書の内容が全て実施計画書に反映されている：'
+(17, 17): '□'
+(19, 3): '※委託先からの実施計画書：'
+(19, 6): '□有 □無'
+(19, 8): '有の場合：委託仕様書の内容が全て実施計画書に反映されている：'
+(19, 17): '□'
+(20, 2): '業務実施計画' [BG:FFC0C0C0]
+(20, 3): '【実施項目・数量・内容】○実施内容、手順等を記載。記載しきれない場合は参照先を明記。'
+(27, 3): ' ・技術プログラムリスト登録プログラムの使用（委託先を含む＊)：'
+(27, 11): '□有'
+(27, 12): '(名称：\u3000\u3000\u3000\u3000\u3000\u3000\u3000 \u3000Ver.\u3000\u3000 )'
+(27, 17): '□無'
+(28, 3): '\u3000\u3000＊；当社が未保有のプログラムを使用する業務を委託する場合は、業務品質管理要領（QC1-003）「10.委託（2）委託仕様書\n\u3000\u3000\u3000\u3000作成の留意事項」を参照。'
+(29, 3): ' ・必要不可欠な関連法令・規制：'
+(29, 7): '□有'
+(29, 8): '(名称：\u3000\u3000\u3000\u3000\u3000\u3000\u3000 \u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000)'
+(29, 17): '□無'
+(30, 3): ' ・顧客が定めた規程・基準等\u3000：'
+(30, 7): '□有'
+(30, 8): '(名称：\u3000\u3000\u3000\u3000\u3000\u3000\u3000 \u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000)'
+(30, 17): '□無'
+(31, 3): ' ・計画書等に地図・書籍等の転載：'
+(31, 8): '□有'
+(31, 9): '(出所・出典が記載されている：□)'
+(31, 17): '□無'
+(32, 3): ' ・個人情報（自宅の住所，電話番号，運転免許証写し等）を持たざるを得ない：'
+(32, 15): '□有'
+(32, 17): '□無'
+(33, 3): '\u3000「有」の場合：'
+(33, 6): '実施担当者は個人情報管理台帳に記載して個人情報管理責任者(個人情報管理担当者)に報告すると共に，個人情報を記録した重要な書類等については，実施責任者が施錠保管している：□'
+(36, 2): '業務工程' [BG:FFC0C0C0]
+(37, 2): '項\u3000\u3000目' [BG:FFC0C0C0]
+(37, 3): '年度' [BG:FFC0C0C0]
+(38, 3): '前年度' [BG:FFC0C0C0]
+(38, 4): 4 [BG:FFC0C0C0]
+(38, 5): 5 [BG:FFC0C0C0]
+(38, 6): 6 [BG:FFC0C0C0]
+(38, 7): 7 [BG:FFC0C0C0]
+(38, 8): 8 [BG:FFC0C0C0]
+(38, 9): 9 [BG:FFC0C0C0]
+(38, 10): 10 [BG:FFC0C0C0]
+(38, 11): 11 [BG:FFC0C0C0]
+(38, 12): 12 [BG:FFC0C0C0]
+(38, 13): 1 [BG:FFC0C0C0]
+(38, 14): 2 [BG:FFC0C0C0]
+(38, 15): 3 [BG:FFC0C0C0]
+(38, 16): '次年度' [BG:FFC0C0C0]
+(44, 2): '委託成果品検査' [BG:FFC0C0C0]
+(45, 2): '妥当性確認' [BG:FFC0C0C0]
+(46, 2): '作成確認' [BG:FFC0C0C0]
+(47, 2): '変更理由/備考\n（特定業務品質計画書を変更する場合、変更理由を必ず記載すること）' [BG:Values must be of type <class 'str'>]
+(47, 9): '承認者' [BG:Values must be of type <class 'str'>]
+(47, 11): '審査者' [BG:Values must be of type <class 'str'>]
+(47, 13): '実施責任者' [BG:Values must be of type <class 'str'>]
+(47, 15): '作成者' [BG:Values must be of type <class 'str'>]
+(53, 13): '=M1'
+(54, 2): '特定業務品質計画書（引き続き）' [BG:FFC0C0C0]
+(55, 2): '受注業務のリスク管理' [BOLD, BG:FFC0C0C0]
+(56, 2): '契約前段階で想定されるリスクの確認・対応結果（すでに契約内容確認書で実施したリスク評価の結果を転記）' [BOLD]
+(57, 2): 'リスク項目' [BOLD]
+(57, 4): 'リスク項目詳細' [BOLD]
+(57, 13): '対策審議' [BOLD]
+(57, 14): '有無程度' [BOLD]
+(57, 15): '対策' [BOLD]
+(57, 16): '具体策' [BOLD]
+(62, 2): '受注・業務着手時段階で想定されるリスクの確認・対応結果' [BOLD]
+(63, 2): 'リスク項目' [BOLD]
+(63, 4): 'リスク項目詳細' [BOLD]
+(63, 13): '対策審議' [BOLD]
+(63, 14): '有無程度' [BOLD]
+(63, 15): '対策' [BOLD]
+(63, 16): '具体策' [BOLD]
+(64, 2): '1.確認記録の不備'
+(64, 4): '案件形成時に認識していた要求事項と契約時の要求事項に差異が発生し、当社がエビデンスを提示することが出来ず、顧客の要求に従わざるを得ない。'
+(67, 2): '2.顧客要求事項の未確定による作業の手戻り'
+(67, 4): '受注時でもなお、要求事項が不明確である中で業務を着手せざるを得ず、作業の手戻りが発生したり、工期を順守できなくなる。'
+(70, 2): '3.作業内容不明確'
+(70, 4): '品質計画（書）策定段階でのリスク抽出が出来なかった場合、見逃したリスクが後の業務実施段階で支障をきたす。'
+(72, 2): '4.委託先の成果品不良、工程遅延'
+(72, 4): '委託先の選定を誤り（初めての会社、規模の小さい会社、地元企業等）、委託先への条件提示の遅れに対し委託先でその遅れを吸収できずに工期が遅れ、当社も発注者に対し工期不履行となる。技術面でも同様のリスク。'
+(76, 2): '5.その他'
+(78, 2): '業務実施・引渡し段階で想定されるリスクの確認・対応結果' [BOLD]
+(79, 2): 'リスク項目' [BOLD]
+(79, 4): 'リスク項目詳細' [BOLD]
+(79, 13): '対策審議' [BOLD]
+(79, 14): '有無程度' [BOLD]
+(79, 15): '対策' [BOLD]
+(79, 16): '具体策' [BOLD]
+(80, 2): '1.設計変更時の検証不足'
+(80, 4): '顧客の要求事項に変更があった場合、新規設計時と同じレビュー・検証を実施せず、顧客要求事項を満たさない成果品を提出してしまう。また、実施したとしても、設計上のミスを見逃してしまい、竣工後顧客に損害を与えてしまう。'
+(84, 2): '2. 業務進捗後、成果品が顧客のイメージと合わず、追加業務が発生'
+(84, 4): '中間打合せで、着手した業務内容や変更内容が顧客の要求に合わず、想定外に工数・時間を要し、要求納期を守れない、コストが大幅に超過する等トラブルが発生する。'
+(87, 2): '3. 最終成果品が顧客のイメージと合わず、追加業務が発生'
+(87, 4): '最終成果品が顧客の要求に合わず、想定外に工数・時間を要し、要求納期を守れない、コストが大幅に超過する等トラブルが発生する。'
+(90, 2): '4.中間検査の未実施'
+(90, 4): '中間検査を実施しなかったために出戻りが発生し、納期・工数に大きなインパクトを与える。'
+(92, 2): '5.検証活動の不足'
+(92, 4): '必要な手順で十分な検証・妥当性確認を行わなかったために、顧客へ瑕疵のある成果品を納入してしまい、顧客との間でトラブルになる。'
+(95, 2): '6.法令や技術基準の不遵守'
+(95, 4): '法令や技術基準の順守に必要な手続き（営業方→法務方のリーガルチェック）を見落とし、対応するために設計変更が生じて、工事金額が増加し、顧客との間でトラブルになる。'
+(98, 2): '7.その他'
+(100, 2): '（記入凡例）対策審議\u3000各部；部会議、本部；本部会議、全社；リスク評価会議\n\u3000\u3000\u3000\u3000\u3000\u3000有無程度\u3000×；該当しない、△；殆ど該当しない、○；一部該当する、◎；殆ど該当する\n\u3000\u3000\u3000\u3000\u3000\u3000対策\u3000\u3000\u3000Ａ；回避、Ｂ；低減、Ｃ；移転、Ｄ；保有\n\u3000（書ききれない場合、別紙「リスク対策シート」に記載）'
+(104, 18): '\u3000'
+
+MERGED CELLS:
+--------------------------------------------------------------------------------
+  C20:Q20
+  L15:Q15
+  B60:C61
+  M70:M71
+  O64:O66
+  L18:Q18
+  F8:H8
+  M98:M99
+  L8:Q8
+  D95:L97
+  M90:M91
+  L10:Q10
+  O47:Q47
+  I8:K8
+  P84:Q86
+  C15:F15
+  C31:G31
+  B37:B38
+  D87:L89
+  P39:Q39
+  B3:Q3
+  M67:M69
+  O76:O77
+  G15:K15
+  B12:B14
+  F9:H11
+  O58:O59
+  N90:N91
+  B2:Q2
+  B87:C89
+  B72:C75
+  N80:N83
+  P43:Q43
+  M47:N47
+  C14:K14
+  G16:K16
+  P72:Q75
+  I9:K11
+  O49:Q51
+  B63:C63
+  M84:M86
+  N76:N77
+  L12:Q12
+  P98:Q99
+  B64:C66
+  P79:Q79
+  B100:Q103
+  C21:Q26
+  B98:C99
+  P64:Q66
+  P63:Q63
+  F19:G19
+  L14:Q14
+  M95:M97
+  O95:O97
+  H17:P17
+  O67:O69
+  N58:N59
+  H19:P19
+  B76:C77
+  M87:M89
+  C30:F30
+  B67:C69
+  P58:Q59
+  B20:B35
+  B54:Q54
+  O48:Q48
+  F17:G17
+  B7:Q7
+  P67:Q69
+  D70:L71
+  C32:N32
+  M76:M77
+  O87:O89
+  D64:L66
+  D80:L83
+  B56:Q56
+  B47:H51
+  F33:P35
+  C28:Q28
+  C37:Q37
+  O60:O61
+  D79:L79
+  O70:O71
+  L16:Q16
+  C33:E33
+  B70:C71
+  D63:L63
+  C6:Q6
+  D72:L75
+  O84:O86
+  N70:N71
+  N92:N94
+  B84:C86
+  N64:N66
+  B79:C79
+  P80:Q83
+  P92:Q94
+  I49:J51
+  I31:P31
+  K49:L51
+  F4:G4
+  B95:C97
+  D58:L59
+  N87:N89
+  N72:N75
+  P41:Q41
+  M48:N48
+  C12:K12
+  D60:L61
+  C18:F18
+  I47:J47
+  C9:E11
+  B8:B11
+  K47:L47
+  M49:N51
+  N98:N99
+  B57:C57
+  M64:M66
+  M80:M83
+  O80:O83
+  B46:Q46
+  N60:N61
+  O92:O94
+  P76:Q77
+  C29:F29
+  D92:L94
+  C27:J27
+  H30:P30
+  B90:C91
+  N67:N69
+  H29:P29
+  P90:Q91
+  C5:Q5
+  C4:E4
+  D84:L86
+  O90:O91
+  M1:R1
+  B92:C94
+  L27:P27
+  P45:Q45
+  M4:Q4
+  M58:M59
+  P70:Q71
+  D57:L57
+  P38:Q38
+  M60:M61
+  P44:Q44
+  B15:B19
+  N84:N86
+  P40:Q40
+  D98:L99
+  B36:Q36
+  D90:L91
+  C8:E8
+  N95:N97
+  B80:C83
+  C17:E17
+  L9:Q9
+  G18:K18
+  H4:K4
+  P95:Q97
+  C19:E19
+  L11:Q11
+  D76:L77
+  M92:M94
+  D67:L69
+  C13:K13
+  C16:F16
+  M53:R53
+  P57:Q57
+  I48:J48
+  K48:L48
+  P60:Q61
+  P87:Q89
+  M72:M75
+  P42:Q42
+  O72:O75
+  B58:C59
+  L13:Q13
+  B78:Q78
+  O98:O99

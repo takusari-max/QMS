@@ -1,0 +1,168 @@
+================================================================================
+EXCEL FORM TEMPLATE ANALYSIS - FILES CREATED
+================================================================================
+
+Three comprehensive analysis files have been generated:
+
+1. ANALYSIS_SUMMARY.md
+   - Human-readable markdown summary
+   - Sheet categorization and descriptions
+   - Form structure patterns
+   - Conversion strategy recommendations
+   - File: /home/user/QMS/ANALYSIS_SUMMARY.md
+
+2. FORM_TEMPLATES_COMPLETE_8-47.txt (219.7 KB)
+   - COMPLETE detailed analysis of all 40 form template sheets (8-47)
+   - For EACH sheet, contains:
+     * Sheet name and index
+     * Used range (rows and columns)
+     * ALL merged cell ranges
+     * EVERY non-empty cell with:
+       - Cell coordinate (e.g., B5, AZ27)
+       - Complete cell value (text content)
+       - Cell formatting (BOLD, font SIZE, background COLOR)
+   - Formatted for easy reference during web form development
+   - File: /home/user/QMS/FORM_TEMPLATES_COMPLETE_8-47.txt
+
+3. sheet_analysis_4-15.txt (128 KB)
+   - Detailed analysis of sheets 4-15
+   - Same comprehensive format as file #2
+   - Includes flow diagram sheets and index sheets
+   - File: /home/user/QMS/sheet_analysis_4-15.txt
+
+================================================================================
+EXCEL WORKBOOK STRUCTURE REFERENCE
+================================================================================
+
+Total Sheets: 47
+
+OVERVIEW & NON-FORM SHEETS (1-7):
+  1. 目次 - Table of Contents
+  2. 基本データ - Basic Data  
+  3. フロー - Flow Diagram
+  4. フロー (業務品質管理　全体業務品質文書管理台帳図)
+  5. フロー (（別紙1）本部間 部間依頼フロー図)
+  6. フロー (（別紙2）委託業務フロー図)
+  7. 業務品質文書管理台帳 - Business Quality Management Ledger
+
+FORM TEMPLATES TO CONVERT (8-47) - 40 SHEETS:
+
+CONTRACT & PLANNING (Sheets 8-16):
+  8. 契約内容確認書 - Contract Confirmation Form
+  9. 記載例契約内容確認書 - Contract Confirmation Example
+  10. 契約内容変更確認書 - Contract Change Confirmation
+  11. リスク対策シート - Risk Mitigation Sheet
+  12. リスク評価シート - Risk Assessment Sheet
+  13. 受注計画書 - Order Planning Document
+  14. 品質計画書 - Quality Planning Document
+  15. 【記載例】品質計画書 - Quality Planning Example
+  16. 特定業務品質計画書 - Specific Business Quality Plan
+
+CUSTOMER & EQUIPMENT (Sheets 17-24):
+  17. 顧客所有物確認書 - Customer Property Confirmation
+  18. 安全事前評価議事録 - Safety Pre-assessment Minutes
+  19. 計測機器使用記録 - Measuring Equipment Usage Record
+  20. 計測機器校正記録 - Measuring Equipment Calibration Record
+  21. 別紙２出張時持ち出し管理簿 - Business Trip Equipment Management
+  22. 別紙３原子力情報に関する教育・実績管理表 - Nuclear Info Education/Performance
+  23. 委託先適合性確認票 - Vendor Eligibility Confirmation
+  24. 別紙06原子力情報取り扱い管理記録 - Nuclear Info Handling Management
+
+OUTSOURCING & DESIGN (Sheets 25-34):
+  25. 設計業務依頼票 - Design Work Request
+  26. 委託計画書（変更書） - Outsourcing Plan/Change
+  27. 簡易委託受注・実行書 - Simple Outsourcing/Execution Document
+  28. 委託業務仕様書の作成 - Outsourcing Specification Creation
+  29. 委託先の情報管理 - Vendor Information Management
+  30. 委託先監査に関する仕様書の記載 - Vendor Audit Specifications
+  31. 原子力業務の追加要求事項 - Nuclear Work Additional Requirements
+  32. 生成AIに関する仕様書への記載 - Generative AI Specifications
+  33. 仕様書チェック表 - Specification Checklist
+  34. ⑤別紙５委託先品質監査チェックシート - Vendor Quality Audit Checklist
+
+INSPECTION & CHANGE (Sheets 35-42):
+  35. 変更依頼・指示書 - Change Request/Instruction
+  36. 支給品・貸与品確認書 - Supplied/Loaned Items Confirmation
+  37. 借用書、備品・消耗品貸出簿 - Loan Form/Equipment Register
+  38. 委託業務提示資料廃棄証明届出書 - Materials Disposal Certificate
+  39. 委託成果品検査記録 - Outsourcing Deliverable Inspection Record
+  40. 設計検査記録 - Design Inspection Record
+  41. 工程内検査記録 - In-Process Inspection Record
+  42. 妥当性確認記録 - Validity Confirmation Record
+
+ADMINISTRATIVE (Sheets 43-47):
+  43. 議事録 - Minutes of Meeting
+  44. 工程表 - Project Schedule
+  45. パンチリスト - Punch List
+  46. 是正処置管理票 - Corrective Action Management
+  47. 改善提案処置管理票 - Improvement Suggestion Management
+
+================================================================================
+HOW TO USE THESE FILES
+================================================================================
+
+For Web Form Development:
+
+1. Start with ANALYSIS_SUMMARY.md for:
+   - Overview of all forms
+   - Form categories and purposes
+   - Structural patterns
+   - Recommended conversion priority
+
+2. Reference FORM_TEMPLATES_COMPLETE_8-47.txt for:
+   - Complete cell-by-cell structure
+   - Exact field labels and positions
+   - Merged cell information (indicates span widths)
+   - Formatting details
+   - Form layout reference
+
+3. Use sheet_analysis_4-15.txt to understand:
+   - Index and flow diagram structure
+   - General file organization
+
+Example Usage - Converting Sheet 8 (契約内容確認書):
+  - Review ANALYSIS_SUMMARY.md Section: "Contract & Planning Forms - Sheet 8"
+  - Search "SHEET 8" in FORM_TEMPLATES_COMPLETE_8-47.txt
+  - Find all cell contents starting with B2 (title), B4 (labels), etc.
+  - Map merged cells to web form field widths
+  - Convert checkbox patterns (□ Yes □ No) to HTML radio buttons
+  - Create text inputs for merged cells containing formula references
+
+================================================================================
+KEY FORM STRUCTURE PATTERNS
+================================================================================
+
+Document Headers:
+  - Row 2-3: Title (BOLD, SIZE:20.0, background color FFD9D9D9)
+  - Row 4-7: Basic info fields (Customer, Subject, Date, Reviewer)
+  - Column Q-R: Navigation links (Size:10.0, BOLD) and revision history
+
+Common Elements:
+  - Checkbox patterns: □ Yes □ No (SIZE:10-11pt, plain)
+  - Text fields: Label in column B/C, merged cells E-M for input
+  - Tables: Multiple merged cells creating grid structure
+  - Instructions: SIZE:7-9pt, normal or bold weight
+  - Required fields: Marked with "・" or shown in BOLD
+
+Merged Cells:
+  - Create visual form structure and field span
+  - B6:D6, B7:D7, etc. = label area
+  - E6:M6, E7:M7, etc. = input area
+  - F20:AI21 = large input area for longer content
+
+Color Codes:
+  - FFD9D9D9 = light gray header background
+  - Other colors: used for specific sections or emphasis
+
+================================================================================
+Original Excel File Details
+================================================================================
+
+File: QC1-003(17)業務品質管理要領（参考帳票集QMSフロー付）_ver2.xlsx
+Location: /home/user/QMS/
+Last Updated: 2026-01-09 (per revision history in forms)
+Total Size: Contains 47 sheets with extensive merged cells
+Content Language: Japanese
+Purpose: Business Quality Management Forms for TEPCO/Nuclear Industry Operations
+
+================================================================================
