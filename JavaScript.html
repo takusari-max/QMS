@@ -674,24 +674,26 @@ function openDatouseiForm(){
   h+='<div class="contract-yn"><label><input type="radio" name="dt_q1" value="YES"> YES</label><label><input type="radio" name="dt_q1" value="NO"> NO</label></div></div>';
   // 2. 検査の確認
   h+='<div class="gf-section"><div class="gf-section-title">２．委託成果品検査、設計検査、工程内検査の確認</div>';
-  var kensaItems=[{k:'dt_k1',l:'委託成果品検査１'},{k:'dt_k2',l:'委託成果品検査２'},{k:'dt_k3',l:'設計検査'},{k:'dt_k4',l:'工程内検査'}];
+  var kensaItems=[{k:'dt_k1',l:'委託成果品検査１',hasName:true},{k:'dt_k2',l:'委託成果品検査２',hasName:true},{k:'dt_k3',l:'委託成果品検査３',hasName:true},{k:'dt_k4',l:'委託成果品検査４',hasName:true},{k:'dt_k5',l:'設計検査'},{k:'dt_k6',l:'工程内検査'}];
   kensaItems.forEach(function(ki){
     h+='<div class="inspection-item"><div class="inspection-item-top">';
     h+='<label class="inspection-target"><input type="checkbox" id="'+ki.k+'_chk"> 該当</label>';
     h+='<span class="inspection-label">'+ki.l+'</span>';
     h+='<div class="contract-yn"><label><input type="radio" name="'+ki.k+'" value="合格"> 合格</label><label><input type="radio" name="'+ki.k+'" value="不合格"> 不合格</label></div>';
     h+='</div>';
-    if(ki.k.indexOf('dt_k1')===0||ki.k.indexOf('dt_k2')===0) h+='<div class="inspection-plan"><span>（委託先名称：</span><input type="text" id="'+ki.k+'_name" class="form-input" style="flex:1;"><span>）</span></div>';
+    if(ki.hasName) h+='<div class="inspection-plan"><span>（委託先名称：</span><input type="text" id="'+ki.k+'_name" class="form-input" style="flex:1;"><span>）</span></div>';
     h+='</div>';
   });
   h+='</div>';
   // 3. 顧客貸与支給品
   h+='<div class="gf-section"><div class="gf-section-title">３．顧客貸与・支給品</div>';
   h+='<div class="form-row"><div class="form-group half"><label>貸与品・支給品の有無</label>';
-  h+='<div class="contract-yn"><label><input type="radio" name="dt_goods" value="有"> 有</label><label><input type="radio" name="dt_goods" value="無"> 無</label></div></div>';
-  h+='<div class="form-group half"><label>「有」の場合の対応</label>';
-  h+='<select id="dt_goods_action" class="form-select"><option value="">選択</option><option value="返却">返却</option><option value="その他">その他</option></select></div></div>';
-  h+='<div class="form-group"><label>対応の詳細</label><textarea id="dt_goods_detail" class="form-textarea" rows="2"></textarea></div></div>';
+  h+='<div class="contract-yn"><label><input type="radio" name="dt_goods" value="有"> 有</label><label><input type="radio" name="dt_goods" value="無"> 無</label></div></div></div>';
+  h+='<div style="margin-left:16px;"><p style="font-size:13px;font-weight:600;">「有」の場合：</p>';
+  h+='<div style="display:flex;flex-wrap:wrap;gap:8px 16px;margin:4px 0 8px;">';
+  ['返却','処分','電子データ削除','その他の対応'].forEach(function(a,i){h+='<label><input type="checkbox" id="dt_goods_a_'+i+'"> '+a+'</label>';});
+  h+='</div>';
+  h+='<div class="form-group"><label>対応の詳細（その他の場合は具体的に記載）</label><textarea id="dt_goods_detail" class="form-textarea" rows="2" placeholder="（記載例）顧客からの指示により件名番号AC11111で管理している資料は、今後継続業務が予定されているため継続保管する。"></textarea></div></div></div>';
   // 4. 産業廃棄物
   h+='<div class="gf-section"><div class="gf-section-title">４．産業廃棄物処理</div>';
   h+='<div class="contract-yn"><label><input type="radio" name="dt_waste" value="無"> 無</label><label><input type="radio" name="dt_waste" value="有・完了"> 有（完了）</label><label><input type="radio" name="dt_waste" value="有・未完"> 有（未完）</label></div>';
@@ -732,14 +734,15 @@ function collectDatouseiData(){
   // Q1
   var q1=document.querySelector('input[name="dt_q1"]:checked'); data.q1=q1?q1.value:'';
   // 検査確認
-  ['dt_k1','dt_k2','dt_k3','dt_k4'].forEach(function(k){
-    data[k+'_chk']=document.getElementById(k+'_chk').checked?'■':'□';
+  ['dt_k1','dt_k2','dt_k3','dt_k4','dt_k5','dt_k6'].forEach(function(k){
+    var chkEl=document.getElementById(k+'_chk');data[k+'_chk']=chkEl&&chkEl.checked?'■':'□';
     var sel=document.querySelector('input[name="'+k+'"]:checked'); data[k]=sel?sel.value:'';
     var ne=document.getElementById(k+'_name'); if(ne) data[k+'_name']=ne.value;
   });
   // 貸与品
   var g=document.querySelector('input[name="dt_goods"]:checked'); data.goods=g?g.value:'';
-  data.goods_action=gv('dt_goods_action');data.goods_detail=gv('dt_goods_detail');
+  var goodsActions=[];for(var ga=0;ga<4;ga++){var gel=document.getElementById('dt_goods_a_'+ga);if(gel&&gel.checked)goodsActions.push(ga);}
+  data.goods_actions=goodsActions.join('|');data.goods_detail=gv('dt_goods_detail');
   // 廃棄物
   var w=document.querySelector('input[name="dt_waste"]:checked'); data.waste=w?w.value:'';
   data.waste_detail=gv('dt_waste_detail');
@@ -770,13 +773,13 @@ function loadDatouseiFormData(){
       ['仕様書','品質計画書','実施計画書','設計業務依頼票','委託関連記録','成果品（案）','委託成果品検査記録','設計検査記録','工程内検査記録','議事録','その他'].forEach(function(dm,i){if(dm===m) document.getElementById('dt_mat_'+i).checked=true;});
     });
     if(data.q1) document.querySelectorAll('input[name="dt_q1"]').forEach(function(r){if(r.value===data.q1) r.checked=true;});
-    ['dt_k1','dt_k2','dt_k3','dt_k4'].forEach(function(k){
-      if(data[k+'_chk']==='■') document.getElementById(k+'_chk').checked=true;
+    ['dt_k1','dt_k2','dt_k3','dt_k4','dt_k5','dt_k6'].forEach(function(k){
+      var chkEl=document.getElementById(k+'_chk');if(chkEl&&data[k+'_chk']==='■') chkEl.checked=true;
       if(data[k]) document.querySelectorAll('input[name="'+k+'"]').forEach(function(r){if(r.value===data[k]) r.checked=true;});
       var ne=document.getElementById(k+'_name'); if(ne&&data[k+'_name']) ne.value=data[k+'_name'];
     });
     if(data.goods) document.querySelectorAll('input[name="dt_goods"]').forEach(function(r){if(r.value===data.goods) r.checked=true;});
-    if(data.goods_action){var el=document.getElementById('dt_goods_action');if(el) el.value=data.goods_action;}
+    if(data.goods_actions){data.goods_actions.split('|').forEach(function(ga){var gel=document.getElementById('dt_goods_a_'+ga);if(gel)gel.checked=true;});}
     if(data.goods_detail){var el2=document.getElementById('dt_goods_detail');if(el2) el2.value=data.goods_detail;}
     if(data.waste) document.querySelectorAll('input[name="dt_waste"]').forEach(function(r){if(r.value===data.waste) r.checked=true;});
     if(data.waste_detail){var el3=document.getElementById('dt_waste_detail');if(el3) el3.value=data.waste_detail;}
@@ -982,6 +985,16 @@ function openHinshitsuForm(){
     for(var rc=1;rc<6;rc++) h+='<td><input type="text" class="gf-table-input" id="hp_risk2_'+ri+'_'+rc+'"></td>';h+='</tr>';});
   h+='</tbody></table></div></div>';
   h+='<p style="font-size:11px;color:#777;">対策審議: 各部；部会議、本部；本部会議、全社；リスク評価会議　|　有無程度: ×；該当しない、△；殆ど該当しない、○；一部該当する、◎；殆ど該当する　|　対策: Ａ；回避、Ｂ；低減、Ｃ；移転、Ｄ；保有</p></div>';
+  // 進捗管理
+  h+='<div class="gf-section"><div class="gf-section-title">進捗管理</div>';
+  h+='<div class="gf-table-wrap"><table class="gf-table"><thead><tr><th>項目</th><th>担当者</th><th>予定日</th><th>実施日</th><th>備考</th></tr></thead><tbody>';
+  ['主要技術検討会','委託成果品検査','設計検査','妥当性確認'].forEach(function(item,i){
+    h+='<tr><td style="font-weight:600;">'+item+'</td>';
+    for(var c=0;c<4;c++) h+='<td><input type="text" class="gf-table-input" id="hp_prog_'+i+'_'+c+'"></td>';h+='</tr>';});
+  h+='</tbody></table></div></div>';
+  // 変更理由/備考
+  h+='<div class="gf-section"><div class="gf-section-title">変更理由/備考</div>';
+  h+='<div class="form-group"><label>品質計画書を変更する場合、変更理由を必ず記載すること</label><textarea id="hp_change_reason" class="form-textarea" rows="4"></textarea></div></div>';
   // 改訂履歴
   h+='<div class="gf-section"><div class="gf-section-title">改訂履歴</div>';
   h+='<div class="gf-table-wrap"><table class="gf-table"><thead><tr><th>No</th><th>改訂日</th><th>改訂内容</th></tr></thead><tbody>';
@@ -1028,8 +1041,12 @@ function saveHinshitsuForm(){
   var revRows=[];for(var ki=0;ki<5;ki++) revRows.push([gv('hp_rev_'+ki+'_0'),gv('hp_rev_'+ki+'_1')].join('|'));
   data.rev_table=revRows.join('\n');
   data.apv_creator=gv('hp_apv_creator');
+  data.change_reason=gv('hp_change_reason');
+  // 進捗管理テーブル
+  var progRows=[];for(var pi=0;pi<4;pi++){var pcols=[];for(var pc=0;pc<4;pc++) pcols.push(gv('hp_prog_'+pi+'_'+pc));progRows.push(pcols.join('|'));}
+  data.progress_table=progRows.join('\n');
   showLoading('保存中...');
-  google.script.run.withSuccessHandler(function(r){hideLoading();showToast(r.message,r.success?'success':'error');
+  google.script.run.withSuccessHandler(function(r){hideLoading();showToast(r.message,r.success?'success':'error');if(r.success) afterFormSaved();
   }).withFailureHandler(function(e){hideLoading();showToast(e.message,'error');
   }).saveGenericFormData(currentProject.projectSSId,'品質計画書',data);
 }
@@ -1049,6 +1066,8 @@ function loadHinshitsuData(){
     for(var ph=0;ph<3;ph++){if(d['risk'+ph+'_table']){d['risk'+ph+'_table'].split('\n').forEach(function(rs,ri){rs.split('|').forEach(function(v,rc){var el=document.getElementById('hp_risk'+ph+'_'+ri+'_'+rc);if(el&&v) el.value=v;});});}}
     if(d.rev_table){d.rev_table.split('\n').forEach(function(rs,ki){rs.split('|').forEach(function(v,c){var el=document.getElementById('hp_rev_'+ki+'_'+c);if(el&&v) el.value=v;});});}
     if(d.apv_creator) setVal('hp_apv_creator',d.apv_creator);
+    if(d.change_reason) setVal('hp_change_reason',d.change_reason);
+    if(d.progress_table){d.progress_table.split('\n').forEach(function(rs,pi){rs.split('|').forEach(function(v,pc){var el=document.getElementById('hp_prog_'+pi+'_'+pc);if(el&&v) el.value=v;});});}
   }).getGenericFormData(currentProject.projectSSId,'品質計画書');
 }
 
@@ -1241,18 +1260,40 @@ function openItakuKeikakuForm(){
     h+='</tr>';
   }
   h+='</tbody></table></div></div>';
+  // 委託総額・外注率
+  h+='<div class="gf-section"><div class="gf-section-title">集計</div>';
+  h+=fRow(fG('h','委託総額（千円）',fIn('ik_total'))+fG('h','外注率（％）',fIn('ik_gaichu_rate')));
+  h+='</div>';
+  // 参照欄
+  h+='<div class="gf-section"><div class="gf-section-title">参照欄</div>';
+  h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:12px;color:#555;line-height:1.8;">';
+  h+='<div><strong>［委託理由］</strong><br>A 補助業務<br>B 現場専業的業務<br>C 特殊技術業務<br>D-1 総合管理業務の一部（緊急・特殊）<br>D-2 地元企業<br>E 技術未習(将来必要)業務<br>F-1 要員不足(一般技術者)<br>F-2 要員不足（若年技術者）<br>G 子会社育成</div>';
+  h+='<div><strong>［推薦理由］</strong><br>a 特殊専門技術<br>b 地域事情<br>c 緊急業務<br>d-1 総合管理業務の一部<br>d-2 地元企業<br>e-1 優秀な情報・設備保有<br>e-2 当社業務に精通<br>e-3 現地精通<br>e-4 小規模・多量・短納期<br>e-5 割付発注<br>f 子会社育成</div>';
+  h+='</div>';
+  h+='<div style="margin-top:8px;"><label><input type="checkbox" id="ik_yojin_check"> 社内での要員調整をしたが、要員確保ができなかった</label></div>';
+  h+='<div style="margin-top:8px;font-size:12px;color:#555;"><strong>〇直接委託の場合</strong><br>①医師,弁護士,公認会計士の業務 ②不動産の登記,鑑定 ③国・地方自治体・公共機関・学術機関への調査,研究 ④翻訳,通訳 ⑤厚生施設運営 ⑥品質・環境マネジメントシステム審査登録 ⑦上記以外で委託成果品が得られない契約</div>';
+  h+='</div>';
   // 承認基準
   h+='<div class="gf-section"><div class="gf-section-title">承認基準</div>';
-  h+='<p style="font-size:12px;color:#555;margin-bottom:6px;">委託内容により、以下の承認が必要となる。</p>';
-  h+='<div class="gf-table-wrap"><table class="gf-table"><thead><tr><th>承認項目</th><th>基準</th><th>承認者</th></tr></thead><tbody>';
-  h+='<tr><td>委託先の選定</td><td>特命の場合</td><td>本部長</td></tr>';
-  h+='<tr><td>委託額</td><td>500万円以上</td><td>本部長</td></tr>';
-  h+='<tr><td>委託額</td><td>500万円未満</td><td>主管部長</td></tr>';
+  h+='<div class="gf-table-wrap"><table class="gf-table"><thead><tr><th>条件</th><th>本部長</th><th>主管部長</th></tr></thead><tbody>';
+  h+='<tr><td>受注額が3,000万円以上の委託</td><td style="text-align:center;">○</td><td style="text-align:center;">―</td></tr>';
+  h+='<tr><td>受注額3,000万円未満：総委託費1,000万円以上</td><td style="text-align:center;">○</td><td style="text-align:center;">―</td></tr>';
+  h+='<tr><td>受注額3,000万円未満：総委託費1,000万円未満</td><td style="text-align:center;">―</td><td style="text-align:center;">○</td></tr>';
+  h+='<tr><td>簡易契約による「簡易委託受注・委託発注実行書」の場合</td><td style="text-align:center;">―</td><td style="text-align:center;">○</td></tr>';
   h+='</tbody></table></div></div>';
-  // 起案日
+  // 添付書類
+  h+='<div class="gf-section"><div class="gf-section-title">添付書類</div>';
+  h+=fG('','添付書類',fTa('ik_attachments',2,'技術習得計画、その他'));
+  h+='</div>';
+  // 起案
   h+='<div class="gf-section"><div class="gf-section-title">起案</div>';
   h+=fRow(fG('h','起案日',fDate('ik_kian_date'))+fG('h','起案者',fIn('ik_kiansya')));
   h+='</div>';
+  // 改訂履歴
+  h+='<div class="gf-section"><div class="gf-section-title">改訂履歴</div>';
+  h+='<div class="gf-table-wrap"><table class="gf-table"><thead><tr><th>No</th><th>改訂日</th><th>改訂内容</th></tr></thead><tbody>';
+  for(var rvi=0;rvi<3;rvi++){h+='<tr><td style="text-align:center;">'+(rvi+1)+'</td><td><input type="date" class="gf-table-input" id="ik_rev_'+rvi+'_0"></td><td><input type="text" class="gf-table-input" id="ik_rev_'+rvi+'_1"></td></tr>';}
+  h+='</tbody></table></div></div>';
   // 承認欄
   h+='<div class="gf-section"><div class="gf-section-title">承認</div>';
   h+=fRow('<div class="form-group third"><label>本部長</label>'+fIn('ik_honbucho','',true)+'</div><div class="form-group third"><label>部長</label>'+fIn('ik_bucho','',true)+'</div><div class="form-group third"><label>ＧＭ</label>'+fIn('ik_gm')+'</div>');
@@ -1268,13 +1309,17 @@ function saveItakuKeikakuForm(){
   var data={code:gv('ik_code'),kenmei:gv('ik_kenmei'),customer:gv('ik_customer'),amount:gv('ik_amount'),
     period_from:gv('ik_period_from'),period_to:gv('ik_period_to'),gyomu:gv('ik_gyomu'),
     honbucho:gv('ik_honbucho'),bucho:gv('ik_bucho'),gm:gv('ik_gm'),
-    kian_date:gv('ik_kian_date'),kiansya:gv('ik_kiansya')};
+    kian_date:gv('ik_kian_date'),kiansya:gv('ik_kiansya'),
+    total:gv('ik_total'),gaichu_rate:gv('ik_gaichu_rate'),attachments:gv('ik_attachments')};
   var s=document.querySelector('input[name="ik_safety"]:checked');data.safety=s?s.value:'';
+  var yojin=document.getElementById('ik_yojin_check');data.yojin_check=yojin&&yojin.checked?'1':'0';
   var rows=[];
   for(var i=0;i<4;i++){var cols=[];for(var c=0;c<6;c++)cols.push(gv('ik_plan_'+i+'_'+c));rows.push(cols.join('|'));}
   data.plan_table=rows.join('\n');
+  var revRows=[];for(var rvi=0;rvi<3;rvi++) revRows.push([gv('ik_rev_'+rvi+'_0'),gv('ik_rev_'+rvi+'_1')].join('|'));
+  data.rev_table=revRows.join('\n');
   showLoading('保存中...');
-  google.script.run.withSuccessHandler(function(r){hideLoading();showToast(r.message,r.success?'success':'error');
+  google.script.run.withSuccessHandler(function(r){hideLoading();showToast(r.message,r.success?'success':'error');if(r.success) afterFormSaved();
   }).withFailureHandler(function(e){hideLoading();showToast(e.message,'error');
   }).saveGenericFormData(currentProject.projectSSId,'委託計画書',data);
 }
@@ -1282,9 +1327,11 @@ function loadItakuKeikakuForm(){
   if(!currentProject||!currentProject.projectSSId) return;
   google.script.run.withSuccessHandler(function(d){
     if(!d) return;
-    ['code','kenmei','customer','amount','period_from','period_to','gyomu','honbucho','bucho','gm','kian_date','kiansya'].forEach(function(k){var el=document.getElementById('ik_'+k);if(el&&d[k]) el.value=d[k];});
+    ['code','kenmei','customer','amount','period_from','period_to','gyomu','honbucho','bucho','gm','kian_date','kiansya','total','gaichu_rate','attachments'].forEach(function(k){var el=document.getElementById('ik_'+k);if(el&&d[k]) el.value=d[k];});
     if(d.safety) document.querySelectorAll('input[name="ik_safety"]').forEach(function(r){if(r.value===d.safety) r.checked=true;});
+    if(d.yojin_check==='1'){var yel=document.getElementById('ik_yojin_check');if(yel)yel.checked=true;}
     if(d.plan_table){d.plan_table.split('\n').forEach(function(rs,i){rs.split('|').forEach(function(v,c){var el=document.getElementById('ik_plan_'+i+'_'+c);if(el) el.value=v;});});}
+    if(d.rev_table){d.rev_table.split('\n').forEach(function(rs,rvi){rs.split('|').forEach(function(v,c){var el=document.getElementById('ik_rev_'+rvi+'_'+c);if(el&&v) el.value=v;});});}
   }).getGenericFormData(currentProject.projectSSId,'委託計画書');
 }
 
@@ -1308,9 +1355,17 @@ function openKaniItakuForm(){
   h+=fRow(fG('h','期間（自）',fDate('ki_period_from'))+fG('h','期間（至）',fDate('ki_period_to')));
   h+='</div>';
   h+='<div class="gf-section"><div class="gf-section-title">実行内容</div>';
-  var costItems=['人件費','法定厚生費','委託費','設計委託費','直接経費','旅費交通費','その他原価'];
+  var costItems=['人件費','法定厚生費','委託費','設計委託費','直接経費','間接原価'];
   costItems.forEach(function(ci,idx){h+=fRow(fG('h',ci,fIn('ki_cost_'+idx)));});
+  h+=fRow(fG('h','計',fIn('ki_cost_total'))+fG('h','委託率',fIn('ki_itaku_rate')));
+  h+=fG('','粗利益',fIn('ki_arari'));
+  h+='<p style="font-size:11px;color:#777;">※需要箇所から「完了通知書・請求書」を受領した場合は、速やかに営業本部の担当者へ送付ください。</p>';
   h+='</div>';
+  // 改訂履歴
+  h+='<div class="gf-section"><div class="gf-section-title">改訂履歴</div>';
+  h+='<div class="gf-table-wrap"><table class="gf-table"><thead><tr><th>No</th><th>改訂日</th><th>改訂内容</th></tr></thead><tbody>';
+  for(var kir=0;kir<3;kir++){h+='<tr><td style="text-align:center;">'+(kir+1)+'</td><td><input type="date" class="gf-table-input" id="ki_rev_'+kir+'_0"></td><td><input type="text" class="gf-table-input" id="ki_rev_'+kir+'_1"></td></tr>';}
+  h+='</tbody></table></div></div>';
   // 作成・承認
   h+=fApproval([{id:'ki_apv_jisshi',label:'実施'},{id:'ki_apv_approval',label:'承認'}]);
   // メモ欄
@@ -1330,10 +1385,12 @@ function saveKaniItakuForm(){
     shijisha:gv('ki_shijisha'),gyomu:gv('ki_gyomu'),amount:gv('ki_amount'),uketsuke:gv('ki_uketsuke'),
     period_from:gv('ki_period_from'),period_to:gv('ki_period_to')};
   var kb=document.querySelector('input[name="ki_kubun"]:checked');data.kubun=kb?kb.value:'';
-  for(var i=0;i<7;i++) data['cost_'+i]=gv('ki_cost_'+i);
+  for(var i=0;i<6;i++) data['cost_'+i]=gv('ki_cost_'+i);
+  data.cost_total=gv('ki_cost_total');data.itaku_rate=gv('ki_itaku_rate');data.arari=gv('ki_arari');
   data.memo=gv('ki_memo');
+  var revRows=[];for(var kir=0;kir<3;kir++) revRows.push([gv('ki_rev_'+kir+'_0'),gv('ki_rev_'+kir+'_1')].join('|'));data.rev_table=revRows.join('\n');
   showLoading('保存中...');
-  google.script.run.withSuccessHandler(function(r){hideLoading();showToast(r.message,r.success?'success':'error');
+  google.script.run.withSuccessHandler(function(r){hideLoading();showToast(r.message,r.success?'success':'error');if(r.success) afterFormSaved();
   }).withFailureHandler(function(e){hideLoading();showToast(e.message,'error');
   }).saveGenericFormData(currentProject.projectSSId,'簡易委託受注実行書',data);
 }
@@ -1343,8 +1400,10 @@ function loadKaniItakuForm(){
     if(!d) return;
     ['date','dept','tanto','renraku','code','kenmei','shiji_date','customer','shijisha','gyomu','amount','uketsuke','period_from','period_to'].forEach(function(k){var el=document.getElementById('ki_'+k);if(el&&d[k]) el.value=d[k];});
     if(d.kubun) document.querySelectorAll('input[name="ki_kubun"]').forEach(function(r){if(r.value===d.kubun) r.checked=true;});
-    for(var i=0;i<7;i++){var el=document.getElementById('ki_cost_'+i);if(el&&d['cost_'+i]) el.value=d['cost_'+i];}
+    for(var i=0;i<6;i++){var el=document.getElementById('ki_cost_'+i);if(el&&d['cost_'+i]) el.value=d['cost_'+i];}
+    ['cost_total','itaku_rate','arari'].forEach(function(k){if(d[k])setVal('ki_'+k,d[k]);});
     if(d.memo) setVal('ki_memo',d.memo);
+    if(d.rev_table){d.rev_table.split('\n').forEach(function(rs,kir){rs.split('|').forEach(function(v,c){var el=document.getElementById('ki_rev_'+kir+'_'+c);if(el&&v)el.value=v;});});}
   }).getGenericFormData(currentProject.projectSSId,'簡易委託受注実行書');
 }
 
@@ -1677,6 +1736,7 @@ function openRiskEvalForm(){
   h+=formSaveBtn("saveRiskEvalForm()");
   h+='</div></div>';
   area.innerHTML=h;showFormPage();
+  autoFillBaseInfo({code:'re_code',kenmei:'re_kenmei',contractor:'re_customer',amount:'re_amount'});
   loadRiskEvalForm();
 }
 function saveRiskEvalForm(){
@@ -2001,11 +2061,63 @@ function loadJuchuPlanForm(){if(!currentProject||!currentProject.projectSSId)ret
 // ===== 業務品質文書管理台帳 =====
 function openDocLedgerForm(){var p=currentProject,area=document.getElementById('sectionFormArea');
   var h=formHeader('planning','library_books','業務品質文書管理台帳');
-  h+='<div class="gf-section"><div class="gf-section-title">基本情報</div>';h+=fRow(fG('h','件名コード',fIn('dl_code',p.code,true))+fG('h','件名',fIn('dl_kenmei',p.kenmeiName,true)));h+='</div>';
-  h+='<div class="gf-section"><div class="gf-section-title">文書管理記録</div><div class="gf-table-wrap"><table class="gf-table"><thead><tr><th>No</th><th>必要記録</th><th>記録となる資料</th><th>品質管理</th><th>業務実施</th><th>チェック</th></tr></thead><tbody>';
-  for(var i=0;i<15;i++){h+='<tr><td style="text-align:center;">'+(i+1)+'</td>';for(var c=0;c<5;c++) h+='<td><input type="text" class="gf-table-input" id="dl_r_'+i+'_'+c+'"></td>';h+='</tr>';}
-  h+='</tbody></table></div></div>';h+=formSaveBtn("saveTableForm('文書管理台帳','dl',15,5)");h+='</div></div>';
-  area.innerHTML=h;showFormPage();loadTableForm('文書管理台帳','dl',15,5,['code','kenmei']);}
+  h+='<div class="gf-section"><div class="gf-section-title">基本情報</div>';h+=fRow(fG('h','件名コード',fIn('dl_code',p.code,true))+fG('h','件名',fIn('dl_kenmei',p.kenmeiName,true)));
+  h+='<p style="font-size:12px;color:#777;">凡例　●：該当　〇：場合により該当　※：品質管理と兼用</p></div>';
+  var ledgerItems=[
+    {no:1,rec:'契約内容確認記録',docs:['◆契約内容確認書','○業務受付処理表','○積算書作成依頼','○見積依頼書','〇リスク対策シート','〇積算書','〇提示額応答記録','〇受注情報','〇議事録類','〇設計業務依頼票','〇簡易委託受注・実行書'],mk:['●','','','','〇','●','','','','','●']},
+    {no:2,rec:'品質計画記録',docs:['◆品質計画書','〇実施計画書','〇安全計画書','◆安全事前評価議事録','〇作業員名簿','〇リスク対策シート','〇品質保証計画'],mk:['●','●','●','●','●','〇','●']},
+    {no:3,rec:'顧客所有物管理記録',docs:['◆顧客所有物確認書','〇借用書','〇顧客所有物リスト','◆顧客所有物返却記録','〇送付状','〇議事録等'],mk:['●','●','●','●','●','●']},
+    {no:4,rec:'計測機器管理記録',docs:['◆計測機器使用記録','◆計測機器校正記録'],mk:['●','●']},
+    {no:5,rec:'委託計画記録',docs:['◆委託計画書','◆委託先適合性確認票','◆委託先品質監査チェックシート','◆変更依頼・指示書','◆支給品・貸与品確認書','〇借用書','〇廃棄証明届出書','〇仕様書チェック表'],mk:['●','●','●','●','●','●','●','●']},
+    {no:6,rec:'委託検査記録',docs:['◆委託成果品検査記録'],mk:['●']},
+    {no:7,rec:'設計検査記録',docs:['◆設計検査記録'],mk:['●']},
+    {no:8,rec:'工程内検査記録',docs:['◆工程内検査記録'],mk:['●']},
+    {no:9,rec:'妥当性確認記録',docs:['◆妥当性確認記録'],mk:['●']},
+    {no:10,rec:'業務進捗管理記録',docs:['◆議事録','〇工程表','〇パンチリスト'],mk:['●','●','●']},
+    {no:11,rec:'是正処置記録',docs:['◆是正処置管理票'],mk:['●']},
+    {no:12,rec:'改善提案記録',docs:['◆改善提案処置管理票'],mk:['●']}
+  ];
+  h+='<div class="gf-section"><div class="gf-section-title">文書管理チェックリスト</div>';
+  ledgerItems.forEach(function(item){
+    h+='<div style="border:1px solid #ddd;border-radius:6px;padding:10px;margin-bottom:10px;">';
+    h+='<div style="display:flex;gap:8px;align-items:center;margin-bottom:6px;"><span style="font-weight:700;background:#e3f2fd;padding:2px 8px;border-radius:4px;">'+item.no+'</span><strong>'+escH(item.rec)+'</strong></div>';
+    h+='<div style="display:flex;flex-wrap:wrap;gap:4px 16px;">';
+    item.docs.forEach(function(doc,di){
+      var isBold=doc.charAt(0)==='◆';
+      h+='<label style="font-size:13px;display:flex;align-items:center;gap:4px;'+(isBold?'font-weight:600;':'')+'"><input type="checkbox" id="dl_c_'+item.no+'_'+di+'"';
+      if(item.mk[di]==='●')h+=' checked';
+      h+='> '+escH(doc)+'</label>';
+    });
+    h+='</div>';
+    h+='<div class="form-row" style="margin-top:6px;"><div class="form-group" style="flex:1;"><label style="font-size:11px;">チェック欄・備考</label><input type="text" class="form-input" id="dl_note_'+item.no+'" style="font-size:12px;"></div></div>';
+    h+='</div>';
+  });
+  h+='</div>';
+  // 改訂履歴
+  h+='<div class="gf-section"><div class="gf-section-title">改訂履歴</div>';
+  h+='<div class="gf-table-wrap"><table class="gf-table"><thead><tr><th>No</th><th>改訂日</th><th>改訂内容</th></tr></thead><tbody>';
+  for(var dri=0;dri<3;dri++){h+='<tr><td style="text-align:center;">'+(dri+1)+'</td><td><input type="date" class="gf-table-input" id="dl_rev_'+dri+'_0"></td><td><input type="text" class="gf-table-input" id="dl_rev_'+dri+'_1"></td></tr>';}
+  h+='</tbody></table></div></div>';
+  h+=formSaveBtn("saveDocLedgerForm()");h+='</div></div>';
+  area.innerHTML=h;showFormPage();loadDocLedgerForm();}
+function saveDocLedgerForm(){if(!currentProject||!currentProject.projectSSId)return;
+  var data={code:gv('dl_code'),kenmei:gv('dl_kenmei')};
+  for(var n=1;n<=12;n++){
+    data['note_'+n]=gv('dl_note_'+n);
+    var checks=[];document.querySelectorAll('[id^="dl_c_'+n+'_"]').forEach(function(el){checks.push(el.checked?'1':'0');});
+    data['checks_'+n]=checks.join('|');
+  }
+  var revRows=[];for(var dri=0;dri<3;dri++) revRows.push([gv('dl_rev_'+dri+'_0'),gv('dl_rev_'+dri+'_1')].join('|'));data.rev_table=revRows.join('\n');
+  showLoading('保存中...');google.script.run.withSuccessHandler(function(r){hideLoading();showToast(r.message,r.success?'success':'error');if(r.success) afterFormSaved();}).withFailureHandler(function(e){hideLoading();showToast(e.message,'error');}).saveGenericFormData(currentProject.projectSSId,'文書管理台帳',data);}
+function loadDocLedgerForm(){if(!currentProject||!currentProject.projectSSId)return;
+  google.script.run.withSuccessHandler(function(d){if(!d)return;
+    ['code','kenmei'].forEach(function(k){var el=document.getElementById('dl_'+k);if(el&&d[k])el.value=d[k];});
+    for(var n=1;n<=12;n++){
+      if(d['note_'+n])setVal('dl_note_'+n,d['note_'+n]);
+      if(d['checks_'+n]){d['checks_'+n].split('|').forEach(function(v,di){var el=document.getElementById('dl_c_'+n+'_'+di);if(el)el.checked=(v==='1');});}
+    }
+    if(d.rev_table){d.rev_table.split('\n').forEach(function(rs,dri){rs.split('|').forEach(function(v,c){var el=document.getElementById('dl_rev_'+dri+'_'+c);if(el&&v)el.value=v;});});}
+  }).getGenericFormData(currentProject.projectSSId,'文書管理台帳');}
 
 // ===== 工程表 =====
 function openKouteiForm(){var p=currentProject,area=document.getElementById('sectionFormArea');
@@ -2031,23 +2143,40 @@ function openAnzenForm(){var p=currentProject,area=document.getElementById('sect
   h+=fG('','安全計画書における作業内容について、関係法令を確認したか','<div class="contract-yn"><label><input type="radio" name="az_hourei" value="YES"> YES</label><label><input type="radio" name="az_hourei" value="NO"> NO</label></div>');
   h+=fG('','判定','<div class="gf-radio-group"><label class="gf-radio"><input type="radio" name="az_hantei" value="承認"> 計画書修正要求なし。よって、計画書内容を承認する。</label><label class="gf-radio"><input type="radio" name="az_hantei" value="修正要求"> 計画書修正要求あり。</label></div>');
   h+='</div>';
+  // 資料修正
+  h+='<div class="gf-section"><div class="gf-section-title">資料修正</div>';
+  h+=fG('','修正内容',fTa('az_shusei_content',3));h+='</div>';
   // 修正結果の確認
   h+='<div class="gf-section"><div class="gf-section-title">修正結果の確認</div>';
-  h+=fG('','修正確認結果',fTa('az_shusei_result',3));h+='</div>';
+  h+=fG('','修正確認結果',fTa('az_shusei_result',3));
+  h+='<div class="gf-table-wrap"><table class="gf-table"><thead><tr><th>本部長</th><th>安全管理担当職</th><th>企画総括部長</th><th>部長</th><th>担当職</th><th>ＧＭ</th><th>メンバー</th></tr></thead><tbody><tr>';
+  ['honbucho','anzen','kikaku','bucho','tanto','gm','member'].forEach(function(r){h+='<td><input type="text" class="gf-table-input" id="az_stamp_'+r+'" style="text-align:center;"></td>';});
+  h+='</tr></tbody></table></div>';
+  h+='<p style="font-size:11px;color:#777;margin-top:6px;">（注）安全管理担当職までの承認後、写しを社会基盤企画総括部に提出してください。</p></div>';
+  // 改訂履歴
+  h+='<div class="gf-section"><div class="gf-section-title">改訂履歴</div>';
+  h+='<div class="gf-table-wrap"><table class="gf-table"><thead><tr><th>No</th><th>改訂日</th><th>改訂内容</th></tr></thead><tbody>';
+  for(var azr=0;azr<3;azr++){h+='<tr><td style="text-align:center;">'+(azr+1)+'</td><td><input type="date" class="gf-table-input" id="az_rev_'+azr+'_0"></td><td><input type="text" class="gf-table-input" id="az_rev_'+azr+'_1"></td></tr>';}
+  h+='</tbody></table></div>';
+  h+='<p style="font-size:11px;color:#777;margin-top:6px;">最新版は、BC1-001 安全事前評価実施要領を確認すること</p></div>';
   // 承認欄
   h+=fApproval([{id:'az_apv_honbucho',label:'本部長'},{id:'az_apv_bucho',label:'部長'},{id:'az_apv_gm',label:'GM'}]);
   h+=formSaveBtn("saveAnzenForm()");h+='</div></div>';area.innerHTML=h;showFormPage();
   autoFillBaseInfo({code:'az_code',kenmei:'az_kenmei',contractor:'az_customer',honbucho:'az_apv_honbucho',bucho:'az_apv_bucho'});
   loadAnzenForm();}
 function saveAnzenForm(){if(!currentProject||!currentProject.projectSSId)return;
-  var data={code:gv('az_code'),kenmei:gv('az_kenmei'),customer:gv('az_customer'),period:gv('az_period'),datetime:gv('az_datetime'),place:gv('az_place'),materials:gv('az_materials'),instructions:gv('az_instructions'),hourei:gv('az_hourei'),shusei_result:gv('az_shusei_result'),apv_honbucho:gv('az_apv_honbucho'),apv_bucho:gv('az_apv_bucho'),apv_gm:gv('az_apv_gm')};
+  var data={code:gv('az_code'),kenmei:gv('az_kenmei'),customer:gv('az_customer'),period:gv('az_period'),datetime:gv('az_datetime'),place:gv('az_place'),materials:gv('az_materials'),instructions:gv('az_instructions'),hourei:gv('az_hourei'),shusei_content:gv('az_shusei_content'),shusei_result:gv('az_shusei_result'),apv_honbucho:gv('az_apv_honbucho'),apv_bucho:gv('az_apv_bucho'),apv_gm:gv('az_apv_gm')};
+  ['honbucho','anzen','kikaku','bucho','tanto','gm','member'].forEach(function(r){data['stamp_'+r]=gv('az_stamp_'+r);});
+  var azRevRows=[];for(var azr=0;azr<3;azr++) azRevRows.push([gv('az_rev_'+azr+'_0'),gv('az_rev_'+azr+'_1')].join('|'));data.rev_table=azRevRows.join('\n');
   for(var i=0;i<7;i++){var s=document.querySelector('input[name="az_a'+i+'"]:checked');data['a'+i]=s?s.value:'';}
   var hantei=document.querySelector('input[name="az_hantei"]:checked');data.hantei=hantei?hantei.value:'';
   showLoading('保存中...');google.script.run.withSuccessHandler(function(r){hideLoading();showToast(r.message,r.success?'success':'error');if(r.success) afterFormSaved();}).withFailureHandler(function(e){hideLoading();showToast(e.message,'error');}).saveGenericFormData(currentProject.projectSSId,'安全事前評価議事録',data);}
 function loadAnzenForm(){if(!currentProject||!currentProject.projectSSId)return;
-  google.script.run.withSuccessHandler(function(d){if(!d)return;['code','kenmei','customer','period','datetime','place','materials','instructions','hourei','shusei_result','apv_honbucho','apv_bucho','apv_gm'].forEach(function(k){var el=document.getElementById('az_'+k);if(el&&d[k])el.value=d[k];});
+  google.script.run.withSuccessHandler(function(d){if(!d)return;['code','kenmei','customer','period','datetime','place','materials','instructions','hourei','shusei_content','shusei_result','apv_honbucho','apv_bucho','apv_gm'].forEach(function(k){var el=document.getElementById('az_'+k);if(el&&d[k])el.value=d[k];});
+    ['honbucho','anzen','kikaku','bucho','tanto','gm','member'].forEach(function(r){var el=document.getElementById('az_stamp_'+r);if(el&&d['stamp_'+r])el.value=d['stamp_'+r];});
     for(var i=0;i<7;i++){if(d['a'+i])document.querySelectorAll('input[name="az_a'+i+'"]').forEach(function(r){if(r.value===d['a'+i])r.checked=true;});}
-    if(d.hantei)document.querySelectorAll('input[name="az_hantei"]').forEach(function(r){if(r.value===d.hantei)r.checked=true;});}).getGenericFormData(currentProject.projectSSId,'安全事前評価議事録');}
+    if(d.hantei)document.querySelectorAll('input[name="az_hantei"]').forEach(function(r){if(r.value===d.hantei)r.checked=true;});
+    if(d.rev_table){d.rev_table.split('\n').forEach(function(rs,azr){rs.split('|').forEach(function(v,c){var el=document.getElementById('az_rev_'+azr+'_'+c);if(el&&v)el.value=v;});});}}).getGenericFormData(currentProject.projectSSId,'安全事前評価議事録');}
 
 // ===== 計測機器使用記録 =====
 function openKeisokuShiyoForm(){var p=currentProject,area=document.getElementById('sectionFormArea');
