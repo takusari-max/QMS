@@ -1429,7 +1429,8 @@ function openKokyakuForm(){
   h+=formSaveBtn("saveKokyakuForm()");
   h+='</div></div>';
   area.innerHTML=h;showFormPage();
-  autoFillBaseInfo({code:'ky_code',kenmei:'ky_kenmei',jisshi:'ky_responsible',bucho:'ky_apv_bucho',jisshi:'ky_apv_jisshi'});
+  autoFillBaseInfo({code:'ky_code',kenmei:'ky_kenmei',bucho:'ky_apv_bucho',jisshi:'ky_apv_jisshi'});
+  setTimeout(function(){setVal('ky_responsible',document.getElementById('ky_apv_jisshi')?document.getElementById('ky_apv_jisshi').value:'');},1500);
   loadKokyakuForm();
 }
 function saveKokyakuForm(){
@@ -1518,7 +1519,8 @@ function openShikyuhinForm(){
   h+=formSaveBtn("saveShikyuhinForm()");
   h+='</div></div>';
   area.innerHTML=h;showFormPage();
-  autoFillBaseInfo({code:'sk_code',kenmei:'sk_kenmei',jisshi:'sk_responsible',bucho:'sk_apv_bucho',jisshi:'sk_apv_jisshi'});
+  autoFillBaseInfo({code:'sk_code',kenmei:'sk_kenmei',bucho:'sk_apv_bucho',jisshi:'sk_apv_jisshi'});
+  setTimeout(function(){setVal('sk_responsible',document.getElementById('sk_apv_jisshi')?document.getElementById('sk_apv_jisshi').value:'');},1500);
   loadShikyuhinForm();
 }
 function saveShikyuhinForm(){
