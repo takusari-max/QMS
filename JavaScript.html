@@ -66,6 +66,7 @@ var FORM_REGISTRY = [
       {k:'jisshi',label:'実施責任者',type:'select_staff',other:true},
       {k:'shinsa',label:'審査責任者',type:'select_staff',other:true},
       {k:'approver',label:'承認者',type:'select_approver',other:true},
+      {k:'gm',label:'GM',type:'select_staff',other:true},
       {k:'tokki',label:'特記事項',type:'textarea'}]},
   // 委託管理
   {id:'itaku_keikaku',title:'委託計画書/変更書',phase:'outsource',icon:'file_copy',action:'itaku_keikaku_form',
@@ -988,6 +989,7 @@ function openHinshitsuForm(){
   showFormPage();
   autoFillBaseInfo({code:'hp_code',kenmei:'hp_kenmei',contractor:'hp_customer',kikiStart:'hp_period_from',kikiEnd:'hp_period_to',approver:'hp_apv_approver',shinsa:'hp_apv_reviewer',jisshi:'hp_apv_responsible'});
   loadHinshitsuData();
+  autoFillCreator('hp_apv_creator');
 }
 function saveHinshitsuForm(){
   if(!currentProject||!currentProject.projectSSId) return;
@@ -1123,6 +1125,7 @@ function openHinshitsuTokuteiForm(){
   showFormPage();
   autoFillBaseInfo({code:'ht_code',kenmei:'ht_kenmei',contractor:'ht_customer',kikiStart:'ht_period_from',kikiEnd:'ht_period_to',approver:'ht_apv_approver',shinsa:'ht_apv_reviewer',jisshi:'ht_apv_responsible'});
   loadHinshitsuTokuteiData();
+  autoFillCreator('ht_apv_creator');
 }
 function saveHinshitsuTokuteiForm(){
   if(!currentProject||!currentProject.projectSSId) return;
@@ -1260,6 +1263,7 @@ function openItakuKeikakuForm(){
   area.innerHTML=h;showFormPage();
   autoFillBaseInfo({code:'ik_code',kenmei:'ik_kenmei',contractor:'ik_customer',kikiStart:'ik_period_from',kikiEnd:'ik_period_to',honbucho:'ik_honbucho',bucho:'ik_bucho',gm:'ik_gm',amount:'ik_amount'});
   loadItakuKeikakuForm();
+  autoFillCreator('ik_kiansya');
 }
 function saveItakuKeikakuForm(){
   if(!currentProject||!currentProject.projectSSId) return;
@@ -1613,6 +1617,14 @@ function autoFillBaseInfo(fm){
     }).getFormBaseInfo(p.projectSSId,currentDepartment,currentHonbu);
   }
 }
+function autoFillCreator(fieldId){
+  google.script.run.withSuccessHandler(function(email){
+    google.script.run.withSuccessHandler(function(name){
+      var el=document.getElementById(fieldId);
+      if(el && !el.value) el.value=name||email;
+    }).getNameByEmail(email);
+  }).getCurrentUserEmail();
+}
 function loadFormData(sheetName,fieldIds,cb){
   var p=currentProject;
   if(!p||!p.projectSSId)return;
@@ -1646,41 +1658,144 @@ function saveFormData(sheetName,fieldIds,cb){
 }
 
 // ===== リスク評価シートフォーム =====
+function reRiskScore(prefix,count){
+  var score=0,total=0;
+  for(var i=1;i<=count;i++){var sel=document.querySelector('input[name="'+prefix+i+'"]:checked');
+    if(sel){var v=sel.value;score+=(v==='◎'?3:v==='○'?2:v==='△'?1:0);total+=3;}}
+  return {score:score,total:total,rate:total>0?score/total:0};
+}
+function reRiskLevel(rate){
+  if(rate>=0.8) return '評価率によるリスクは大です';
+  if(rate>=0.5) return '評価率によるリスクは中です';
+  if(rate>=0.2) return '評価率によるリスクは小です';
+  if(rate>0) return '評価率によるリスクは極めて小です';
+  return '';
+}
+function reUpdateCalc(){
+  var s1=reRiskScore('re_s1_r',10);
+  document.getElementById('re_s1_score').textContent=s1.score;
+  document.getElementById('re_s1_total').textContent=s1.total;
+  document.getElementById('re_s1_rate').textContent=s1.total>0?(s1.rate*100).toFixed(1)+'%':'';
+  document.getElementById('re_s1_level').textContent=reRiskLevel(s1.rate);
+  var s2a=reRiskScore('re_s2a_r',10);
+  document.getElementById('re_s2a_score').textContent=s2a.score;
+  document.getElementById('re_s2a_total').textContent=s2a.total;
+  var s2b=reRiskScore('re_s2b_r',10);
+  document.getElementById('re_s2b_score').textContent=s2b.score;
+  document.getElementById('re_s2b_total').textContent=s2b.total;
+  var s2score=s2a.score+s2b.score,s2total=s2a.total+s2b.total,s2rate=s2total>0?s2score/s2total:0;
+  document.getElementById('re_s2_score').textContent=s2score;
+  document.getElementById('re_s2_total').textContent=s2total;
+  document.getElementById('re_s2_rate').textContent=s2total>0?(s2rate*100).toFixed(1)+'%':'';
+  document.getElementById('re_s2_level').textContent=reRiskLevel(s2rate);
+}
+function reRiskTable(prefix,items){
+  var h='<div class="gf-table-wrap"><table class="gf-table"><thead><tr><th style="width:30px;">No</th><th style="width:120px;">リスク項目</th><th>リスク項目詳細</th><th style="width:100px;">回答</th><th style="width:120px;">備考</th></tr></thead><tbody>';
+  items.forEach(function(it,idx){
+    var n=idx+1;
+    h+='<tr><td style="text-align:center;">'+n+'</td>';
+    if(it.editable){
+      h+='<td><input type="text" class="gf-table-input" id="'+prefix+'_label'+n+'" value="'+escH(it.l||'')+'"></td>';
+      h+='<td><input type="text" class="gf-table-input" id="'+prefix+'_detail'+n+'" value="'+escH(it.d||'')+'"></td>';
+    } else {
+      h+='<td style="font-weight:600;font-size:12px;">'+escH(it.l)+'</td>';
+      h+='<td style="font-size:12px;">'+escH(it.d)+'</td>';
+    }
+    h+='<td><div class="contract-yn" style="flex-direction:column;gap:2px;">';
+    ['◎','○','△','×'].forEach(function(o){h+='<label style="font-size:12px;"><input type="radio" name="'+prefix+'_r'+n+'" value="'+o+'" onchange="reUpdateCalc()"> '+o+'</label>';});
+    h+='</div></td>';
+    h+='<td><input type="text" class="gf-table-input" id="'+prefix+'_biko'+n+'"></td></tr>';
+  });
+  h+='</tbody></table></div>';
+  return h;
+}
+function reResultSection(prefix){
+  return '<div style="display:flex;gap:16px;align-items:center;margin:8px 0;padding:8px;background:var(--bg-light,#f5f5f5);border-radius:6px;">'
+    +'<span>評価数: <strong id="'+prefix+'_score">0</strong></span>'
+    +'<span>全体: <strong id="'+prefix+'_total">0</strong></span>'
+    +'<span>評価率: <strong id="'+prefix+'_rate"></strong></span>'
+    +'<span style="color:var(--danger,#d32f2f);font-weight:600;" id="'+prefix+'_level"></span></div>';
+}
+function reSignSection(prefix){
+  var h='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;">';
+  h+=fG('','実施責任者氏名',fIn(prefix+'_responsible'));
+  h+=fG('','部長氏名',fIn(prefix+'_bucho'));
+  h+=fG('','記入日',fDate(prefix+'_resp_date'));
+  h+=fG('','記入日',fDate(prefix+'_bucho_date'));
+  h+='</div>';
+  h+=fG('','自由記載欄',fTa(prefix+'_memo',2));
+  h+=fG('','管理の重要度','<div class="gf-radio-group"><label class="gf-radio"><input type="radio" name="'+prefix+'_juyoudo" value="高"> 高</label><label class="gf-radio"><input type="radio" name="'+prefix+'_juyoudo" value="中"> 中</label><label class="gf-radio"><input type="radio" name="'+prefix+'_juyoudo" value="低"> 低</label></div>');
+  return h;
+}
 function openRiskEvalForm(){
   var p=currentProject,area=document.getElementById('sectionFormArea');
   var h=formHeader('reception','assessment','受注案件リスク評価シート');
+  // 案件情報
   h+='<div class="gf-section"><div class="gf-section-title">案件情報</div>';
   h+=fRow(fG('h','案件番号',fIn('re_code',p.code,true))+fG('h','受注金額',fIn('re_amount',p.juchuAmount?String(p.juchuAmount):'')));
   h+=fG('','案件名',fIn('re_kenmei',p.kenmeiName,true));
   h+=fG('','お客さま名',fIn('re_customer',p.contractor,true));
+  h+='<p style="font-size:13px;color:var(--text-light);margin:8px 0 0;">回答欄凡例　◎：大いに当てはまる　○：一部当てはまる　△：ほとんど当てはまらない　×：該当なし</p>';
   h+='</div>';
   // STEP1
-  var riskItems=[
-    {k:'r1',l:'①新規お客さま',d:'要求事項の提示方法・業務推進方法に習熟しておらず、要注意事項を見落とす'},
-    {k:'r2',l:'②新規商材',d:'ノウハウが十分ではなく案件形成の段階でのリスクを見逃す'},
-    {k:'r3',l:'③業務内容不明確',d:'要求事項が不明確で不利な条件での受注となる'},
-    {k:'r4',l:'④与信問題の発生',d:'与信に問題があることが判明し、トラブルに発展する'},
-    {k:'r5',l:'⑤契約内容の突然の変更',d:'合意形成を行った内容が契約間際に覆ってしまう'},
-    {k:'r6',l:'⑥工期の顧客都合の変更',d:'十分なリソースを確保できないまま業務実施に至る'},
-    {k:'r7',l:'⑦確認記録の不備',d:'要求内容の認識に齟齬が生じトラブルに発展する'},
-    {k:'r8',l:'⑧金額不足',d:'最終見積額が上振れし客先が受入を拒む'},
-    {k:'r9',l:'⑨損害賠償の上限',d:'損害賠償に上限がなく支払い原資を超過する'},
-    {k:'r10',l:'⑩その他',d:''}
+  var s1Items=[
+    {l:'①新規お客さま',d:'新規お客さまである場合、当社が要求事項の提示方法・業務推進方法に習熟しておらず、お客さまの要求事項・要注意事項を見落とす。'},
+    {l:'②新規商材',d:'新規商材である場合、ノウハウが十分ではなく案件形成の段階でのリスクを見逃す。'},
+    {l:'③業務内容不明確',d:'お客さまの要求事項が不明確で受注に進むべきか、手を引くかの判断に迷う間、当社から手を引けない状況となり不利な条件での受注を強いられる。'},
+    {l:'④与信問題の発生',d:'技術方が独自に案件化を進め、契約の段階で営業方が与信調査をした結果、お客さまの与信に問題があることが判明し、お客さまとの金銭面でのトラブルが発生する。'},
+    {l:'⑤契約内容の突然の変更',d:'（特命型）担当者と合意形成を行って来た内容が、相手都合（上司の指示等）により、契約間際に覆ってしまう。（競争型）仕様内容が不明確なまま受注し、追加業務をさせられる。'},
+    {l:'⑥工期のお客さま都合の変更',d:'想定していた工期・納期が、お客さま都合により変更となってしまい、変更後の着手段階で十分なリソースを確保できないまま業務実施を求められる。'},
+    {l:'⑦確認記録の不備',d:'電話連絡で受けた情報等を記録に残さなかったため、お客さまとの間で要求内容の認識に齟齬が生じ、トラブルに発展する。'},
+    {l:'⑧金額不足',d:'当初の見積もり額より、判明した最終的な見積もり額が上振れした場合、客先が受け入れを拒む。'},
+    {l:'⑨損害賠償の上限',d:'契約書などに設計瑕疵などによる損害賠償に関する記載がない（上限がない）ため、重大な設計瑕疵により損害賠償が生じた場合、支払いができなくなる可能性がある。'},
+    {l:'⑩その他',d:'',editable:true}
   ];
-  h+='<div class="gf-section"><div class="gf-section-title">STEP1 リスク評価</div>';
-  h+='<p style="font-size:13px;color:var(--text-light);margin-bottom:10px;">◎：大いに当てはまる　○：一部当てはまる　△：ほとんど当てはまらない　×：該当なし</p>';
-  riskItems.forEach(function(ri){
-    h+='<div class="gf-check-item"><div style="flex:1;"><div style="font-weight:600;">'+escH(ri.l)+'</div>';
-    if(ri.d) h+='<div style="font-size:12px;color:var(--text-light);margin-top:2px;">'+escH(ri.d)+'</div>';
-    h+='</div><div class="contract-yn">';
-    ['◎','○','△','×'].forEach(function(o){h+='<label><input type="radio" name="re_'+ri.k+'" value="'+o+'"> '+o+'</label>';});
-    h+='</div></div>';
-  });
-  h+=fG('','備考',fTa('re_biko',3));
+  h+='<div class="gf-section"><div class="gf-section-title">【リスク評価ＳＴＥＰ１】 1.契約前段階で想定されるリスク</div>';
+  h+=reRiskTable('re_s1',s1Items);
+  h+=reResultSection('re_s1');
+  h+='<div class="gf-section-title" style="margin-top:12px;">【ＳＴＥＰ１のリスク評価結果】</div>';
+  h+='<div style="display:flex;gap:16px;margin:4px 0;font-size:13px;color:var(--text-light);">評価基準: ≧80%→リスク大　≧50%→リスク中　≧20%→リスク小　＜20%→リスク極小</div>';
+  h+=reSignSection('re_s1');
   h+='</div>';
-  // STEP2
-  h+='<div class="gf-section"><div class="gf-section-title">STEP2 リスク対策</div>';
-  h+=fG('','リスク対策の概要',fTa('re_taisaku',5));
+  // STEP2 セクション2A
+  var s2aItems=[
+    {l:'①確認記録の不備',d:'案件形成時に認識していた要求事項と契約時の要求事項に差異が発生し、当社がエビデンスを提示することが出来ず、お客さまの要求に従わざるを得ない。'},
+    {l:'②お客さま要求事項の未確定による作業の手戻り',d:'受注時でもなお、要求事項が不明確である中で業務を着手せざるを得ず、作業の手戻りが発生したり、工期を順守できなくなる。'},
+    {l:'③業務内容不明確',d:'品質計画（書）策定段階でのリスク抽出が出来なかった場合、見逃したリスクが後の業務実施段階で支障をきたす。'},
+    {l:'④委託先の成果品不良、工程遅延',d:'委託先の選定を誤り（初めての会社、規模の小さい会社、地元企業等）、委託先への条件提示の遅れに対し委託先でその遅れを吸収できずに工期が遅れ、当社も発注者に対し工期不履行となる。技術面でも同様のリスク。'},
+    {l:'⑤',d:'',editable:true},{l:'⑥',d:'',editable:true},{l:'⑦',d:'',editable:true},{l:'⑧',d:'',editable:true},{l:'⑨',d:'',editable:true},{l:'⑩',d:'',editable:true}
+  ];
+  h+='<div class="gf-section"><div class="gf-section-title">【リスク評価ＳＴＥＰ２】 2.受注・業務着手段階で想定されるリスク</div>';
+  h+=reRiskTable('re_s2a',s2aItems);
+  h+='<div style="display:flex;gap:16px;align-items:center;margin:8px 0;padding:8px;background:var(--bg-light,#f5f5f5);border-radius:6px;">'
+    +'<span>リスク２ 評価数: <strong id="re_s2a_score">0</strong></span>'
+    +'<span>全体: <strong id="re_s2a_total">0</strong></span></div>';
+  h+='</div>';
+  // STEP2 セクション2B
+  var s2bItems=[
+    {l:'①設計変更時の検証不足',d:'お客さまの要求事項に変更があった場合、新規設計時と同じレビュー・検証を実施せず、お客さま要求事項を満たさない成果品を提出してしまう。また、実施したとしても、設計上のミスを見逃してしまい、竣工後お客さまに損害を与えてしまう。'},
+    {l:'②業務進捗後、成果品がお客さまのイメージと合わず、追加業務が発生',d:'中間打合せで、着手した業務内容や変更内容がお客さまの要求に合わず、想定外に工数・時間を要し、要求納期を守れない、コストが大幅に超過する等トラブルが発生する。'},
+    {l:'③最終成果品がお客さまのイメージと合わず、追加業務が発生',d:'最終成果品がお客さまの要求に合わず、想定外に工数・時間を要し、要求納期を守れない、コストが大幅に超過する等トラブルが発生する。'},
+    {l:'④中間検査の未実施',d:'中間検査を実施しなかったために出戻りが発生し、納期・工数に大きなインパクトを与える。'},
+    {l:'⑤検証・妥当性確認の不足',d:'必要な手順で十分な検証・妥当性確認を行わなかったために、お客さまへ瑕疵のある成果品を納入してしまい、お客さまとの間でトラブルになる。'},
+    {l:'⑥法令や技術基準の不順守',d:'法令や技術基準の順守に必要な手続き（営業方→法務方のリーガルチェック）を見落とし、対応するために設計変更が生じて、工事金額が増加し、お客さまとの間でトラブルになる。'},
+    {l:'⑦',d:'',editable:true},{l:'⑧',d:'',editable:true},{l:'⑨',d:'',editable:true},{l:'⑩',d:'',editable:true}
+  ];
+  h+='<div class="gf-section"><div class="gf-section-title">【リスク評価ＳＴＥＰ２】 3.業務実施・引渡し段階で想定されるリスク</div>';
+  h+=reRiskTable('re_s2b',s2bItems);
+  h+='<div style="display:flex;gap:16px;align-items:center;margin:8px 0;padding:8px;background:var(--bg-light,#f5f5f5);border-radius:6px;">'
+    +'<span>リスク３ 評価数: <strong id="re_s2b_score">0</strong></span>'
+    +'<span>全体: <strong id="re_s2b_total">0</strong></span></div>';
+  h+='</div>';
+  // STEP2合計・評価結果
+  h+='<div class="gf-section"><div class="gf-section-title">【ＳＴＥＰ２のリスク評価結果】 合計（リスク2+リスク3）</div>';
+  h+=reResultSection('re_s2');
+  h+='<div style="display:flex;gap:16px;margin:4px 0;font-size:13px;color:var(--text-light);">評価基準: ≧80%→リスク大　≧50%→リスク中　≧20%→リスク小　＜20%→リスク極小</div>';
+  h+=reSignSection('re_s2');
+  h+='</div>';
+  // 凡例
+  h+='<div class="gf-section"><div class="gf-section-title">記入凡例</div>';
+  h+='<p style="font-size:12px;color:var(--text-light);line-height:1.8;">対策審議　各部；部会議、本部；本部会議、全社；リスク評価会議<br>有無程度　×；該当しない、△；殆ど該当しない、○；一部該当する、◎；殆ど該当する<br>対策　Ａ；回避、Ｂ；低減、Ｃ；移転、Ｄ；保有　（記載できない場合、別紙「リスク対策シート」に記載）</p>';
   h+='</div>';
   h+=formSaveBtn("saveRiskEvalForm()");
   h+='</div></div>';
@@ -1690,8 +1805,27 @@ function openRiskEvalForm(){
 }
 function saveRiskEvalForm(){
   if(!currentProject||!currentProject.projectSSId) return;
-  var data={code:gv('re_code'),kenmei:gv('re_kenmei'),customer:gv('re_customer'),amount:gv('re_amount'),biko:gv('re_biko'),taisaku:gv('re_taisaku')};
-  for(var i=1;i<=10;i++){var s=document.querySelector('input[name="re_r'+i+'"]:checked');data['r'+i]=s?s.value:'';}
+  var data={code:gv('re_code'),kenmei:gv('re_kenmei'),customer:gv('re_customer'),amount:gv('re_amount')};
+  // STEP1 responses + biko
+  for(var i=1;i<=10;i++){var s=document.querySelector('input[name="re_s1_r'+i+'"]:checked');data['s1_r'+i]=s?s.value:'';data['s1_biko'+i]=gv('re_s1_biko'+i);}
+  // STEP1 editable item 10 label/detail
+  data.s1_label10=gv('re_s1_label10');data.s1_detail10=gv('re_s1_detail10');
+  // STEP1 sign
+  data.s1_responsible=gv('re_s1_responsible');data.s1_resp_date=gv('re_s1_resp_date');
+  data.s1_bucho=gv('re_s1_bucho');data.s1_bucho_date=gv('re_s1_bucho_date');
+  data.s1_memo=gv('re_s1_memo');
+  var s1j=document.querySelector('input[name="re_s1_juyoudo"]:checked');data.s1_juyoudo=s1j?s1j.value:'';
+  // STEP2A responses + biko + editable labels
+  for(var i=1;i<=10;i++){var s=document.querySelector('input[name="re_s2a_r'+i+'"]:checked');data['s2a_r'+i]=s?s.value:'';data['s2a_biko'+i]=gv('re_s2a_biko'+i);}
+  for(var i=5;i<=10;i++){data['s2a_label'+i]=gv('re_s2a_label'+i);data['s2a_detail'+i]=gv('re_s2a_detail'+i);}
+  // STEP2B responses + biko + editable labels
+  for(var i=1;i<=10;i++){var s=document.querySelector('input[name="re_s2b_r'+i+'"]:checked');data['s2b_r'+i]=s?s.value:'';data['s2b_biko'+i]=gv('re_s2b_biko'+i);}
+  for(var i=7;i<=10;i++){data['s2b_label'+i]=gv('re_s2b_label'+i);data['s2b_detail'+i]=gv('re_s2b_detail'+i);}
+  // STEP2 sign
+  data.s2_responsible=gv('re_s2_responsible');data.s2_resp_date=gv('re_s2_resp_date');
+  data.s2_bucho=gv('re_s2_bucho');data.s2_bucho_date=gv('re_s2_bucho_date');
+  data.s2_memo=gv('re_s2_memo');
+  var s2j=document.querySelector('input[name="re_s2_juyoudo"]:checked');data.s2_juyoudo=s2j?s2j.value:'';
   showLoading('保存中...');
   google.script.run.withSuccessHandler(function(r){hideLoading();showToast(r.message,r.success?'success':'error');
   if(r.success) afterFormSaved();}).withFailureHandler(function(e){hideLoading();showToast(e.message,'error');
@@ -1701,8 +1835,31 @@ function loadRiskEvalForm(){
   if(!currentProject||!currentProject.projectSSId) return;
   google.script.run.withSuccessHandler(function(d){
     if(!d) return;
-    ['code','kenmei','customer','amount','biko','taisaku'].forEach(function(k){var el=document.getElementById('re_'+k);if(el&&d[k]) el.value=d[k];});
-    for(var i=1;i<=10;i++){if(d['r'+i]) document.querySelectorAll('input[name="re_r'+i+'"]').forEach(function(r){if(r.value===d['r'+i]) r.checked=true;});}
+    ['code','kenmei','customer','amount'].forEach(function(k){var el=document.getElementById('re_'+k);if(el&&d[k]) el.value=d[k];});
+    // STEP1
+    for(var i=1;i<=10;i++){
+      if(d['s1_r'+i]) document.querySelectorAll('input[name="re_s1_r'+i+'"]').forEach(function(r){if(r.value===d['s1_r'+i]) r.checked=true;});
+      if(d['s1_biko'+i]) setVal('re_s1_biko'+i,d['s1_biko'+i]);
+    }
+    if(d.s1_label10) setVal('re_s1_label10',d.s1_label10);
+    if(d.s1_detail10) setVal('re_s1_detail10',d.s1_detail10);
+    ['s1_responsible','s1_resp_date','s1_bucho','s1_bucho_date','s1_memo'].forEach(function(k){if(d[k]) setVal('re_'+k,d[k]);});
+    if(d.s1_juyoudo) document.querySelectorAll('input[name="re_s1_juyoudo"]').forEach(function(r){if(r.value===d.s1_juyoudo) r.checked=true;});
+    // STEP2A
+    for(var i=1;i<=10;i++){
+      if(d['s2a_r'+i]) document.querySelectorAll('input[name="re_s2a_r'+i+'"]').forEach(function(r){if(r.value===d['s2a_r'+i]) r.checked=true;});
+      if(d['s2a_biko'+i]) setVal('re_s2a_biko'+i,d['s2a_biko'+i]);
+    }
+    for(var i=5;i<=10;i++){if(d['s2a_label'+i]) setVal('re_s2a_label'+i,d['s2a_label'+i]);if(d['s2a_detail'+i]) setVal('re_s2a_detail'+i,d['s2a_detail'+i]);}
+    // STEP2B
+    for(var i=1;i<=10;i++){
+      if(d['s2b_r'+i]) document.querySelectorAll('input[name="re_s2b_r'+i+'"]').forEach(function(r){if(r.value===d['s2b_r'+i]) r.checked=true;});
+      if(d['s2b_biko'+i]) setVal('re_s2b_biko'+i,d['s2b_biko'+i]);
+    }
+    for(var i=7;i<=10;i++){if(d['s2b_label'+i]) setVal('re_s2b_label'+i,d['s2b_label'+i]);if(d['s2b_detail'+i]) setVal('re_s2b_detail'+i,d['s2b_detail'+i]);}
+    ['s2_responsible','s2_resp_date','s2_bucho','s2_bucho_date','s2_memo'].forEach(function(k){if(d[k]) setVal('re_'+k,d[k]);});
+    if(d.s2_juyoudo) document.querySelectorAll('input[name="re_s2_juyoudo"]').forEach(function(r){if(r.value===d.s2_juyoudo) r.checked=true;});
+    reUpdateCalc();
   }).getGenericFormData(currentProject.projectSSId,'リスク評価');
 }
 
@@ -1896,6 +2053,7 @@ function openZeseiForm(){
   area.innerHTML=h;showFormPage();
   autoFillBaseInfo({bucho:'zs_apv_approval',shinsa:'zs_apv_review'});
   loadPhase3Form('是正処置管理票','zs',['doc_name','dept','futekigo','genin','plan_detail','result','biko','review_kijun','review_date','review_cause','haifu_kansa','haifu_dept','apv_creator'],['category','plan_type','review_result']);
+  autoFillCreator('zs_apv_creator');
 }
 
 // ===== 改善提案処置管理票フォーム =====
@@ -1944,6 +2102,7 @@ function openKaizenForm(){
   area.innerHTML=h;showFormPage();
   autoFillBaseInfo({bucho:'kz_apv_approval',shinsa:'kz_apv_review'});
   loadKaizenForm();
+  autoFillCreator('kz_apv_creator');
 }
 function saveKaizenForm(){
   if(!currentProject||!currentProject.projectSSId) return;
@@ -2167,7 +2326,8 @@ function openHaikiShomeiForm(){var p=currentProject,area=document.getElementById
   h+='<div class="gf-section"><div class="gf-section-title">廃棄資料一覧</div><div class="gf-table-wrap"><table class="gf-table"><thead><tr><th>No</th><th>資料名</th><th>数量</th><th>廃棄方法</th><th>廃棄日</th><th>確認</th></tr></thead><tbody>';
   for(var i=0;i<8;i++){h+='<tr><td style="text-align:center;">'+(i+1)+'</td>';for(var c=0;c<4;c++) h+='<td><input type="text" class="gf-table-input" id="hk_r_'+i+'_'+c+'"></td>';
     h+='<td><select class="rt-select" id="hk_r_'+i+'_4"><option value="">-</option><option value="✓">✓</option></select></td></tr>';}
-  h+='</tbody></table></div></div>';h+=formSaveBtn("saveHaikiForm()");h+='</div></div>';area.innerHTML=h;showFormPage();loadHaikiForm();}
+  h+='</tbody></table></div></div>';h+=formSaveBtn("saveHaikiForm()");h+='</div></div>';area.innerHTML=h;showFormPage();
+  autoFillBaseInfo({kenmei:'hk_kenmei',kikiStart:'hk_period_from',kikiEnd:'hk_period_to'});loadHaikiForm();}
 function saveHaikiForm(){if(!currentProject||!currentProject.projectSSId)return;var data={todokesaki:gv('hk_todokesaki'),date:gv('hk_date'),todokenushi:gv('hk_todokenushi'),kenmei:gv('hk_kenmei'),period_from:gv('hk_period_from'),period_to:gv('hk_period_to')};
   var methods=[];for(var mi=0;mi<5;mi++){var mel=document.getElementById('hk_method_'+mi);if(mel&&mel.checked)methods.push(mi);}data.methods=methods.join('|');
   var rows=[];for(var i=0;i<8;i++){var cols=[];for(var c=0;c<5;c++)cols.push(gv('hk_r_'+i+'_'+c));rows.push(cols.join('|'));}data.table=rows.join('\n');showLoading('保存中...');

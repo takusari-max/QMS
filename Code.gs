@@ -211,7 +211,7 @@ function ensureProjectSS(dept, rowIndex, code, kenmeiName) {
     var newSs = SpreadsheetApp.openById(newId);
     if (!newSs.getSheetByName('グループ・実施体制・特記事項')) {
       var s = newSs.insertSheet('グループ・実施体制・特記事項');
-      s.getRange(1,1,1,7).setValues([['グループ','担当者','実施責任者','審査責任者','承認者','特記事項','設定日']]);
+      s.getRange(1,1,1,8).setValues([['グループ','担当者','実施責任者','審査責任者','承認者','特記事項','設定日','GM']]);
     }
     if (!newSs.getSheetByName('議事録')) {
       var s2 = newSs.insertSheet('議事録');
@@ -243,9 +243,9 @@ function saveGroupTaisei(ssId, data) {
   try {
     var ss = SpreadsheetApp.openById(ssId);
     var sh = ss.getSheetByName('グループ・実施体制・特記事項');
-    if (!sh) { sh = ss.insertSheet('グループ・実施体制・特記事項'); sh.getRange(1,1,1,7).setValues([['グループ','担当者','実施責任者','審査責任者','承認者','特記事項','設定日']]); }
+    if (!sh) { sh = ss.insertSheet('グループ・実施体制・特記事項'); sh.getRange(1,1,1,8).setValues([['グループ','担当者','実施責任者','審査責任者','承認者','特記事項','設定日','GM']]); }
     var now = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyy/MM/dd');
-    sh.getRange(2,1,1,7).setValues([[data.group||'',data.tanto||'',data.jisshi||'',data.shinsa||'',data.approver||'',data.tokki||'',now]]);
+    sh.getRange(2,1,1,8).setValues([[data.group||'',data.tanto||'',data.jisshi||'',data.shinsa||'',data.approver||'',data.tokki||'',now,data.gm||'']]);
     return { success:true, message:'保存しました。' };
   } catch(e) { return { success:false, message:e.message }; }
 }
@@ -253,10 +253,10 @@ function saveGroupTaisei(ssId, data) {
 function getGroupTaisei(ssId) {
   try {
     var sh = SpreadsheetApp.openById(ssId).getSheetByName('グループ・実施体制・特記事項');
-    if (!sh || sh.getLastRow() < 2) return { group:'',tanto:'',jisshi:'',shinsa:'',approver:'',tokki:'',date:'' };
-    var r = sh.getRange(2,1,1,7).getValues()[0];
-    return { group:sv(r[0]),tanto:sv(r[1]),jisshi:sv(r[2]),shinsa:sv(r[3]),approver:sv(r[4]),tokki:sv(r[5]),date:sv(r[6]) };
-  } catch(e) { return { group:'',tanto:'',jisshi:'',shinsa:'',approver:'',tokki:'',date:'' }; }
+    if (!sh || sh.getLastRow() < 2) return { group:'',tanto:'',jisshi:'',shinsa:'',approver:'',tokki:'',date:'',gm:'' };
+    var r = sh.getRange(2,1,1,8).getValues()[0];
+    return { group:sv(r[0]),tanto:sv(r[1]),jisshi:sv(r[2]),shinsa:sv(r[3]),approver:sv(r[4]),tokki:sv(r[5]),date:sv(r[6]),gm:sv(r[7]) };
+  } catch(e) { return { group:'',tanto:'',jisshi:'',shinsa:'',approver:'',tokki:'',date:'',gm:'' }; }
 }
 
 function getFormBaseInfo(ssId, dept, honbu) {
@@ -267,7 +267,7 @@ function getFormBaseInfo(ssId, dept, honbu) {
     approver: taisei.approver, tanto: taisei.tanto, group: taisei.group,
     bucho: approvers.bucho ? approvers.bucho.name : '',
     honbucho: approvers.honbucho ? approvers.honbucho.name : '',
-    gm: approvers.gm ? approvers.gm.name : ''
+    gm: taisei.gm || ''
   };
 }
 
