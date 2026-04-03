@@ -1949,7 +1949,8 @@ function openShiyoshoCheckForm(){
     '内訳項目は仕様書に即しているか（第三者が見てわかるか）',
     '価格交渉記録は第三者が経緯を把握できる記載か',
     '個別付帯条項使用時に適用承認書・個別付帯条項の添付はあるか',
-    '覚書発生時に適用承認書・覚書の添付はあるか'
+    '覚書発生時に適用承認書・覚書の添付はあるか',
+    '生成AI使用可否についての注意事項の記載はあるか'
   ];
   var h=formHeader('outsource','checklist_rtl','委託業務仕様書チェック項目');
   h+='<div class="gf-section"><div class="gf-section-title">チェック項目</div>';
@@ -2068,11 +2069,11 @@ function openZeseiForm(){
   h+='</div>';
   // 承認欄
   h+=fApproval([{id:'zs_apv_approval',label:'承認'},{id:'zs_apv_review',label:'審査'},{id:'zs_apv_creator',label:'作成'}]);
-  h+=formSaveBtn("savePhase3Form('是正処置管理票','zs',['doc_name','dept','futekigo','genin','plan_detail','result','biko','review_kijun','review_date','review_cause','haifu_kansa','haifu_dept','apv_creator'],['category','plan_type','review_result'])");
+  h+=formSaveBtn("savePhase3Form('是正処置管理票','zs',['doc_name','dept','futekigo','genin','plan_detail','result','biko','review_kijun','review_date','review_cause','haifu_kansa','haifu_dept','apv_approval','apv_review','apv_creator'],['category','plan_type','review_result'])");
   h+='</div></div>';
   area.innerHTML=h;showFormPage();
   autoFillBaseInfo({bucho:'zs_apv_approval',shinsa:'zs_apv_review'});
-  loadPhase3Form('是正処置管理票','zs',['doc_name','dept','futekigo','genin','plan_detail','result','biko','review_kijun','review_date','review_cause','haifu_kansa','haifu_dept','apv_creator'],['category','plan_type','review_result']);
+  loadPhase3Form('是正処置管理票','zs',['doc_name','dept','futekigo','genin','plan_detail','result','biko','review_kijun','review_date','review_cause','haifu_kansa','haifu_dept','apv_approval','apv_review','apv_creator'],['category','plan_type','review_result']);
   autoFillCreator('zs_apv_creator');
 }
 
@@ -2127,7 +2128,7 @@ function openKaizenForm(){
 function saveKaizenForm(){
   if(!currentProject||!currentProject.projectSSId) return;
   var data={doc_name:gv('kz_doc_name'),dept:gv('kz_dept'),content:gv('kz_content'),yoin:gv('kz_yoin'),plan:gv('kz_plan'),
-    fuyo_reason:gv('kz_fuyo_reason'),result:gv('kz_result'),haifu_kansa:gv('kz_haifu_kansa'),haifu_dept:gv('kz_haifu_dept'),apv_creator:gv('kz_apv_creator')};
+    fuyo_reason:gv('kz_fuyo_reason'),result:gv('kz_result'),haifu_kansa:gv('kz_haifu_kansa'),haifu_dept:gv('kz_haifu_dept'),apv_approval:gv('kz_apv_approval'),apv_review:gv('kz_apv_review'),apv_creator:gv('kz_apv_creator')};
   var cat=document.querySelector('input[name="kz_category"]:checked');data.category=cat?cat.value:'';
   var need=document.querySelector('input[name="kz_need"]:checked');data.need=need?need.value:'';
   var checks=[];
@@ -2143,7 +2144,7 @@ function loadKaizenForm(){
   if(!currentProject||!currentProject.projectSSId) return;
   google.script.run.withSuccessHandler(function(d){
     if(!d) return;
-    ['doc_name','dept','content','yoin','plan','fuyo_reason','result','haifu_kansa','haifu_dept','apv_creator'].forEach(function(k){var el=document.getElementById('kz_'+k);if(el&&d[k]) el.value=d[k];});
+    ['doc_name','dept','content','yoin','plan','fuyo_reason','result','haifu_kansa','haifu_dept','apv_approval','apv_review','apv_creator'].forEach(function(k){var el=document.getElementById('kz_'+k);if(el&&d[k]) el.value=d[k];});
     if(d.category) document.querySelectorAll('input[name="kz_category"]').forEach(function(r){if(r.value===d.category) r.checked=true;});
     if(d.need) document.querySelectorAll('input[name="kz_need"]').forEach(function(r){if(r.value===d.need) r.checked=true;});
     if(d.checks){d.checks.split('|').forEach(function(c){var el=document.getElementById('kz_'+c);if(el) el.checked=true;});}
@@ -2293,9 +2294,10 @@ function loadAnzenForm(){if(!currentProject||!currentProject.projectSSId)return;
 function openKeisokuShiyoForm(){var p=currentProject,area=document.getElementById('sectionFormArea');
   var h=formHeader('execution','straighten','計測機器使用記録');
   h+='<div class="gf-section"><div class="gf-section-title">基本情報</div>';h+=fRow(fG('h','件名コード',fIn('ks_code',p.code,true))+fG('h','件名',fIn('ks_kenmei',p.kenmeiName,true)));h+='</div>';
-  h+='<div class="gf-section"><div class="gf-section-title">使用記録</div><div class="gf-table-wrap"><table class="gf-table"><thead><tr><th>使用日</th><th>管理番号</th><th>機器名</th><th>前確認</th><th>後確認</th><th>責任者</th><th>備考</th></tr></thead><tbody>';
+  h+='<div class="gf-section"><div class="gf-section-title">使用記録</div><div class="gf-table-wrap"><table class="gf-table"><thead><tr><th>使用年月日</th><th>管理番号</th><th>計測機器名</th><th>使用前確認</th><th>使用後確認</th><th>実施責任者確認</th><th>備考（不具合時の措置等）</th></tr></thead><tbody>';
   for(var i=0;i<10;i++){h+='<tr>';for(var c=0;c<3;c++) h+='<td><input type="text" class="gf-table-input" id="ks_r_'+i+'_'+c+'"></td>';
-    for(var s=3;s<6;s++) h+='<td><select class="rt-select" id="ks_r_'+i+'_'+s+'"><option value="">-</option><option value="✓">✓</option></select></td>';
+    for(var s=3;s<5;s++) h+='<td><select class="rt-select" id="ks_r_'+i+'_'+s+'"><option value="">-</option><option value="✓">✓</option></select></td>';
+    h+='<td><input type="text" class="gf-table-input" id="ks_r_'+i+'_5"></td>';
     h+='<td><input type="text" class="gf-table-input" id="ks_r_'+i+'_6"></td></tr>';}
   h+='</tbody></table></div></div>';h+=formSaveBtn("saveTableForm('計測機器使用記録','ks',10,7)");h+='</div></div>';
   area.innerHTML=h;showFormPage();loadTableForm('計測機器使用記録','ks',10,7,['code','kenmei']);}
@@ -2370,35 +2372,40 @@ function openShakuyoshoForm(){var area=document.getElementById('sectionFormArea'
 function openNucMochidashiForm(){var area=document.getElementById('sectionFormArea');
   var h=formHeader('nuclear','luggage','出張時持ち出し管理簿（別紙2）');
   h+='<div class="gf-section"><div class="gf-section-title">基本情報</div>';h+=fRow(fG('h','年度',fIn('nm_nendo'))+fG('h','本部・部',fIn('nm_dept')));h+='</div>';
-  h+='<div class="gf-section"><div class="gf-section-title">持ち出し記録</div><div class="gf-table-wrap"><table class="gf-table"><thead><tr><th>No</th><th>件名番号</th><th>情報内容</th><th>出発日</th><th>帰社日</th><th>持出者</th><th>確認</th></tr></thead><tbody>';
-  for(var i=0;i<10;i++){h+='<tr><td style="text-align:center;">'+(i+1)+'</td>';for(var c=0;c<5;c++) h+='<td><input type="text" class="gf-table-input" id="nm_r_'+i+'_'+c+'"></td>';
-    h+='<td><select class="rt-select" id="nm_r_'+i+'_5"><option value="">-</option><option value="✓">✓</option></select></td></tr>';}
-  h+='</tbody></table></div></div>';h+=formSaveBtn("saveTableForm('持ち出し管理簿','nm',10,6)");h+='</div></div>';
-  area.innerHTML=h;showFormPage();loadTableForm('持ち出し管理簿','nm',10,6,['nendo','dept']);}
+  h+='<div class="gf-section"><div class="gf-section-title">持ち出し記録</div><div class="gf-table-wrap"><table class="gf-table"><thead><tr><th>No</th><th>件名番号</th><th>情報内容</th><th>出発日</th><th>帰社日</th><th>出張者</th><th>許可日</th><th>許可者</th><th>出張先</th><th>帰還確認日</th><th>確認者</th></tr></thead><tbody>';
+  for(var i=0;i<10;i++){h+='<tr><td style="text-align:center;">'+(i+1)+'</td>';for(var c=0;c<10;c++) h+='<td><input type="text" class="gf-table-input" id="nm_r_'+i+'_'+c+'"></td>';h+='</tr>';}
+  h+='</tbody></table></div></div>';h+=formSaveBtn("saveTableForm('持ち出し管理簿','nm',10,10)");h+='</div></div>';
+  area.innerHTML=h;showFormPage();loadTableForm('持ち出し管理簿','nm',10,10,['nendo','dept']);}
 
 // ===== 原子力: 教育・実績管理表 =====
 function openNucKyoikuForm(){var area=document.getElementById('sectionFormArea');
   var h=formHeader('nuclear','school','原子力情報に関する教育・実績管理表（別紙3）');
   h+='<div class="gf-section"><div class="gf-section-title">基本情報</div>';h+=fRow(fG('h','年度',fIn('nk_nendo'))+fG('h','本部・部',fIn('nk_dept')));h+='</div>';
-  h+='<div class="gf-section"><div class="gf-section-title">教育記録</div><div class="gf-table-wrap"><table class="gf-table"><thead><tr><th>No</th><th>教育日時</th><th>教育種別</th><th>講師名</th><th>教育内容</th><th>受講者</th></tr></thead><tbody>';
-  for(var i=0;i<10;i++){h+='<tr><td style="text-align:center;">'+(i+1)+'</td>';for(var c=0;c<5;c++) h+='<td><input type="text" class="gf-table-input" id="nk_r_'+i+'_'+c+'"></td>';h+='</tr>';}
-  h+='</tbody></table></div></div>';h+=formSaveBtn("saveTableForm('原子力教育実績','nk',10,5)");h+='</div></div>';
-  area.innerHTML=h;showFormPage();loadTableForm('原子力教育実績','nk',10,5,['nendo','dept']);}
+  h+='<div class="gf-section"><div class="gf-section-title">教育記録</div><div class="gf-table-wrap"><table class="gf-table"><thead><tr><th>No</th><th>教育日時</th><th>教育種別</th><th>講師名</th><th>教育内容</th><th>受講者</th><th>備考</th></tr></thead><tbody>';
+  for(var i=0;i<10;i++){h+='<tr><td style="text-align:center;">'+(i+1)+'</td>';for(var c=0;c<6;c++) h+='<td><input type="text" class="gf-table-input" id="nk_r_'+i+'_'+c+'"></td>';h+='</tr>';}
+  h+='</tbody></table></div></div>';h+=formSaveBtn("saveTableForm('原子力教育実績','nk',10,6)");h+='</div></div>';
+  area.innerHTML=h;showFormPage();loadTableForm('原子力教育実績','nk',10,6,['nendo','dept']);}
 
 // ===== 原子力: 情報管理記録 =====
 function openNucKanriForm(){var area=document.getElementById('sectionFormArea');
   var h=formHeader('nuclear','lock','原子力情報取り扱い管理記録（別紙6）');
   h+='<div class="gf-section"><div class="gf-section-title">基本情報</div>';h+=fRow(fG('h','年度',fIn('nkr_nendo'))+fG('h','本部・部',fIn('nkr_dept')));h+='</div>';
-  var items=['①情報取扱者の台帳に漏れはないか','②原子力情報は決められたところに保管されているか','③情報取扱者への教育は実施されているか','④出張時の持ち出し管理は適切か','⑤委託先への情報管理は適切か'];
+  var items=['①情報取扱者の台帳に漏れはないか','②原子力情報はきちんと決められたところに保管されているか','③出張に伴う情報の持ち出し台帳はきちんと運用されているか','④情報セキュリティに関する教育は適切に行われているか','⑤委託先に対する適合性確認は適切に行われているか、漏れはないか','⑥委託先のセキュリティチェックは適宜行われているか','⑦原子力情報の電子データは適切なフォルダに格納され運用されているか'];
   h+='<div class="gf-section"><div class="gf-section-title">管理確認項目</div>';
-  items.forEach(function(item,idx){h+='<div class="gf-check-item" style="flex-direction:column;align-items:stretch;gap:6px;"><div style="font-weight:600;">'+escH(item)+'</div><div class="form-row" style="gap:8px;"><div class="form-group third"><label>確認結果</label><select id="nkr_res_'+idx+'" class="form-select"><option value="">-</option><option value="良">良</option><option value="要改善">要改善</option></select></div><div class="form-group third"><label>確認日</label><input type="date" id="nkr_date_'+idx+'" class="form-input"></div><div class="form-group third"><label>確認者</label><input type="text" id="nkr_who_'+idx+'" class="form-input"></div></div>'+fG('','状況',fTa('nkr_status_'+idx,2))+'</div>';});
-  h+='</div>';h+=formSaveBtn("saveNucKanriForm()");h+='</div></div>';area.innerHTML=h;showFormPage();loadNucKanriForm();}
-function saveNucKanriForm(){if(!currentProject||!currentProject.projectSSId)return;var data={nendo:gv('nkr_nendo'),dept:gv('nkr_dept')};
-  for(var i=0;i<5;i++){['res','date','who','status'].forEach(function(f){data[f+'_'+i]=gv('nkr_'+f+'_'+i);});}showLoading('保存中...');
+  items.forEach(function(item,idx){h+='<div class="gf-check-item" style="flex-direction:column;align-items:stretch;gap:6px;"><div style="font-weight:600;">'+escH(item)+'</div><div class="form-row" style="gap:8px;"><div class="form-group third"><label>確認結果</label><select id="nkr_res_'+idx+'" class="form-select"><option value="">-</option><option value="良">良</option><option value="＿">＿</option><option value="要改善">要改善</option></select></div><div class="form-group third"><label>確認日</label><input type="date" id="nkr_date_'+idx+'" class="form-input"></div><div class="form-group third"><label>確認者</label><input type="text" id="nkr_who_'+idx+'" class="form-input"></div></div>'+fG('','状況',fTa('nkr_status_'+idx,2))+'</div>';});
+  h+='</div>';
+  h+='<div class="gf-section"><div class="gf-section-title">総合判定</div>';
+  h+=fRow(fG('h','一般原子力情報管理責任者',fIn('nkr_kanrisya'))+fG('h','総合判定','<select id="nkr_sogo" class="form-select"><option value="">-</option><option value="良">良</option><option value="要改善">要改善</option></select>'));
+  h+=fRow(fG('h','日付',fDate('nkr_sogo_date')));
+  h+=fG('','特記事項',fTa('nkr_tokki',3));
+  h+='</div>';
+  h+=formSaveBtn("saveNucKanriForm()");h+='</div></div>';area.innerHTML=h;showFormPage();loadNucKanriForm();}
+function saveNucKanriForm(){if(!currentProject||!currentProject.projectSSId)return;var data={nendo:gv('nkr_nendo'),dept:gv('nkr_dept'),kanrisya:gv('nkr_kanrisya'),sogo:gv('nkr_sogo'),sogo_date:gv('nkr_sogo_date'),tokki:gv('nkr_tokki')};
+  for(var i=0;i<7;i++){['res','date','who','status'].forEach(function(f){data[f+'_'+i]=gv('nkr_'+f+'_'+i);});}showLoading('保存中...');
   google.script.run.withSuccessHandler(function(r){hideLoading();showToast(r.message,r.success?'success':'error');if(r.success) afterFormSaved();}).withFailureHandler(function(e){hideLoading();showToast(e.message,'error');}).saveGenericFormData(currentProject.projectSSId,'原子力情報管理',data);}
 function loadNucKanriForm(){if(!currentProject||!currentProject.projectSSId)return;
-  google.script.run.withSuccessHandler(function(d){if(!d)return;['nendo','dept'].forEach(function(k){var el=document.getElementById('nkr_'+k);if(el&&d[k])el.value=d[k];});
-    for(var i=0;i<5;i++){['res','date','who','status'].forEach(function(f){var el=document.getElementById('nkr_'+f+'_'+i);if(el&&d[f+'_'+i])el.value=d[f+'_'+i];});}}).getGenericFormData(currentProject.projectSSId,'原子力情報管理');}
+  google.script.run.withSuccessHandler(function(d){if(!d)return;['nendo','dept','kanrisya','sogo','sogo_date','tokki'].forEach(function(k){var el=document.getElementById('nkr_'+k);if(el&&d[k])el.value=d[k];});
+    for(var i=0;i<7;i++){['res','date','who','status'].forEach(function(f){var el=document.getElementById('nkr_'+f+'_'+i);if(el&&d[f+'_'+i])el.value=d[f+'_'+i];});}}).getGenericFormData(currentProject.projectSSId,'原子力情報管理');}
 
 // ===== 参照系帳票 個別フォーム =====
 
