@@ -1659,9 +1659,9 @@ function saveFormData(sheetName,fieldIds,cb){
 
 // ===== リスク評価シートフォーム =====
 function reRiskScore(prefix,count){
-  var score=0,total=0;
-  for(var i=1;i<=count;i++){var sel=document.querySelector('input[name="'+prefix+i+'"]:checked');
-    if(sel){var v=sel.value;score+=(v==='◎'?3:v==='○'?2:v==='△'?1:0);total+=3;}}
+  var score=0,total=count*3;
+  for(var i=1;i<=count;i++){var sel=document.getElementById(prefix+i);
+    if(sel&&sel.value){var v=sel.value;score+=(v==='◎'?3:v==='○'?2:v==='△'?1:0);}}
   return {score:score,total:total,rate:total>0?score/total:0};
 }
 function reRiskLevel(rate){
@@ -1701,9 +1701,10 @@ function reRiskTable(prefix,items){
       h+='<td style="font-weight:600;font-size:12px;">'+escH(it.l)+'</td>';
       h+='<td style="font-size:12px;">'+escH(it.d)+'</td>';
     }
-    h+='<td><div class="contract-yn" style="flex-direction:column;gap:2px;">';
-    ['◎','○','△','×'].forEach(function(o){h+='<label style="font-size:12px;"><input type="radio" name="'+prefix+'_r'+n+'" value="'+o+'" onchange="reUpdateCalc()"> '+o+'</label>';});
-    h+='</div></td>';
+    h+='<td><select id="'+prefix+'_r'+n+'" onchange="reUpdateCalc()" style="width:100%;padding:4px;font-size:13px;">';
+    h+='<option value="">--</option>';
+    ['◎','○','△','×'].forEach(function(o){h+='<option value="'+o+'">'+o+'</option>';});
+    h+='</select></td>';
     h+='<td><input type="text" class="gf-table-input" id="'+prefix+'_biko'+n+'"></td></tr>';
   });
   h+='</tbody></table></div>';
@@ -1717,14 +1718,19 @@ function reResultSection(prefix){
     +'<span style="color:var(--danger,#d32f2f);font-weight:600;" id="'+prefix+'_level"></span></div>';
 }
 function reSignSection(prefix){
-  var h='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;">';
+  var h='<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px;">';
+  // グループ1: 実施責任者氏名 + 記入日 + 自由記載欄
+  h+='<div style="border:1px solid var(--border,#ddd);border-radius:6px;padding:10px;">';
   h+=fG('','実施責任者氏名',fIn(prefix+'_responsible'));
-  h+=fG('','部長氏名',fIn(prefix+'_bucho'));
   h+=fG('','記入日',fDate(prefix+'_resp_date'));
-  h+=fG('','記入日',fDate(prefix+'_bucho_date'));
-  h+='</div>';
   h+=fG('','自由記載欄',fTa(prefix+'_memo',2));
-  h+=fG('','管理の重要度','<div class="gf-radio-group"><label class="gf-radio"><input type="radio" name="'+prefix+'_juyoudo" value="高"> 高</label><label class="gf-radio"><input type="radio" name="'+prefix+'_juyoudo" value="中"> 中</label><label class="gf-radio"><input type="radio" name="'+prefix+'_juyoudo" value="低"> 低</label></div>');
+  h+='</div>';
+  // グループ2: 部長氏名 + 記入日 + 管理の重要度
+  h+='<div style="border:1px solid var(--border,#ddd);border-radius:6px;padding:10px;">';
+  h+=fG('','部長氏名',fIn(prefix+'_bucho'));
+  h+=fG('','記入日',fDate(prefix+'_bucho_date'));
+  h+=fG('','管理の重要度（高/中/低）','<div class="gf-radio-group"><label class="gf-radio"><input type="radio" name="'+prefix+'_juyoudo" value="高"> 高</label><label class="gf-radio"><input type="radio" name="'+prefix+'_juyoudo" value="中"> 中</label><label class="gf-radio"><input type="radio" name="'+prefix+'_juyoudo" value="低"> 低</label></div>');
+  h+='</div></div>';
   return h;
 }
 function openRiskEvalForm(){
@@ -1807,7 +1813,7 @@ function saveRiskEvalForm(){
   if(!currentProject||!currentProject.projectSSId) return;
   var data={code:gv('re_code'),kenmei:gv('re_kenmei'),customer:gv('re_customer'),amount:gv('re_amount')};
   // STEP1 responses + biko
-  for(var i=1;i<=10;i++){var s=document.querySelector('input[name="re_s1_r'+i+'"]:checked');data['s1_r'+i]=s?s.value:'';data['s1_biko'+i]=gv('re_s1_biko'+i);}
+  for(var i=1;i<=10;i++){data['s1_r'+i]=gv('re_s1_r'+i);data['s1_biko'+i]=gv('re_s1_biko'+i);}
   // STEP1 editable item 10 label/detail
   data.s1_label10=gv('re_s1_label10');data.s1_detail10=gv('re_s1_detail10');
   // STEP1 sign
@@ -1816,10 +1822,10 @@ function saveRiskEvalForm(){
   data.s1_memo=gv('re_s1_memo');
   var s1j=document.querySelector('input[name="re_s1_juyoudo"]:checked');data.s1_juyoudo=s1j?s1j.value:'';
   // STEP2A responses + biko + editable labels
-  for(var i=1;i<=10;i++){var s=document.querySelector('input[name="re_s2a_r'+i+'"]:checked');data['s2a_r'+i]=s?s.value:'';data['s2a_biko'+i]=gv('re_s2a_biko'+i);}
+  for(var i=1;i<=10;i++){data['s2a_r'+i]=gv('re_s2a_r'+i);data['s2a_biko'+i]=gv('re_s2a_biko'+i);}
   for(var i=5;i<=10;i++){data['s2a_label'+i]=gv('re_s2a_label'+i);data['s2a_detail'+i]=gv('re_s2a_detail'+i);}
   // STEP2B responses + biko + editable labels
-  for(var i=1;i<=10;i++){var s=document.querySelector('input[name="re_s2b_r'+i+'"]:checked');data['s2b_r'+i]=s?s.value:'';data['s2b_biko'+i]=gv('re_s2b_biko'+i);}
+  for(var i=1;i<=10;i++){data['s2b_r'+i]=gv('re_s2b_r'+i);data['s2b_biko'+i]=gv('re_s2b_biko'+i);}
   for(var i=7;i<=10;i++){data['s2b_label'+i]=gv('re_s2b_label'+i);data['s2b_detail'+i]=gv('re_s2b_detail'+i);}
   // STEP2 sign
   data.s2_responsible=gv('re_s2_responsible');data.s2_resp_date=gv('re_s2_resp_date');
@@ -1838,7 +1844,7 @@ function loadRiskEvalForm(){
     ['code','kenmei','customer','amount'].forEach(function(k){var el=document.getElementById('re_'+k);if(el&&d[k]) el.value=d[k];});
     // STEP1
     for(var i=1;i<=10;i++){
-      if(d['s1_r'+i]) document.querySelectorAll('input[name="re_s1_r'+i+'"]').forEach(function(r){if(r.value===d['s1_r'+i]) r.checked=true;});
+      if(d['s1_r'+i]) setVal('re_s1_r'+i,d['s1_r'+i]);
       if(d['s1_biko'+i]) setVal('re_s1_biko'+i,d['s1_biko'+i]);
     }
     if(d.s1_label10) setVal('re_s1_label10',d.s1_label10);
@@ -1847,13 +1853,13 @@ function loadRiskEvalForm(){
     if(d.s1_juyoudo) document.querySelectorAll('input[name="re_s1_juyoudo"]').forEach(function(r){if(r.value===d.s1_juyoudo) r.checked=true;});
     // STEP2A
     for(var i=1;i<=10;i++){
-      if(d['s2a_r'+i]) document.querySelectorAll('input[name="re_s2a_r'+i+'"]').forEach(function(r){if(r.value===d['s2a_r'+i]) r.checked=true;});
+      if(d['s2a_r'+i]) setVal('re_s2a_r'+i,d['s2a_r'+i]);
       if(d['s2a_biko'+i]) setVal('re_s2a_biko'+i,d['s2a_biko'+i]);
     }
     for(var i=5;i<=10;i++){if(d['s2a_label'+i]) setVal('re_s2a_label'+i,d['s2a_label'+i]);if(d['s2a_detail'+i]) setVal('re_s2a_detail'+i,d['s2a_detail'+i]);}
     // STEP2B
     for(var i=1;i<=10;i++){
-      if(d['s2b_r'+i]) document.querySelectorAll('input[name="re_s2b_r'+i+'"]').forEach(function(r){if(r.value===d['s2b_r'+i]) r.checked=true;});
+      if(d['s2b_r'+i]) setVal('re_s2b_r'+i,d['s2b_r'+i]);
       if(d['s2b_biko'+i]) setVal('re_s2b_biko'+i,d['s2b_biko'+i]);
     }
     for(var i=7;i<=10;i++){if(d['s2b_label'+i]) setVal('re_s2b_label'+i,d['s2b_label'+i]);if(d['s2b_detail'+i]) setVal('re_s2b_detail'+i,d['s2b_detail'+i]);}
