@@ -853,7 +853,7 @@ function openKeiyakuHenkouForm(){
 }
 function saveKeiyakuHenkouForm(){
   if(!currentProject||!currentProject.projectSSId) return;
-  var data={no:gv('kh_no'),code:gv('kh_code'),kenmei:gv('kh_kenmei'),date:gv('kh_date'),place:gv('kh_place'),customer:gv('kh_customer'),confirmer:gv('kh_confirmer'),change:gv('kh_change'),doc_name:gv('kh_doc_name')};
+  var data={no:gv('kh_no'),code:gv('kh_code'),kenmei:gv('kh_kenmei'),date:gv('kh_date'),place:gv('kh_place'),customer:gv('kh_customer'),confirmer:gv('kh_confirmer'),change:gv('kh_change'),doc_name:gv('kh_doc_name'),honbucho:gv('kh_honbucho'),bucho:gv('kh_bucho'),responsible:gv('kh_responsible')};
   var m=document.querySelector('input[name="kh_method"]:checked'); data.method=m?m.value:'';
   var ru=document.querySelector('input[name="kh_risk_umu"]:checked'); data.risk_umu=ru?ru.value:'';
   var rows=[];
@@ -877,7 +877,7 @@ function loadKeiyakuHenkouData(){
       }).getNextFormNo(currentProject.projectSSId,'契約内容変更確認');
     }
     if(!d) return;
-    ['no','code','kenmei','date','place','customer','confirmer','change','doc_name'].forEach(function(k){var el=document.getElementById('kh_'+k);if(el&&d[k]) el.value=d[k];});
+    ['no','code','kenmei','date','place','customer','confirmer','change','doc_name','honbucho','bucho','responsible'].forEach(function(k){var el=document.getElementById('kh_'+k);if(el&&d[k]) el.value=d[k];});
     if(d.method) document.querySelectorAll('input[name="kh_method"]').forEach(function(r){if(r.value===d.method) r.checked=true;});
     if(d.risk_umu) document.querySelectorAll('input[name="kh_risk_umu"]').forEach(function(r){if(r.value===d.risk_umu) r.checked=true;});
     if(d.risk_table){d.risk_table.split('\n').forEach(function(rs,i){
@@ -1328,7 +1328,7 @@ function openKaniItakuForm(){
   h+=formSaveBtn("saveKaniItakuForm()");
   h+='</div></div>';
   area.innerHTML=h;showFormPage();
-  autoFillBaseInfo({code:'ki_code',kenmei:'ki_kenmei',contractor:'ki_customer',jisshi:'ki_apv_jisshi',amount:'ki_amount',kikiStart:'ki_period_from',kikiEnd:'ki_period_to'});
+  autoFillBaseInfo({code:'ki_code',kenmei:'ki_kenmei',contractor:'ki_customer',jisshi:'ki_apv_jisshi',bucho:'ki_apv_approval',amount:'ki_amount',kikiStart:'ki_period_from',kikiEnd:'ki_period_to'});
   loadKaniItakuForm();
 }
 function saveKaniItakuForm(){
@@ -1336,7 +1336,7 @@ function saveKaniItakuForm(){
   var data={date:gv('ki_date'),dept:gv('ki_dept'),tanto:gv('ki_tanto'),renraku:gv('ki_renraku'),
     code:gv('ki_code'),kenmei:gv('ki_kenmei'),shiji_date:gv('ki_shiji_date'),customer:gv('ki_customer'),
     shijisha:gv('ki_shijisha'),gyomu:gv('ki_gyomu'),amount:gv('ki_amount'),uketsuke:gv('ki_uketsuke'),
-    period_from:gv('ki_period_from'),period_to:gv('ki_period_to')};
+    period_from:gv('ki_period_from'),period_to:gv('ki_period_to'),apv_jisshi:gv('ki_apv_jisshi'),apv_approval:gv('ki_apv_approval')};
   var kb=document.querySelector('input[name="ki_kubun"]:checked');data.kubun=kb?kb.value:'';
   for(var i=0;i<6;i++) data['cost_'+i]=gv('ki_cost_'+i);
   data.cost_total=gv('ki_cost_total');data.itaku_rate=gv('ki_itaku_rate');data.arari=gv('ki_arari');
@@ -1350,7 +1350,7 @@ function loadKaniItakuForm(){
   if(!currentProject||!currentProject.projectSSId) return;
   google.script.run.withSuccessHandler(function(d){
     if(!d) return;
-    ['date','dept','tanto','renraku','code','kenmei','shiji_date','customer','shijisha','gyomu','amount','uketsuke','period_from','period_to'].forEach(function(k){var el=document.getElementById('ki_'+k);if(el&&d[k]) el.value=d[k];});
+    ['date','dept','tanto','renraku','code','kenmei','shiji_date','customer','shijisha','gyomu','amount','uketsuke','period_from','period_to','apv_jisshi','apv_approval'].forEach(function(k){var el=document.getElementById('ki_'+k);if(el&&d[k]) el.value=d[k];});
     if(d.kubun) document.querySelectorAll('input[name="ki_kubun"]').forEach(function(r){if(r.value===d.kubun) r.checked=true;});
     for(var i=0;i<6;i++){var el=document.getElementById('ki_cost_'+i);if(el&&d['cost_'+i]) el.value=d['cost_'+i];}
     ['cost_total','itaku_rate','arari'].forEach(function(k){if(d[k])setVal('ki_'+k,d[k]);});
@@ -1436,7 +1436,7 @@ function openKokyakuForm(){
 function saveKokyakuForm(){
   if(!currentProject||!currentProject.projectSSId) return;
   var data={no:gv('ky_no'),date:gv('ky_date'),code:gv('ky_code'),kenmei:gv('ky_kenmei'),
-    responsible:gv('ky_responsible'),
+    responsible:gv('ky_responsible'),apv_bucho:gv('ky_apv_bucho'),apv_jisshi:gv('ky_apv_jisshi'),
     shikyuhin_hokan:gv('ky_shikyuhin_hokan'),shikyuhin_shobun:gv('ky_shikyuhin_shobun'),
     shikyuhin_date:gv('ky_shikyuhin_date'),shikyuhin_kakunin:gv('ky_shikyuhin_kakunin'),
     taiyo_hokan:gv('ky_taiyo_hokan'),taiyo_ukeire_date:gv('ky_taiyo_ukeire_date'),
@@ -1457,7 +1457,7 @@ function loadKokyakuForm(){
   if(!currentProject||!currentProject.projectSSId) return;
   google.script.run.withSuccessHandler(function(d){
     if(!d) return;
-    ['no','date','code','kenmei','responsible','shikyuhin_hokan','shikyuhin_shobun','shikyuhin_date','shikyuhin_kakunin','taiyo_hokan','taiyo_ukeire_date','taiyo_henkyaku','taiyo_kakunin_date','taiyo_henkyaku_date','funshitsu_detail'].forEach(function(k){var el=document.getElementById('ky_'+k);if(el&&d[k]) el.value=d[k];});
+    ['no','date','code','kenmei','responsible','apv_bucho','apv_jisshi','shikyuhin_hokan','shikyuhin_shobun','shikyuhin_date','shikyuhin_kakunin','taiyo_hokan','taiyo_ukeire_date','taiyo_henkyaku','taiyo_kakunin_date','taiyo_henkyaku_date','funshitsu_detail'].forEach(function(k){var el=document.getElementById('ky_'+k);if(el&&d[k]) el.value=d[k];});
     if(d.taiyo_suryo_chk==='true'){var sc=document.getElementById('ky_taiyo_suryo_chk');if(sc) sc.checked=true;}
     if(d.taiyo_gaiken_chk==='true'){var gc=document.getElementById('ky_taiyo_gaiken_chk');if(gc) gc.checked=true;}
     if(d.gijiroku) document.querySelectorAll('input[name="ky_gijiroku"]').forEach(function(r){if(r.value===d.gijiroku) r.checked=true;});
@@ -1526,7 +1526,7 @@ function openShikyuhinForm(){
 function saveShikyuhinForm(){
   if(!currentProject||!currentProject.projectSSId) return;
   var data={no:gv('sk_no'),date:gv('sk_date'),code:gv('sk_code'),kenmei:gv('sk_kenmei'),
-    responsible:gv('sk_responsible'),itaku_name:gv('sk_itaku_name'),management:gv('sk_management'),disposal:gv('sk_disposal'),
+    responsible:gv('sk_responsible'),apv_bucho:gv('sk_apv_bucho'),apv_jisshi:gv('sk_apv_jisshi'),itaku_name:gv('sk_itaku_name'),management:gv('sk_management'),disposal:gv('sk_disposal'),
     shobun_date:gv('sk_shobun_date'),shobun_kakunin:gv('sk_shobun_kakunin'),
     taiyo_hokan:gv('sk_taiyo_hokan'),taiyo_ukeire_date:gv('sk_taiyo_ukeire_date'),
     taiyo_henkyaku:gv('sk_taiyo_henkyaku'),taiyo_kakunin_date:gv('sk_taiyo_kakunin_date'),
@@ -1546,7 +1546,7 @@ function loadShikyuhinForm(){
   if(!currentProject||!currentProject.projectSSId) return;
   google.script.run.withSuccessHandler(function(d){
     if(!d) return;
-    ['no','date','code','kenmei','responsible','itaku_name','management','disposal','shobun_date','shobun_kakunin','taiyo_hokan','taiyo_ukeire_date','taiyo_henkyaku','taiyo_kakunin_date','taiyo_henkyaku_date'].forEach(function(k){var el=document.getElementById('sk_'+k);if(el&&d[k]) el.value=d[k];});
+    ['no','date','code','kenmei','responsible','apv_bucho','apv_jisshi','itaku_name','management','disposal','shobun_date','shobun_kakunin','taiyo_hokan','taiyo_ukeire_date','taiyo_henkyaku','taiyo_kakunin_date','taiyo_henkyaku_date'].forEach(function(k){var el=document.getElementById('sk_'+k);if(el&&d[k]) el.value=d[k];});
     if(d.taiyo_suryo_chk==='true'){var sc=document.getElementById('sk_taiyo_suryo_chk');if(sc) sc.checked=true;}
     if(d.taiyo_gaiken_chk==='true'){var gc=document.getElementById('sk_taiyo_gaiken_chk');if(gc) gc.checked=true;}
     if(d.shiyosho) document.querySelectorAll('input[name="sk_shiyosho"]').forEach(function(r){if(r.value===d.shiyosho) r.checked=true;});
@@ -1808,7 +1808,11 @@ function openRiskEvalForm(){
   h+=formSaveBtn("saveRiskEvalForm()");
   h+='</div></div>';
   area.innerHTML=h;showFormPage();
-  autoFillBaseInfo({code:'re_code',kenmei:'re_kenmei',contractor:'re_customer',amount:'re_amount'});
+  autoFillBaseInfo({code:'re_code',kenmei:'re_kenmei',contractor:'re_customer',amount:'re_amount',jisshi:'re_s1_responsible',bucho:'re_s1_bucho'});
+  setTimeout(function(){
+    setVal('re_s2_responsible',document.getElementById('re_s1_responsible')?document.getElementById('re_s1_responsible').value:'');
+    setVal('re_s2_bucho',document.getElementById('re_s1_bucho')?document.getElementById('re_s1_bucho').value:'');
+  },1500);
   loadRiskEvalForm();
 }
 function saveRiskEvalForm(){
@@ -1905,7 +1909,7 @@ function openRiskPlanForm(){
   h+='<p style="font-size:12px;color:#555;margin:8px 0 6px;">「対策の有効性」の評価</p>';
   h+='<div class="gf-table-wrap"><table class="gf-table"><tr><th>本部長</th><th>部長</th><th>GM</th><th>実施責任者</th></tr>';
   h+='<tr><td>'+fIn('rp_ev_honbucho','',true)+'</td><td>'+fIn('rp_ev_bucho','',true)+'</td><td>'+fIn('rp_ev_gm')+'</td><td>'+fIn('rp_ev_jisshi','',true)+'</td></tr></table></div></div>';
-  var rpFields=['kenmei','customer','amount','period_from','period_to','responsible','issue_date','background','risk_detail','taisaku_detail','yuukousei','apv_gm','ev_gm'];
+  var rpFields=['kenmei','customer','amount','period_from','period_to','responsible','issue_date','background','risk_detail','taisaku_detail','yuukousei','apv_honbucho','apv_bucho','apv_gm','apv_jisshi','ev_honbucho','ev_bucho','ev_gm','ev_jisshi'];
   h+=formSaveBtn("savePhase3Form('リスク対策','rp',"+JSON.stringify(rpFields)+",['phase','taisaku'])");
   h+='</div></div>';
   area.innerHTML=h;showFormPage();
