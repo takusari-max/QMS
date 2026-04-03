@@ -1876,15 +1876,20 @@ function openRiskPlanForm(){
   h+='<div class="gf-section"><div class="gf-section-title">基本情報</div>';
   h+=fG('','段階','<div class="gf-radio-group"><label class="gf-radio"><input type="radio" name="rp_phase" value="契約前"> 契約前</label><label class="gf-radio"><input type="radio" name="rp_phase" value="契約後"> 契約後</label></div>');
   h+=fG('','件名',fIn('rp_kenmei',p.kenmeiName,true));
-  h+=fRow(fG('h','顧客名',fIn('rp_customer',p.contractor,true))+fG('h','受注額',fIn('rp_amount')));
-  h+=fRow(fG('h','受注期間',fIn('rp_period'))+fG('h','実施責任者',fIn('rp_responsible')));
-  h+=fG('','発行年月日',fDate('rp_issue_date'));
+  h+=fRow(fG('h','顧客名',fIn('rp_customer',p.contractor,true))+fG('h','受注額（百万円）',fIn('rp_amount')));
+  h+=fRow(fG('h','受注期間（自）',fDate('rp_period_from'))+fG('h','受注期間（至）',fDate('rp_period_to')));
+  h+=fRow(fG('h','実施責任者',fIn('rp_responsible'))+fG('h','発行年月日',fDate('rp_issue_date')));
   h+='</div>';
   h+='<div class="gf-section"><div class="gf-section-title">リスク分析</div>';
   h+=fG('','背景と経緯',fTa('rp_background',5));
   h+=fG('','リスクの詳細内容',fTa('rp_risk_detail',5));
-  h+=fG('','対策','<div class="gf-radio-group"><label class="gf-radio"><input type="radio" name="rp_taisaku" value="回避"> 回避</label><label class="gf-radio"><input type="radio" name="rp_taisaku" value="低減"> 低減</label><label class="gf-radio"><input type="radio" name="rp_taisaku" value="移転"> 移転</label><label class="gf-radio"><input type="radio" name="rp_taisaku" value="保有"> 保有</label></div>');
-  h+=fG('','対策の詳細',fTa('rp_taisaku_detail',5));
+  h+=fG('','対策（該当する対策を選択し、詳細を記入）','<div class="gf-radio-group"><label class="gf-radio"><input type="radio" name="rp_taisaku" value="回避"> A 回避</label><label class="gf-radio"><input type="radio" name="rp_taisaku" value="低減"> B 低減</label><label class="gf-radio"><input type="radio" name="rp_taisaku" value="移転"> C 移転</label><label class="gf-radio"><input type="radio" name="rp_taisaku" value="保有"> D 保有</label></div>'+fTa('rp_taisaku_detail',5));
+  h+='<div style="margin-top:8px;padding:10px;background:var(--bg-light,#f5f5f5);border-radius:6px;font-size:12px;color:var(--text-light,#666);line-height:1.8;">';
+  h+='<strong>（リスク対策の定義）</strong><br>';
+  h+='A 回避：リスクが高すぎると判断する場合、受注しない。あるいは、当社で保有しておらず、委託先も見当たらないような技術を必要とする要求事項は受注範囲から除外するなど。<br>';
+  h+='B 低減：外部専門家による評価の実施、社内審査体制や社内推進体制の強化など。<br>';
+  h+='C 移転：当社に責任が及ばないように契約により先方に責任を転嫁するなど。<br>';
+  h+='D 保有：経営判断により、政策的に受注する場合。</div>';
   h+='</div>';
   // 対策の有効性評価
   h+='<div class="gf-section"><div class="gf-section-title">対策の有効性評価（業務完了後に記載）</div>';
@@ -1898,16 +1903,19 @@ function openRiskPlanForm(){
   h+='<p style="font-size:12px;color:#555;margin:8px 0 6px;">「対策の有効性」の評価</p>';
   h+='<div class="gf-table-wrap"><table class="gf-table"><tr><th>本部長</th><th>部長</th><th>GM</th><th>実施責任者</th></tr>';
   h+='<tr><td>'+fIn('rp_ev_honbucho','',true)+'</td><td>'+fIn('rp_ev_bucho','',true)+'</td><td>'+fIn('rp_ev_gm')+'</td><td>'+fIn('rp_ev_jisshi','',true)+'</td></tr></table></div></div>';
-  var rpFields=['kenmei','customer','amount','period','responsible','issue_date','background','risk_detail','taisaku_detail','yuukousei','apv_gm','ev_gm'];
+  var rpFields=['kenmei','customer','amount','period_from','period_to','responsible','issue_date','background','risk_detail','taisaku_detail','yuukousei','apv_gm','ev_gm'];
   h+=formSaveBtn("savePhase3Form('リスク対策','rp',"+JSON.stringify(rpFields)+",['phase','taisaku'])");
   h+='</div></div>';
   area.innerHTML=h;showFormPage();
-  autoFillBaseInfo({kenmei:'rp_kenmei',contractor:'rp_customer',amount:'rp_amount',honbucho:'rp_apv_honbucho',bucho:'rp_apv_bucho',jisshi:'rp_apv_jisshi',gm:'rp_apv_gm'});
+  autoFillBaseInfo({kenmei:'rp_kenmei',contractor:'rp_customer',kikiStart:'rp_period_from',kikiEnd:'rp_period_to',honbucho:'rp_apv_honbucho',bucho:'rp_apv_bucho',jisshi:'rp_apv_jisshi',gm:'rp_apv_gm'});
+  if(p.juchuAmount) setVal('rp_amount',String(Math.round(Number(p.juchuAmount)/1000)));
   // Copy approver names to effectiveness section too
   setTimeout(function(){
     setVal('rp_ev_honbucho',document.getElementById('rp_apv_honbucho')?document.getElementById('rp_apv_honbucho').value:'');
     setVal('rp_ev_bucho',document.getElementById('rp_apv_bucho')?document.getElementById('rp_apv_bucho').value:'');
+    setVal('rp_ev_gm',document.getElementById('rp_apv_gm')?document.getElementById('rp_apv_gm').value:'');
     setVal('rp_ev_jisshi',document.getElementById('rp_apv_jisshi')?document.getElementById('rp_apv_jisshi').value:'');
+    setVal('rp_responsible',document.getElementById('rp_apv_jisshi')?document.getElementById('rp_apv_jisshi').value:'');
   },1500);
   loadPhase3Form('リスク対策','rp',rpFields,['phase','taisaku']);
 }
