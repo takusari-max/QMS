@@ -266,7 +266,8 @@ function getFormBaseInfo(ssId, dept, honbu) {
     jisshi: taisei.jisshi, shinsa: taisei.shinsa,
     approver: taisei.approver, tanto: taisei.tanto, group: taisei.group,
     bucho: approvers.bucho ? approvers.bucho.name : '',
-    honbucho: approvers.honbucho ? approvers.honbucho.name : ''
+    honbucho: approvers.honbucho ? approvers.honbucho.name : '',
+    gm: approvers.gm ? approvers.gm.name : ''
   };
 }
 
@@ -686,7 +687,7 @@ function getApproversByEmail(email) { return getApproversByLoginEmail_(email); }
 function getApproversByDept(dept, honbu) {
   try {
     var rows = SpreadsheetApp.openById(CONFIG.PHONEBOOK_SS_ID).getSheets()[0].getDataRange().getValues().slice(1);
-    var bucho = null, honbucho = null;
+    var bucho = null, honbucho = null, gm = null;
     for (var j = 0; j < rows.length; j++) {
       var pos = String(rows[j][4]).trim(), d = String(rows[j][2]).trim(), hb = String(rows[j][1]).trim();
       var nm = String(rows[j][5]).trim(), sendEmail = String(rows[j][11]).trim();
@@ -696,8 +697,11 @@ function getApproversByDept(dept, honbu) {
       if (hb === honbu && (pos === '本部長' || /^本部長\s*●$/.test(pos)) && !honbucho) {
         honbucho = { name: nm, email: sendEmail };
       }
+      if (d === dept && /^[GＧ][MＭ]/.test(pos) && !gm) {
+        gm = { name: nm, email: sendEmail };
+      }
     }
-    return { bucho: bucho, honbucho: honbucho, dept: dept, honbu: honbu };
+    return { bucho: bucho, honbucho: honbucho, gm: gm, dept: dept, honbu: honbu };
   } catch(e) { return { error: e.message }; }
 }
 
